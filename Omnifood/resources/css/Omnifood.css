@@ -1,0 +1,77 @@
+<<<<<<< HEAD
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-bodx;
+}
+
+html{
+  background-color: white;
+  color:#555;
+  font-family:'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size:20px;
+  text-rendering: optimizeLegibility;
+}
+
+/* .row{
+  max-width:1140px;
+  margin: 0 auto;
+} */
+
+header{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.705),rgba(0, 0, 0, 0.705)), url("img/hero.jpg");
+  background-size:cover; /*바탕화면 이미지 크기조절*/
+  background-position:center;
+  height: 100vh /*100% viewport*/
+}
+
+.hero-text-box{
+  position:absolute;
+  width: 1140px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%); /*translate the element half ot its width and of its height, up and to the left*/
+}
+
+
+h1{
+  margin:0;
+  color:#fff;
+  font-size: 240%; /*font-size of h1 will be affected by 20px which is global font-size of html*/
+  font-weight:300;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  word-spacing: 4px;
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 30px; 
+  font-weight:300;
+  text-decoration:none;
+}
+
+.btn-full{
+  
+=======
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-bodx;
+}
+
+html{
+  background-color: white;
+  color:#555;
+  font-family:'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size:20px;
+  text-rendering: optimizeLegibility;
+}
+
+.row{
+  max-width:1140px;
+  margin: 0 auto;
+>>>>>>> 314d4d6d7597b45cd3310b44653ea3559f4df057
+}

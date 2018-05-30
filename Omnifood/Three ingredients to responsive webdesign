@@ -1,0 +1,18 @@
+<<<<<<< HEAD
+1. Fluid grid
+-> all layout elements are sized in relative unites, such as percentages, instead of absoulte units like pixels.
+
+2. Flexible images
+-> are also sized in relative unites.
+
+3.Media queries
+=======
+1. Fluid grid
+-> all layout elements are sized in relative unites, such as percentages, instead of absoulte units like pixels.
+
+2. Flexible images
+-> are also sized in relative unites.
+
+3.Media queries
+>>>>>>> 314d4d6d7597b45cd3310b44653ea3559f4df057
+-> allow us to specify different CSS style rules for different broweser widths.
