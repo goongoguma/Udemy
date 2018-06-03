@@ -186,3 +186,35 @@ header{
 .main-nav li a:active {
   border-bottom: 2px solid #e67e22;
 }
+
+/*----------------------------------------------------------------------------------------------------*/
+/*MEALS*/
+/*----------------------------------------------------------------------------------------------------*/
+
+.meals-showcase{
+  list-style: none; /*no bullet points*/
+  width: 100%;
+}
+
+.meals-showcase li{
+  float: left;
+  width: 25%;
+} /*specifying a float property and display:block is redundant.
+    display: inline will not make any difference, because setting float: left forces display: block "no matter what"*/
+
+.meal-photo{
+  width: 100%;
+  margin: 0;
+}
+
+.meal-photo img{
+  width:100%;
+  height:auto;
+} 
+
+
+
+
+
+
+
