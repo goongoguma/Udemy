@@ -96,37 +96,37 @@ Spacing and layout
 
 The 7 real-world steps to a fully functional website
 
-1. Define your project
--> Define the goal of your project (ex.portfolio,selling an e-book etc)
--> Define your audience
--> Design with your goal and audience in mind
+1. Define your project</br>
+-> Define the goal of your project (ex.portfolio,selling an e-book etc)</br>
+-> Define your audience</br>
+-> Design with your goal and audience in mind</br>
 
-2. Plan out everything
--> Plan your content : text, images, videos, icons, etc
--> Start thinking about visual hierarchy (content first approach)
--> Define the navigation
--> Define the site structure if it is a bigger project
+2. Plan out everything</br>
+-> Plan your content : text, images, videos, icons, etc</br>
+-> Start thinking about visual hierarchy (content first approach)</br>
+-> Define the navigation</br>
+-> Define the site structure if it is a bigger project</br>
 
-3. Sketch your ideas before you design
--> Get inspired and think about your design
--> Get the ideas out of your head:sketch your ideas before you start disigning
--> Make as many sketches as you want but don't make it perfect
--> Never start designing without having an idea of what you want to build
+3. Sketch your ideas before you design</br>
+-> Get inspired and think about your design</br>
+-> Get the ideas out of your head:sketch your ideas before you start disigning</br>
+-> Make as many sketches as you want but don't make it perfect</br>
+-> Never start designing without having an idea of what you want to build</br>
 
-4. Design and develop your website
--> Design your website using guidlines and tips you've learned in the webdesign section.
--> Do that using HTML and CSS: designing in the browser (designing and developing at the same time)
--> Use sketches , content and planning decisions you've made in steps 1,2 and 3
--> This step is the biggest part of building a website, but:all steps are important
+4. Design and develop your website</br>
+-> Design your website using guidlines and tips you've learned in the webdesign section.</br>
+-> Do that using HTML and CSS: designing in the browser (designing and developing at the same time)</br>
+-> Use sketches , content and planning decisions you've made in steps 1,2 and 3</br>
+-> This step is the biggest part of building a website, but:all steps are important</br>
 
-5. Optimizing
--> Optimize performance : site speed
--> Search engine optimisation (SEO)
+5. Optimizing</br>
+-> Optimize performance : site speed</br>
+-> Search engine optimisation (SEO)</br>
 
-6. Launch the masterpiece
--> All you need for launching is a webserver that will host your website and deliver it to the world
+6. Launch the masterpiece</br>
+-> All you need for launching is a webserver that will host your website and deliver it to the world</br>
 
-7. Site maintenace
--> Launching is not the end of the story
--> Monitor your users behavior and change your website if necessary
--> Update your content regularly : blog
+7. Site maintenace</br>
+-> Launching is not the end of the story</br>
+-> Monitor your users behavior and change your website if necessary</br>
+-> Update your content regularly : blog</br>
