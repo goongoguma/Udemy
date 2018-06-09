@@ -105,10 +105,27 @@ h2:after {
   text-align:center;
   color:#e67e22;
   font-size:120%;
+  margin-right:10px;
+  
+  /*secrets to align text and icons*/
   line-height:120%;
   vertical-align:middle; /*The vertical-align CSS property specifies the vertical alignment of an inline or table-cell box.*/
+  margin-top:-5px;
 }
-
+/*--------LINKS--------*/
+a:link,
+a:active{
+  color:#e67e22;
+  text-decoration:none;
+  padding-bottom:1px;
+  border-bottom:1px solid #e67e22;
+  transition: border-bottom 0.2s, color 0.2s;
+}
+a:hover,
+a:active {
+  color:#555;
+  border-bottom:1px solid transparent;
+}
 
 /*--------BUTTONS--------*/
 .btn:link,  /*기본링크의 달린 스타일*/
@@ -159,7 +176,8 @@ header{
   background-image: linear-gradient(rgba(0, 0, 0, 0.705),rgba(0, 0, 0, 0.705)), url("img/hero.jpg");
   background-size:cover; /*바탕화면 이미지 크기조절*/
   background-position:center;
-  height: 100vh /*100% viewport*/
+  height: 100vh; /*100% viewport*/
+  background-attachment: fixed; /*images stays at the same place*/
 }
 
 .hero-text-box{
@@ -293,6 +311,11 @@ header{
   margin-right:25px;
 }
 
+.btn-app:link,
+.btn-visited{
+  border:0;
+}
+
 .btn-app img {
   height:50px;
   width:auto;
@@ -313,3 +336,43 @@ header{
   margin-bottom:5px;
 }
 
+/*----------------------------------------------------------------------------------------------------*/
+/*TESTIMONIALS/
+/*----------------------------------------------------------------------------------------------------*/
+
+.section-testimonials{
+  background-image:linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(img/back-customers.jpg);
+  background-size: cover;
+  color:#fff;
+  background-attachment: fixed; /*images stays at the same place*/
+}
+
+blockquote {
+  padding: 2%;
+  font-style:italic;
+  line-height:145%;
+  position:relative;
+  margin-top:40px;
+}
+
+blockquote:before{
+  content: "\201C";
+  font-size:500%;
+  /* display:block;  -> All elements that are position:absolute; are automatically treated as display:block*/
+  position:absolute;
+  top:-5px;
+  left:-3px;
+}
+
+cite{
+  font-size:90%;
+  margin-top:25px;
+  display:block;
+}
+
+cite img{
+  height:45px;
+  border-radius:50%;
+  margin-right:10px;
+  vertical-align:middle;
+}
