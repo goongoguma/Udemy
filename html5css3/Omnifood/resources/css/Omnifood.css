@@ -129,7 +129,8 @@ a:active {
 
 /*--------BUTTONS--------*/
 .btn:link,  /*기본링크의 달린 스타일*/
-.btn:visited { /*방문한 링크에 대한 스타일*/
+.btn:visited, /*방문한 링크에 대한 스타일*/
+input[type=submit] { 
   display:inline-block;
   padding:10px 30px; 
   font-weight:300;
@@ -139,7 +140,8 @@ a:active {
 }
 
 .btn-full:link,
-.btn-full:visited {
+.btn-full:visited,
+input[type=submit] {
   background-color: #e67e22;
   border:1px solid #e67e22;
   color:#fff;
@@ -153,7 +155,9 @@ a:active {
 }
 
 .btn:hover, /*마우스를 가져다 댔을때의 스타일*/
-.btn:active{ /*클릭 시의 변화되는 스타일*/
+.btn:active /*클릭 시의 변화되는 스타일*/
+input[type=submit]:hover,
+input[type=submit]:active{ 
    background-color: #cf6d17;
 }
 
@@ -378,7 +382,7 @@ cite img{
 }
 
 /*----------------------------------------------------------------------------------------------------*/
-/*SIGN UP/
+/*SIGN UP*/
 /*----------------------------------------------------------------------------------------------------*/
 
 .section-plans{
@@ -433,3 +437,108 @@ cite img{
   padding:5px 0;
 }
 
+/*----------------------------------------------------------------------------------------------------*/
+/* FORM */
+/*----------------------------------------------------------------------------------------------------*/
+
+.contact-form{
+  width:60%;
+  margin:0 auto;
+}
+
+input[type=text] , /* The [attribute=value] selector is used to select elements with the specified attribute and value. 브라우저 제약이 많으므로 안쓰는게 좋음 */
+input[type=email] ,
+select,
+textarea{
+  width:100%;
+  padding:7px;
+  border-radius:3px;
+  border:1px solid #ccc
+}
+
+textarea{
+  height:100px;
+}
+
+input[type=checkbox]{
+  margin:10px 5px 10px 0;
+}
+
+*:focus {outline:none}
+
+/*----------------------------------------------------------------------------------------------------*/
+/*FOOTER*/
+/*----------------------------------------------------------------------------------------------------*/
+
+footer{
+  background-color: #333;
+  padding:60px;
+  font-size:80%;
+}
+
+.footer-bav{
+  list-style:none;
+  float:left;
+}
+
+.social-links{
+  list-style: none;
+  float:right;
+}
+
+.footer-nav li,
+.social-links li{
+  display:inline-block;
+  margin-right:20px;
+}
+
+.footer-nav li:last-child,
+.social-links li:last-child{
+  margin-right:0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited{
+  text-decoration:none;
+  border:0;
+  color:#888;
+  transition:color 0.2s;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active{
+  color:#ddd;
+}
+.social-links li a:link,
+.social-links li a:visited{
+  font-size:180%;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram {
+  transition:color 0.2s
+}
+
+.ion-social-facebook:hover{
+  color:#3b5998;
+}
+.ion-social-twitter:hover{
+  color:#00aced;
+}
+.ion-social-googleplus:hover{
+  color:#dd4b39;
+}
+.ion-social-instagram:hover{
+  color:#517fa4;
+}
+
+footer p{
+  color:#888;
+  text-align:center;
+  font-size:90%;
+  margin-top:20px;
+}
