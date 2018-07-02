@@ -84,7 +84,7 @@ console.log(obj.city);
 */
 
 
-/*
+
 // FUNCTIONS ARE ALSO OBJECTS IN JAVASCRIPT
 // -> A function is an instance of the Object type;
 // -> A function behaves like any other object;
@@ -93,8 +93,9 @@ console.log(obj.city);
 // -> We can return a function from a function;
 // => Because of all these reason, We call it 'first-class-function'
 
-// Passing functions as arguments 
 
+/*
+// Passing functions as arguments 
 var years = [1990, 1965, 1937, 2005, 1998];
 
 function arrayCalc(arr, fn) {
@@ -105,9 +106,10 @@ function arrayCalc(arr, fn) {
   return arrRes
 }
 
+//callback function
 function calculateAge(el) {
   return 2016 - el;
-} //callback function
+} 
 
 
 function isFullAge(el) {
@@ -131,3 +133,176 @@ console.log(ages);
 console.log(fullAges);
 console.log(rates);
 */
+
+
+/*
+// Functions returning functions
+function interviewQuestion(job) {
+  if (job === 'designer') {
+    return function(name) {
+      console.log(name + ', can you please explain what UX design is?')
+    }
+  } else if (job === 'teacher') {
+    return function(name) {
+      console.log('What subject do you teach, ' + name + '?');
+    }
+  } else {
+    return function(name) {
+      console.log('Hello ' + name + ', what do you do?');
+    }
+  }
+}
+
+var teacherQuestion = interviewQuestion('teacher');
+var designerQuestion = interviewQuestion('designer');
+// if we run this 'teacherQuestion' variable will be the function that is returned from 'interviewQuestion' when we pass teacher.
+
+teacherQuestion('John');
+designerQuestion('John');
+designerQuestion('Jane');
+designerQuestion('Mark');
+designerQuestion('Mike');
+
+interviewQuestion('teacher')('Mark');
+*/
+
+
+// IIFE (Immediately Invoked Function Expressions)
+/*
+function game() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+}
+game();
+
+// Without a name and a paranthesis, then a JavaScript parser would think this is a function declaration. 
+// But since we don't have name for the function declaration, then it will throw an error.
+// Therefore we basically need to trick the parser, and make it believe that what we have here is an expression not a declaration.
+// Solution is wrap enitre thing into paranthesis because in JavaScript, what's inside of parenthesis cannot be a statement and like this,
+// JavaScript will know that it should treat this as an expression, not as a declaration.
+// After that, we only have to invoke the function. 
+// Also we can no longer access the score variable from the outside which means we have created data privacy here.
+// IIFE is available only once because this function is not assigned to any variable. 
+// All we want here is to create a new scope that is hidden from the outside scope so where we can safely put variables.
+// With this, we obtain data privacy, don't interfere with other variables in our global execution context.
+
+(function () {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+})();
+
+// console.log(score); // 'not defined'
+
+
+(function (goodLuck) {
+  var score = Math.random() * 10;
+  console.log(score >= 5 - goodLuck);
+})(5);
+*/
+
+
+// Closures
+// -> CLOSURES SUMMARY : An inner function has always access to the variables and parameters of its outer function, even after the outer function has returned.
+/*
+function retirement(retirementAge) {
+  var a = ' years left until retirement.';
+  return function(yearOfBirth) {
+    var age = 2016 - yearOfBirth;
+    console.log((retirementAge - age) + a);
+  }
+}
+
+var retirementUS = retirement(66);
+var retirementGermany = retirement(65);
+var retirementIceland = retirement(67);
+
+retirementUS(1990);
+retirementGermany(1990);
+retirementIceland(1990);
+
+
+function interviewQuestion(job) {
+  return function(name) {
+      if (job === 'designer') {
+        console.log(name + ', can you please explain what UX design is?')
+      } else if (job === 'teacher') {
+        console.log('What subject do you teach, ' + name + '?');
+      } else {
+        console.log('Hello ' + name + ', what do you do?');
+      }
+   }
+}
+interviewQuestion('teacher')('John');
+// The decision is taken right inside of the function that we returned.
+// That is possible because we can use 'job' variable to take a decision even after the interviewQuestion function has already returned.
+*/
+
+
+// Bind, call and apply 
+/*
+var john = {
+  name: 'John',
+  age: 26,
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+    if (style === 'formal') {
+      console.log('Good ' + timeOfDay+ ', Ladies and gentlemen! I\'m '+ this.name + ' I\'m a ' + this.job + ' and I\'m' + this.age + ' years old.');
+    } else if (style === 'friendly') {
+      console.log('Hey what\'s up? I\'m '+ this.name + ' I\'m a ' + this.job+ ' and I\'m' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+    }
+  }
+};
+
+john.presentation('formal', 'morning');
+
+var emily = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer'
+};
+
+// first argument of call method always sets 'this' variable.
+john.presentation.call(emily, 'friendly', 'afternoon'); // This is called 'method borrowing'
+
+// john.presentation.apply(emily, ['friendly, afternoon']); // not gonna work because our method does not expect to get 'array' input
+// 'bind' allows us to creat a copy of a function with a preset argument
+var johnFriendly = john.presentation.bind(john, 'friendly');
+
+johnFriendly('morning');
+johnFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+
+// ex.
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+    }
+  return arrRes
+}
+
+function calculateAge(el) {
+  return 2016 - el;
+} 
+
+function isFullAge(limit, el) {
+  return el >= limit;
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+console.log(ages);
+console.log(fullJapan);
+*/ 
+
+
+
+
+
+
+
+
