@@ -26,7 +26,7 @@ var jan = Object.create(personProto,
 // in an easier way than 'function constructors' because it allows us to directly specify which object should be a prototype.
 */
 
-
+/*
 // Primitives vs Objects
 // Variables containg primitives actually hold that data inside of the variable itself.
 // However a variables associated with objects do not acutall contain the object, 
@@ -81,4 +81,53 @@ console.log(obj.city);
 // This shows us that when we pass a primitive into the function, a simple copy is created so we can change A as much as we want,
 // it will never affect the variable on the outside because it is a primitive. but when we pass the object it is not really the object that we pass,
 // but the reference to the object.
+*/
+
+
+/*
+// FUNCTIONS ARE ALSO OBJECTS IN JAVASCRIPT
+// -> A function is an instance of the Object type;
+// -> A function behaves like any other object;
+// -> We can store functions in a variable;
+// -> We can pass a function as an argument to another function
+// -> We can return a function from a function;
+// => Because of all these reason, We call it 'first-class-function'
+
+// Passing functions as arguments 
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+  }
+  return arrRes
+}
+
+function calculateAge(el) {
+  return 2016 - el;
+} //callback function
+
+
+function isFullAge(el) {
+  return el >= 18;
+}
+
+function maxHeartRage(el) {
+  if(el >= 18 && el <= 81) {
+    return Math.round(206.9 - (0.67 * el));
+  } else {
+    return - 1;
+  }
+}
+
+
+var ages = arrayCalc(years, calculateAge);
+var fullAges = arrayCalc(ages, isFullAge);
+var rates = arrayCalc(ages, maxHeartRage);
+
+console.log(ages);
+console.log(fullAges);
+console.log(rates);
 */
