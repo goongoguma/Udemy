@@ -122,3 +122,76 @@ ages6 = years.map((el, index) => { // in case add more lines of code
 console.log(ages6); // ["Age element 1: 26.", "Age element 2: 51.", "Age element 3: 34.", "Age element 4: 79."]
 */
 
+//  LECTURE : Arrow Functions 2 : lexical 'this' variable 
+/*
+// ES5
+var box5 = {
+  color: 'green',
+  position: 1,
+  clickMe: function() {
+    var self = this;
+    document.querySelector('.green').addEventListener('click', function() {
+      var str = 'This is box number ' + self.position + ' and it is ' + self.color;
+      alert(str);
+    });
+  }
+
+}
+box5.clickMe(); // This is box number 1 and it is green
+
+// ES6
+const box6 = {
+  color: 'green',
+  position: 1,
+  clickMe: function() {
+    document.querySelector('.green').addEventListener('click',() => {
+      var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+      alert(str);
+    });
+  }
+
+}
+box6.clickMe(); // The result of it is as same as ES5 because this keyword in arrow functions shares lexically of its surroundings 
+
+const box66 = {
+  color: 'green',
+  position: 1,
+  clickMe: () => {
+    document.querySelector('.green').addEventListener('click',() => {
+      var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+      alert(str);
+    });
+  }
+
+}
+box66.clickMe(); // the result is 'This is box undfined and it is undfined' because this keyword in arrow functions shares lexically of its surroundings 
+
+function Person(name) {
+  this.name = name;
+
+}
+
+// ES5
+Person.prototype.myFriends5 = function(friends) {
+  var arr = friends.map(function(el) {
+    return this.name + ' is friends with ' + el;
+  }.bind(this));
+  console.log(arr); //"John is friends with Bob","John is friends with Jane","John is friends with Mark"
+}
+
+var friends = ['Bob', 'Jane', 'Mark']
+new Person('John').myFriends5(friends);
+
+// ES6
+Person.prototype.myFriends6 = function(friends) {
+  var arr = friends.map( el => `${this.name} + is friends with ${el}`);
+    
+  console.log(arr);
+}
+new Person('Mike').myFriends6(friends);
+*/
+
+
+
+
+
