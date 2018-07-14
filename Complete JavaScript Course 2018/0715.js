@@ -49,3 +49,48 @@ for(let i = 0; i < 5; i++) {
 
 console.log(i);
 */
+
+//  LECTURE : Blocks and IIFEs 
+/*
+//ES6
+{
+  const a = 1;
+  let b = 2;
+}
+
+console.log(a + b);
+
+//ES5
+(function() {
+  var c = 3;
+})();
+*/
+
+//  LECTURE : STRINGS
+/*
+let firstName = 'john';
+let lastName = 'Smith';
+const yearOfBirth = 1990;
+
+function calcAge(year) {
+  return 2016 - year;
+}
+
+// ES5
+console.log('This is ' + firstName +' ' + lastName + '. He was born in ' +
+yearOfBirth + '. Today, he is ' + calcAge(yearOfBirth) + ' years old.');
+//This is John Smith. He was born in 1990. Today, he is 26 years old.
+
+// ES6 (template literals)
+console.log(`This is ${firstName} ${lastName}. He was born in ${yearOfBirth}. 
+Today he is ${calcAge(yearOfBirth)} years old.`);
+//This is John Smith. He was born in 1990. Today, he is 26 years old.
+
+
+// New string methods in ES6
+const n = `${firstName} ${lastName}`;
+console.log(n.startsWith('J')); //n.startsWith tells the string starts with J or not 
+console.log(n.endsWith('th')); //n.startsWith tells the string ends with th or not 
+console.log(n.includes('oh')); //n.includes tells the string includes oh or not 
+console.log(firstName.repeat(5)); //.repeat tells the string repeats variable firstName for 5 times
+*/
