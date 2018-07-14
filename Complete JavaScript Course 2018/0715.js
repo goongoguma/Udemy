@@ -94,3 +94,31 @@ console.log(n.endsWith('th')); //n.startsWith tells the string ends with th or n
 console.log(n.includes('oh')); //n.includes tells the string includes oh or not 
 console.log(firstName.repeat(5)); //.repeat tells the string repeats variable firstName for 5 times
 */
+
+//  LECTURE : Arrow Functions 
+/*
+const years = [1990, 1965, 1982, 1937];
+
+// ES5
+var ages5 = years.map(function(el) {
+    return 2016 - el;
+});
+console.log(ages5); // [26, 51, 34, 79]
+
+// ES6
+let ages6 = years.map(el => 2016 - el); // one argument and one line of code 
+console.log(ages6); // [26, 51, 34, 79]
+
+ages6 = years.map((el, index) => `Age element ${index + 1}: ${2016 - el}.`); // in case two arguments
+console.log(ages6); // ["Age element 1: 26.", "Age element 2: 51.", "Age element 3: 34.", "Age element 4: 79."]
+
+ages6 = years.map((el, index) => { // in case add more lines of code
+  const now = new
+  Date().getFullYear();
+  const age = now - el;
+  return `Age element ${index + 1}: ${age}.`
+});
+
+console.log(ages6); // ["Age element 1: 26.", "Age element 2: 51.", "Age element 3: 34.", "Age element 4: 79."]
+*/
+
