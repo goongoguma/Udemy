@@ -123,3 +123,60 @@ const all = [h, ...boxes]
 
 Array.from(all).forEach(cur => cur.style.color = 'purple'); //Array.from(all) makes 'all' into an array
 
+
+/////////////////////////////////////////////////////
+// LECTURE : Rest Parameter 
+// -> it allows to an arbitrary number of arguments into a function and use it in that function.
+// -> it receives couple of single values and transforms them into an array when we call a funciton with multiple parameters
+
+// ES5
+function isFUllAge5() {
+  //console.log(arguments);
+  var argsArr = Array.prototype.slice.call(arguments);
+
+  argsArr.forEach(function(cur) {
+    console.log((2016 - cur) >= 18);
+  })
+}
+
+isFUllAge5(1990, 1999, 1965);
+isFUllAge5(1990, 1999, 1965, 2016, 1987);
+
+// ES6
+
+// as soon as we call the function, it will transform the arguments into an array and then pass it into the function
+// and we can access that years array automatically in a function and use it as we did before 
+function isFUllAge6(...years) {
+    years.forEach(cur => console.log(2016 - cur >= 18));
+}
+
+isFUllAge6(1990, 1999, 1965, 2016, 1987);
+
+// spread operator is used in the function call 
+// while the rest operator is used in the function declaration to accept an arbitrary number of parameters.
+
+
+//// Whcih age of a person becomes full of age
+
+// ES5
+function isFUllAge5(limit) {
+  var argsArr = Array.prototype.slice.call(arguments, 1); // it is going to start to cut at position number one. 
+  console.log(argsArr); // [21, 1990, 1999, 1965]
+
+  argsArr.forEach(function(cur) {
+    console.log((2016 - cur) >= limit);
+  })
+}
+
+isFUllAge5(16, 1990, 1999, 1965); // three times true 
+
+
+// ES6
+
+// as soon as we call the function, it will transform the arguments into an array and then pass it into the function
+// and we can access that years array automatically in a function and use it as we did before 
+function isFUllAge6(limit, ...years) {
+    years.forEach(cur => console.log(2016 - cur >= limit));
+}
+
+isFUllAge6(16, 1990, 1999, 1965, 2016, 1987); // true true true true false true 
