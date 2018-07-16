@@ -52,7 +52,7 @@ const boxesArr6 = Array.from(boxes); //'from' transforms the nodelist 'boxes' to
 boxesArr6.forEach(cur => cur.style.backgroundColor = 'dodgerblue');
 
 
-// LOOP
+//// LOOP
 
 // ES5
 for(var i = 0; i < boxesArr5.length; i++) {
@@ -71,7 +71,7 @@ for(const cur of boxesArr6) {
 }
 
 
-// FINDING ELEMENTS IN AN ARRAY
+//// FINDING ELEMENTS IN AN ARRAY
 
 // ES5
 var ages = [12, 17, 8, 21, 14, 11];
@@ -109,14 +109,14 @@ const sum3 = addFourAges(...ages); // ... expand the 'ages' array into its compo
 console.log(sum3); // 81
 
 
-// Combine two family names into one array
+//// Combine two family names into one array
 const familySmith = ['John', 'Jane', 'Mark'];
 const familyMiller = ['Mary', 'Bob', 'Ann'];
 const bigFamily = [...familySmith, 'Lily', ...familyMiller];
 console.log(bigFamily); // ["John", "Jane", "Mark", "Lily", "Mary", "Bob", "Ann"]
 
 
-// Using spread operator in node list
+//// Using spread operator in node list
 const h = document.querySelector('h1');
 const boxes = document.querySelectorAll('.box');
 const all = [h, ...boxes]
@@ -180,3 +180,36 @@ function isFUllAge6(limit, ...years) {
 }
 
 isFUllAge6(16, 1990, 1999, 1965, 2016, 1987); // true true true true false true 
+
+
+/////////////////////////////////////////////////////
+// LECTURE : Default parameters 
+// -> it is used to pre-reset one or more parameters of a function. which are default values
+
+// ES5
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+ 
+ lastName === undefiend ? lastName = 'Smith' : lastName = lastName;
+ nationality === undefiend ? nationality = 'american' : nationality = nationality;
+  
+  this.firstNmae = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1990);
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'Spanish');
+
+// ES6
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'america') {
+  this.firstNmae = firstName;
+  this.lastName = lastName;
+  this.yearOfBirth = yearOfBirth;
+  this.nationality = nationality;
+}
+
+var john = new SmithPerson('John', 1990);
+// firstName: "John", lastName: "Smith", nationality: "american", yearOfBirth: 1990
+var emily = new SmithPerson('Emily', 1983, 'Diaz', 'Spanish'); // overides default value
+// firstName: "Emily", lastName: "Diaz", yearOfBirth: 1983, nationality: "spanish"
