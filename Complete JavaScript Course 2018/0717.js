@@ -42,4 +42,108 @@ const ans = parseInt(prompt('Write the correct answer')) //parseInt converts the
 console.log(question.get(ans === question.get('correct')));
 
 
+/////////////////////////////////////////////////////
+// LECTURE : Classes (synthetic sugar)
+// -> Classes make it easier to implement inheritance and to create objects based on blueprints(function constructor).
+// -> Class definitions are not hoisted
+// -> We can only add method to classes not properties
+// ES5 
+var Person5 = function(name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+}
 
+Person5.prototype.calculateAge = function() {
+  var age = new Date.getFullYear - this.yearOfBirth;
+  console.log(age);
+}
+
+var john5 = new Person5('John', 1990, 'teacher');
+
+// ES6
+class Person6 {  // class declaration
+    constructor (name,yearOfBirth,job) {
+      this.name = name;
+      this.yearOfBirth = yearOfBirth;
+      this.job = job;
+    }
+
+    calculateAge() {
+      var age = new Date.getFullYear - this.yearOfBirth;
+      console.log(age);
+    }
+
+    static greeting() { // static method is not going to inherit it
+      console.log('Hey there!');
+    }
+}
+
+const john6 = new Person6('John', 1990, 'teacher');
+
+Person6.greeting();
+
+
+/////////////////////////////////////////////////////
+// LECTURE : Classes with subclasses
+// -> Person5 is a super-class and Athlete5 is a sub-class
+
+var Person5 = function(name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+}
+
+Person5.prototype.calculateAge = function() {
+  var age = new Date.getFullYear() - this.yearOfBirth;
+  console.log(age);
+}
+
+var Athlete5 = function(name, yearOfBirth, job, olympicGames, medals) {
+  Person5.call(this, name, yearOfBirth, job); // 'this' indicates newly created empty object of Athlete5 
+  this.olympicGames = olympicGames;
+  this.medals = medals;
+}
+
+// Athlete5.prototype.wonMedal = function() {
+//     this.medals++;
+//     console.log(this.medals);
+// }
+
+Athlete5.prototype = Object.create(Person5.prototype); // two function constructors are connected and the prototype chain should work
+
+var johnAthlete5 = new Athlete5('John', 1990, 'swimmer', 3, 10); 
+
+johnAthlete5.calculateAge();  // 26
+//johnAthlete5.wonMedal();  // 11
+
+
+// ES6
+class Person6 {  // class declaration
+  constructor (name,yearOfBirth,job) {
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+  }
+
+  calculateAge() {
+    var age = new Date.getFullYear() - this.yearOfBirth;
+    console.log(age); // 26
+  }
+}
+
+class Athlete6 extends Person6 { 
+    constructor(name, yearOfBirth, job, olympicGames, medals) {
+      super(name, yearOfBirth, job); //super() calls Person6 automatically
+       this.olympicGames = olympicGames;
+       this.medals = medals;
+    }
+    wonMedal() {
+      this.medals++;
+      console.log(this.medals); // 11
+    }
+}
+
+const johnAthlete6 = new Athlete6('John', 1990, 'swimmer', 3, 10);
+johnAthlete6/wonMedal(); 
+johnAthlete6.calculateAge();
