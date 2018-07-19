@@ -1,0 +1,99 @@
+<!-- An Example of Asynchronous JavaScript -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>Asynchronous JavaScript</h1>
+    <script>
+    //     const second = () => {
+    //         setTimeout(() => {
+    //             console.log(`Async Hey there`);
+    //         }, 2000)
+    //     }
+    //    const first = () => {
+    //        console.log(`Hey there`);
+    //        second();
+    //        console.log(`The end`);
+    //    } 
+
+    //    first();
+
+////////////////////////////////////////////
+////// ASYNCHRONOUS WITH CALLBACK FUNCITON
+
+//     function getRecipe() {
+//       setTimeout(() => {
+//       const recipeID = [523, 883, 432, 947];
+//       console.log(recipeID);
+
+//         setTimeout(id => {
+//             const recipe = {title: `Fresh tomato pasta`, publisher: `Jonas`};
+//             console.log(`${id}: ${recipe.title}`);
+          
+//           setTimeout(publisher => {
+//           const recipe2 = {title: `Italian Pizza`, publisher : `Jonas`};
+//           console.log(recipe2);
+//            }, 1500, recipe.publisher);
+        
+//         }, 1500, recipeID[2]);
+     
+//     }, 1500);
+  
+// }
+//     getRecipe();
+
+////////////////////////////////////////////
+///// PROMISE
+const getIDs = new Promise((resolve, reject) => { // Promise gets two arguments. resolve part and reject part
+    setTimeout(() => {
+        resolve([523, 883, 432, 947]); // resolve : if the promise is succesful, returns the array
+    }, 1500);
+});
+// all of the promise objects of getIDs inherit the methods
+
+const getRecipe = recID => {
+    return new Promise((resolve, reject) => {
+      setTimeout(ID => {
+        const recipe = {title: `Fresh tomato past`, publisher: `Jonas`};
+        resolve(`${ID}: ${recipe.title}`);      
+      }, 1500, recID);
+    
+    });
+};
+
+const getRelated = publisher => {
+    return new Promise((resolve, reject) => {
+        setTimeout(pub => {
+          const recipe = {title: `Italian Pizza`, publisher : `Jonas`};
+         resolve(`${pub}: ${recipe.title}`);   
+        }, 1500, publisher)
+    });
+};
+
+///////consume part of promise
+getIDs.then(IDs => { //IDs is the result of the successful promise -> [523, 883, 432, 947]
+    console.log(IDs);
+    return getRecipe(IDs[2]) //in order to prevent another 'then' in getIDs.then, we use return as chaining method
+})
+
+.then(recipe => {
+    console.log(recipe);
+    return getRelated('Jonas');
+}) 
+
+.then(recipe => {
+    console.log(recipe);
+})
+//.then method allows to add an event handler for the case that the promise is fullfiled
+// argument IDs is the result of successful promise 
+
+getIDs.catch(error => {
+   console.log(error);
+}); //.catch method is a handler for the case that a promise gets rejected
+</script>
+</body>
+</html>
