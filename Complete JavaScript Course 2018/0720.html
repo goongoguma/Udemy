@@ -47,47 +47,67 @@
 
 ////////////////////////////////////////////
 ///// PROMISE
-const getIDs = new Promise((resolve, reject) => { // Promise gets two arguments. resolve part and reject part
-    setTimeout(() => {
-        resolve([523, 883, 432, 947]); // resolve : if the promise is succesful, returns the array
-    }, 1500);
-});
-// all of the promise objects of getIDs inherit the methods
+// const getIDs = new Promise((resolve, reject) => { // Promise gets two arguments. resolve part and reject part
+//     setTimeout(() => {
+//         resolve([523, 883, 432, 947]); // resolve : if the promise is succesful, returns the array
+//     }, 1500);
+// });
+// // all of the promise objects of getIDs inherit the methods
 
-const getRecipe = recID => {
-    return new Promise((resolve, reject) => {
-      setTimeout(ID => {
-        const recipe = {title: `Fresh tomato past`, publisher: `Jonas`};
-        resolve(`${ID}: ${recipe.title}`);      
-    }, 1500, recID);
-  });
-};
+// const getRecipe = recID => {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(ID => {
+//         const recipe = {title: `Fresh tomato past`, publisher: `Jonas`};
+//         resolve(`${ID}: ${recipe.title}`);      
+//     }, 1500, recID);
+//   });
+// };
 
-const getRelated = publisher => {
-    return new Promise((resolve, reject) => {
-        setTimeout(pub => {
-          const recipe = {title: `Italian Pizza`, publisher : `Jonas`};
-         resolve(`${pub}: ${recipe.title}`);   
-        }, 1500, publisher)
-    });
-};
+// const getRelated = publisher => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(pub => {
+//           const recipe = {title: `Italian Pizza`, publisher : `Jonas`};
+//          resolve(`${pub}: ${recipe.title}`);   
+//         }, 1500, publisher)
+//     });
+// };
 
-/////// Async/Await
+////////////////////////////////////////////
+/////  Async/Await
+  // async function getRecipesAW() { // this function is an Asynchronous function
+  // // the await expresstion will stop the code from executing until getIDs promise is fulfilled
+  // // when the promise is resolved, the value of the Await expression is the resolved value of the promise which is then assigned to IDs variable
+  // // the await expression can only be used inside an async function and it runs background
+  //     const IDs = await getIDs; 
+  //     console.log(IDs); // [523, 883, 432, 947]
+  //     const recipe = await getRecipe(IDs[2]);
+  //     console.log(recipe);
+  //     const related = await getRelated('Jonas');
+  //     console.log(related);
 
-  async function getRecipesAW() { // this function is an Asynchronous function
-  // the await expresstion will stop the code from executing until getIDs promise is fulfilled
-  // when the promise is resolved, the value of the Await expression is the resolved value of the promise which is then assigned to IDs variable
-  // the await expression can only be used inside an async function and it runs background
-      const IDs = await getIDs; 
-      console.log(IDs); // [523, 883, 432, 947]
-      const recipe = await getRecipe(IDs[2]);
-      console.log(recipe);
-      const related = await getRelated('Jonas');
-      console.log(related);
-
-  } 
+  // } 
   
-  getRecipesAW();
+  // getRecipesAW();
+
+////////////////////////////////////////////
+/////  Fetch and Promises
+function getWeather(woeid) {
+fetch(`https://crossorigin.me/https://www.metaweather.com/api/location/${woeid}/`) // original domain / api address
+// fetch api automatically returns a promise without us having to write a promise ourselves. we just consume it here.
+.then(result => {
+  console.log(result);
+  return result.json(); // processing json(json to javascript), result.json() will return promise, chaining method
+}) //result is a resolved value of the promise
+.then(data => { 
+  console.log(data);
+  const today = data.consolidated_weather[0];
+  console.log(`Temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`)
+})
+.catch(error => console.log(error));
+}
+
+getWeather(2487956)
+
 
   </script>
 </body>
