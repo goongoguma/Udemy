@@ -12,7 +12,8 @@ console.log('App.js is running!');
 // </div>
 // );
 
-/// Events and Attributes
+///////////////////////////////////////////////////////
+//// Events and Attributes
 // in React, className is used instead of class 
 // let count = 0;
 // const addOne = () => console.log('addOne');
@@ -28,20 +29,92 @@ console.log('App.js is running!');
 //   </div>
 // );
 
-/// Manual Data Binding
-let count = 0;
-const addOne = () => console.log('addOne');
-const minusOne = () => console.log("MINUSONE");
-const reset = () => console.log("RESET");
+////////////////////////////////////////////////////////
+//// Manual Data Binding
+// JSX does not have data built-in binding
+// let count = 0;
+// const addOne = () => {
+//   count++;
+//   renderCounterApp();
+// }
+// const minusOne = () => {
+//   // subtract 1 from count - rerender
+//   count--;
+//   renderCounterApp();
+// }
+// const reset = () => {
+//   count = 0;
+//   renderCounterApp();
+//   // set count to 0 a rerender
+// }
 
-const templateTwo = (
-  <div>
-  <h1>Count: {count}</h1>
-  <button onClick={addOne}>+1</button> 
-  <button onClick={minusOne}>-1</button> 
-  <button onClick={reset}>reset</button>
-  </div>
-);
-const appRoot = document.getElementById('app');
+// const appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot); // This is where we are gonna render out application
+// const renderCounterApp = () => {
+//   const templateTwo = (
+//     <div>
+//       <h1>Count: {count}</h1>
+//       <button onClick={addOne}>+1</button> 
+//       <button onClick={minusOne}>-1</button> 
+//       <button onClick={reset}>reset</button>
+//     </div>
+//   );
+
+//   ReactDOM.render(templateTwo, appRoot); // This is where we are gonna render out application
+// };
+// renderCounterApp();
+
+
+/// ///////////////////////////////////////////////////
+//// Forms and Inputs
+// var app = {
+//   title : 'Indecision App',
+//   subtitle : 'Put your life in the hands of a computer',
+//   options: []
+// };
+// const onFormSubmit = (e) => {
+//   e.preventDefault(); // prevents page refresh 
+
+//   const option = e.target.elements.option.value; //this points to the element that the event started on
+
+//   if (option) {
+//     app.options.push(option);
+//     e.target.elements.option.value = '';
+//     render();
+//   } 
+// };
+
+// const onRemoveAll = () => {
+//   app.options = [];
+//   render();
+// };
+
+// const appRoot = document.getElementById('app');
+
+// const render = () => {
+//   var template = ( 
+//     <div>
+//       <h1>{app.title}</h1> 
+//       {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
+//       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+//       <p>{app.options.length}</p>
+//       <button onClick={onRemoveAll}>Remove All</button>
+//       <ol>
+//         <li>Item one</li>
+//         <li>Item two</li>
+//       </ol>
+//       <form onSubmit={onFormSubmit}>
+//        <input type="text" name="option"/>
+//        <button>Add Option</button>
+       
+//       </form>
+//     </div>
+//   );
+//   ReactDOM.render(template, appRoot);
+// };
+// render();
+
+
+
+  
+
