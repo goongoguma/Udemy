@@ -12,21 +12,27 @@ var template = ( // in React, elements have to be bound in one root element
 </div>
 );
 
-// Challenge1 : Create a templateTwo var JSX expression using
-// div
-//  h1 -> My name
-//  p -> Age :
-//  p -> Location :
-// Render templateTwo instead of template
-
-var templateTwo = (
-<div>
-  <h1> My Name : Jay An </h1>
-  <p> Age : 29 </p>
-  <p> Location : Incheon </p>
-</div>
-);
-
+/// Challenge3 : Only render the subtitle (and p tag) if subtitle exist - logical and operator
+// render new p tag - if options.length > 0 "Here are your options" unless "No options"
+var app = {
+    title : 'Indecision App',
+    subtitle : 'Put your life in the hands of a computer',
+    options: ['One', 'Two']
+  };
+  var template = ( 
+    <div>
+      <h1>{app.title}</h1> 
+      {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+      </ol>
+    </div>
+    );
+  
+ 
+  
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot); // This is where we are gonna render out application
+ReactDOM.render(template, appRoot); // This is where we are gonna render out application
