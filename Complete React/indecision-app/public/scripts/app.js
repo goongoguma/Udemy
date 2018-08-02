@@ -1,3 +1,5 @@
+'use strict';
+
 console.log('App.js is running!');
 
 // JSX(JavaScript Syntax Extension) - JavaScript XML
@@ -67,54 +69,85 @@ console.log('App.js is running!');
 
 /// ///////////////////////////////////////////////////
 //// Forms and Inputs
-// var app = {
-//   title : 'Indecision App',
-//   subtitle : 'Put your life in the hands of a computer',
-//   options: []
-// };
-// const onFormSubmit = (e) => {
-//   e.preventDefault(); // prevents page refresh 
+var app = {
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of a computer',
+  options: []
+};
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault(); // prevents page refresh 
 
-//   const option = e.target.elements.option.value; //this points to the element that the event started on
+  var option = e.target.elements.option.value; //this points to the element that the event started on
 
-//   if (option) {
-//     app.options.push(option);
-//     e.target.elements.option.value = '';
-//     render();
-//   } 
-// };
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    render();
+  }
+};
 
-// const onRemoveAll = () => {
-//   app.options = [];
-//   render();
-// };
+var onRemoveAll = function onRemoveAll() {
+  app.options = [];
+  render();
+};
 
-// const appRoot = document.getElementById('app');
+var appRoot = document.getElementById('app');
 
-// const render = () => {
-//   var template = ( 
-//     <div>
-//       <h1>{app.title}</h1> 
-//       {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
-//       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-//       <p>{app.options.length}</p>
-//       <button onClick={onRemoveAll}>Remove All</button>
-//       <ol>
-//         <li>Item one</li>
-//         <li>Item two</li>
-//       </ol>
-//       <form onSubmit={onFormSubmit}>
-//        <input type="text" name="option"/>
-//        <button>Add Option</button>
-       
-//       </form>
-//     </div>
-//   );
-//   ReactDOM.render(template, appRoot);
-// };
-// render();
-
-
-
-  
-
+var render = function render() {
+  var template = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      'p',
+      null,
+      'Subtitle : ',
+      app.subtitle
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length > 0 ? 'Here are your options' : 'No options'
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length
+    ),
+    React.createElement(
+      'button',
+      { onClick: onRemoveAll },
+      'Remove All'
+    ),
+    React.createElement(
+      'ol',
+      null,
+      React.createElement(
+        'li',
+        null,
+        'Item one'
+      ),
+      React.createElement(
+        'li',
+        null,
+        'Item two'
+      )
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
+      )
+    )
+  );
+  ReactDOM.render(template, appRoot);
+};
+render();
