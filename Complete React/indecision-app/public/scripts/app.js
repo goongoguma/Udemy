@@ -1,12 +1,120 @@
 console.log('App.js is running!');
 
 // JSX(JavaScript Syntax Extension) - JavaScript XML
-// var template = <p>This is JSX from app.js!</p>;
-var template = React.createElement(
-  "h1",
-  { id: "someid" },
-  "This is JSX from app.js"
-);
-var appRoot = document.getElementById('app');
+// const template = ( // in React, elements have to be bound in one root element
+// <div>
+//   <h1>Indecision App</h1> 
+//   <p>This is some info</p>
+//   <ol>
+//     <li>Item one</li>
+//     <li>Item two</li>
+//   </ol>
+// </div>
+// );
 
-ReactDOM.render(template, appRoot); // This is where we are gonna render out application
+///////////////////////////////////////////////////////
+//// Events and Attributes
+// in React, className is used instead of class 
+// let count = 0;
+// const addOne = () => console.log('addOne');
+// const minusOne = () => console.log("MINUSONE");
+// const reset = () => console.log("RESET");
+
+// const templateTwo = (
+//   <div>
+//   <h1>Count: {count}</h1>
+//   <button onClick={addOne}>+1</button> 
+//   <button onClick={minusOne}>-1</button> 
+//   <button onClick={reset}>reset</button>
+//   </div>
+// );
+
+////////////////////////////////////////////////////////
+//// Manual Data Binding
+// JSX does not have data built-in binding
+// let count = 0;
+// const addOne = () => {
+//   count++;
+//   renderCounterApp();
+// }
+// const minusOne = () => {
+//   // subtract 1 from count - rerender
+//   count--;
+//   renderCounterApp();
+// }
+// const reset = () => {
+//   count = 0;
+//   renderCounterApp();
+//   // set count to 0 a rerender
+// }
+
+// const appRoot = document.getElementById('app');
+
+// const renderCounterApp = () => {
+//   const templateTwo = (
+//     <div>
+//       <h1>Count: {count}</h1>
+//       <button onClick={addOne}>+1</button> 
+//       <button onClick={minusOne}>-1</button> 
+//       <button onClick={reset}>reset</button>
+//     </div>
+//   );
+
+//   ReactDOM.render(templateTwo, appRoot); // This is where we are gonna render out application
+// };
+// renderCounterApp();
+
+
+/// ///////////////////////////////////////////////////
+//// Forms and Inputs
+// var app = {
+//   title : 'Indecision App',
+//   subtitle : 'Put your life in the hands of a computer',
+//   options: []
+// };
+// const onFormSubmit = (e) => {
+//   e.preventDefault(); // prevents page refresh 
+
+//   const option = e.target.elements.option.value; //this points to the element that the event started on
+
+//   if (option) {
+//     app.options.push(option);
+//     e.target.elements.option.value = '';
+//     render();
+//   } 
+// };
+
+// const onRemoveAll = () => {
+//   app.options = [];
+//   render();
+// };
+
+// const appRoot = document.getElementById('app');
+
+// const render = () => {
+//   var template = ( 
+//     <div>
+//       <h1>{app.title}</h1> 
+//       {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
+//       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+//       <p>{app.options.length}</p>
+//       <button onClick={onRemoveAll}>Remove All</button>
+//       <ol>
+//         <li>Item one</li>
+//         <li>Item two</li>
+//       </ol>
+//       <form onSubmit={onFormSubmit}>
+//        <input type="text" name="option"/>
+//        <button>Add Option</button>
+       
+//       </form>
+//     </div>
+//   );
+//   ReactDOM.render(template, appRoot);
+// };
+// render();
+
+
+
+  
+
