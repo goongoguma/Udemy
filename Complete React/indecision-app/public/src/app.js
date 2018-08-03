@@ -114,9 +114,68 @@
 // };
 // render();
 
-/// ///////////////////////////////////////////////////
+///////////////////////////////////////////////////
 //// Arrays in JSX
+// var app = {
+//   title : 'Indecision App',
+//   subtitle : 'Put your life in the hands of a computer',
+//   options: []
+// };
+// const onFormSubmit = (e) => {
+//   e.preventDefault(); // prevents page refresh 
 
+//   const option = e.target.elements.option.value; //this points to the element that the event started on
+
+//   if (option) {
+//     app.options.push(option);
+//     e.target.elements.option.value = '';
+//     render();
+//   } 
+// };
+
+// const onRemoveAll = () => {
+//   app.options = [];
+//   render();
+// };
+
+// const appRoot = document.getElementById('app');
+
+// // const numbers = [55, 101, 1000];
+
+// const render = () => {
+//   var template = ( 
+//     <div>
+//       <h1>{app.title}</h1> 
+//       {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
+//       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+//       <p>{app.options.length}</p>
+//       <button onClick={onRemoveAll}>Remove All</button>
+//       {
+//         //[99, 98, 97,'Mike Smith'] this is same as {99}{98}{97}
+//         //[<p key='1'>a</p>, <p key='2'>b</p>, <p key='3'>c</p>] // JSX in array need key identifier
+//         // numbers.map((number) => {
+//         //   return <p key={number}>Number: {number}</p>
+//         // })
+//       }
+//       <ol>
+//       {/* map over app.options getting back an array of lis (set key and text) */}
+//       {
+//         app.options.map((string) => <li key={string}>Items: {string}</li>)
+//       }
+//       </ol>
+//       <form onSubmit={onFormSubmit}>
+//        <input type="text" name="option"/>
+//        <button>Add Option</button>
+       
+//       </form>
+//     </div>
+//   );
+//   ReactDOM.render(template, appRoot);
+// };
+// render();
+
+///////////////////////////////////////////////////
+//// Picking an Option
 var app = {
   title : 'Indecision App',
   subtitle : 'Put your life in the hands of a computer',
@@ -139,9 +198,13 @@ const onRemoveAll = () => {
   render();
 };
 
-const appRoot = document.getElementById('app');
+const onMakeDecision = () => { // the function generate a random number
+ const randomNum = Math.floor(Math.random() * app.options.length);
+ const option = app.options[randomNum];
+ alert(option);
+};
 
-// const numbers = [55, 101, 1000];
+const appRoot = document.getElementById('app');
 
 const render = () => {
   var template = ( 
@@ -149,20 +212,11 @@ const render = () => {
       <h1>{app.title}</h1> 
       {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
       <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-      <p>{app.options.length}</p>
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
       <button onClick={onRemoveAll}>Remove All</button>
-      {
-        //[99, 98, 97,'Mike Smith'] this is same as {99}{98}{97}
-        //[<p key='1'>a</p>, <p key='2'>b</p>, <p key='3'>c</p>] // JSX in array need key identifier
-        // numbers.map((number) => {
-        //   return <p key={number}>Number: {number}</p>
-        // })
-      }
       <ol>
-      {/* map over app.options getting back an array of lis (set key and text) */}
-      {
-        app.options.map((string) => <li key={string}>Items: {string}</li>)
-      }
+      {app.options.map((string) => <li key={string}>{string}</li>)}
+      
       </ol>
       <form onSubmit={onFormSubmit}>
        <input type="text" name="option"/>
@@ -174,5 +228,4 @@ const render = () => {
   ReactDOM.render(template, appRoot);
 };
 render();
-
 
