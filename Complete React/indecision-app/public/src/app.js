@@ -1,4 +1,4 @@
-console.log('App.js is running!');
+// console.log('App.js is running!');
 
 // JSX(JavaScript Syntax Extension) - JavaScript XML
 // const template = ( // in React, elements have to be bound in one root element
@@ -14,7 +14,7 @@ console.log('App.js is running!');
 
 ///////////////////////////////////////////////////////
 //// Events and Attributes
-// in React, className is used instead of class 
+//in React, className is used instead of class 
 // let count = 0;
 // const addOne = () => console.log('addOne');
 // const minusOne = () => console.log("MINUSONE");
@@ -114,7 +114,65 @@ console.log('App.js is running!');
 // };
 // render();
 
+/// ///////////////////////////////////////////////////
+//// Arrays in JSX
 
+var app = {
+  title : 'Indecision App',
+  subtitle : 'Put your life in the hands of a computer',
+  options: []
+};
+const onFormSubmit = (e) => {
+  e.preventDefault(); // prevents page refresh 
 
-  
+  const option = e.target.elements.option.value; //this points to the element that the event started on
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    render();
+  } 
+};
+
+const onRemoveAll = () => {
+  app.options = [];
+  render();
+};
+
+const appRoot = document.getElementById('app');
+
+// const numbers = [55, 101, 1000];
+
+const render = () => {
+  var template = ( 
+    <div>
+      <h1>{app.title}</h1> 
+      {app.subtitle && <p>Subtitle : {app.subtitle}</p>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <button onClick={onRemoveAll}>Remove All</button>
+      {
+        //[99, 98, 97,'Mike Smith'] this is same as {99}{98}{97}
+        //[<p key='1'>a</p>, <p key='2'>b</p>, <p key='3'>c</p>] // JSX in array need key identifier
+        // numbers.map((number) => {
+        //   return <p key={number}>Number: {number}</p>
+        // })
+      }
+      <ol>
+      {/* map over app.options getting back an array of lis (set key and text) */}
+      {
+        app.options.map((string) => <li key={string}>Items: {string}</li>)
+      }
+      </ol>
+      <form onSubmit={onFormSubmit}>
+       <input type="text" name="option"/>
+       <button>Add Option</button>
+       
+      </form>
+    </div>
+  );
+  ReactDOM.render(template, appRoot);
+};
+render();
+
 
