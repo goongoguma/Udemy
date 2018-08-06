@@ -36,8 +36,13 @@ class Action extends React.Component {
   }
 }
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
   handleRemoveAll() {
-    alert('Do you want to remove all?')
+    console.log(this.props.options);
+    // alert('handleRemoveAll');
   }
   render() {
     return (
@@ -86,3 +91,7 @@ class AddOption extends React.Component {
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+
+
+
+
