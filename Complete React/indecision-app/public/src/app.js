@@ -1,3 +1,5 @@
+// stateless functional component
+
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +48,7 @@ class IndecisionApp extends React.Component {
       options: prev.options.concat([option])
     }
    });
+   
   }
 
   render() {
@@ -63,51 +66,54 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component{
-  render() {
-    return (
-      <div>
-      <h1>{this.props.title}</h1>
-      <h2>{this.props.subtitle}</h2>
-      </div>
-    );
-  }
+const Header = (props) => {
+  return (
+    <div>
+    <h1>{props.title}</h1>
+    <h2>{props.subtitle}</h2>
+    </div>
+  );
 }
 
-class Action extends React.Component {
-   render() {
-    return (
-      <div>
-      <button onClick={this.props.handlePick} disabled={!this.props.hasOptions}> 
-      What should I do? 
-      </button>
-      </div>
-    );
-  }
-}
+const Action = (props) => {
+  return (
+    <div>
+    <button onClick={props.handlePick} disabled={!props.hasOptions}> 
+    What should I do? 
+    </button>
+    </div>
+  );
+};
 
-class Options extends React.Component {
-  render() {
-    return (
-      <div>
-      <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-      {
-        this.props.options.map((e) => <Option key={e} optionText={e}/>)
-      }
-      </div>
-    );
-  }
-}
+// class Action extends React.Component {
+//    render() {
+//     return (
+//       <div>
+//       <button onClick={this.props.handlePick} disabled={!this.props.hasOptions}> 
+//       What should I do? 
+//       </button>
+//       </div>
+//     );
+//   }
+// }
 
-// Option -> Option component here
-class Option extends React.Component {
-  render() {
-    return (
-      <div>
-      {this.props.optionText}
-      </div>
-    );
-  }
+const Options = (props) => {
+  return (
+    <div>
+    <button onClick={props.handleDeleteOptions}>Remove All</button>
+    {
+      props.options.map((e) => <Option key={e} optionText={e}/>)
+    }
+    </div>
+  );
+};
+
+const Option = (props) => {
+  return (
+    <div>
+    {props.optionText}
+    </div>
+  );
 }
 
 // 1. Setup the form with text input and submit button
@@ -123,15 +129,17 @@ class AddOption extends React.Component {
   }
   handleAddOption(e) {
     e.preventDefault();
-
-    const option = e.target.elements.option.value.trim(); //trimp() removes white space
+   
+    const option = e.target.elements.option.value.trim(); // trim() removes white space
     const error = this.props.handleAddOption(option);
+    e.target.elements.[options].value = '';
    
     this.setState(() => {
       return {
         error
       };
     });
+    
   }
   render() {
     return (
@@ -145,6 +153,19 @@ class AddOption extends React.Component {
     );
   }
 }
+
+// stateless functional component 
+// props get passed in to the function as an argument 
+// this is not used in stateless function
+
+// const User = (props) => { 
+//   return (
+//     <div>
+//       <p>Name: {props.name} </p> 
+//       <p>Age: {props.age} </p>
+//     </div>
+//   );
+// };
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
 
