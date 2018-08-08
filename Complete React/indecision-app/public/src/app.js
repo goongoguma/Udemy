@@ -1,5 +1,3 @@
-// stateless functional component
-
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
@@ -11,8 +9,15 @@ class IndecisionApp extends React.Component {
       options: props.options
     };
   }
-
-  // handleDeleteOptions
+  componentDidMount() {
+    console.log('fetching data');
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log('saving data');
+  }
+  componentwillUnmount() {
+    console.log('componentWillUnmount');
+  }
   handleDeleteOptions() { 
     this.setState(() => ({options: []})); 
   }
