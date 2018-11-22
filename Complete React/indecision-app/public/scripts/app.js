@@ -1,153 +1,240 @@
-'use strict';
+"use strict";
 
-console.log('App.js is running!');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-// JSX(JavaScript Syntax Extension) - JavaScript XML
-// const template = ( // in React, elements have to be bound in one root element
-// <div>
-//   <h1>Indecision App</h1> 
-//   <p>This is some info</p>
-//   <ol>
-//     <li>Item one</li>
-//     <li>Item two</li>
-//   </ol>
-// </div>
-// );
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-///////////////////////////////////////////////////////
-//// Events and Attributes
-// in React, className is used instead of class 
-// let count = 0;
-// const addOne = () => console.log('addOne');
-// const minusOne = () => console.log("MINUSONE");
-// const reset = () => console.log("RESET");
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-// const templateTwo = (
-//   <div>
-//   <h1>Count: {count}</h1>
-//   <button onClick={addOne}>+1</button> 
-//   <button onClick={minusOne}>-1</button> 
-//   <button onClick={reset}>reset</button>
-//   </div>
-// );
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-////////////////////////////////////////////////////////
-//// Manual Data Binding
-// JSX does not have data built-in binding
-// let count = 0;
-// const addOne = () => {
-//   count++;
-//   renderCounterApp();
-// }
-// const minusOne = () => {
-//   // subtract 1 from count - rerender
-//   count--;
-//   renderCounterApp();
-// }
-// const reset = () => {
-//   count = 0;
-//   renderCounterApp();
-//   // set count to 0 a rerender
-// }
+var TodoList = function (_React$Component) {
+  _inherits(TodoList, _React$Component);
 
-// const appRoot = document.getElementById('app');
+  function TodoList(props) {
+    _classCallCheck(this, TodoList);
 
-// const renderCounterApp = () => {
-//   const templateTwo = (
-//     <div>
-//       <h1>Count: {count}</h1>
-//       <button onClick={addOne}>+1</button> 
-//       <button onClick={minusOne}>-1</button> 
-//       <button onClick={reset}>reset</button>
-//     </div>
-//   );
+    var _this = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
 
-//   ReactDOM.render(templateTwo, appRoot); // This is where we are gonna render out application
-// };
-// renderCounterApp();
-
-
-/// ///////////////////////////////////////////////////
-//// Forms and Inputs
-var app = {
-  title: 'Indecision App',
-  subtitle: 'Put your life in the hands of a computer',
-  options: []
-};
-var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault(); // prevents page refresh 
-
-  var option = e.target.elements.option.value; //this points to the element that the event started on
-
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = '';
-    render();
+    _this.formSubmit = _this.formSubmit.bind(_this);
+    _this.deleteAll = _this.deleteAll.bind(_this);
+    _this.deleteOne = _this.deleteOne.bind(_this);
+    _this.state = {
+      todoArr: []
+    };
+    return _this;
   }
-};
 
-var onRemoveAll = function onRemoveAll() {
-  app.options = [];
-  render();
-};
+  _createClass(TodoList, [{
+    key: "formSubmit",
+    value: function formSubmit(list) {
+      var _this2 = this;
 
-var appRoot = document.getElementById('app');
+      // 빈칸
+      if (!list) {
+        alert("Please Enter valid text");
+        // 중복
+      } else if (this.state.todoArr.indexOf(list) > -1) {
+        alert("This is already in the list");
+      } else if (this.state.todoArr.indexOf(list) === -1) {
+        this.setState(function (prevState) {
+          return {
+            todoArr: _this2.state.todoArr.concat(list)
+          };
+        });
+      }
+    }
+  }, {
+    key: "deleteAll",
+    value: function deleteAll() {
+      this.setState(function () {
+        return {
+          todoArr: []
+        };
+      });
+    }
+  }, {
+    key: "deleteOne",
+    value: function deleteOne(listtoRemove) {
+      this.setState(function (prevState) {
+        return {
+          todoArr: prevState.todoArr.filter(function (list) {
+            return listtoRemove !== list;
+          })
+        };
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(HandleTitle, null),
+        React.createElement(HandleLists, { todoArr: this.state.todoArr, deleteAll: this.deleteAll, deleteOne: this.deleteOne }),
+        React.createElement(HandleAddList, { formSubmit: this.formSubmit })
+      );
+    }
+  }]);
 
-var render = function render() {
-  var template = React.createElement(
-    'div',
+  return TodoList;
+}(React.Component);
+
+var HandleTitle = function HandleTitle(props) {
+  return React.createElement(
+    "div",
     null,
     React.createElement(
-      'h1',
+      "h1",
       null,
-      app.title
-    ),
-    app.subtitle && React.createElement(
-      'p',
-      null,
-      'Subtitle : ',
-      app.subtitle
+      props.title
     ),
     React.createElement(
-      'p',
+      "h2",
       null,
-      app.options.length > 0 ? 'Here are your options' : 'No options'
-    ),
-    React.createElement(
-      'p',
-      null,
-      app.options.length
-    ),
-    React.createElement(
-      'button',
-      { onClick: onRemoveAll },
-      'Remove All'
-    ),
-    React.createElement(
-      'ol',
-      null,
-      React.createElement(
-        'li',
-        null,
-        'Item one'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item two'
-      )
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', { type: 'text', name: 'option' }),
-      React.createElement(
-        'button',
-        null,
-        'Add Option'
-      )
+      props.subTitle
     )
   );
-  ReactDOM.render(template, appRoot);
 };
-render();
+
+HandleTitle.defaultProps = {
+  title: "Todo-List",
+  subTitle: "Put your life in the hands of a computer."
+};
+
+var HandleLists = function (_React$Component2) {
+  _inherits(HandleLists, _React$Component2);
+
+  function HandleLists(props) {
+    _classCallCheck(this, HandleLists);
+
+    return _possibleConstructorReturn(this, (HandleLists.__proto__ || Object.getPrototypeOf(HandleLists)).call(this, props));
+  }
+
+  _createClass(HandleLists, [{
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "button",
+          { onClick: this.props.deleteAll },
+          "\uC804\uCCB4\uC0AD\uC81C"
+        ),
+        this.props.todoArr.map(function (arr) {
+          return React.createElement(HandleList, { key: arr, listText: arr, deleteOne: _this4.props.deleteOne });
+        })
+      );
+    }
+  }]);
+
+  return HandleLists;
+}(React.Component);
+
+var HandleList = function (_React$Component3) {
+  _inherits(HandleList, _React$Component3);
+
+  function HandleList(props) {
+    _classCallCheck(this, HandleList);
+
+    return _possibleConstructorReturn(this, (HandleList.__proto__ || Object.getPrototypeOf(HandleList)).call(this, props));
+  }
+
+  _createClass(HandleList, [{
+    key: "render",
+    value: function render() {
+      var _this6 = this;
+
+      return React.createElement(
+        "div",
+        null,
+        this.props.listText,
+        React.createElement(
+          "button",
+          { onClick: function onClick() {
+              return _this6.props.deleteOne(_this6.props.listText);
+            } },
+          "\uC0AD\uC81C"
+        )
+      );
+    }
+  }]);
+
+  return HandleList;
+}(React.Component);
+
+var HandleAddList = function (_React$Component4) {
+  _inherits(HandleAddList, _React$Component4);
+
+  function HandleAddList(props) {
+    _classCallCheck(this, HandleAddList);
+
+    var _this7 = _possibleConstructorReturn(this, (HandleAddList.__proto__ || Object.getPrototypeOf(HandleAddList)).call(this, props));
+
+    _this7.formSubmitChild = _this7.formSubmitChild.bind(_this7);
+    _this7.handleChange = _this7.handleChange.bind(_this7);
+    _this7.state = {
+      todo: ''
+    };
+    return _this7;
+  }
+
+  _createClass(HandleAddList, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        todo: e.target.value
+      });
+      console.log(this.state.value);
+    }
+  }, {
+    key: "formSubmitChild",
+    value: function formSubmitChild(e) {
+      var _this8 = this;
+
+      e.preventDefault();
+
+      var inputVal = e.target.elements.todoinput.value.trim();
+
+      this.setState(function () {
+        return {
+          todo: _this8.props.formSubmit(inputVal)
+        };
+      });
+      this.setState({
+        todo: ''
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "form",
+          { onSubmit: this.formSubmitChild },
+          React.createElement("input", { type: "text", name: "todoinput", autoFocus: true, onChange: this.handleChange, value: this.state.todo }),
+          React.createElement(
+            "button",
+            null,
+            "\uCD94\uAC00"
+          )
+        )
+      );
+    }
+  }]);
+
+  return HandleAddList;
+}(React.Component);
+
+ReactDOM.render(React.createElement(TodoList, null), document.getElementById("app"));
+
+//-onClick requires a reference to a function, 
+//-so you need to pass it a function. . .
+//-1. onClick={props.handleDeleteOption}  will not work because the handler needs the value of option
+//-2. onClick={props.handleDeleteOption(props.optionText)} will not work because you are invoking the function not assigning it
+//-3.The arrow function was created to solve the above two problems (a regulalr function would also have worked)
