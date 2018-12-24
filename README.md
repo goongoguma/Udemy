@@ -1,3 +1,5 @@
-# Studying in Udemy 
-  ##  List of lectures
-  * Complete React by Andrew Mead
+# Studying in Udemy
+
+## List of lectures
+
+- The Modern JavaScript Bootcamp by Andrew Mead
