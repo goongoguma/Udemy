@@ -10,11 +10,18 @@ let isFreezing = temp === "Andrew"; // true
 // let isFreezing = temp !== "Andrew "; // false
 console.log(isFreezing); // true
 
-let temp2 = 32;
-let isFreezing2 = temp2 < 32;
+let temp2 = 180;
+let isFreezing2 = temp2 <= 32; // true
 // let isFreezing2 = temp2 > 32; // false
 // let isFreezing2 = temp2 => 32; // true
-console.log(isFreezing2); // true
+if (temp2 <= 32) {
+  console.log("It is freezing outside!"); // It is freezing outside!
+}
+
+if (temp2 >= 110) {
+  console.log("It is way to hot outside!");
+  console.log("Testing123");
+}
 
 // Challenge area
 
@@ -28,3 +35,11 @@ let isSenior = age >= 65;
 console.log(isChild); // false
 // Print is senior value
 console.log(isSenior); // false
+// If 7 or under print message about child pricing
+if (age <= 7) {
+  console.log("You will get a child discount!");
+}
+// If 65 or older print message about senior discount
+if (age >= 65) {
+  console.log("You will get a senior discout!");
+}
