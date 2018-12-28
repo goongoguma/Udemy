@@ -5,36 +5,21 @@ const notes = [
   { title: "Office modification", body: "Get a new seat" }
 ];
 
-// notes.pop();
-// notes.push("My new note");
+// find method returns what it matches itself
+// just like object, when reference of an array changes, value of array also changes as well
+const findNote = function(notes, noteTitle) {
+  return notes.find(function(note, index) {
+    return note.title === noteTitle;
+  });
+};
 
-// console.log(notes.shift());
-// notes.unshift("My first note");
+// // findIndex method returns the index
+// const findNote = function(notes, noteTitle) {
+//   const index = notes.findIndex(function(note, index) {
+//     return note.title === noteTitle;
+//   });
+//   return notes[index];
+// };
 
-// notes.splice(1, 1, "This is the new second item");
-
-// // if you are going to change one item in the array, you can use basic bracket notation
-// notes[2] = "This is now the new note 3";
-
-// notes.forEach(function(item, index) {
-//   console.log(index);
-//   console.log(item);
-// });
-
-console.log(notes.length);
-console.log(notes);
-
-// when we comparing objects, it does not matter if they have same set of object properties and same object property values. That does not make objects equal.
-// what makes two objects equal is if there is exact same object in memory.
-// note: indexOf uses ===
-console.log(notes.indexOf({ hello: "hi" })); // -1
-let someObject = { hello: "hi" };
-let otherObject = someObject;
-console.log(someObject === otherObject); // true
-
-// If you want to find object in an array, use findIndex() method not indexOf() method.
-// findIndex returns first match it finds
-const index = notes.findIndex(function(note, index) {
-  return note.hello === "hi";
-});
-console.log(index); // 0
+const note = findNote(notes, "Office modification");
+console.log(note);
