@@ -11,5 +11,10 @@ const notes = ["Note 1", "Note 2", "Note 3"];
 // if you are going to change one item in the array, you can use basic bracket notation
 notes[2] = "This is now the new note 3";
 
+notes.forEach(function(item, index) {
+  console.log(index);
+  console.log(item);
+});
+
 console.log(notes.length);
 console.log(notes);

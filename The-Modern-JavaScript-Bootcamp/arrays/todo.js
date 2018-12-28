@@ -17,5 +17,8 @@ todos.push("preparing for the interview");
 // Remove the first item from the list
 todos.shift();
 
-console.log(todos);
 console.log(`You have ${todos.length} todos!`);
+
+todos.forEach(function(item, index) {
+  console.log(`${index + 1}. ${item}`);
+});
