@@ -10,8 +10,12 @@ const todos = [
   "searching for a job"
 ];
 
-console.log(`You have ${todos.length} todos!`);
+// Delete the 3rd item
+todos.splice(2, 1);
+// Add a new item onto the end
+todos.push("preparing for the interview");
+// Remove the first item from the list
+todos.shift();
 
-for (const i = 0; i < todos.length; i++) {
-  console.log(`Todo ${i + 1}: ${todos[i]}`);
-}
+console.log(todos);
+console.log(`You have ${todos.length} todos!`);
