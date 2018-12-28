@@ -1,4 +1,9 @@
-const notes = ["Note 1", "Note 2", "Note 3"];
+const notes = [
+  { hello: "hi" },
+  { title: "My next trip", body: "I would like to go to Spain" },
+  { title: "Habbits to work on", body: "Exercise, Eating a bit better." },
+  { title: "Office modification", body: "Get a new seat" }
+];
 
 // notes.pop();
 // notes.push("My new note");
@@ -8,22 +13,28 @@ const notes = ["Note 1", "Note 2", "Note 3"];
 
 // notes.splice(1, 1, "This is the new second item");
 
-// if you are going to change one item in the array, you can use basic bracket notation
-notes[2] = "This is now the new note 3";
+// // if you are going to change one item in the array, you can use basic bracket notation
+// notes[2] = "This is now the new note 3";
 
-notes.forEach(function(item, index) {
-  console.log(index);
-  console.log(item);
-});
+// notes.forEach(function(item, index) {
+//   console.log(index);
+//   console.log(item);
+// });
 
 console.log(notes.length);
 console.log(notes);
 
-// Counting... 1
-for (let count = 0; count <= 2; count++) {
-  console.log(count);
-}
+// when we comparing objects, it does not matter if they have same set of object properties and same object property values. That does not make objects equal.
+// what makes two objects equal is if there is exact same object in memory.
+// note: indexOf uses ===
+console.log(notes.indexOf({ hello: "hi" })); // -1
+let someObject = { hello: "hi" };
+let otherObject = someObject;
+console.log(someObject === otherObject); // true
 
-for (let count = notes.length - 1; count >= 0; count--) {
-  console.log(notes[count]);
-}
+// If you want to find object in an array, use findIndex() method not indexOf() method.
+// findIndex returns first match it finds
+const index = notes.findIndex(function(note, index) {
+  return note.hello === "hi";
+});
+console.log(index); // 0
