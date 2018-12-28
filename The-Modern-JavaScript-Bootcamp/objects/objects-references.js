@@ -5,7 +5,7 @@ let myAccount = {
 };
 
 let otherAccount = myAccount;
-otherAccount.income = 10000; // it changes the property of myAccount
+otherAccount.income = 1000; // it changes the property of myAccount
 otherAccount = {}; // binding is broken.
 
 // when the value of reference changes, the value of object also changes
@@ -16,6 +16,5 @@ let addExpense = function(account, amount) {
   // account.expenses = account.expenses + amount; // { name: 'Jae Hyun An', expenses: 1500, income: 10000 }
   console.log(account);
 };
-
-addExpense(myAccount, 1500);
+addExpense(myAccount, 2.5);
 console.log(myAccount);
