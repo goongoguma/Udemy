@@ -1,7 +1,7 @@
 const todos = [
   {
     text: "washing dishes",
-    completed: true
+    completed: false
   },
   {
     text: "cleaning up the room",
@@ -24,11 +24,20 @@ const todos = [
 // 1. Convert array to array of objects -> text, completed(true/false)
 // 2. Create function to remove a todo by text value
 
-const deleteTodo = function(todos, doneText) {
-  return todos.filter(function(todo, index) {
-    return todo.text.toLowerCase() !== doneText.toLowerCase();
+// const deleteTodo = function(todos, doneText) {
+//   return todos.filter(function(todo, index) {
+//     return todo.text.toLowerCase() !== doneText.toLowerCase();
+//   });
+// };
+
+// const todoList = deleteTodo(todos, "washing dishes");
+// console.log(todoList);
+
+// showing only completed: false
+let getThingsTodo = function(todos) {
+  return todos.filter(function(todo) {
+    return !todo.completed;
   });
 };
 
-const todoList = deleteTodo(todos, "washing dishes");
-console.log(todoList);
+console.log(getThingsTodo(todos));
