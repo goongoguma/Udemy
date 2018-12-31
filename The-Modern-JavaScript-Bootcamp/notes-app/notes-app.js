@@ -34,9 +34,6 @@ document.querySelector("#search-text").addEventListener("input", function(e) {
   renderNotes(notes, filters);
 });
 
-document.querySelector("#name-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  // elements is going to allow us to access all of the fields we have set up
-  console.log(e.target.elements.firstName.value);
-  e.target.elements.firstName.value = "";
+document.querySelector("#for-fun").addEventListener("change", function(e) {
+  console.log(e.target.checked);
 });

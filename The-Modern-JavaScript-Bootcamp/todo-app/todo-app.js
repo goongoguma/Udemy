@@ -1,11 +1,11 @@
 const todos = [
   {
     text: "washing dishes",
-    completed: false
+    completed: true
   },
   {
     text: "cleaning up the room",
-    completed: true
+    completed: false
   },
   {
     text: "studying javascript",
@@ -13,11 +13,11 @@ const todos = [
   },
   {
     text: "writing cv",
-    completed: false
+    completed: true
   },
   {
     text: "searching for a job",
-    completed: true
+    completed: false
   }
 ];
 
@@ -77,3 +77,17 @@ document.querySelector("#add-todo").addEventListener("submit", function(e) {
   searchText(todos, filter);
   e.target.elements.todo.value = "";
 });
+
+// CHECKBOX
+document
+  .querySelector("#hide-completed")
+  .addEventListener("change", function(e) {
+    if (e.target.checked) {
+      const completeTrue = todos.filter(function(todo) {
+        return !todo.completed;
+      });
+      searchText(completeTrue, filter);
+    } else {
+      searchText(todos, filter);
+    }
+  });
