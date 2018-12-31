@@ -21,22 +21,46 @@ const todos = [
   }
 ];
 
-// You have 2 todos left (p element)
-// Add a p for each todo above (use text value)
+// Filtering Challenge
+// Setup a div contain for todos
+// Setup filters (searchText) and wire up a new filter input change it
+// Create a renderTodos function to render and rerender the latest filtered data
 
-let incompleteTodos = todos.filter(function(todo) {
-  return !todo.completed;
-});
+// Starts
+let filter = {
+  filteredText: ""
+};
 
-const summaryPtag = document.createElement("h2");
-summaryPtag.textContent = `You have ${incompleteTodos.length} todos left`;
-document.querySelector("body").appendChild(summaryPtag);
+const searchText = function(todos, filter) {
+  const filteredResult = todos.filter(function(todo) {
+    return todo.text.toLowerCase().includes(filter.filteredText.toLowerCase());
+  });
+  console.log(filteredResult);
 
-todos.forEach(function(todo) {
-  const todoText = document.createElement("p");
-  todoText.textContent = todo.text;
-  document.querySelector("body").appendChild(todoText);
-});
+  const incompleteTodos = filteredResult.filter(function(todo) {
+    return !todo.completed;
+  });
+
+  document.querySelector("#todo-lists").innerHTML = "";
+
+  const summaryPtag = document.createElement("h2");
+  summaryPtag.textContent = `You have ${filteredResult.length} todos left`;
+  document.querySelector("#todo-lists").appendChild(summaryPtag);
+
+  filteredResult.forEach(function(result) {
+    const todoText = document.createElement("p");
+    todoText.textContent = result.text;
+    document.querySelector("#todo-lists").appendChild(todoText);
+  });
+};
+
+searchText(todos, filter);
+
+// let incompleteTodos = todos.filter(function(todo) {
+//   return !todo.completed;
+// });
+
+//Ends
 
 // BUTTON EVENT
 document.querySelector("#add-todo").addEventListener("click", function(e) {
@@ -46,4 +70,10 @@ document.querySelector("#add-todo").addEventListener("click", function(e) {
 // INPUT EVENT
 document.querySelector("#todo-input").addEventListener("input", function(e) {
   console.log(e.target.value);
+});
+
+// SEARCH TODO
+document.querySelector("#search-id").addEventListener("input", function(e) {
+  filter.filteredText = e.target.value;
+  searchText(todos, filter);
 });
