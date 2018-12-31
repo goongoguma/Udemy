@@ -4,30 +4,38 @@ const notes = [
   { title: "Office modification", body: "Get a new seat" }
 ];
 
-// find method returns what it matches itself
-// just like object, when reference of an array changes, value of array also changes as well
-const findNote = function(notes, noteTitle) {
-  return notes.find(function(note, index) {
-    return note.title === noteTitle;
+console.log("a" < "b");
+
+// calling just sort method is not going to do anythinging for array of objects. Therefore use function in sort method
+const sortNotes = function(notes) {
+  notes.sort(function(a, b) {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    } else if (b.title.toLowerCase() < a.title.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    }
   });
 };
 
-const findNotes = function(notes, query) {
-  return notes.filter(function(note, index) {
-    const isTitleMatch = note.title.toLowerCase().includes(query.toLowerCase());
-    const isBodyMatch = note.body.toLowerCase().includes(query.toLowerCase());
-    return isTitleMatch || isBodyMatch;
-  });
-};
+sortNotes(notes);
+console.log(notes);
 
-console.log(findNotes(notes, "eating"));
-
-// // findIndex method returns the index
+// // find method returns what it matches itself
+// // just like object, when reference of an array changes, value of array also changes as well
 // const findNote = function(notes, noteTitle) {
-//   const index = notes.findIndex(function(note, index) {
+//   return notes.find(function(note, index) {
 //     return note.title === noteTitle;
 //   });
-//   return notes[index];
 // };
 
-const note = findNote(notes, "Office modification");
+// const findNotes = function(notes, query) {
+//   return notes.filter(function(note, index) {
+//     const isTitleMatch = note.title.toLowerCase().includes(query.toLowerCase());
+//     const isBodyMatch = note.body.toLowerCase().includes(query.toLowerCase());
+//     return isTitleMatch || isBodyMatch;
+//   });
+// };
+
+// console.log(findNotes(notes, "eating"));
