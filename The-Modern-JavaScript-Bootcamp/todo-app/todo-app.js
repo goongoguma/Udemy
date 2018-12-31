@@ -39,6 +39,6 @@ todos.forEach(function(todo) {
 });
 
 // Listen for ne todo creation
-document.querySelector("button").addEventListener("click", function(e) {
+document.querySelector("#add-todo").addEventListener("click", function(e) {
   console.log("todo has been added");
 });
