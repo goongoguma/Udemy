@@ -38,7 +38,12 @@ todos.forEach(function(todo) {
   document.querySelector("body").appendChild(todoText);
 });
 
-// Listen for ne todo creation
+// BUTTON EVENT
 document.querySelector("#add-todo").addEventListener("click", function(e) {
   console.log("todo has been added");
+});
+
+// INPUT EVENT
+document.querySelector("#todo-input").addEventListener("input", function(e) {
+  console.log(e.target.value);
 });
