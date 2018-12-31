@@ -44,7 +44,7 @@ const searchText = function(todos, filter) {
   document.querySelector("#todo-lists").innerHTML = "";
 
   const summaryPtag = document.createElement("h2");
-  summaryPtag.textContent = `You have ${filteredResult.length} todos left`;
+  summaryPtag.textContent = `You have ${incompleteTodos.length} todos left`;
   document.querySelector("#todo-lists").appendChild(summaryPtag);
 
   filteredResult.forEach(function(result) {
@@ -60,20 +60,20 @@ searchText(todos, filter);
 //   return !todo.completed;
 // });
 
-//Ends
-
-// BUTTON EVENT
-document.querySelector("#add-todo").addEventListener("click", function(e) {
-  console.log("todo has been added");
-});
-
-// INPUT EVENT
-document.querySelector("#todo-input").addEventListener("input", function(e) {
-  console.log(e.target.value);
-});
-
 // SEARCH TODO
 document.querySelector("#search-id").addEventListener("input", function(e) {
   filter.filteredText = e.target.value;
   searchText(todos, filter);
+});
+
+// ADD EVENT
+document.querySelector("#add-todo").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const newTodo = {
+    text: e.target.elements.todo.value,
+    completed: false
+  };
+  todos.push(newTodo);
+  searchText(todos, filter);
+  e.target.elements.todo.value = "";
 });
