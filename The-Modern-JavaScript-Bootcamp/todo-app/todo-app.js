@@ -37,3 +37,8 @@ todos.forEach(function(todo) {
   todoText.textContent = todo.text;
   document.querySelector("body").appendChild(todoText);
 });
+
+// Listen for ne todo creation
+document.querySelector("button").addEventListener("click", function(e) {
+  console.log("todo has been added");
+});
