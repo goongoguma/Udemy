@@ -8,6 +8,32 @@ const filters = {
   searchText: ""
 };
 
+// CRUD OPERATION (CREATE, READ, UPDATE, DELETE)
+// CREATE
+// localStorage.setItem("location", "Incheon");
+// READ
+// console.log(localStorage.getItem("location"));
+// UPDATE
+// UPDATE also uses setItem with different value
+// DELETE
+// localStorage.removeItem("location");
+// localStorage.clear() -> it deletes everything
+
+// const user = {
+//   name: "Jae Hyun",
+//   age: 28
+// };
+
+// // HOW TO SAVE OBJECT IN LOCALSTORAGE
+// const userJSON = JSON.stringify(user);
+// console.log(userJSON);
+// localStorage.setItem("user", userJSON);
+
+// // HOW TO GET A DATA FROM THE LOCALSTORAGE
+// const userJSON = localStorage.getItem("user");
+// const user = JSON.parse(userJSON);
+// console.log(`${user.name} is ${user.age}`);
+
 // FILTERING NOTES
 const renderNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
