@@ -1,38 +1,15 @@
-const notes = [
-  { title: "My next trip", body: "I would like to go to Spain" },
-  { title: "Habbits to work on", body: "Exercise, Eating a bit better." },
-  { title: "Office modification", body: "Get a new seat" }
-];
+let notes = [];
 
 const filters = {
   searchText: ""
 };
 
-// CRUD OPERATION (CREATE, READ, UPDATE, DELETE)
-// CREATE
-// localStorage.setItem("location", "Incheon");
-// READ
-// console.log(localStorage.getItem("location"));
-// UPDATE
-// UPDATE also uses setItem with different value
-// DELETE
-// localStorage.removeItem("location");
-// localStorage.clear() -> it deletes everything
+// Check for existin saved data
+const notesJSON = localStorage.getItem("notes");
 
-// const user = {
-//   name: "Jae Hyun",
-//   age: 28
-// };
-
-// // HOW TO SAVE OBJECT IN LOCALSTORAGE
-// const userJSON = JSON.stringify(user);
-// console.log(userJSON);
-// localStorage.setItem("user", userJSON);
-
-// // HOW TO GET A DATA FROM THE LOCALSTORAGE
-// const userJSON = localStorage.getItem("user");
-// const user = JSON.parse(userJSON);
-// console.log(`${user.name} is ${user.age}`);
+if (notesJSON) {
+  notes = JSON.parse(notesJSON);
+}
 
 // FILTERING NOTES
 const renderNotes = function(notes, filters) {
@@ -44,7 +21,13 @@ const renderNotes = function(notes, filters) {
 
   filteredNotes.forEach(function(note) {
     const noteEl = document.createElement("p");
-    noteEl.textContent = note.title;
+
+    if (note.title.length) {
+      noteEl.textContent = note.title;
+    } else {
+      noteEl.textContent = "Unnamed note";
+    }
+
     document.querySelector("#notes").appendChild(noteEl);
   });
 };
@@ -52,7 +35,12 @@ const renderNotes = function(notes, filters) {
 renderNotes(notes, filters);
 
 document.querySelector("#create-note").addEventListener("click", function(e) {
-  e.target.textContent = "The button was clicked";
+  notes.push({
+    title: "",
+    body: ""
+  });
+  localStorage.setItem("notes", JSON.stringify(notes));
+  renderNotes(notes, filters);
 });
 
 document.querySelector("#search-text").addEventListener("input", function(e) {

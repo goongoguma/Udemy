@@ -1,30 +1,10 @@
-const todos = [
-  {
-    text: "washing dishes",
-    completed: true
-  },
-  {
-    text: "cleaning up the room",
-    completed: false
-  },
-  {
-    text: "studying javascript",
-    completed: true
-  },
-  {
-    text: "writing cv",
-    completed: true
-  },
-  {
-    text: "searching for a job",
-    completed: false
-  }
-];
+let todos = [];
 
-// Filtering Challenge
-// Setup a div contain for todos
-// Setup filters (searchText) and wire up a new filter input change it
-// Create a renderTodos function to render and rerender the latest filtered data
+const todosJSON = localStorage.getItem("todos");
+
+if (todosJSON) {
+  todos = JSON.parse(todosJSON);
+}
 
 // Starts
 let filter = {
@@ -74,6 +54,7 @@ document.querySelector("#add-todo").addEventListener("submit", function(e) {
     completed: false
   };
   todos.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(todos));
   searchText(todos, filter);
   e.target.elements.todo.value = "";
 });
