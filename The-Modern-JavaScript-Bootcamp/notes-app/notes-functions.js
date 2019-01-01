@@ -9,7 +9,7 @@ const getSavedNotes = function() {
 };
 
 // SAVE THE NOTES TO LOCALSTORAGE
-const svaeNotes = function(notes) {
+const saveNotes = function(notes) {
   localStorage.setItem("notes", JSON.stringify(notes));
 };
 
@@ -28,7 +28,7 @@ const generateNoteDom = function(note) {
 // FILTERING NOTES
 const renderNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
-    return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
+    return note.title.toLowerCase().includes(filters.renderTodos.toLowerCase());
   });
 
   document.querySelector("#notes").innerHTML = "";

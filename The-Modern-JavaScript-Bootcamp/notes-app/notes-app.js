@@ -1,7 +1,7 @@
 const notes = getSavedNotes();
 
 const filters = {
-  searchText: ""
+  renderTodos: ""
 };
 
 renderNotes(notes, filters);
@@ -11,12 +11,12 @@ document.querySelector("#create-note").addEventListener("click", function(e) {
     title: "",
     body: ""
   });
-  svaeNotes(notes);
+  saveNotes(notes);
   renderNotes(notes, filters);
 });
 
 document.querySelector("#search-text").addEventListener("input", function(e) {
-  filters.searchText = e.target.value;
+  filters.renderTodos = e.target.value;
   renderNotes(notes, filters);
 });
 
