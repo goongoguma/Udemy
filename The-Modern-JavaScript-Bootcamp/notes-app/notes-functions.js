@@ -53,8 +53,46 @@ const generateNoteDom = function(note) {
   return noteEl;
 };
 
+// SORT YOUR NOTES BY ONE OF THREE WAYS ACCORDING TO OPTION VALUE IN INDEX.HTML
+const sortNotes = function(notes, sortBy) {
+  if (sortBy === "byEdited") {
+    return notes.sort(function(a, b) {
+      if (a.updatedAt > b.updatedAt) {
+        return -1;
+      } else if (a.updatedAt < b.updatedAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+      // return b.updatedAt - a.updatedAt;
+    });
+  } else if (sortBy === "byCreated") {
+    return notes.sort(function(a, b) {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else if (a.createdAt < b.createdAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "alphabetically") {
+    return notes.sort(function(a, b) {
+      // if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      //   return -1;
+      // } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      //   return 1;
+      // } else {
+      //   return 0;
+      // }
+      return a.updatedAt - b.updatedAt;
+    });
+  }
+};
+
 // FILTERING NOTES
 const renderNotes = function(notes, filters) {
+  notes = sortNotes(notes, filters.sortBy);
   const filteredNotes = notes.filter(function(note) {
     return note.title.toLowerCase().includes(filters.renderTodos.toLowerCase());
   });

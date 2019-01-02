@@ -49,7 +49,7 @@ const toggleTodo = function(result) {
     return todo.id === result.id;
   });
   if (toggleIndex !== undefined) {
-    toggleIndex.completed = !result.completed;
+    toggleIndex.completed = !toggleIndex.completed;
   }
 };
 

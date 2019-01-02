@@ -1,7 +1,8 @@
 let notes = getSavedNotes();
 
 const filters = {
-  renderTodos: ""
+  renderTodos: "",
+  sortBy: "byEdited"
 };
 
 renderNotes(notes, filters);
@@ -27,7 +28,8 @@ document.querySelector("#search-text").addEventListener("input", function(e) {
 });
 
 document.querySelector("#filter-by").addEventListener("change", function(e) {
-  console.log(e.target.value);
+  filters.sortBy = e.target.value;
+  renderNotes(notes, filters);
 });
 
 // 글 수정페이지에서 제목이 바뀔때 다른 탭에 있는 메인탭에서도 제목을 같이 바꿔주기
