@@ -2,8 +2,8 @@ const titleEl = document.querySelector("#note-title");
 const bodyEl = document.querySelector("#note-body");
 const removeEl = document.querySelector("#remove-note");
 const noteId = location.hash.substring(1);
-const notes = getSavedNotes();
-const note = notes.find(function(note) {
+let notes = getSavedNotes();
+let note = notes.find(function(note) {
   return note.id === noteId;
 });
 
@@ -29,4 +29,25 @@ removeEl.addEventListener("click", function() {
   removeNote(note.id);
   saveNotes(notes);
   location.assign("/index.html");
+});
+
+// in order to sync data across pages, use window object
+// storage only fires on the other pages
+// 다른 페이지에서 작동되는 코드들. 변수들의 값이 새롭게 할당된다.
+window.addEventListener("storage", function(e) {
+  console.log(e);
+  if (e.key === "notes") {
+    notes = JSON.parse(e.newValue);
+    let note = notes.find(function(note) {
+      return note.id === noteId;
+    });
+
+    // IN CASE ID IS WRONG, RELOCATE TO MAIN PAGE
+    if (note === undefined) {
+      location.assign("/index.html");
+    }
+
+    titleEl.value = note.title;
+    bodyEl.value = note.body;
+  }
 });
