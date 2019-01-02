@@ -8,12 +8,12 @@ const getSaveTodos = function() {
   }
 };
 
-// // SAVE TODOS TO LOCALSTORAGE
+// SAVE TODOS TO LOCALSTORAGE
 const saveTodos = function(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
-// // RENDER APPLICATION TODOS BASED ON FILTERS
+// RENDER APPLICATION TODOS BASED ON FILTERS
 const renderTodos = function(todos, filter) {
   const filteredResult = todos.filter(function(todo) {
     return todo.text.toLowerCase().includes(filter.filteredText.toLowerCase());
@@ -33,7 +33,17 @@ const renderTodos = function(todos, filter) {
   });
 };
 
-// // GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
+// REMOVE TODO BY ID
+const removeTodo = function(result) {
+  const removedIndex = todos.findIndex(function(todo) {
+    return todo.id === result.id;
+  });
+  if (removedIndex > -1) {
+    return todos.splice(removedIndex, 1);
+  }
+};
+
+// GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
 const generateTodoDOM = function(result) {
   const todoEl = document.createElement("div");
   const todoCheck = document.createElement("input");
@@ -50,6 +60,13 @@ const generateTodoDOM = function(result) {
 
   // SETUP REMOVE BUTTON
   todoButton.textContent = "remove";
+
+  todoButton.addEventListener("click", function() {
+    removeTodo(result);
+    saveTodos(todos);
+    renderTodos(todos, filter);
+  });
+
   todoEl.appendChild(todoButton);
 
   document.querySelector("#todo-lists").appendChild(todoEl);
