@@ -7,10 +7,6 @@ let filter = {
 
 renderTodos(todos, filter);
 
-// let incompleteTodos = todos.filter(function(todo) {
-//   return !todo.completed;
-// });
-
 // SEARCH TODO
 document.querySelector("#search-id").addEventListener("input", function(e) {
   filter.filteredText = e.target.value;
