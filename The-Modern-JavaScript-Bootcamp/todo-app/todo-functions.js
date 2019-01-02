@@ -35,9 +35,24 @@ const renderTodos = function(todos, filter) {
 
 // // GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
 const generateTodoDOM = function(result) {
-  const todoText = document.createElement("p");
+  const todoEl = document.createElement("div");
+  const todoCheck = document.createElement("input");
+  const todoText = document.createElement("span");
+  const todoButton = document.createElement("button");
+
+  // SETUP CHECKBOX
+  todoCheck.setAttribute("type", "checkbox");
+  todoEl.appendChild(todoCheck);
+
+  // SETUP TEXT
   todoText.textContent = result.text;
-  document.querySelector("#todo-lists").appendChild(todoText);
+  todoEl.appendChild(todoText);
+
+  // SETUP REMOVE BUTTON
+  todoButton.textContent = "remove";
+  todoEl.appendChild(todoButton);
+
+  document.querySelector("#todo-lists").appendChild(todoEl);
 };
 
 // // GET THE DOM ELEMENTS FOR LIST SUMMARY
