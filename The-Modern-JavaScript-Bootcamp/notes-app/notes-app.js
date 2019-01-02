@@ -6,15 +6,16 @@ const filters = {
 
 renderNotes(notes, filters);
 
-console.log(uuidv4());
-
 document.querySelector("#create-note").addEventListener("click", function(e) {
   const id = uuidv4();
+  const timeStamp = moment().valueOf();
   notes.push({
     // create unique id using uuidv4
     id,
     title: "",
-    body: ""
+    body: "",
+    createdAt: timeStamp,
+    updatedAt: timeStamp
   });
   saveNotes(notes);
   location.assign(`/edit.html#${id}`);

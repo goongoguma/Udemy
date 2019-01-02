@@ -66,3 +66,8 @@ const renderNotes = function(notes, filters) {
     document.querySelector("#notes").appendChild(noteEl);
   });
 };
+
+// GENERATE THE LAST EDITED MESSAGE
+const generateLastEdited = function(timeStamp) {
+  return `Last edited ${moment(timeStamp).fromNow()}`;
+};

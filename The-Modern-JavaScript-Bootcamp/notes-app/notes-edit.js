@@ -1,4 +1,5 @@
 const titleEl = document.querySelector("#note-title");
+const timeEl = document.querySelector("#time");
 const bodyEl = document.querySelector("#note-body");
 const removeEl = document.querySelector("#remove-note");
 const noteId = location.hash.substring(1);
@@ -17,11 +18,17 @@ bodyEl.value = note.body;
 
 titleEl.addEventListener("input", function(e) {
   note.title = e.target.value;
+  note.updatedAt = moment().valueOf();
+  timeEl.textContent = generateLastEdited(note.updatedAt);
   saveNotes(notes);
 });
 
+timeEl.textContent = generateLastEdited(note.updatedAt);
+
 bodyEl.addEventListener("input", function(e) {
   note.body = e.target.value;
+  note.updatedAt = moment().valueOf();
+  timeEl.textContent = generateLastEdited(note.updatedAt);
   saveNotes(notes);
 });
 
@@ -49,5 +56,6 @@ window.addEventListener("storage", function(e) {
 
     titleEl.value = note.title;
     bodyEl.value = note.body;
+    timeEl.textContent = generateLastEdited(note.updatedAt);
   }
 });
