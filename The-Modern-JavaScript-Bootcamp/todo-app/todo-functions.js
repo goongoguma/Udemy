@@ -63,8 +63,10 @@ const generateTodoDOM = function(result) {
   // SETUP CHECKBOX
   todoCheck.setAttribute("type", "checkbox");
   todoEl.appendChild(todoCheck);
-  // Checked when the value is true
+
+  // when the input is checked -> true/ not checked -> false
   todoCheck.checked = result.completed;
+
   todoCheck.addEventListener("change", function() {
     toggleTodo(result);
     saveTodos(todos);
