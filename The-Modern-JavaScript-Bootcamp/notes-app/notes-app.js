@@ -6,8 +6,12 @@ const filters = {
 
 renderNotes(notes, filters);
 
+console.log(uuidv4());
+
 document.querySelector("#create-note").addEventListener("click", function(e) {
   notes.push({
+    // create unique id using uuidv4
+    id: uuidv4(),
     title: "",
     body: ""
   });

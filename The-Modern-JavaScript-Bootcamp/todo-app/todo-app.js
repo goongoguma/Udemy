@@ -21,6 +21,7 @@ document.querySelector("#search-id").addEventListener("input", function(e) {
 document.querySelector("#add-todo").addEventListener("submit", function(e) {
   e.preventDefault();
   const newTodo = {
+    id: uuidv4(),
     text: e.target.elements.todo.value,
     completed: false
   };
