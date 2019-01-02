@@ -36,3 +36,35 @@ window.addEventListener("storage", function(e) {
     renderNotes(notes, filters);
   }
 });
+
+// Unix Epoch - January 1st 1970 00:00:00
+
+// we can represent specific time providing arguments in the function call
+
+// THIS ALLOWS US TO GET TIME USING UNIX EPOCH AND SAVED IN LOCALSTORAGE
+const now = new Date();
+const timeStamp = now.getTime();
+
+// THIS IS USED AFTER WE GET A DATA FROM A LOCALSTORAGE AND DO SOMETHING RELATED TO THE DATE
+const myDate = new Date(timeStamp);
+console.log(myDate.getFullYear());
+
+// console.log(`Year: ${now.getFullYear()}`);
+// // Jan represeted 0
+// console.log(`Month: ${now.getMonth()}`);
+// console.log(`Day of month: ${now.getDate()}`);
+// console.log(`Hour: ${now.getHours()}`);
+// console.log(`Minutes: ${now.getMinutes()}`);
+// console.log(`Seconds: ${now.getSeconds()}`);
+
+const timeOne = new Date("May 5 2002 02:00:00");
+const timeTwo = new Date();
+const timeOneTimeStamp = timeOne.getFullYear();
+const timeTwoTimeStamp = timeTwo.getFullYear();
+console.log(timeTwoTimeStamp);
+
+if (timeOneTimeStamp < timeTwoTimeStamp) {
+  console.log(timeOne.toString());
+} else if (timeOneTimeStamp > timeTwoTimeStamp) {
+  console.log(timeTwo.toString());
+}
