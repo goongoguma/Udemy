@@ -43,6 +43,16 @@ const removeTodo = function(result) {
   }
 };
 
+// TOGGLE THE COMPLETED VALUE FOR A GIVEN TODO
+const toggleTodo = function(result) {
+  const toggleIndex = todos.find(function(todo) {
+    return todo.id === result.id;
+  });
+  if (toggleIndex !== undefined) {
+    toggleIndex.completed = !result.completed;
+  }
+};
+
 // GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
 const generateTodoDOM = function(result) {
   const todoEl = document.createElement("div");
@@ -53,6 +63,13 @@ const generateTodoDOM = function(result) {
   // SETUP CHECKBOX
   todoCheck.setAttribute("type", "checkbox");
   todoEl.appendChild(todoCheck);
+  // Checked when the value is true
+  todoCheck.checked = result.completed;
+  todoCheck.addEventListener("change", function() {
+    toggleTodo(result);
+    saveTodos(todos);
+    renderTodos(todos, filter);
+  });
 
   // SETUP TEXT
   todoText.textContent = result.text;
