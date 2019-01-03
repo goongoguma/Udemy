@@ -85,7 +85,7 @@ const sortNotes = function(notes, sortBy) {
       // } else {
       //   return 0;
       // }
-      return a.updatedAt - b.updatedAt;
+      return b.updatedAt - a.updatedAt;
     });
   }
 };
