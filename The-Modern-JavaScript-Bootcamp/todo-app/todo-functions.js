@@ -1,43 +1,35 @@
 // FETCH EXISTING TODOS FROM LOCALSTORAGE
-const getSaveTodos = function() {
+const getSaveTodos = () => {
   const todosJSON = localStorage.getItem("todos");
-  if (todosJSON) {
-    return JSON.parse(todosJSON);
-  } else {
-    return [];
-  }
+  return todosJSON ? JSON.parse(todosJSON) : [];
 };
 
 // SAVE TODOS TO LOCALSTORAGE
-const saveTodos = function(todos) {
+const saveTodos = todos => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 // RENDER APPLICATION TODOS BASED ON FILTERS
-const renderTodos = function(todos, filter) {
-  const filteredResult = todos.filter(function(todo) {
-    return todo.text.toLowerCase().includes(filter.filteredText.toLowerCase());
-  });
+const renderTodos = (todos, filter) => {
+  const filteredResult = todos.filter(todo =>
+    todo.text.toLowerCase().includes(filter.filteredText.toLowerCase())
+  );
   console.log(filteredResult);
 
-  const incompleteTodos = filteredResult.filter(function(todo) {
-    return !todo.completed;
-  });
+  const incompleteTodos = filteredResult.filter(todo => !todo.completed);
 
   document.querySelector("#todo-lists").innerHTML = "";
 
   generateSummaryDOM(incompleteTodos);
 
-  filteredResult.forEach(function(result) {
+  filteredResult.forEach(result => {
     generateTodoDOM(result);
   });
 };
 
 // REMOVE TODO BY ID
 const removeTodo = function(result) {
-  const removedIndex = todos.findIndex(function(todo) {
-    return todo.id === result.id;
-  });
+  const removedIndex = todos.findIndex(todo => todo.id === result.id);
   if (removedIndex > -1) {
     return todos.splice(removedIndex, 1);
   }
@@ -45,16 +37,14 @@ const removeTodo = function(result) {
 
 // TOGGLE THE COMPLETED VALUE FOR A GIVEN TODO
 const toggleTodo = function(result) {
-  const toggleIndex = todos.find(function(todo) {
-    return todo.id === result.id;
-  });
+  const toggleIndex = todos.find(todo => todo.id === result.id);
   if (toggleIndex !== undefined) {
     toggleIndex.completed = !toggleIndex.completed;
   }
 };
 
 // GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
-const generateTodoDOM = function(result) {
+const generateTodoDOM = result => {
   const todoEl = document.createElement("div");
   const todoCheck = document.createElement("input");
   const todoText = document.createElement("span");
@@ -67,7 +57,7 @@ const generateTodoDOM = function(result) {
   // when the input is checked -> true/ not checked -> false
   todoCheck.checked = result.completed;
 
-  todoCheck.addEventListener("change", function() {
+  todoCheck.addEventListener("change", () => {
     toggleTodo(result);
     saveTodos(todos);
     renderTodos(todos, filter);
@@ -80,7 +70,7 @@ const generateTodoDOM = function(result) {
   // SETUP REMOVE BUTTON
   todoButton.textContent = "remove";
 
-  todoButton.addEventListener("click", function() {
+  todoButton.addEventListener("click", () => {
     removeTodo(result);
     saveTodos(todos);
     renderTodos(todos, filter);
@@ -92,7 +82,7 @@ const generateTodoDOM = function(result) {
 };
 
 // // GET THE DOM ELEMENTS FOR LIST SUMMARY
-const generateSummaryDOM = function(incompleteTodos) {
+const generateSummaryDOM = incompleteTodos => {
   const summaryPtag = document.createElement("h2");
   summaryPtag.textContent = `You have ${incompleteTodos.length} todos left`;
   document.querySelector("#todo-lists").appendChild(summaryPtag);

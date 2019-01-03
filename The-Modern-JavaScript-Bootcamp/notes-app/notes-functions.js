@@ -1,11 +1,7 @@
 // READ EXISTING NOTES FROM LOCALSTORAGE
 const getSavedNotes = function() {
   const notesJSON = localStorage.getItem("notes");
-  if (notesJSON) {
-    return JSON.parse(notesJSON);
-  } else {
-    return [];
-  }
+  return notesJSON ? JSON.parse(notesJSON) : [];
 };
 
 // SAVE THE NOTES TO LOCALSTORAGE
@@ -18,9 +14,8 @@ const removeNote = function(id) {
   const noteIndex = notes.findIndex(function(note) {
     return note.id === id;
   });
-  if (noteIndex > -1) {
-    notes.splice(noteIndex, 1);
-  }
+
+  noteIndex > -1 ? notes.splice(noteIndex, 1) : null;
 };
 
 // GENERATE THE DOM STRUCTURE FOR A NOTE
@@ -41,12 +36,10 @@ const generateNoteDom = function(note) {
     renderNotes(notes, filters);
   });
 
-  // Setup the note title text
-  if (note.title.length) {
-    textEl.textContent = note.title;
-  } else {
-    textEl.textContent = "Unnamed note";
-  }
+  // SETUP THE NOTE TITLE TEXT
+  note.title.length
+    ? (textEl.textContent = note.title)
+    : (textEl.textContent = "Unnamed note");
   textEl.setAttribute("href", `/edit.html#${note.id}`);
   noteEl.appendChild(textEl);
 
