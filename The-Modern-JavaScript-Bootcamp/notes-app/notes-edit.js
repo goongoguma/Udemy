@@ -9,7 +9,7 @@ let note = notes.find(function(note) {
 });
 
 // IN CASE ID IS WRONG, RELOCATE TO MAIN PAGE
-if (note === undefined) {
+if (!note) {
   location.assign("/index.html");
 }
 
@@ -50,7 +50,7 @@ window.addEventListener("storage", function(e) {
     });
 
     // IN CASE ID IS WRONG, RELOCATE TO MAIN PAGE
-    if (note === undefined) {
+    if (!note) {
       location.assign("/index.html");
     }
 

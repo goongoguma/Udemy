@@ -38,7 +38,7 @@ const removeTodo = function(result) {
 // TOGGLE THE COMPLETED VALUE FOR A GIVEN TODO
 const toggleTodo = function(result) {
   const toggleIndex = todos.find(todo => todo.id === result.id);
-  if (toggleIndex !== undefined) {
+  if (toggleIndex) {
     toggleIndex.completed = !toggleIndex.completed;
   }
 };
