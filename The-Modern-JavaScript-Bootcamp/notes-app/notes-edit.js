@@ -1,3 +1,5 @@
+"use strict";
+
 const titleEl = document.querySelector("#note-title");
 const timeEl = document.querySelector("#time");
 const bodyEl = document.querySelector("#note-body");
