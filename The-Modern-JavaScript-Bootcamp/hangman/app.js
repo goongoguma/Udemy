@@ -1,17 +1,23 @@
-// PRIMITIVE VALUE : STRING, NUMBER, BOOLEAN, NULL, UNDEFINED
+const game1 = new Hangman("cat", 3);
+const startEl = document.querySelector("#start");
+const wordEl = document.querySelector("#word");
+const remainingEl = document.querySelector("#remaining");
 
-// Object : myObject --> Object.prototype --> null
-// Array: myArray --> Array.prototype --> Object.prototype --> null
-// Function: myFunc --> Function.prototype --> Object.prototype --> null
+wordEl.textContent = game1.getPuzzle(); // c*t
+remainingEl.textContent = game1.remainingGuesses;
 
-// WHEN WE TRY TO ACCESS A METHOD ON PRIMITIVE VALUE, IT CONVERTS INTO AN OBJECT AND THEN CALL METHOD ON THAT
-// String: myString --> String.prtotype --> Object.prototype --> null
-// Number: myNumber --> Number.prototype --> Obejct.prototype --> null
-// Boolean: myBoolean --> Boolean.prototype --> Object.prototype --> null
+window.addEventListener("keypress", function(e) {
+  const guess = String.fromCharCode(e.charCode);
+  startEl.remove();
 
-const product = "Computer";
-console.log(product);
+  document.querySelector("#status").textContent = "PLAYING...";
+  game1.guessing(guess);
 
-const otherProduct = new String("Phone");
+  wordEl.textContent = game1.getPuzzle(); // c*t
 
-console.log(otherProduct);
+  if (!wordEl.textContent.split("").includes("*")) {
+    document.querySelector("#status").textContent = "YOU GOT IT RIGHT!";
+  }
+
+  remainingEl.textContent = game1.remainingGuesses;
+});
