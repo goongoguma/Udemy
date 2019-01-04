@@ -4,13 +4,16 @@ const wordEl = document.querySelector("#word");
 const remainingEl = document.querySelector("#remaining");
 
 wordEl.textContent = game1.getPuzzle(); // c*t
-remainingEl.textContent = game1.remainingGuesses;
+remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 
+console.log("hello");
 window.addEventListener("keypress", function(e) {
   const guess = String.fromCharCode(e.charCode);
   startEl.remove();
 
-  document.querySelector("#status").textContent = "PLAYING...";
+  if (game1.remainingGuesses > 0) {
+    document.querySelector("#status").textContent = "PLAYING...";
+  }
   game1.guessing(guess);
 
   wordEl.textContent = game1.getPuzzle(); // c*t
@@ -19,5 +22,5 @@ window.addEventListener("keypress", function(e) {
     document.querySelector("#status").textContent = "YOU GOT IT RIGHT!";
   }
 
-  remainingEl.textContent = game1.remainingGuesses;
+  remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 });

@@ -21,12 +21,17 @@ Hangman.prototype.getPuzzle = function() {
 
 Hangman.prototype.guessing = function(alphabet) {
   guess = alphabet.toLowerCase();
-  if (!this.guessedLetters.includes(guess) && !this.word.includes(guess)) {
-    this.remainingGuesses -= 1;
-    if (this.remainingGuesses <= 0) {
-      document.querySelector("#status").textContent = "GAME OVER";
+  if (this.remainingGuesses > 0) {
+    if (!this.guessedLetters.includes(guess) && !this.word.includes(guess)) {
+      this.remainingGuesses -= 1;
+      if (this.remainingGuesses === 0) {
+        document.querySelector(
+          "#status"
+        ).textContent = `GAME OVER. The word was "${this.word.join("")}"`;
+        return null;
+      }
+    } else if (!this.guessedLetters.includes(guess)) {
+      this.guessedLetters.push(guess);
     }
-  } else if (!this.guessedLetters.includes(guess)) {
-    this.guessedLetters.push(guess);
   }
 };
