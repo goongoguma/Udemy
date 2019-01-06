@@ -6,7 +6,6 @@ const remainingEl = document.querySelector("#remaining");
 wordEl.textContent = game1.getPuzzle(); // c*t
 remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 
-console.log("hello");
 window.addEventListener("keypress", function(e) {
   const guess = String.fromCharCode(e.charCode);
   startEl.remove();
