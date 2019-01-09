@@ -27,13 +27,14 @@ window.addEventListener("keypress", e => {
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 });
 
-getPuzzle("2", puzzle => {
-  if (puzzle) {
-    console.log(puzzle);
-  } else {
-    console.log(`Error : ${puzzle}`);
+getPuzzle("2").then(
+  resolvedPuzzle => {
+    console.log(resolvedPuzzle);
+  },
+  rejectedPuzzle => {
+    console.log(`Error: ${rejectedPuzzle}`);
   }
-});
+);
 
 // CHALLENGE
 
@@ -42,10 +43,11 @@ getPuzzle("2", puzzle => {
 // 3. Make the HTTP request and call the callback with country information
 // 4. Use the callback to print the country name
 
-getCountry("KR", whatCountry => {
-  if (whatCountry) {
-    console.log(whatCountry.name);
-  } else {
-    console.log("ERROR!!");
+getCountry("KR").then(
+  resolvedCountry => {
+    console.log(resolvedCountry.name);
+  },
+  rejectedCountry => {
+    console.log(rejectedCountry);
   }
-});
+);
