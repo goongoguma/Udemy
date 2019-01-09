@@ -27,13 +27,18 @@ window.addEventListener("keypress", e => {
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 });
 
-getPuzzle(puzzle => {
-  if (puzzle) {
-    console.log(puzzle);
-  } else {
-    console.log(`Error : ${puzzle}`);
-  }
-});
+// getPuzzle(puzzle => {
+//   if (puzzle) {
+//     console.log(puzzle);
+//   } else {
+//     console.log(`Error : ${puzzle}`);
+//   }
+// });
+
+// // SYNC EXAMPLE
+// const puzzle = getPuzzleSync();
+// console.log(puzzle);
+// console.log("do something else");
 
 // // CHALLENGE
 // // 1. MAKE A NEW REQUEST FOR ALL COUNTRIES
