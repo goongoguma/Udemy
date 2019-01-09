@@ -55,11 +55,13 @@ getDataPromise(10)
   .then(data => {
     return getDataPromise(data);
   })
+  // in promise chaining, we don't have to return a promise from then. I can return anything I would like
+  // and that is gonna get passed along to the next step in the promise chain
   .then(data => {
-    return getDataPromise(data);
+    return "this is some test data";
   })
   .then(data => {
-    console.log(data); // 40
+    console.log(data);
   })
   .catch(err => {
     console.log(err);

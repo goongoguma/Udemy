@@ -27,20 +27,46 @@ window.addEventListener("keypress", e => {
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 });
 
-getPuzzle("2").then(
-  resolvedPuzzle => {
-    console.log(resolvedPuzzle);
-  },
-  rejectedPuzzle => {
-    console.log(`Error: ${rejectedPuzzle}`);
-  }
-);
+// getPuzzle("2").then(
+//   data => {
+//     console.log(data.puzzle);
+//   },
+//   err => {
+//     console.log(`Error: ${err}`);
+//   }
+// );
 
-getCountry("KR").then(
-  resolvedCountry => {
-    console.log(resolvedCountry.name);
-  },
-  rejectedCountry => {
-    console.log(rejectedCountry);
-  }
-);
+getPuzzle("2")
+  .then(puzzle => {
+    console.log(puzzle);
+  })
+  .catch(err => {
+    console.log(`Error: ${err}`);
+  });
+
+// getCountry("KR").then(
+//   resolvedCountry => {
+//     console.log(resolvedCountry.name);
+//   },
+//   rejectedCountry => {
+//     console.log(rejectedCountry);
+//   }
+// );
+
+// // fetch is gonna resolve or reject when it actually ready for us therfore we know that request is completed.
+// fetch("http://puzzle.mead.io/puzzle", {})
+//   .then(response => {
+//     if (response.status === 200) {
+//       // this will return promise
+//       return response.json();
+//     } else {
+//       // this will fire .catch
+//       throw new Error("Unable to fetch the puzzle");
+//     }
+//   })
+//   .then(data => {
+//     console.log(data.puzzle);
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
