@@ -34,22 +34,6 @@ const getDataPromise = num =>
     }, 2000);
   });
 
-// getDataPromise(2).then(
-//   data => {
-//     getDataPromise(data).then(
-//       data => {
-//         console.log(`Promise data: ${data}`); // 8
-//       },
-//       err => {
-//         console.log(err);
-//       }
-//     );
-//   },
-//   err => {
-//     console.log(err);
-//   }
-// );
-
 // Promise chaining
 getDataPromise(10)
   .then(data => {
