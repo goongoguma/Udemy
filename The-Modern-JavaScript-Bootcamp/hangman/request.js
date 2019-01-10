@@ -29,3 +29,13 @@ const getCountry = countryCode => {
       return myCountry.name;
     });
 };
+
+const getLocation = () => {
+  return fetch("http://ipinfo.io/json?token=20efd7cde00eea").then(res => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      throw new Error("Unable to fetch location data");
+    }
+  });
+};

@@ -44,28 +44,13 @@ getPuzzle("2")
     console.log(`Error: ${err}`);
   });
 
-getCountry("KR")
+getLocation()
+  .then(location => {
+    return getCountry(location.country);
+  })
   .then(resolvedCountry => {
     console.log(resolvedCountry);
   })
   .catch(err => {
     console.log(`Error: ${err}`);
   });
-
-// // fetch is gonna resolve or reject when it actually ready for us therfore we know that request is completed.
-// fetch("http://puzzle.mead.io/puzzle", {})
-//   .then(response => {
-//     if (response.status === 200) {
-//       // this will return promise
-//       return response.json();
-//     } else {
-//       // this will fire .catch
-//       throw new Error("Unable to fetch the puzzle");
-//     }
-//   })
-//   .then(data => {
-//     console.log(data.puzzle);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
