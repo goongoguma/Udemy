@@ -44,14 +44,13 @@ getPuzzle("2")
     console.log(`Error: ${err}`);
   });
 
-// getCountry("KR").then(
-//   resolvedCountry => {
-//     console.log(resolvedCountry.name);
-//   },
-//   rejectedCountry => {
-//     console.log(rejectedCountry);
-//   }
-// );
+getCountry("KR")
+  .then(resolvedCountry => {
+    console.log(resolvedCountry);
+  })
+  .catch(err => {
+    console.log(`Error: ${err}`);
+  });
 
 // // fetch is gonna resolve or reject when it actually ready for us therfore we know that request is completed.
 // fetch("http://puzzle.mead.io/puzzle", {})
