@@ -25,29 +25,28 @@ const getPuzzle = async wordCount => {
   }
 };
 
-const getCountry = countryCode => {
-  return fetch("http://restcountries.eu/rest/v2/all")
-    .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        throw new Error("Unable to fetch country data");
-      }
-    })
-    .then(data => {
-      const myCountry = data.find(
-        country => country.alpha2Code === countryCode
-      );
-      return myCountry.name;
-    });
+const getCountry = async countryCode => {
+  const res = await fetch("http://restcountries.eu/rest/v2/all");
+  if (res.status === 200) {
+    const data = await res.json();
+    return data.find(country => country.alpha2Code === countryCode).name;
+  } else {
+    throw new Error("Unable to get country data");
+  }
 };
 
-const getLocation = () => {
-  return fetch("http://ipinfo.io/json?token=20efd7cde00eea").then(res => {
-    if (res.status === 200) {
-      return res.json();
-    } else {
-      throw new Error("Unable to fetch location data");
-    }
-  });
+const getLocation = async () => {
+  const res = await fetch("http://ipinfo.io/json?token=20efd7cde00eea");
+  if (res.status === 200) {
+    const data = await res.json();
+    return data;
+  } else {
+    throw new Error("Unable to get location data");
+  }
+};
+
+getCurrentCountry = async () => {
+  const location = await getLocation();
+  const country = await getCountry(location.country);
+  return country;
 };

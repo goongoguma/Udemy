@@ -27,15 +27,6 @@ window.addEventListener("keypress", e => {
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 });
 
-// getPuzzle("2").then(
-//   data => {
-//     console.log(data.puzzle);
-//   },
-//   err => {
-//     console.log(`Error: ${err}`);
-//   }
-// );
-
 getPuzzle("2")
   .then(puzzle => {
     console.log(puzzle);
@@ -44,13 +35,21 @@ getPuzzle("2")
     console.log(`Error: ${err}`);
   });
 
-getLocation()
-  .then(location => {
-    return getCountry(location.country);
-  })
-  .then(resolvedCountry => {
-    console.log(resolvedCountry);
+// getLocation()
+//   .then(location => {
+//     return getCountry(location.country);
+//   })
+//   .then(resolvedCountry => {
+//     console.log(resolvedCountry);
+//   })
+//   .catch(err => {
+//     console.log(`Error: ${err}`);
+//   });
+
+getCurrentCountry()
+  .then(country => {
+    console.log(country);
   })
   .catch(err => {
-    console.log(`Error: ${err}`);
+    console.log(err);
   });
