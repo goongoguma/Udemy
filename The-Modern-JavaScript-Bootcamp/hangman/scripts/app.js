@@ -23,7 +23,7 @@ window.addEventListener("keypress", e => {
 });
 
 const render = () => {
-  wordEl.textContent = game1.getPuzzle(); // c*t
+  wordEl.innerHTML = ""; // c*t
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
 };
 

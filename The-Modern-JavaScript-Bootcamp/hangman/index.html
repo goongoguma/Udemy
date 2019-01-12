@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <title>Document</title>
   </head>
   <body>
-    <p id="start"></p>
-    <p id="status"></p>
-    <p id="word"></p>
-    <p id="remaining"></p>
-    <button id="reset">Reset</button>
+    <div>
+      <div id="word" class="puzzle"></div>
+      <div id="remaining"></div>
+      <button id="reset" class="button">Reset</button>
+    </div>
   </body>
-  <script src="request.js"></script>
-  <script src="hangman.js"></script>
-  <script src="app.js"></script>
+  <script src="scripts/request.js"></script>
+  <script src="scripts/hangman.js"></script>
+  <script src="scripts/app.js"></script>
 </html>
