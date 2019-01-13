@@ -23,8 +23,17 @@ window.addEventListener("keypress", e => {
 });
 
 const render = () => {
-  wordEl.innerHTML = ""; // c*t
+  wordEl.innerHTML = "";
   remainingEl.textContent = `Remaining Guess : ${game1.remainingGuesses}`;
+
+  game1
+    .getPuzzle()
+    .split("")
+    .forEach(letter => {
+      const letterEl = document.createElement("span");
+      letterEl.textContent = letter;
+      wordEl.appendChild(letterEl);
+    });
 };
 
 const startGame = async () => {
