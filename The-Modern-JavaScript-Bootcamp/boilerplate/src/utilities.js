@@ -7,4 +7,6 @@ const name = "Jae Hyun";
 
 const square = x => x * x;
 
+console.log("guten morgen");
+
 export { add, name, square as default };
