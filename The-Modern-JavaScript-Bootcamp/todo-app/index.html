@@ -4,24 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>TODOLIST</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="icon" href="images/favicon.png?v=1" />
+    <title>To-do App</title>
   </head>
   <body>
-    <h1>Creating Todo-List</h1>
-    <input id="search-id" placeholder="search what to do" />
-    <label> <input type="checkbox" id="hide-completed" />Hide-completed </label>
-    <form id="add-todo">
-      <input
-        id="search-id"
-        type="text"
-        placeholder="something to do"
-        name="todo"
-      />
-      <button>Add</button>
-    </form>
-    <div id="todo-lists"></div>
+    <div class="header">
+      <div class="container">
+        <h1 class="header__title">To-do App</h1>
+        <h2 class="header__subtitle">What do you need to do?</h2>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="actions__container">
+        <input id="search-id" class="input" placeholder="search what to do" />
+        <label class="checkbox">
+          <input type="checkbox" id="hide-completed" />Hide-completed
+        </label>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="todo-lists"></div>
+      <form id="add-todo">
+        <input
+          class="input"
+          id="search-id"
+          type="text"
+          placeholder="something to do"
+          name="todo"
+        />
+        <button class="button">Add</button>
+      </form>
+    </div>
   </body>
-  <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
-  <script src="todo-functions.js"></script>
-  <script src="todo-app.js"></script>
+  <script src="scripts/uuidv4.js"></script>
+  <script src="scripts/todo-functions.js"></script>
+  <script src="scripts/todo-app.js"></script>
 </html>

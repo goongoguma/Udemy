@@ -28,9 +28,16 @@ const renderTodos = (todos, filter) => {
 
   generateSummaryDOM(incompleteTodos);
 
-  filteredResult.forEach(result => {
-    generateTodoDOM(result);
-  });
+  if (filteredResult.length === 0) {
+    const filteredEl = document.createElement("p");
+    filteredEl.classList.add("empty-message");
+    filteredEl.textContent = "No to-dos to show";
+    document.querySelector("#todo-lists").appendChild(filteredEl);
+  } else {
+    filteredResult.forEach(result => {
+      generateTodoDOM(result);
+    });
+  }
 };
 
 // REMOVE TODO BY ID
@@ -51,14 +58,15 @@ const toggleTodo = function(result) {
 
 // GET THE DOM ELEMENTS FOR AN INDIVIDUAL NOTE
 const generateTodoDOM = result => {
-  const todoEl = document.createElement("div");
+  const todoEl = document.createElement("label");
+  const containerEl = document.createElement("div");
   const todoCheck = document.createElement("input");
   const todoText = document.createElement("span");
   const todoButton = document.createElement("button");
 
   // SETUP CHECKBOX
   todoCheck.setAttribute("type", "checkbox");
-  todoEl.appendChild(todoCheck);
+  containerEl.appendChild(todoCheck);
 
   // when the input is checked -> true/ not checked -> false
   todoCheck.checked = result.completed;
@@ -71,11 +79,16 @@ const generateTodoDOM = result => {
 
   // SETUP TEXT
   todoText.textContent = result.text;
-  todoEl.appendChild(todoText);
+  containerEl.appendChild(todoText);
+
+  // Setup container
+  todoEl.classList.add("list-item");
+  containerEl.classList.add("list-item__container");
+  todoEl.appendChild(containerEl);
 
   // SETUP REMOVE BUTTON
   todoButton.textContent = "remove";
-
+  todoButton.classList.add("button", "button--text");
   todoButton.addEventListener("click", () => {
     removeTodo(result);
     saveTodos(todos);
@@ -90,6 +103,9 @@ const generateTodoDOM = result => {
 // // GET THE DOM ELEMENTS FOR LIST SUMMARY
 const generateSummaryDOM = incompleteTodos => {
   const summaryPtag = document.createElement("h2");
-  summaryPtag.textContent = `You have ${incompleteTodos.length} todos left`;
+  summaryPtag.classList.add("list-title");
+  summaryPtag.textContent = `You have ${incompleteTodos.length} ${
+    incompleteTodos.length > 1 ? `todos` : `todo`
+  } left`;
   document.querySelector("#todo-lists").appendChild(summaryPtag);
 };
