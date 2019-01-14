@@ -31,7 +31,7 @@ const renderTodos = (todos, filter) => {
   if (filteredResult.length === 0) {
     const filteredEl = document.createElement("p");
     filteredEl.classList.add("empty-message");
-    filteredEl.textContent = "No to-dos to show";
+    filteredEl.textContent = "There are no to-dos to show";
     document.querySelector("#todo-lists").appendChild(filteredEl);
   } else {
     filteredResult.forEach(result => {
