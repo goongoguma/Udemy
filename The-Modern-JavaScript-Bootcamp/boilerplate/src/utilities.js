@@ -3,7 +3,7 @@
 
 const add = (a, b) => a + b;
 
-const name = "Jay";
+const name = "Jae Hyun";
 
 const square = x => x * x;
 
