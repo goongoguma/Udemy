@@ -18,6 +18,7 @@ const getPuzzle = async wordCount => {
     `//puzzle.mead.io/puzzle?wordCount=${wordCount}`
   );
   if (response.status === 200) {
+    // parsing json is a slow operation so it needs await
     const data = await response.json();
     return data.puzzle;
   } else {

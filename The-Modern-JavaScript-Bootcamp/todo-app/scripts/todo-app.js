@@ -11,7 +11,6 @@ renderTodos(todos, filter);
 // SEARCH TODO
 document.querySelector("#search-id").addEventListener("input", e => {
   filter.filteredText = e.target.value;
-  renderTodos(todos, filter);
 });
 
 // ADD EVENT
