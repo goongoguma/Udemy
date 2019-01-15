@@ -1,8 +1,13 @@
 // HTTP (Hypertext Transfer Protocol)
 // Request - What do we want to do
 // Response - What was actually done
+import validator from "validator";
+import uuidv4 from "uuid/v4";
 import Hangman from "./hangman";
 import getPuzzle from "./request";
+
+console.log(uuidv4()); // random id
+console.log(validator.isEmail("abc@ocl.com")); // true
 
 const startEl = document.querySelector("#start");
 const wordEl = document.querySelector("#word");
