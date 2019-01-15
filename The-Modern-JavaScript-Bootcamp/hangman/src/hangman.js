@@ -30,6 +30,7 @@ class Hangman {
         }
       } else if (!this.guessedLetters.includes(guess)) {
         this.guessedLetters.push(guess);
+        // [...this.guessedLetters, guess];
       }
     }
   }

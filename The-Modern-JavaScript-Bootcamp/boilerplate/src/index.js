@@ -1,7 +1,16 @@
-const calculateAverage = (str, ...numbers) => {
-  let sum = 0;
-  numbers.forEach(num => (sum += num));
-  const average = sum / numbers.length;
-  return `The average ${str} is ${average}`;
+const printTeam = (teamName, coach, ...players) => {
+  console.log(`Team: ${teamName}`);
+  console.log(`Coach: ${coach}`);
+  console.log(`Players: ${players.join(", ")}`);
 };
-console.log(calculateAverage("grade", 0, 100, 88, 64));
+
+const team = {
+  name: "Liberty",
+  coach: "Tim",
+  players: ["Jack", "Tom", "Sherry", "Smith"]
+};
+printTeam(team.name, team.coach, ...team.players);
+
+const cities = ["NewYork", "Seoul", "Tokyo"];
+
+const citiesCopy = ["Santiago", ...cities];
