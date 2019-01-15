@@ -1,0 +1,9 @@
+- Server Side Templating
+  - Back-end server creates an HTML document and sends it to the user
+  - This HTML document is fully rendered HTML document
+  - User visits page -> HTTP request to server -> New HTML Document -> User clicks a link -> HTTP request to server -> New HTML Document
+- Single Page App
+  - Server sends a bare-bones HTML doc to the user.
+  - After bare-bones HTML loads up, JavaScript runs on the users machine to assemble a full webpage
+  - User visits page -> HTTP request to server -> New HTML Document -> React/Angular boots up, shows page -> User clicks link -> React/Angular shows new content
+  - In SPA, we have a huge pile of JavaScript that is being shipped down to user's browser. This is why we should use webpack.
