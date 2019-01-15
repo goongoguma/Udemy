@@ -1,53 +1,32 @@
-const printTeam = (teamName, coach, ...players) => {
-  console.log(`Team: ${teamName}`);
-  console.log(`Coach: ${coach}`);
-  console.log(`Players: ${players.join(", ")}`);
+const todo = {
+  id: "abcdefg",
+  text: "Hello World",
+  completed: false
 };
 
-const team = {
-  name: "Liberty",
-  coach: "Tim",
-  players: ["Jack", "Tom", "Sherry", "Smith"]
+// Destructuring
+const {
+  text: todoText,
+  completed,
+  details = "No details provided",
+  ...others
+} = todo;
+
+console.log(todoText); // "Hello World"
+console.log(completed); // false
+console.log(details); // "No details provided"
+console.log(others); // {id: "abcdefg" }
+
+// also we can use destructuring in array
+const age = [65, 0, , , 27, 48, 21];
+const [first, second, , forth = 30, ...otherAges] = age;
+console.log(first); // 65
+console.log(second); // 0
+console.log(forth); // 30
+console.log(otherAges); // [27, 48, 21]
+
+// Destructuring also can be used in function
+const printTodo = ({ text, completed }) => {
+  console.log(`${text}: ${completed}`); // Hello World: false
 };
-printTeam(team.name, team.coach, ...team.players);
-
-const cities = ["NewYork", "Seoul", "Tokyo"];
-
-const citiesCopy = ["Santiago", ...cities];
-
-// The Object Spread Syntax
-let house = {
-  bedrooms: 2,
-  bathrooms: 1.5,
-  yearBuilt: 2017
-};
-
-let newHouse = {
-  // we can set a new value for the object
-  basement: true,
-  // all of the properties from house will copy over this object
-  ...house
-};
-
-newHouse.yearBuilt = 2018;
-
-console.log(house);
-console.log(newHouse);
-
-// Object Spread Syntax Challenge
-const person = {
-  name: "Jay",
-  age: 25
-};
-
-const location = {
-  city: "Incheon",
-  country: "S.Korea"
-};
-
-const overview = {
-  ...person,
-  ...location
-};
-
-console.log(overview);
+printTodo(todo);
