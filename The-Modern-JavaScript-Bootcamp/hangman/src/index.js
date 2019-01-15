@@ -1,6 +1,9 @@
 // HTTP (Hypertext Transfer Protocol)
 // Request - What do we want to do
 // Response - What was actually done
+import Hangman from "./hangman";
+import getPuzzle from "./request";
+
 const startEl = document.querySelector("#start");
 const wordEl = document.querySelector("#word");
 const remainingEl = document.querySelector("#remaining");
@@ -49,19 +52,3 @@ document.querySelector("#reset").addEventListener("click", () => {
 });
 
 startGame();
-
-// getPuzzle("2")
-//   .then(puzzle => {
-//     console.log(puzzle);
-//   })
-//   .catch(err => {
-//     console.log(`Error: ${err}`);
-//   });
-
-// getCurrentCountry()
-//   .then(country => {
-//     console.log(country);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });

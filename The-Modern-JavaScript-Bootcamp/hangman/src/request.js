@@ -36,18 +36,14 @@ const getCountry = async countryCode => {
   }
 };
 
-const getLocation = async () => {
-  const res = await fetch("//ipinfo.io/json?token=20efd7cde00eea");
-  if (res.status === 200) {
-    const data = await res.json();
-    return data;
-  } else {
-    throw new Error("Unable to get location data");
-  }
-};
+// const getLocation = async () => {
+//   const res = await fetch("//ipinfo.io/json?token=20efd7cde00eea");
+//   if (res.status === 200) {
+//     const data = await res.json();
+//     return data;
+//   } else {
+//     throw new Error("Unable to get location data");
+//   }
+// };
 
-getCurrentCountry = async () => {
-  const location = await getLocation();
-  const country = await getCountry(location.country);
-  return country;
-};
+export { getPuzzle as default };
