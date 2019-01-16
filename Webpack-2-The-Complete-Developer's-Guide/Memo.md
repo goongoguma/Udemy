@@ -204,3 +204,6 @@ module: {
     ] // 순서는 오른쪽에서 왼쪽으로 읽는다.
   }
 ```
+
+- If we import images from assets folder, it will go through url and image-webpack loaders and if there is an image that bigger than 40000 bytes, it is going to be saved as seperated file into build directory.
+- The image smaller than 40000 byets, coded base64 and saved as string in bundle.js which means only this size of image appears on screen.
