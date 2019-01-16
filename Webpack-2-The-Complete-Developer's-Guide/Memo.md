@@ -25,6 +25,7 @@
   - And also ensuring that each module is **executed in the correct order**.
 
 - Module System
+
   - Common JS
     - It is implented by node.js
     - Common Syntax : require, module.exports
@@ -35,3 +36,13 @@
   - ES2015 : import, export
     - Most popular in module world
     - Common Syntax : import, export
+
+- Webpack Installation and Configuration
+
+  - Webpack is gonna read contents in webpack.config.js and based on the instruction we have provided inside of it, takes some operation on code base.
+  - Two minimum properties
+    - The Entry Property
+      - The file serves up as the root of an application. (it is convention to name it as index.js).
+      - It only imports code to it which means entry property does not depend upon anything else.
+      - It is a first file that executed when application starts up in the browser.
+      - It is a start of module building process.
