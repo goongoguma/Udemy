@@ -124,3 +124,21 @@ myModules[entryPointIndex](); // it calls index.js function
 - The benefit of using webpack to handle our css is that we can make use of a bunch of different CSS files and import those files into each of the files that we actually care about to make use of them inside of our project. _It gives very clear relationship between JS file and CSS file. It is really a tool that we can use to make developement or styling of our applications a lot more staraightforward_.
 - You do not need to export 'images' because it just runs not executing something.
 - If we want to include a file in bundle.js, make sure that it has to get exported at least one file.
+
+12. The Syle and CSS Loaders
+
+- any files that not ending '.js', we do have to specify file extention at the end.
+- We are going to install two loaders. (css-loader, style-loader)
+  - css-loader
+    - Know how to deal with CSS imports
+  - style-loader
+    - Takes CSS imports and adds them to the HTML document
+- How to apply css, style loaders in webpack.config?
+  ```js
+   {
+     // in package.json file
+     // loader is applied from right to left
+      use: ["style-loader", "css-loader"],
+      test: /\.css$/
+   }
+  ```
