@@ -23,3 +23,15 @@
 
   - The purpose of webpack is take a big collection of tiny little JS modules and **merge them all into one big JS file**.
   - And also ensuring that each module is **executed in the correct order**.
+
+- Module System
+  - Common JS
+    - It is implented by node.js
+    - Common Syntax : require, module.exports
+  - AMD : require, define
+    - Asynchronous Module Definition
+    - Commonly used in front-end applications where different modules of code can be loaded up asynchronously
+    - Common Syntax : require, define
+  - ES2015 : import, export
+    - Most popular in module world
+    - Common Syntax : import, export
