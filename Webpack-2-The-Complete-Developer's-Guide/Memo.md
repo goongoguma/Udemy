@@ -54,7 +54,7 @@
 
 7.  Running Webpack
 
-- Commaned ran at terminal
+- Command ran at terminal
 
   - webpack
     - Effect
@@ -75,3 +75,26 @@
 - type 'npm run build' in the terminal
 - for a note, when a module is installed globally, you can have only one version of module installed at a time. Therfore when several projects use different version of webpack, it would be pretty hard to adjust the version using global modules. This problem can easily be solved by just installing the module locally and depending upon locally installed webpack.
 - when npm run build is executed, the size of bundle.js is much bigger than sum of the other files that actually used inside of bundle.
+
+8.  The Bundle.js File
+
+- What happens inside of bundle.js file is webpack takes all of modules code, stuffs it in individual functions and stuffs those functions into an array and then calls different functions in that array.
+
+```js
+// inside of bundle.js file...
+
+var myModules = [
+  function() {
+    const sum = (a, b) => a + b;
+    return sum;
+  },
+  function() {
+    const sum = myModules[0]();
+    const total = sum(10, 10);
+    console.log(total);
+  }
+];
+
+var entryPointIndex = 1;
+myModules[entryPointIndex](); // it calls index.js function
+```
