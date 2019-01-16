@@ -98,3 +98,17 @@ var myModules = [
 var entryPointIndex = 1;
 myModules[entryPointIndex](); // it calls index.js function
 ```
+
+9.  Introduction to Module Loaders
+
+- Module Loaders
+  - It does some pre-processing on files before they are added to bundle.js file
+  - It is commonly used to implement transpiling for ES2015 code. (such as babel)
+  - Also it can be used to handle css, images, all different types of files can be enabled for usage of webpack.
+- Babel Modules
+  - babel-loader
+    - Teaches babel how to work with webpack.
+  - babel-core
+    - Knows how to take in code, parse it and generate some output files.
+  - babel-reset-env
+    - Ruleset for telling babel exactly what pieces of ES2015/6/7 syntax to look for and how to turn it into ES5 code.
