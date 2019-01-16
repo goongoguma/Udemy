@@ -118,3 +118,9 @@ myModules[entryPointIndex](); // it calls index.js function
 - In webpack.config.js file, by defining loaders or rules in module, we can tell webpack to take a pre-processing step on every file that includes into budle.js file.
 - Test get assigned a regular expression. Any regular expression we passed into test property will be taken by webpack and applied to a file name of every file that we import to our project. (/\.js\$/ : all file ends with .js, babel will be applied)
 - Create .babelrc file in order to execute babel-preset-env.
+
+11. Handling CSS with Webpack
+
+- The benefit of using webpack to handle our css is that we can make use of a bunch of different CSS files and import those files into each of the files that we actually care about to make use of them inside of our project. _It gives very clear relationship between JS file and CSS file. It is really a tool that we can use to make developement or styling of our applications a lot more staraightforward_.
+- You do not need to export 'images' because it just runs not executing something.
+- If we want to include a file in bundle.js, make sure that it has to get exported at least one file.
