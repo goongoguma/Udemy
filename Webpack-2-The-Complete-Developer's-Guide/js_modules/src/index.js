@@ -1,7 +1,12 @@
-// Calls functions from sum.js, then prints the result
-import sum from "./sum";
-import "./image_viewer";
+const button = document.createElement("button");
 
-const total = sum(20, 5);
+button.innerText = "Click me";
 
-console.log(total);
+button.onclick = () => {
+  // System is a global variable inside of JS
+  System.import("./image_viewer").then(module => {
+    module.funcImg();
+  });
+};
+
+document.body.appendChild(button);

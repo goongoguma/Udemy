@@ -210,3 +210,17 @@ module: {
 - In console, there is an error about big image and the url is set to wrong location. If we want to set this right, we have to use 'publicPath' property in webpack.config file.
 - URL loader emits the URL of the file with 'output.publicPath' prepended to the URL.
 - publicPath propery is not only used by URL loader. It will also be used by any other loader that produces direct file reference to a file in our output directory.
+
+15. Code Splitting
+
+- With code splitting, webpack allows us to split up bundle.js output into seperate individuale files and programmecally decide when to load up different pieces of bundle inside of our code base.
+- In other words, we can control exactly when we load up different modules to show different code inside of our project.
+- Suppose in login screen, only minimum amount of JS is shown but after logged in, load the rest of JS.
+- System variable
+  - System is a global variable inside of JS.
+  - when we call System.import, we pass name of the module that we want to import browser than reach out to a server and try to find the module.
+  - It works only for one module.
+  - However if the module we want to call has other modules inside then we can take with it.
+  - System.import also takes sometimes to reach out server. (it works asynchronously) it returns promise as well.
+  - When we add in any System.import call into our code and webpack processes it, webpack is going to automatically search through our codebase for any calls to System.import.
+- When you enable code splitting inside of JS application, which is done by just adding system.import call, webpack is going to automatically changed the code about figuring out how to go and fetch modules off the server is exported from the application.
