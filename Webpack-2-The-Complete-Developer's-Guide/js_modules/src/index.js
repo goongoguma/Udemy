@@ -1,6 +1,6 @@
 // Calls functions from sum.js, then prints the result
-const sum = require("./sum");
+import sum from "./sum";
 
-const total = sum(10, 5);
+const total = sum(20, 5);
 
 console.log(total);
