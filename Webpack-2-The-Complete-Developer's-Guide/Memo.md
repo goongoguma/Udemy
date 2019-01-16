@@ -81,7 +81,7 @@
 - What happens inside of bundle.js file is webpack takes all of modules code, stuffs it in individual functions and stuffs those functions into an array and then calls different functions in that array.
 
 ```js
-// inside of bundle.js file...
+// simplify of what is going on inside of bundle.js file
 
 var myModules = [
   function() {
