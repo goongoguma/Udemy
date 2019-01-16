@@ -6,7 +6,8 @@ const config = {
   entry: "./src/index.js", // 상대경로로 지정
   output: {
     path: path.resolve(__dirname, "build"), // 절대경로로 지정, "build"는 파일의 이름
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "build/"
   },
   module: {
     rules: [

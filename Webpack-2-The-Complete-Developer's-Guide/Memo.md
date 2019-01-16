@@ -207,3 +207,6 @@ module: {
 
 - If we import images from assets folder, it will go through url and image-webpack loaders and if there is an image that bigger than 40000 bytes, it is going to be saved as seperated file into build directory.
 - The image smaller than 40000 byets, coded base64 and saved as string in bundle.js which means only this size of image appears on screen.
+- In console, there is an error about big image and the url is set to wrong location. If we want to set this right, we have to use 'publicPath' property in webpack.config file.
+- URL loader emits the URL of the file with 'output.publicPath' prepended to the URL.
+- publicPath propery is not only used by URL loader. It will also be used by any other loader that produces direct file reference to a file in our output directory.
