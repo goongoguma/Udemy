@@ -51,3 +51,27 @@
     - It is a form of object and contains two properties
       - path : where the ouput file is saved to also use absolute path. (use path module _const path = require('path').resolve()_)
       - filename : what webpack should call the file that actually created (it is convention to name it as bundle.js).
+
+7.  Running Webpack
+
+- Commaned ran at terminal
+
+  - webpack
+    - Effect
+      - Out of all globally installed modules, find the one called webpack and run it.
+  - npm run build
+    - Effect
+      - Run the copy of 'webpack' stored in the 'node_modules' directory
+
+- In order to run webpack, you have to set package.json file.
+- in "scripts", set command word and what to execute with it
+
+```js
+"scripts": {
+ "build": "webpack"
+},
+```
+
+- type 'npm run build' in the terminal
+- for a note, when a module is installed globally, you can have only one version of module installed at a time. Therfore when several projects use different version of webpack, it would be pretty hard to adjust the version using global modules. This problem can easily be solved by just installing the module locally and depending upon locally installed webpack.
+- when npm run build is executed, the size of bundle.js is much bigger than sum of the other files that actually used inside of bundle.
