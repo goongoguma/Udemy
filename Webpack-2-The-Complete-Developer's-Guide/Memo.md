@@ -178,3 +178,29 @@ module: {
     new ExtractTextPlugin('style.css')
   ]
 ```
+
+14. Handling Images with Webpack
+
+- Images from outside source are pretty slow. It takes a lot longer to load up the image.
+- It would be much faster if we hosted images locally ourselves.
+- Whenever we attempt to import an image into a file, we are going to send it down to seperate loaders
+  - image-webpack-loader
+    - It will compress the image for us automatically
+  - url-loader
+    - It behaves differently depending a size of an image.
+    - If the image is small than it includes the image in bundle.js as raw data.
+    - If the image is big than it includes the raw image in the output directory.
+- How to set image-webpack-loader and url-loader
+
+```js
+ {
+    test: /\.(jpe?g|png|gif|svg)$/,
+    use: [
+      {
+        loader: "url-loader",
+        options: { limit: 40000 } // look for any images that are 40000 bytes large
+      },
+      "image-webpack-loader"
+    ] // 순서는 오른쪽에서 왼쪽으로 읽는다.
+  }
+```
