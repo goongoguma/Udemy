@@ -68,25 +68,31 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 // Utility functions for working with mathmatical calculations
-const sum = (a, b) => a + b;
+var sum = function sum(a, b) {
+  return a + b;
+};
 
 module.exports = sum;
-
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-// Calls functions from sum.js, then prints the result
-const sum = __webpack_require__(0);
+"use strict";
 
-const total = sum(10, 5);
+
+// Calls functions from sum.js, then prints the result
+var sum = __webpack_require__(0);
+
+var total = sum(10, 5);
 
 console.log(total);
-
 
 /***/ }
 /******/ ]);

@@ -112,3 +112,9 @@ myModules[entryPointIndex](); // it calls index.js function
     - Knows how to take in code, parse it and generate some output files.
   - babel-reset-env
     - Ruleset for telling babel exactly what pieces of ES2015/6/7 syntax to look for and how to turn it into ES5 code.
+
+10. Babel Configuration
+
+- In webpack.config.js file, by defining loaders or rules in module, we can tell webpack to take a pre-processing step on every file that includes into budle.js file.
+- Test get assigned a regular expression. Any regular expression we passed into test property will be taken by webpack and applied to a file name of every file that we import to our project. (/\.js\$/ : all file ends with .js, babel will be applied)
+- Create .babelrc file in order to execute babel-preset-env.

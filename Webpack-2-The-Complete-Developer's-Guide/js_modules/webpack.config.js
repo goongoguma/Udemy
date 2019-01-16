@@ -6,6 +6,14 @@ const config = {
   output: {
     path: path.resolve(__dirname, "build"), // 절대경로로 지정, "build"는 파일의 이름
     filename: "bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.js$/
+      }
+    ]
   }
 };
 
