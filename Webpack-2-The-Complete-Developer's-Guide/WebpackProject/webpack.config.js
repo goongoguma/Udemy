@@ -1,11 +1,29 @@
 var webpack = require("webpack");
 var path = require("path");
 
+const VENDOR_LIBS = [
+  // each string in the array are the name of the library(npm modules) that we want to include in seperate vendor file.
+  // the modules are here going to change infrequently
+  "faker",
+  "react",
+  "lodash",
+  "redux",
+  "react-redux",
+  "react-dom",
+  "react-input-range",
+  "redux-form",
+  "redux-thunk"
+];
+
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    bundle: "./src/index.js",
+    vendor: VENDOR_LIBS
+  },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "bundle.js"
+    // square brackets with name gets replaced with the key in entry section
+    filename: "[name].js"
   },
   module: {
     rules: [
@@ -19,5 +37,10 @@ module.exports = {
         test: /\.css$/
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor"
+    })
+  ]
 };

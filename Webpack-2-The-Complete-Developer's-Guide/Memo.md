@@ -246,3 +246,46 @@ rules: [
 - Webpack is all about helping us with the amount of time that it takes to load up our JavaScript dependencies of our application.
 - The first techinque to adjust the size of the application is splitting up our codebase into two big seperate chunks of files usiing code splitting.
 - Using code splitting, we are going to look at taking all of the code that we are writing for our project(index.js, searchList.js) and separating it out from all of the vendor-related code(third-party module code).
+
+18. Refactoring for Vendor Splitting
+
+- With code splitting and vendor asset, we can decrease the time that loads up an application on subsequent visits.
+- When we do code splitting in vendor dependencies. Rather than single bundle.js in filename in webpack.config, we are going to specifically tell webpack before it starts to parse any of our code that we want it to split up our codebase into two separate secions.
+- Vendor Splitting
+  - Code will change quite frequently. However libraries and modules we use are not going to change frequently. Therefore we make a file called 'vendor.js' by seperated from bundle.js which is the file that contains bunch of codes and decrease load up time.
+
+```js
+const VENDOR_LIBS = [
+  // each string in the array are the name of the library(npm modules) that we want to include in seperate vendor file.
+  // the modules are here going to change infrequently
+  "faker",
+  "lodash",
+  "redux",
+  "react-redux",
+  "react-dom",
+  "react-input-range",
+  "redux-form",
+  "redux-thunk"
+];
+// two entry points are created
+entry: {
+    bundle: "./src/index.js",
+    vendor: VENDOR_LIBS
+  },
+```
+
+19. Effect of Code Splitting
+
+- After 'run npm build' we have new file called vendor.js However the size of bundle.js is unchanged.
+- Because we thought we have seperated our vendor files from bundle.js but that does not mean that webpack is going to automatically find common modules between bundle.js and vendor.js and make sure they have those libraries only one time.
+- Therefore, we are going to use plugin called "the common's chunk plugins".
+
+```js
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "vendor" // it tells webpack look at the total sum of total project files between entry points(bundle input and vendor input), if any modules duplicates between those points, pull it out and only add it to vendor entry point
+  })
+];
+```
+
+- Using this plugin acutally decrease the size of bundle.js from 3.8MB to 468KB.
