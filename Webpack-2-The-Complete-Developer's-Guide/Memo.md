@@ -392,6 +392,70 @@ plugins: [
   The result of which, the rebuild time is dramatically shortened.
 - But when we give a change to webpack.config file, we have to restart webpack-dev-server.
 - Unlike 'npm run build', webpack-dev-server does not create files in dist folder. Those files are saved in only in memory and we navigate 'localhose:8080' then the project files are served directly out of memory, not directly from our hard drive.
-*dev-server is only for development not for production use.*
+  _dev-server is only for development not for production use._
 - Because when we run webpack-dev-server, it will internally execute webpack. But it stops webpack from actually saving any files in our project file directory.
 - In order words, if you want to get raw development assets, you have to run 'webpack' not 'webpack-dev-server'.
+
+25. React Router with Codesplitting
+
+- Using code splitting with React-router is a fantastic way to break up an application into smaller parts and this is something that gets really useful when you are working on really large React projects.
+- In router.js file, when a user first lands at our website, they can grab the big bundle.js file and that will have all the code they neede for show the very root base routes of the application which are Home and ArtistMain components.
+- Then as the user starts to navigate around the app, we will add in some code splitting to dynamically load up the ArtistCreate, ArtistDetail and ArtistEdit components.
+- What we are going to do is transforming general jsx structure into a plain JS object. (this is actually what react-router does behind the scenes all the jsx you write.)
+
+```js
+const Routes = () => {
+  return (
+    <Router history={hashHistory}>
+      <Route path="/" component={Home}>
+        <IndexRoute component={ArtistMain} />
+        <Route path="artists/new" component={ArtistCreate} />
+        <Route path="artists/:id" component={ArtistDetail} />
+        <Route path="artists/:id/edit" component={ArtistEdit} />
+      </Route>
+    </Router>
+  );
+};
+
+// we can change react-router as form of objective using code-splitting
+const componentRoutes = {
+  component: Home,
+  path: "/",
+  indexRoute: { component: ArtistMain },
+  childRoutes: [
+    {
+      path: "artists/new",
+      // getComponent works as asynchronously
+      getComponent(location, cb) {
+        // React-router expects us to call cb which is a function with our module or with our component after we have loaded it up
+        // first argument of cb is an error object. In our case, error is not expected.
+        System.import("./components/artists/ArtistCreate").then(module =>
+          cb(null, module.default)
+        );
+      }
+    },
+    {
+      path: "artists/:id",
+      getComponent(location, cb) {
+        System.import("./components/artists/ArtistDetail").then(module =>
+          cb(null, module.default)
+        );
+      }
+    },
+    {
+      path: "artists/:id/edit",
+      getComponent(location, cb) {
+        System.import("./components/artists/ArtistEdit").then(module =>
+          cb(null, module.default)
+        );
+      }
+    }
+  ]
+};
+
+const Routes = () => {
+  return <Router history={hashHistory} routes={componentRoutes} />;
+};
+```
+
+- the code above seems bit repetitive but System.import is very static analysis, literally just reading over your code. Therfore we are not able to dynamically generate it based on the location that the user is navigating to.
