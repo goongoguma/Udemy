@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     // square brackets with name gets replaced with the key in entry section
-    filename: "[name].js"
+    filename: "[name].[chunkhash].js"
   },
   module: {
     rules: [
@@ -41,7 +41,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor"
+      name: ["vendor", "manifest"]
     }),
     new HtmlWebpackPlugin({
       // using existing html document as a source for template

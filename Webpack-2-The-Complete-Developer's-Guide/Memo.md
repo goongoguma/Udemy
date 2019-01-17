@@ -314,3 +314,39 @@ plugins: [
 ```
 
 - After 'npm run build' command, you can find new html file that created in dist file. Therefore, application file in dist directory must be run
+
+21. Chunk Hashing for Cashe Busting
+
+- How browser decides whether or note it has downloaded a file?
+
+  - It will look at the exact filename of the file and also specifically like bundle.js. If the filename has not changed, the browser will use the cached version.
+
+- Cach Busting
+
+  - We need to somehow figure out a way to rename our output bundle.js file and vendor.js file to make sure the browser is really clear on when the file's contents have actually changed.
+    Therefore by renaming it we will give the browser the ability to really answer the question whether or not it has downloaded that file before.
+  - In order to do this, we are going to use chunkhash property in filename.
+
+- chunkhash
+  - Every singl time that our bundle or vendor file is updated or changed in some fashion, Webpack will automatically hash the contents of that file and then spit it out as the chunkhash.
+  ```js
+  output: {
+    path: path.join(__dirname, "dist"),
+    // chunkhash is unique string of characters
+    filename: "[name].[chunkhash].js"
+  },
+  ```
+  - But if we change bundle.js file, webpack will mistakenly think that our vendor file is updated as well. To fix that, we have to change the name of the property in plugins name.
+  ```js
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ["vendor", "manifest"]
+    }),
+    new HtmlWebpackPlugin({
+      // using existing html document as a source for template
+      template: "src/index.html"
+    })
+  ];
+  ```
+  - manifest creates a third JS file in our dist directory called manifest.js.
+  - The purpose of the file is to better tell the browser or kind of better give everything involved a little bit more understanding on whether or not the vendor file actually got changed.
