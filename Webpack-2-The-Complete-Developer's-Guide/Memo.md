@@ -213,7 +213,7 @@ module: {
 
 15. Code Splitting
 
-- With code splitting, webpack allows us to split up bundle.js output into seperate individuale files and programmecally decide when to load up different pieces of bundle inside of our code base.
+- With code splitting, webpack allows us to split up bundle.js output into seperate individual files and programmecally decide when to load up different pieces of bundle inside of our code base.
 - In other words, we can control exactly when we load up different modules to show different code inside of our project.
 - Suppose in login screen, only minimum amount of JS is shown but after logged in, load the rest of JS.
 - System variable
@@ -375,3 +375,23 @@ plugins: [
 - The next key difference about webpack-dev-server is that when we open up our web browser, we will no longer be manually loading up our index HTML document. Instead, we are going to make connection or get access to this webpack-dev-server which will automatically feed us the index HTML and otherwise all the other deveoploment assets.
 - Webpack-dev-server is really developing a client-side application. (SPA with zero connection to server side logic)
 - So how we are going to integrate webpack-dev-server and traditional server side logic?
+
+24. Gotchas with Webpack Dev Server
+
+- After webpack-dev-server installation on terminal, modifies script in package.json
+
+```js
+"scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack",
+    "serve": "webpack-dev-server"
+  },
+```
+
+- When I make that change, webpack-dev-server will automatically rebuild our project, but it decides to only rebuild one individual file. Therefore webpack-dev-server does not rebuild our entire project, it just takes care of that very small change.
+  The result of which, the rebuild time is dramatically shortened.
+- But when we give a change to webpack.config file, we have to restart webpack-dev-server.
+- Unlike 'npm run build', webpack-dev-server does not create files in dist folder. Those files are saved in only in memory and we navigate 'localhose:8080' then the project files are served directly out of memory, not directly from our hard drive.
+*dev-server is only for development not for production use.*
+- Because when we run webpack-dev-server, it will internally execute webpack. But it stops webpack from actually saving any files in our project file directory.
+- In order words, if you want to get raw development assets, you have to run 'webpack' not 'webpack-dev-server'.
