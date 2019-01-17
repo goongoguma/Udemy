@@ -461,8 +461,44 @@ const Routes = () => {
 - the code above seems bit repetitive but System.import is very static analysis, literally just reading over your code. Therfore we are not able to dynamically generate it based on the location that the user is navigating to.
 
 26. Deployment Options
-- When we think about webpack deployment, we think about whether or not we are serving up a static application and the words 'front-end assets only', or if we have both a front-end application and a back-end as well. 
+
+- When we think about webpack deployment, we think about whether or not we are serving up a static application and the words 'front-end assets only', or if we have both a front-end application and a back-end as well.
 - Static Asset Providers
   - Github Pages, Amazon S3, Digital Ocean, MS Azure, surge
 - Server-based Providers
   - Amazon EC2, Amazon ELB, Digital Ocean, Heroku, MS Azure
+
+27. Getting Production Ready
+
+- Among all libraries we have installed, Reactjs makes use of this NODE_ENV flag. Whenever React runs, it looks for a window scoped variable of 'process.env.NODE_ENV'.
+- If it finds the variable and it is equal to the string production, react is not going to do quite so many error checking procedures while it runs and renders an application.
+- This is beneficial because it assumes that maybe you don't want so much error checking and the thought there is that in your development environment, you want a lot more error checking so you can catch a lot of different errors before they get pushed to production.
+- Adding 'process.env.NODE_ENV' in the global variable in webpack.config, it makes sure that React does not take all that error checking into consideration.
+- In order to 'process.env.NODE_ENV' available in window, DefinePlugin is used.
+
+```js
+new webpack.DefinePlugin({
+  "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+});
+```
+
+- 'process.env.NODE_ENV' is talking about the NODE_ENV environment variable running on our machine.
+- Also setting NODE_ENV=production in package.json file
+
+```js
+"scripts": {
+    "clean": "rimraf dist",
+    "build": "NODE_ENV=production npm run clean && webpack",
+    "serve": "webpack-dev-server"
+  },
+```
+
+- NODE_ENV=production makes sure that when node runs are clean and webpack scripts, webpack will be ran in the node environment of production.
+- If we build our project without defining 'production' environment variable then webpack will assume that we are not running in production and we don't have to worry about all these additional checks.
+- Adding '-p' right after 'webpack' tells webpack that we want a production version of our output. When webpack runs in production mode, it will automatically minify all of our JS code.
+
+```js
+"build": "set NODE_ENV=production&&npm run clean&&webpack -p",
+```
+
+- When minifies JS code, webpack will automatically rename some of our variables and it will automatically compact down all of our code into the minimum amount of code possible. (size decreases 20% to 30% than in development mode.)
