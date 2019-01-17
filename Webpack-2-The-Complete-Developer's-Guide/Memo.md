@@ -517,7 +517,7 @@ new webpack.DefinePlugin({
     - This approach is more common for smaller applications because deployment is easier as well because there is only one server that we have worry about.
     - From now, when we visit our node server, we expect the node server to somehow reach over to webpack and serve up our application bundle both in a development environment and production environment.
 
-29. Node and Webpack Integration (using express)
+29. Node and Webpack Integration (by using ExpressJS)
 
 - Integrating webpack with node is going to be a little bit different depending on whether or not we are on our local development machine or our application has been deployed to some outside service provider. In other words, a node server will be behaving differently depending on its environment.
   - How node is going to behave when we are running on our local machine?
@@ -527,4 +527,33 @@ new webpack.DefinePlugin({
     - Production Environment
       - In production world, we do not want to run webpack at all because it is a huge resource hog
       - Instead, we want to save the generated assets inside of dist directory and whenever a user navigates to our server in a browser, we are going to tell the node server to just go ahead and serve out these statically built assets from particular directory.
-- Setting up the environment in server.js
+- Setting up the environment in server.js by installing express
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.listen(3050, () => console.log("Listening"));
+```
+
+30. Webpack Middleware in Development
+
+- We are going to inside of our server.js file by wiring up webpack to make sure that it works correctly in development.
+- Webpack middleware to help us serve up our application.
+- Middlewares are used to intercept and modify incoming request to our server and they are a part of ExpressJS
+- The middleware works by intercepting incoming request for an application(index HTML file) and respond with the compiled JS application.
+- Easy to say, the middleware is watching for incoming requests, if it sees one, it is going to snatch it and respond with the application assets.
+
+```js
+// we need all three for the middleware
+const webpackMiddleware = require("webpack-dev-middleware");
+const webpack = require("webpack");
+const webpackConfig = require("./webpack.config.js");
+const app = express();
+
+app.use(webpackMiddleware(webpack(webpackConfig)));
+```
+
+- For a note, middleware@1.9.0 version is being used. (I have tried out other version but it keeps throwing 'invalid' error.)
+- Using this way, it allows us to make changes to our individual project files, webpack will automatically rerun over our project and we can refresh the page and see our changes appear live on the screen. Which means we do not need to manually run webpack command all the time like 'npm run build'.
