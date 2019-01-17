@@ -459,3 +459,10 @@ const Routes = () => {
 ```
 
 - the code above seems bit repetitive but System.import is very static analysis, literally just reading over your code. Therfore we are not able to dynamically generate it based on the location that the user is navigating to.
+
+26. Deployment Options
+- When we think about webpack deployment, we think about whether or not we are serving up a static application and the words 'front-end assets only', or if we have both a front-end application and a back-end as well. 
+- Static Asset Providers
+  - Github Pages, Amazon S3, Digital Ocean, MS Azure, surge
+- Server-based Providers
+  - Amazon EC2, Amazon ELB, Digital Ocean, Heroku, MS Azure
