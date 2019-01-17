@@ -352,3 +352,18 @@ plugins: [
   ```
   - manifest creates a third JS file in our dist directory called manifest.js.
   - The purpose of the file is to better tell the browser or kind of better give everything involved a little bit more understanding on whether or not the vendor file actually got changed.
+
+22. Cleaning Project Files
+
+- Every single time that I make a change to my project and then rebuild it, additional JS build files are put inside of dist folder.
+- If we start to rebuild the project many times, we are going to end up with a ton of duplicate files inside of dist directory.
+- So we are going to clear out the contents in dist directory using module called 'rimraf'.
+- After installation is done, set rimraf module inside of package.json file.
+
+```js
+"scripts": {
+    "clean": "rimraf dist",
+    // this command deletes all files in dies directory and then running webpack to build our project
+    "build": "npm run clean && webpack"
+  },
+```
