@@ -513,6 +513,18 @@ new webpack.DefinePlugin({
     - It has possibilities of performance gains out of separation of our static assets and our more dynamic assets.
   - The second type (putting together in a single server address)
     - It is the single monolithic server that will both serve up our app and then also have the ability to have some specialized API or server based logic as well.
-    - In other words, a node server is responsible for serving up the application and also some business logic as well. 
+    - In other words, a node server is responsible for serving up the application and also some business logic as well.
     - This approach is more common for smaller applications because deployment is easier as well because there is only one server that we have worry about.
-    - From now, when we visit our node server, we expect the node server to somehow reach over to webpack and serve up our application bundle both in a development environment and production environment. 
+    - From now, when we visit our node server, we expect the node server to somehow reach over to webpack and serve up our application bundle both in a development environment and production environment.
+
+29. Node and Webpack Integration (using express)
+
+- Integrating webpack with node is going to be a little bit different depending on whether or not we are on our local development machine or our application has been deployed to some outside service provider. In other words, a node server will be behaving differently depending on its environment.
+  - How node is going to behave when we are running on our local machine?
+    - Development Environment
+      - we are going to set up node so that it automatically passes request through to our webpack build process.
+      - This will allow us to take advantage of webpack without having status starts up a separate webpack server. So it is going to be running internally toward NodeJS server.
+    - Production Environment
+      - In production world, we do not want to run webpack at all because it is a huge resource hog
+      - Instead, we want to save the generated assets inside of dist directory and whenever a user navigates to our server in a browser, we are going to tell the node server to just go ahead and serve out these statically built assets from particular directory.
+- Setting up the environment in server.js
