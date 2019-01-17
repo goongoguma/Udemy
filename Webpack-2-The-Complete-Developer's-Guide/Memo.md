@@ -49,7 +49,7 @@
   - The Output Property
     - It tells webpack where to take bundle.js that is formed up at all over JS modules and where to save it and what to name it.
     - It is a form of object and contains two properties
-      - path : where the ouput file is saved to also use absolute path. (use path module _const path = require('path').resolve()_)
+      - path : where the ouput file is saved to, also use absolute path. (use path module _const path = require('path').resolve()_)
       - filename : what webpack should call the file that actually created (it is convention to name it as bundle.js).
 
 7.  Running Webpack
@@ -115,7 +115,7 @@ myModules[entryPointIndex](); // it calls index.js function
 
 10. Babel Configuration
 
-- In webpack.config.js file, by defining loaders or rules in module, we can tell webpack to take a pre-processing step on every file that includes into budle.js file.
+- In webpack.config.js file, by defining loaders or rules in module, we can tell webpack to take a pre-processing step on every file that includes into bundle.js file.
 - Test get assigned a regular expression. Any regular expression we passed into test property will be taken by webpack and applied to a file name of every file that we import to our project. (/\.js\$/ : all file ends with .js, babel will be applied)
 - Create .babelrc file in order to execute babel-preset-env.
 
@@ -144,7 +144,7 @@ myModules[entryPointIndex](); // it calls index.js function
   ```
 - CSS loader and style loader have taken the css and inject it into a <head> tag.
 - But we have not yet instructed webpack about HTML document. So how could webpack modifies the content of <head> tag?
-- Because css and style loaders take bundle.js and add some code inside of that to tell bundle.js how to update the HTML document after the script actually loaded up.
+- Because css and style loaders take bundle.js and add some code inside of it to tell bundle.js how to update the HTML document after the script actually loaded up.
 - In order words, in image_viewer.js file imports css file -> the css loader notices that we have imported css file -> css loader takes contents of file and sticks it into a long string inside of bundle.js document -> the style loader looks at the contents that css loader takes in and add some code to bundle.js file to take the string(updated by css loader) and append to the <head> tag in it's own individual style tag.
 - But loading up css and JavaScript in single file is slower because browser handle those files in parellel download request.
 
@@ -207,7 +207,7 @@ module: {
 
 - If we import images from assets folder, it will go through url and image-webpack loaders and if there is an image that bigger than 40000 bytes, it is going to be saved as seperated file into build directory.
 - The image smaller than 40000 byets, coded base64 and saved as string in bundle.js which means only this size of image appears on screen.
-- In console, there is an error about big image and the url is set to wrong location. If we want to set this right, we have to use 'publicPath' property in webpack.config file.
+- In console, there is an error about big image and the url is set to wrong direction. If we want to set this right, we have to use 'publicPath' property in webpack.config file.
 - URL loader emits the URL of the file with 'output.publicPath' prepended to the URL.
 - publicPath propery is not only used by URL loader. It will also be used by any other loader that produces direct file reference to a file in our output directory.
 
@@ -223,4 +223,26 @@ module: {
   - However if the module we want to call has other modules inside then we can take with it.
   - System.import also takes sometimes to reach out server. (it works asynchronously) it returns promise as well.
   - When we add in any System.import call into our code and webpack processes it, webpack is going to automatically search through our codebase for any calls to System.import.
-- When you enable code splitting inside of JS application, which is done by just adding system.import call, webpack is going to automatically changed the code about figuring out how to go and fetch modules off the server is exported from the application.
+- When you enable code splitting inside of JS application, which is done by just adding system.import call, webpack is going to automatically changed the code about figuring out how to go and fetch modules off the server exported from the application.
+
+16. Mininum Webpack Config
+
+```js
+rules: [
+  {
+    use: "babel-loader",
+    test: /\.js$/,
+    exclude: /node_modules/
+  }
+];
+```
+
+- exclude indicates that do not apply babel to any files inside of node_modules directory.
+- .babelrc file instructs babel which pieces of syntax you should try to transform inside of our code base. and since this is made of react, add "react" in the presets array.
+
+17. Vendor Asset Caching
+
+- asset caching : In first visit of application a browser will download js files. However in next visit, if a browser has downloaded js files and saved local copy of that file, it is not going to download files.
+- Webpack is all about helping us with the amount of time that it takes to load up our JavaScript dependencies of our application.
+- The first techinque to adjust the size of the application is splitting up our codebase into two big seperate chunks of files usiing code splitting.
+- Using code splitting, we are going to look at taking all of the code that we are writing for our project(index.js, searchList.js) and separating it out from all of the vendor-related code(third-party module code).
