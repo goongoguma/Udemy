@@ -502,3 +502,17 @@ new webpack.DefinePlugin({
 ```
 
 - When minifies JS code, webpack will automatically rename some of our variables and it will automatically compact down all of our code into the minimum amount of code possible. (size decreases 20% to 30% than in development mode.)
+
+28. Deployment of Servers (Assets + Custom Server)
+
+- There are two general types that we can structure our deployment.
+  - The first type (putting together in two seperate addresses)
+    - Suppose user visits www.app.com, it will get back the build application. In other words, our index html file and any supporting JS documents. That application will be sent back to the user's browser, it will be loaded up inside of browser, JS application we made can make API requests to this outside server that we are maintaining.
+    - It is somewhat being similar to having a static application but it is also got the ability to make requests to this outside API.
+    - This is how many large applications work.
+    - It has possibilities of performance gains out of separation of our static assets and our more dynamic assets.
+  - The second type (putting together in a single server address)
+    - It is the single monolithic server that will both serve up our app and then also have the ability to have some specialized API or server based logic as well.
+    - In other words, a node server is responsible for serving up the application and also some business logic as well. 
+    - This approach is more common for smaller applications because deployment is easier as well because there is only one server that we have worry about.
+    - From now, when we visit our node server, we expect the node server to somehow reach over to webpack and serve up our application bundle both in a development environment and production environment. 
