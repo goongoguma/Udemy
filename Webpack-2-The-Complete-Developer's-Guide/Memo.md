@@ -557,3 +557,59 @@ app.use(webpackMiddleware(webpack(webpackConfig)));
 
 - For a note, middleware@1.9.0 version is being used. (I have tried out other version but it keeps throwing 'invalid' error.)
 - Using this way, it allows us to make changes to our individual project files, webpack will automatically rerun over our project and we can refresh the page and see our changes appear live on the screen. Which means we do not need to manually run webpack command all the time like 'npm run build'.
+
+31. Webpack Middleware in Production
+
+- The idea is we want to build production assets exactly one time and stick them into dist directory. Then anytime that an user comes to the server for index.html file or JS files, we will send them back the resources that are contained inside dist directory. So having nothing to do with webpack whatsoever.
+- webpackMiddleware is only executed in development environment.
+  we can use process.env.NODE_ENV with 'if' statment to make it.
+- But whenever we are deploying to remote servers like AWS or Heroku, the value of NODE_ENV is not necessarily set for us. which means the way we set the variable right above is going to differ based on the deployment target or where an application is being deployed.
+- And we are going to add a little bit of code in else statment to make all of the resources inside of dist directory are freely avaialble to users.
+
+```js
+if (process.env.NODE_ENV !== "production") {
+  const webpackMiddleware = require("webpack-dev-middleware");
+  const webpack = require("webpack");
+  const webpackConfig = require("./webpack.config.js");
+  app.use(webpackMiddleware(webpack(webpackConfig)));
+} else {
+  // this line of code tells Express that it should make everything inside of the dist directory freely available for use.
+  app.unsubscribe(express.static("dist"));
+  // this line of code says that if anyone makes a get request to any route on our server, go ahead and send them back index.html file.
+  // this code is used specifically for compatibility with React-Router and browser history module.
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist/index.html"));
+  });
+}
+```
+
+- type 'set NODE_ENV=production&& node server.js' in command line to execute the server.
+- How to acutally add in some logic for handling authentication or working with the database or anything like that?
+
+  - To do that you would additional routes _above_ all existing webpack information or configuration. Espeacially
+
+  ```js
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist/index.html"));
+  });
+  ```
+
+  this above.
+
+  ```js
+  app.get("/hello", (req, res) => res.send({ hi: "there" }));
+  if (process.env.NODE_ENV !== "production") {...}
+  ```
+
+- Many different service providers like AWS and especially Heroku, will not allow you to define your own port.
+
+```js
+// 3050 is not allowed
+app.listen(3050, () => console.log("Listening"));
+```
+
+- Instead, they will want you to bind to a port specified by the server.
+
+```js
+app.listen(process.env.PORT || 3050, () => console.log("Listening"));
+```
