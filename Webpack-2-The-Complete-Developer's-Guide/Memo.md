@@ -367,3 +367,11 @@ plugins: [
     "build": "npm run clean && webpack"
   },
 ```
+
+23. Webpack Dev Server
+
+- It is an intermediary between our browser and our Webpack output. With webpack-dev-server we only have to start our server up one time. It is responsible for watching all of our project code and automatically rebuilding our project whenever one of our files changes.
+- The real key aspect of webpack-dev-server is that it only updates the individual JS modules that are changed when we save our projects(individual files).
+- The next key difference about webpack-dev-server is that when we open up our web browser, we will no longer be manually loading up our index HTML document. Instead, we are going to make connection or get access to this webpack-dev-server which will automatically feed us the index HTML and otherwise all the other deveoploment assets.
+- Webpack-dev-server is really developing a client-side application. (SPA with zero connection to server side logic)
+- So how we are going to integrate webpack-dev-server and traditional server side logic?
