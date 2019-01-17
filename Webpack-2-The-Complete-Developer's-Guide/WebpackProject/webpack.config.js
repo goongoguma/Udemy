@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var path = require("path");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const VENDOR_LIBS = [
   // each string in the array are the name of the library(npm modules) that we want to include in seperate vendor file.
@@ -41,6 +42,10 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor"
+    }),
+    new HtmlWebpackPlugin({
+      // using existing html document as a source for template
+      template: "src/index.html"
     })
   ]
 };

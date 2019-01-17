@@ -240,7 +240,7 @@ rules: [
 - exclude indicates that do not apply babel to any files inside of node_modules directory.
 - .babelrc file instructs babel which pieces of syntax you should try to transform inside of our code base. and since this is made of react, add "react" in the presets array.
 
-17. Vendor Asset Caching
+17. Vendor Asset Caching (Downloaded project file from Stephen's github)
 
 - asset caching : In first visit of application a browser will download js files. However in next visit, if a browser has downloaded js files and saved local copy of that file, it is not going to download files.
 - Webpack is all about helping us with the amount of time that it takes to load up our JavaScript dependencies of our application.
@@ -281,6 +281,8 @@ entry: {
 - Therefore, we are going to use plugin called "the common's chunk plugins".
 
 ```js
+var webpack = require("webpack");
+
 plugins: [
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendor" // it tells webpack look at the total sum of total project files between entry points(bundle input and vendor input), if any modules duplicates between those points, pull it out and only add it to vendor entry point
@@ -289,3 +291,26 @@ plugins: [
 ```
 
 - Using this plugin acutally decrease the size of bundle.js from 3.8MB to 468KB.
+- But size of total file (bundle.js and vendor.js) is still big and applicaion does not work with an error saying 'webpackJsonp is not defined'
+
+20. Troubleshooting Vendor Bundles
+
+- 'webpackJsonp is not defined' error occurs because we have not added new vendor.js file into html file.
+- But installing plugin called 'html webpack', you don't need to do it.
+- After setting is done, delete <script> tag that connects bundle.js file and index.html file. This plugin will generate automatically for us.
+
+```js
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: "vendor"
+  }),
+  new HtmlWebpackPlugin({
+    // using existing html document as a source for template
+    template: "src/index.html"
+  })
+];
+```
+
+- After 'npm run build' command, you can find new html file that created in dist file. Therefore, application file in dist directory must be run
