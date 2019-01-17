@@ -329,6 +329,8 @@ plugins: [
 
 - chunkhash
   - Every singl time that our bundle or vendor file is updated or changed in some fashion, Webpack will automatically hash the contents of that file and then spit it out as the chunkhash.
+  - If we modify even one character inside of any of files in vendor of bundle, the entire chunkhash is going to change.
+  - chunckhash makes sure that as long as the file got updated in any way shape or form, the browser will attempt to redownload it.
   ```js
   output: {
     path: path.join(__dirname, "dist"),
