@@ -96,8 +96,14 @@
 ## 12. Extracting JSX to New Components
 
 - Steps for creating a reusable and configurable component
+
   - Identify the JSX that apprears to be duplicated
   - What is the purpose of that block of JSX? Think of a descriptive name for what it does
   - Create a new file to house this new component - it should have the same name as the component
   - Create a new component in the new file, paste the JSX into it
   - Make the new component configurable by using React's 'props' system.
+
+  ## 13. React's Props System
+
+  - Props is a system for passing data from a parent component to a child component.
+  - Goal is to customize or configure a child component.
