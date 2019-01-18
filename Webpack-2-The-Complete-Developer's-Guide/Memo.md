@@ -1,23 +1,50 @@
-- Index
+- </h1>Tutorial Memo Index </h1>
+  - [1. Server Side Templating에 대해](#ServerSideTemplating)
+  - [2. SPA에 대해](#SinglePageApp)
+  - [3. JS모듈은 무엇인가?](#WhatisJavaScriptModule)
+  - [4. 웹팩의 사용목적](#ThePurposeofWebpack)
+  - [5. 다양한 모듈 시스템](#ModuleSystem)
+  - [6. 웹팩 설치와 설정](#WebpackInstallationandConfiguration)
+  - [7. 웹팩 실행](#RunningWebpack)
+  - [8. bundle.js에 관해](#TheBundle.jsFile)
+  - [9. 모듈 로더가 무엇인지? & BABEL 모듈](#IntroductiontoModuleLoaders)
+  - [10. BABEL 세팅](#BabelConfiguration)
+  - [11. 웹팩으로 CSS 다루기](#HandlingCSSwithWebpack)
+  - [12. STYLE 로더와 CSS 로더의 설치와 작동](#TheStyleandCSSLoaders)
+  - [13. The Extract Text 플러그인 사용법](#TheExtractTextPlugin)
+  - [14. 웹팩을 이용해 이미지 다루기](#HandlingImageswithWebpack)
+  - [15. Code Splitting과 System.import](#CodeSplitting)
+  - [16. Webpack.config에 exclude 프로퍼티 넣기](#MininumWebpackConfig)
+  - [17. Asset Caching과 Code Splitting을 사용해 파일 분리하기 (Vendor Splitting)](#VendorAssetCaching)
+  - [18. Vendor Splitting의 이유와 세팅법](#RefactoringforVendorSplitting)
+  - [19. bundle.js 용량 줄이기 및 commonchunk 플러그인 사용법](#EffectofCodeSplitting)
+  - [20. HTML webpack 플러그인을 사용해 html 문서에 script 태그 자동 입력](#TroubleshootingVendorBundles)
+  - [21. chunkhash 기능을 사용해 파일 이름 바꿔주기](#ChunkHashingforCasheBusting)
+  - [22. rimraf 모듈을 사용해 파일 정리하기](#CleaningProjectFiles)
+  - [23. Webpack Dev Server란?](#WebpackDevServer)
+  - [24. Webpack Dev Server 설치 및 주의사항](#GotchaswithWebpackDevServer)
+  - [25. Code Splitting을 사용해 React Router 기능 만들기](#ReactRouterwithCodesplitting)
+  - [26. 다양한 배포 옵션들](#DeploymentOptions)
+  - [27. process.env.NODE_ENV를 이용해 환경설정하기](#GettingProductionReady)
+  - [28. 서버 배포 방법의 종류](#DeploymentofServers)
+  - [29. ExpressJS를 사용해 노드와 웹팩 사용해보기](#NodeandWebpackIntegration)
+  - [30. Webpack Middleware와 사용법](#WebpackMiddlewareinDevelopment)
+  - [31. 배포 환경에 따른 Middleware 사용설정 및 배포 서비스에 맞춰 process.env 변경하기](#WebpackMiddlewareinProduction)
 
-1. [introduction](#introduction)
-2. SPA에 대해
-3. JS모듈은 무엇인가?
-
-4. Server Side Templating
+<h2 name="ServerSideTemplating">1. Server Side Templating</h2>
 
 - Back-end server creates an HTML document and sends it to the user
 - This HTML document is fully rendered HTML document
 - User visits page -> HTTP request to server -> New HTML Document -> User clicks a link -> HTTP request to server -> New HTML Document
 
-2. Single Page App
+<h2 name="SinglePageApp">2. Single Page App</h2>
 
 - Server sends a bare-bones HTML doc to the user.
 - After bare-bones HTML loads up, JavaScript runs on the users machine to assemble a full webpage
 - User visits page -> HTTP request to server -> New HTML Document -> React/Angular boots up, shows page -> User clicks link -> React/Angular shows new content
 - In SPA, we have a huge pile of JavaScript that is being shipped down to user's browser.
 
-3. What is JavaScript Module?
+<h2 name="WhatisJavaScriptModule">3. What is JavaScript Module?</h2>
 
 - It is a single JavaScript file contains some small amount of code.
 - The benefit of this approach is gets a lot more clear the code is located in our project.
@@ -25,12 +52,12 @@
 - also many JS files in HTTP connection is a bad idea for performance stand point : <u>more files we have, slower load time for pages</u>.
 - **And this is exactly where Webpack comes into play**
 
-4. The Purpose of Webpack
+<h2 name="ThePurposeofWebpack">4. The Purpose of Webpack</h2>
 
 - The purpose of webpack is take a big collection of tiny little JS modules and **merge them all into one big JS file**.
 - And also ensuring that each module is **executed in the correct order**.
 
-5. <div name="introduction">Module System</div>
+<h2 name="ModuleSystem">5. Module System</h2>
 
 - Common JS
   - It is implented by node.js
@@ -43,7 +70,7 @@
   - Most popular in module world
   - Common Syntax : import, export
 
-6. Webpack Installation and Configuration
+<h2 name="WebpackInstallationandConfiguration">6. Webpack Installation and Configuration</h2>
 
 - Webpack is gonna read contents in webpack.config.js and based on the instruction we have provided inside of it, takes some operation on code base.
 - Two minimum properties
@@ -58,7 +85,7 @@
       - path : where the ouput file is saved to, also use absolute path. (use path module _const path = require('path').resolve()_)
       - filename : what webpack should call the file that actually created (it is convention to name it as bundle.js).
 
-7. Running Webpack
+<h2 name="RunningWebpack">7. Running Webpack</h2>
 
 - Command ran at terminal
 
@@ -82,7 +109,7 @@
 - for a note, when a module is installed globally, you can have only one version of module installed at a time. Therfore when several projects use different version of webpack, it would be pretty hard to adjust the version using global modules. This problem can easily be solved by just installing the module locally and depending upon locally installed webpack.
 - when npm run build is executed, the size of bundle.js is much bigger than sum of the other files that actually used inside of bundle.
 
-8.  The Bundle.js File
+<h2 name="TheBundle.jsFile">8. The Bundle.js File</h2>
 
 - What happens inside of bundle.js file is webpack takes all of modules code, stuffs it in individual functions and stuffs those functions into an array and then calls different functions in that array.
 
@@ -105,7 +132,7 @@ var entryPointIndex = 1;
 myModules[entryPointIndex](); // it calls index.js function
 ```
 
-9.  Introduction to Module Loaders
+<h2 name="IntroductiontoModuleLoaders">9. Introduction to Module Loaders</h2>
 
 - Module Loaders
   - It does some pre-processing on files before they are added to bundle.js file
@@ -119,19 +146,19 @@ myModules[entryPointIndex](); // it calls index.js function
   - babel-reset-env
     - Ruleset for telling babel exactly what pieces of ES2015/6/7 syntax to look for and how to turn it into ES5 code.
 
-10. Babel Configuration
+<h2 name="BabelConfiguration">10. Babel Configuration</h2>
 
 - In webpack.config.js file, by defining loaders or rules in module, we can tell webpack to take a pre-processing step on every file that includes into bundle.js file.
 - Test get assigned a regular expression. Any regular expression we passed into test property will be taken by webpack and applied to a file name of every file that we import to our project. (/\.js\$/ : all file ends with .js, babel will be applied)
 - Create .babelrc file in order to execute babel-preset-env.
 
-11. Handling CSS with Webpack
+<h2 name="HandlingCSSwithWebpack">11. Handling CSS with Webpack</h2>
 
 - The benefit of using webpack to handle our css is that we can make use of a bunch of different CSS files and import those files into each of the files that we actually care about to make use of them inside of our project. _It gives very clear relationship between JS file and CSS file. It is really a tool that we can use to make developement or styling of our applications a lot more staraightforward_.
 - You do not need to export 'images' because it just runs not executing something.
 - If we want to include a file in bundle.js, make sure that it has to get exported at least one file.
 
-12. The Syle and CSS Loaders
+<h2 name="TheStyleandCSSLoaders">12. The Style and CSS Loaders</h2>
 
 - any files that not ending '.js', we do have to specify file extention at the end.
 - We are going to install two loaders. (css-loader, style-loader)
@@ -154,7 +181,7 @@ myModules[entryPointIndex](); // it calls index.js function
 - In order words, in image_viewer.js file imports css file -> the css loader notices that we have imported css file -> css loader takes contents of file and sticks it into a long string inside of bundle.js document -> the style loader looks at the contents that css loader takes in and add some code to bundle.js file to take the string(updated by css loader) and append to the <head> tag in it's own individual style tag.
 - But loading up css and JavaScript in single file is slower because browser handle those files in parellel download request.
 
-13. The Extract Text Plugin
+<h2 name="TheExtractTextPlugin">13. The Extract Text Plugin</h2>
 
 - In order to overcome the weakness of css and style loader, we are going to use another library.
 - Install extract text webpack plugin (npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4)
@@ -185,7 +212,7 @@ module: {
   ]
 ```
 
-14. Handling Images with Webpack
+<h2 name="HandlingImageswithWebpack">14. Handling Images with Webpack</h2>
 
 - Images from outside source are pretty slow. It takes a lot longer to load up the image.
 - It would be much faster if we hosted images locally ourselves.
@@ -217,7 +244,7 @@ module: {
 - URL loader emits the URL of the file with 'output.publicPath' prepended to the URL.
 - publicPath propery is not only used by URL loader. It will also be used by any other loader that produces direct file reference to a file in our output directory.
 
-15. Code Splitting
+<h2 name="CodeSplitting">15. Code Splitting</h2>
 
 - With code splitting, webpack allows us to split up bundle.js output into seperate individual files and programmecally decide when to load up different pieces of bundle inside of our code base.
 - In other words, we can control exactly when we load up different modules to show different code inside of our project.
@@ -231,7 +258,7 @@ module: {
   - When we add in any System.import call into our code and webpack processes it, webpack is going to automatically search through our codebase for any calls to System.import.
 - When you enable code splitting inside of JS application, which is done by just adding system.import call, webpack is going to automatically changed the code about figuring out how to go and fetch modules off the server exported from the application.
 
-16. Mininum Webpack Config
+<h2 name="MininumWebpackConfig">16. Mininum Webpack Config</h2>
 
 ```js
 rules: [
@@ -246,14 +273,14 @@ rules: [
 - exclude indicates that do not apply babel to any files inside of node_modules directory.
 - .babelrc file instructs babel which pieces of syntax you should try to transform inside of our code base. and since this is made of react, add "react" in the presets array.
 
-17. Vendor Asset Caching (Downloaded project file from Stephen's github)
+<h2 name="VendorAssetCaching">17. Vendor Asset Caching (Downloaded project file from Stephen's github)</h2>
 
 - asset caching : In first visit of application a browser will download js files. However in next visit, if a browser has downloaded js files and saved local copy of that file, it is not going to download files.
 - Webpack is all about helping us with the amount of time that it takes to load up our JavaScript dependencies of our application.
 - The first techinque to adjust the size of the application is splitting up our codebase into two big seperate chunks of files usiing code splitting.
 - Using code splitting, we are going to look at taking all of the code that we are writing for our project(index.js, searchList.js) and separating it out from all of the vendor-related code(third-party module code).
 
-18. Refactoring for Vendor Splitting
+<h2 name="RefactoringforVendorSplitting">18. Refactoring for Vendor Splitting</h2>
 
 - With code splitting and vendor asset, we can decrease the time that loads up an application on subsequent visits.
 - When we do code splitting in vendor dependencies. Rather than single bundle.js in filename in webpack.config, we are going to specifically tell webpack before it starts to parse any of our code that we want it to split up our codebase into two separate sections.
@@ -280,7 +307,7 @@ entry: {
   },
 ```
 
-19. Effect of Code Splitting
+<h2 name="EffectofCodeSplitting">19. Effect of Code Splitting</h2>
 
 - After 'run npm build' we have new file called vendor.js However the size of bundle.js is unchanged.
 - Because we thought we have seperated our vendor files from bundle.js but that does not mean that webpack is going to automatically find common modules between bundle.js and vendor.js and make sure they have those libraries only one time.
@@ -299,7 +326,7 @@ plugins: [
 - Using this plugin acutally decrease the size of bundle.js from 3.8MB to 468KB.
 - But size of total file (bundle.js and vendor.js) is still big and applicaion does not work with an error saying 'webpackJsonp is not defined'
 
-20. Troubleshooting Vendor Bundles
+<h2 name="TroubleshootingVendorBundles">20. Troubleshooting Vendor Bundles</h2>
 
 - 'webpackJsonp is not defined' error occurs because we have not added new vendor.js file into html file.
 - But installing plugin called 'html webpack', you don't need to do it.
@@ -321,7 +348,7 @@ plugins: [
 
 - After 'npm run build' command, you can find new html file that created in dist file. Therefore, application file in dist directory must be run
 
-21. Chunk Hashing for Cashe Busting
+<h2 name="ChunkHashingforCasheBusting">21. Chunk Hashing for Cashe Busting</h2>
 
 - How browser decides whether or note it has downloaded a file?
 
@@ -360,7 +387,7 @@ plugins: [
   - The purpose of the file is to better tell the browser or kind of better give everything involved a little bit more understanding on whether or not the vendor file actually got changed.
   - reference : https://www.udemy.com/webpack-2-the-complete-developers-guide/learn/v4/t/lecture/6296302?start=15
 
-22. Cleaning Project Files
+<h2 name="CleaningProjectFiles">22. Cleaning Project Files</h2>
 
 - Every single time that I make a change to my project and then rebuild it, additional JS build files are put inside of dist folder.
 - If we start to rebuild the project many times, we are going to end up with a ton of duplicate files inside of dist directory.
@@ -375,7 +402,7 @@ plugins: [
   },
 ```
 
-23. Webpack Dev Server
+<h2 name="WebpackDevServer">23. Webpack Dev Server</h2>
 
 - It is an intermediary between our browser and our Webpack output. With webpack-dev-server we only have to start our server up one time. It is responsible for watching all of our project code and automatically rebuilding our project whenever one of our files changes.
 - The real key aspect of webpack-dev-server is that it only updates the individual JS modules(individual files) that are changed when we save our projects.
@@ -383,7 +410,7 @@ plugins: [
 - Webpack-dev-server is really developing a client-side application. (SPA has zero connection to server side logic)
 - So how we are going to integrate webpack-dev-server and traditional server side logic?
 
-24. Gotchas with Webpack Dev Server
+<h2 name="GotchaswithWebpackDevServer">24. Gotchas with Webpack Dev Server</h2>
 
 - After webpack-dev-server installation on terminal, modifies script in package.json
 
@@ -403,7 +430,7 @@ plugins: [
 - Because when we run webpack-dev-server, it will internally execute webpack. But it stops webpack from actually saving any files in our project file directory. (no file generated in dist folder)
 - In order words, if you want to get raw development assets, you have to run 'webpack' not 'webpack-dev-server'.
 
-25. React Router with Codesplitting
+<h2 name="ReactRouterwithCodesplitting">25. React Router with Codesplitting</h2>
 
 - Using code splitting with React-router is a fantastic way to break up an application into smaller parts and this is something that gets really useful when you are working on really large React projects.
 - In router.js file, when a user first lands at our website, they can grab the bundle.js file and that will have all the code they need for show the very root base routes of the application which are Home and ArtistMain components.
@@ -467,7 +494,7 @@ const Routes = () => {
 
 - the code above seems bit repetitive but System.import is very static analysis, literally just reading over your code. Therfore we are not able to dynamically generate it based on the location that the user is navigating to.
 
-26. Deployment Options
+<h2 name="DeploymentOptions">26. Deployment Options</h2>
 
 - When we think about webpack deployment, we think about whether or not we are serving up a static application and the words 'front-end assets only', or if we have both a front-end application and a back-end as well.
 - Static Asset Providers
@@ -475,7 +502,7 @@ const Routes = () => {
 - Server-based Providers
   - Amazon EC2, Amazon ELB, Digital Ocean, Heroku, MS Azure
 
-27. Getting Production Ready
+<h2 name="GettingProductionReady">27. Getting Production Ready</h2>
 
 - Among all libraries we have installed, Reactjs makes use of this NODE_ENV flag. Whenever React runs, it looks for a window scoped variable of 'process.env.NODE_ENV'.
 - If it finds the variable and it is equal to the string production, react is not going to do quite so many error checking procedures while it runs and renders an application.
@@ -511,7 +538,7 @@ new webpack.DefinePlugin({
 - When minifies JS code, webpack will automatically rename some of our variables and it will automatically compact down all of our code into the minimum amount of code possible. (size decreases 20% to 30% than in development mode.)
 - Reference : https://rokking1.blog.me/221348718607
 
-28. Deployment of Servers (Assets + Custom Server)
+<h2 name="DeploymentofServers">28. Deployment of Servers (Assets + Custom Server)</h2>
 
 - There are two general types that we can structure our deployment.
   - The first type (putting together in two seperate addresses)
@@ -525,7 +552,7 @@ new webpack.DefinePlugin({
     - This approach is more common for smaller applications because deployment is easier as well because there is only one server that we have worry about.
     - From now, when we visit our node server, we expect the node server to somehow reach over to webpack and serve up our application bundle both in a development environment and production environment.
 
-29. Node and Webpack Integration (by using ExpressJS)
+<h2 name="NodeandWebpackIntegration">29. Node and Webpack Integration (by using ExpressJS)</h2>
 
 - Integrating webpack with node is going to be a little bit different depending on whether or not we are on our local development machine or our application has been deployed to some outside service provider. In other words, a node server will be behaving differently depending on its environment.
   - How node is going to behave when we are running on our local machine?
@@ -546,7 +573,7 @@ const app = express();
 app.listen(3050, () => console.log("Listening"));
 ```
 
-30. Webpack Middleware in Development
+<h2 name="WebpackMiddlewareinDevelopment">30. Webpack Middleware in Development</h2>
 
 - We are going to inside of our server.js file by wiring up webpack to make sure that it works correctly in development.
 - Webpack middleware to help us serve up our application.
@@ -567,7 +594,7 @@ app.use(webpackMiddleware(webpack(webpackConfig)));
 - For a note, middleware@1.9.0 version is being used. (I have tried out other version but it keeps throwing 'invalid' error.)
 - Using this way, it allows us to make changes to our individual project files, webpack will automatically rerun over our project and we can refresh the page and see our changes appear live on the screen. Which means we do not need to manually run webpack command all the time like 'npm run build'.
 
-31. Webpack Middleware in Production
+<h2 name="WebpackMiddlewareinProduction">31. Webpack Middleware in Production</h2>
 
 - The idea is we want to build production assets exactly one time and stick them into dist directory. Then anytime that user comes to the server for index.html file or JS files, we will send them back the resources that are contained inside dist directory. So having nothing to do with webpack whatsoever.
 - webpackMiddleware is only executed in development environment. we can use process.env.NODE_ENV with 'if' statment to make it work.
