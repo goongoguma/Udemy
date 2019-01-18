@@ -1,4 +1,4 @@
-1. Critical Question related to React
+## 1. Critical Question related to React
 
 - What is React and its purpose?
 
@@ -30,3 +30,20 @@
   - React is split into two separate libraries.
   - React knows what a component is and how to make components work together.
   - ReactDOM knows how to take a component and make it show up in the DOM.
+
+## 2. Exploring a Create-React-App Project
+
+- src : Folder where we put all the source code we write.
+- public : Folder that stores static files like images.
+- node_modules : Folder that contains all of our project dependencies.
+- package.json : Records our project dependencies and configures our project.
+- package-lock.json : Records the exact version of packages that we install.
+- README.md : Instructions on how to use this project.
+
+## 3. JavaScript Module Systems
+
+- import React from 'react'
+  - import : we want to get code from some other file or dependency
+  - React : The variable we want to assign this import to (It is a convention to name the variable according to the name of library)
+  - from : We are about to specify the name of the library or file we are importing from
+  - 'react' : The name of the dependency or path to the file we are importing from node_modules
