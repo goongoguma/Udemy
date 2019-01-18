@@ -57,3 +57,12 @@
 - It is a special dialect of JS (it is not HTML!)
 - Browsers do not understand JSX code. We write JSX then run tools to turn it into normal JS
 - Very similar in form and function to HTML with a couple differences.
+
+## 6. Inline Styling with JSX
+
+- JSX vs HTML
+  - Adding custom styling to an element uses different syntax.
+    - HTML : <div style="background-color:red;"></div>
+    - JSX : <div style={{backgroundColor:'red'}}></div>
+  - Adding a class to an element uses different syntax.
+  - JSX can reference JS variables.
