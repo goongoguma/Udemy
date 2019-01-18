@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 // Create a react component
 const App = () => {
-  const buttonText = "Click Me!";
+  const buttonText = "Click Me";
   return (
     <div>
       <label className="label" for="name">
@@ -12,7 +12,7 @@ const App = () => {
       </label>
       <input id="name" type="text" />
       <button style={{ backgroundColor: "blue", color: "white" }}>
-        {getButtonText()}
+        {buttonText}
       </button>
     </div>
   );

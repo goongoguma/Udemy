@@ -75,3 +75,7 @@
 ## 8. Referencing JS Variables in JSX
 
 - JSX can reference JS variables and function call inside of {}.
+
+## 9. Values JSX Can't show
+
+- We are not allowed to take plain JS object and reference it inside of JSX to print it up as 'text'.
