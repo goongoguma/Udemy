@@ -87,3 +87,8 @@
   - We want to make components that can be easily reused through out application.
 - Component Configuration
   - We should be able to configure a component when it is created. When we create different components, we have ability to somehow customize them when they are created.
+
+## 11. Specifying Images in JSX
+
+- We are going to use library called 'faker'.
+  - It automatically generates massive amount of realistic fake data.
