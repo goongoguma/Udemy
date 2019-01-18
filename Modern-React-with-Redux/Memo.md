@@ -51,3 +51,9 @@
 ## 4. Displaying Content with Functional Components
 
 - A component is a _Function_ or _Class_ that produces HTML to show the user using JSX and handles feedback from the user using Event Handlers.
+
+## 5. What is JSX?
+
+- It is a special dialect of JS (it is not HTML!)
+- Browsers do not understand JSX code. We write JSX then run tools to turn it into normal JS
+- Very similar in form and function to HTML with a couple differences.
