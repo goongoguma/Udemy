@@ -7,3 +7,5 @@
 
 - Webpack 2: The Complete Developer's Guide by Stephen Grider
   - Certificate : https://udemy-certificate.s3.amazonaws.com/pdf/UC-FSDAINTN.pdf
+  
+- Modern React with Redux by Stephen Grider
