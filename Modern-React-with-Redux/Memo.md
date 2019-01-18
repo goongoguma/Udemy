@@ -93,6 +93,21 @@
 - We are going to use library called 'faker'.
   - It automatically generates massive amount of realistic fake data.
 
+## 12. Showing Custom Children
+
+- When we pass one component to another as child component, It is going to show up inside of the component on the prop's object and specifically on a property of the prop's object called the children property.
+
+```js
+<ApprovalCard>
+  <CommentDetail
+    author="Sam"
+    timeAgo="Today at 4:00PM"
+    commentText="Thank you!"
+    source={faker.image.avatar()}
+  />
+</ApprovalCard>
+```
+
 ## 12. Extracting JSX to New Components
 
 - Steps for creating a reusable and configurable component
@@ -107,3 +122,18 @@
 
   - Props is a system for passing data from a parent component to a child component.
   - Goal is to customize or configure a child component.
+
+  ## 14. Showing Custom Children
+
+  - It is able to pass one component to other component as props.
+
+  ```js
+  <ApprovalCard>
+    <CommentDetail
+      author="Sam"
+      timeAgo="Today at 4:00PM"
+      commentText="Thank you!"
+      source={faker.image.avatar()}
+    />
+  </ApprovalCard>
+  ```
