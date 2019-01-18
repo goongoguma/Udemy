@@ -61,7 +61,6 @@
 ## 6. Inline Styling with JSX
 
 - JSX vs HTML
-
   - Adding custom styling to an element uses different syntax.
     - HTML : <div style="background-color:red;"></div>
     - JSX : <div style={{backgroundColor:'red'}}></div>
@@ -79,3 +78,12 @@
 ## 9. Values JSX Can't show
 
 - We are not allowed to take plain JS object and reference it inside of JSX to print it up as 'text'.
+
+## 10. Three Tenets of Components
+
+- Component Nesting
+  - A component can be shown inside of another.
+- Component Reusability
+  - We want to make components that can be easily reused through out application.
+- Component Configuration
+  - We should be able to configure a component when it is created. When we create different components, we have ability to somehow customize them when they are created.
