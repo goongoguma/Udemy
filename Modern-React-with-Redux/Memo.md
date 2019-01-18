@@ -47,3 +47,7 @@
   - React : The variable we want to assign this import to (It is a convention to name the variable according to the name of library)
   - from : We are about to specify the name of the library or file we are importing from
   - 'react' : The name of the dependency or path to the file we are importing from node_modules
+
+## 4. Displaying Content with Functional Components
+
+- A component is a _Function_ or _Class_ that produces HTML to show the user using JSX and handles feedback from the user using Event Handlers.
