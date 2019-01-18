@@ -250,7 +250,7 @@ rules: [
 18. Refactoring for Vendor Splitting
 
 - With code splitting and vendor asset, we can decrease the time that loads up an application on subsequent visits.
-- When we do code splitting in vendor dependencies. Rather than single bundle.js in filename in webpack.config, we are going to specifically tell webpack before it starts to parse any of our code that we want it to split up our codebase into two separate secions.
+- When we do code splitting in vendor dependencies. Rather than single bundle.js in filename in webpack.config, we are going to specifically tell webpack before it starts to parse any of our code that we want it to split up our codebase into two separate sections.
 - Vendor Splitting
   - Code will change quite frequently. However libraries and modules we use are not going to change frequently. Therefore we make a file called 'vendor.js' by seperated from bundle.js which is the file that contains bunch of codes and decrease load up time.
 
@@ -328,8 +328,8 @@ plugins: [
   - In order to do this, we are going to use chunkhash property in filename.
 
 - chunkhash
-  - Every singl time that our bundle or vendor file is updated or changed in some fashion, Webpack will automatically hash the contents of that file and then spit it out as the chunkhash.
-  - If we modify even one character inside of any of files in vendor of bundle, the entire chunkhash is going to change.
+  - Every single time that our bundle or vendor file is updated or changed in some fashion, Webpack will automatically hash the contents of that file and then spit it out as the chunkhash.
+  - If we modify even one character inside of any of files in vendor or bundle, the entire chunkhash is going to change.
   - chunckhash makes sure that as long as the file got updated in any way shape or form, the browser will attempt to redownload it.
   ```js
   output: {
@@ -338,7 +338,7 @@ plugins: [
     filename: "[name].[chunkhash].js"
   },
   ```
-  - But if we change bundle.js file, webpack will mistakenly think that our vendor file is updated as well. To fix that, we have to change the name of the property in plugins name.
+  - But if we change bundle.js file, webpack will mistakenly think that our vendor file is updated as well. To fix that, we have to change the vale that name property has in plugins.
   ```js
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -352,6 +352,7 @@ plugins: [
   ```
   - manifest creates a third JS file in our dist directory called manifest.js.
   - The purpose of the file is to better tell the browser or kind of better give everything involved a little bit more understanding on whether or not the vendor file actually got changed.
+  - reference : https://www.udemy.com/webpack-2-the-complete-developers-guide/learn/v4/t/lecture/6296302?start=15
 
 22. Cleaning Project Files
 
@@ -363,7 +364,7 @@ plugins: [
 ```js
 "scripts": {
     "clean": "rimraf dist",
-    // this command deletes all files in dies directory and then running webpack to build our project
+    // this command deletes all files in dist directory and then running webpack to build our project
     "build": "npm run clean && webpack"
   },
 ```
@@ -371,9 +372,9 @@ plugins: [
 23. Webpack Dev Server
 
 - It is an intermediary between our browser and our Webpack output. With webpack-dev-server we only have to start our server up one time. It is responsible for watching all of our project code and automatically rebuilding our project whenever one of our files changes.
-- The real key aspect of webpack-dev-server is that it only updates the individual JS modules that are changed when we save our projects(individual files).
+- The real key aspect of webpack-dev-server is that it only updates the individual JS modules(individual files) that are changed when we save our projects.
 - The next key difference about webpack-dev-server is that when we open up our web browser, we will no longer be manually loading up our index HTML document. Instead, we are going to make connection or get access to this webpack-dev-server which will automatically feed us the index HTML and otherwise all the other deveoploment assets.
-- Webpack-dev-server is really developing a client-side application. (SPA with zero connection to server side logic)
+- Webpack-dev-server is really developing a client-side application. (SPA has zero connection to server side logic)
 - So how we are going to integrate webpack-dev-server and traditional server side logic?
 
 24. Gotchas with Webpack Dev Server
@@ -391,15 +392,15 @@ plugins: [
 - When I make that change, webpack-dev-server will automatically rebuild our project, but it decides to only rebuild one individual file. Therefore webpack-dev-server does not rebuild our entire project, it just takes care of that very small change.
   The result of which, the rebuild time is dramatically shortened.
 - But when we give a change to webpack.config file, we have to restart webpack-dev-server.
-- Unlike 'npm run build', webpack-dev-server does not create files in dist folder. Those files are saved in only in memory and we navigate 'localhose:8080' then the project files are served directly out of memory, not directly from our hard drive.
-  _dev-server is only for development not for production use._
-- Because when we run webpack-dev-server, it will internally execute webpack. But it stops webpack from actually saving any files in our project file directory.
+- Unlike 'npm run build', webpack-dev-server does not create files in dist folder. Those files are saved in only in memory and when we navigate 'localhose:8080' then the project files are served directly out of memory, not directly from our hard-drive.
+- _dev-server is only for development not for production use._
+- Because when we run webpack-dev-server, it will internally execute webpack. But it stops webpack from actually saving any files in our project file directory. (no file generated in dist folder)
 - In order words, if you want to get raw development assets, you have to run 'webpack' not 'webpack-dev-server'.
 
 25. React Router with Codesplitting
 
 - Using code splitting with React-router is a fantastic way to break up an application into smaller parts and this is something that gets really useful when you are working on really large React projects.
-- In router.js file, when a user first lands at our website, they can grab the big bundle.js file and that will have all the code they neede for show the very root base routes of the application which are Home and ArtistMain components.
+- In router.js file, when a user first lands at our website, they can grab the bundle.js file and that will have all the code they need for show the very root base routes of the application which are Home and ArtistMain components.
 - Then as the user starts to navigate around the app, we will add in some code splitting to dynamically load up the ArtistCreate, ArtistDetail and ArtistEdit components.
 - What we are going to do is transforming general jsx structure into a plain JS object. (this is actually what react-router does behind the scenes all the jsx you write.)
 
@@ -417,7 +418,7 @@ const Routes = () => {
   );
 };
 
-// we can change react-router as form of objective using code-splitting
+// we can change react-router as form of objectives using code-splitting
 const componentRoutes = {
   component: Home,
   path: "/",
@@ -473,7 +474,7 @@ const Routes = () => {
 - Among all libraries we have installed, Reactjs makes use of this NODE_ENV flag. Whenever React runs, it looks for a window scoped variable of 'process.env.NODE_ENV'.
 - If it finds the variable and it is equal to the string production, react is not going to do quite so many error checking procedures while it runs and renders an application.
 - This is beneficial because it assumes that maybe you don't want so much error checking and the thought there is that in your development environment, you want a lot more error checking so you can catch a lot of different errors before they get pushed to production.
-- Adding 'process.env.NODE_ENV' in the global variable in webpack.config, it makes sure that React does not take all that error checking into consideration.
+- Adding 'process.env.NODE_ENV' in the global variable in webpack.config makes sure that React does not take all that error checking into consideration.
 - In order to 'process.env.NODE_ENV' available in window, DefinePlugin is used.
 
 ```js
@@ -488,7 +489,7 @@ new webpack.DefinePlugin({
 ```js
 "scripts": {
     "clean": "rimraf dist",
-    "build": "NODE_ENV=production npm run clean && webpack",
+    "build": "set NODE_ENV=production&&npm run clean&&webpack",
     "serve": "webpack-dev-server"
   },
 ```
@@ -502,6 +503,7 @@ new webpack.DefinePlugin({
 ```
 
 - When minifies JS code, webpack will automatically rename some of our variables and it will automatically compact down all of our code into the minimum amount of code possible. (size decreases 20% to 30% than in development mode.)
+- Reference : https://rokking1.blog.me/221348718607
 
 28. Deployment of Servers (Assets + Custom Server)
 
@@ -534,6 +536,7 @@ const express = require("express");
 
 const app = express();
 
+// 3050 is a port number
 app.listen(3050, () => console.log("Listening"));
 ```
 
@@ -542,8 +545,8 @@ app.listen(3050, () => console.log("Listening"));
 - We are going to inside of our server.js file by wiring up webpack to make sure that it works correctly in development.
 - Webpack middleware to help us serve up our application.
 - Middlewares are used to intercept and modify incoming request to our server and they are a part of ExpressJS
-- The middleware works by intercepting incoming request for an application(index HTML file) and respond with the compiled JS application.
-- Easy to say, the middleware is watching for incoming requests, if it sees one, it is going to snatch it and respond with the application assets.
+- The middleware works by intercepting incoming request for an application(index.html file) and respond with the compiled JS application.
+- Easy to say, the middleware is watching for incoming requests, if it sees one, it is going to snatch it and responds with the application assets.
 
 ```js
 // we need all three for the middleware
@@ -560,10 +563,9 @@ app.use(webpackMiddleware(webpack(webpackConfig)));
 
 31. Webpack Middleware in Production
 
-- The idea is we want to build production assets exactly one time and stick them into dist directory. Then anytime that an user comes to the server for index.html file or JS files, we will send them back the resources that are contained inside dist directory. So having nothing to do with webpack whatsoever.
-- webpackMiddleware is only executed in development environment.
-  we can use process.env.NODE_ENV with 'if' statment to make it.
-- But whenever we are deploying to remote servers like AWS or Heroku, the value of NODE_ENV is not necessarily set for us. which means the way we set the variable right above is going to differ based on the deployment target or where an application is being deployed.
+- The idea is we want to build production assets exactly one time and stick them into dist directory. Then anytime that user comes to the server for index.html file or JS files, we will send them back the resources that are contained inside dist directory. So having nothing to do with webpack whatsoever.
+- webpackMiddleware is only executed in development environment. we can use process.env.NODE_ENV with 'if' statment to make it work.
+- But whenever we are deploying to remote servers like AWS or Heroku, the value of NODE_ENV is not necessarily set for us. which means the way we set the variable right below is going to differ based on the deployment target or where an application is being deployed.
 - And we are going to add a little bit of code in else statment to make all of the resources inside of dist directory are freely avaialble to users.
 
 ```js
@@ -583,10 +585,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 ```
 
-- type 'set NODE_ENV=production&& node server.js' in command line to execute the server.
+- type 'set NODE_ENV=production && node server.js' in command line to execute the server.
 - How to acutally add in some logic for handling authentication or working with the database or anything like that?
 
-  - To do that you would additional routes _above_ all existing webpack information or configuration. Espeacially
+  - To do that you would add additional routes _above_ all existing webpack information or configuration. Especially
 
   ```js
   app.get("*", (req, res) => {

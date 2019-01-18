@@ -11,10 +11,7 @@ const componentRoutes = {
   childRoutes: [
     {
       path: "artists/new",
-      // getComponent works as asynchronously
       getComponent(location, cb) {
-        // React-router expects us to call cb which is a function with our module or with our component after we have loaded it up
-        // first argument of cb is an error object. In our case, error is not expected.
         System.import("./components/artists/ArtistCreate").then(module =>
           cb(null, module.default)
         );
