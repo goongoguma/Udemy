@@ -61,8 +61,17 @@
 ## 6. Inline Styling with JSX
 
 - JSX vs HTML
+
   - Adding custom styling to an element uses different syntax.
     - HTML : <div style="background-color:red;"></div>
     - JSX : <div style={{backgroundColor:'red'}}></div>
-  - Adding a class to an element uses different syntax.
-  - JSX can reference JS variables.
+
+## 7. Class vs ClassName
+
+- Adding a class to an element uses different syntax.
+  - HTML : class
+  - JSX : className (to avoid collision of words with class in component)
+
+## 8. Referencing JS Variables in JSX
+
+- JSX can reference JS variables and function call inside of {}.
