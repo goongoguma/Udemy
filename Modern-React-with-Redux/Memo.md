@@ -8,7 +8,7 @@
 - Why didn't we use Redux to make the app?
 
   - React can work by itself
-  - But React can also work with a tremendous variety of other livraries , packages, servers and databases.
+  - But React can also work with a tremendous variety of other libraries , packages, servers and databases.
 
 - What was 'class' thing in React?
 
@@ -23,7 +23,7 @@
 - How did the screen change when a mouse is moved?
 
   - An event handler
-  - Event handlers are used to detext user interaction and respond to it.
+  - Event handlers are used to detect user interaction and respond to it.
 
 - Why did we add two libraries (React and ReactDOM)?
 
@@ -98,14 +98,12 @@
 - When we pass one component to another as child component, It is going to show up inside of the component on the prop's object and specifically on a property of the prop's object called the children property.
 
 ```js
-<ApprovalCard>
-  <CommentDetail
-    author="Sam"
-    timeAgo="Today at 4:00PM"
-    commentText="Thank you!"
-    source={faker.image.avatar()}
-  />
-</ApprovalCard>
+<CommentDetail
+  author="Sam"
+  timeAgo="Today at 4:00PM"
+  commentText="Thank you!"
+  source={faker.image.avatar()}
+/>
 ```
 
 ## 12. Extracting JSX to New Components
@@ -118,22 +116,34 @@
   - Create a new component in the new file, paste the JSX into it
   - Make the new component configurable by using React's 'props' system.
 
-  ## 13. React's Props System
+## 13. React's Props System
 
-  - Props is a system for passing data from a parent component to a child component.
-  - Goal is to customize or configure a child component.
+- Props is a system for passing data from a parent component to a child component.
+- Goal is to customize or configure a child component.
 
-  ## 14. Showing Custom Children
+## 14. Showing Custom Children
 
-  - It is able to pass one component to other component as props.
+- It is able to pass one component to another component as props.
 
-  ```js
-  <ApprovalCard>
-    <CommentDetail
-      author="Sam"
-      timeAgo="Today at 4:00PM"
-      commentText="Thank you!"
-      source={faker.image.avatar()}
-    />
-  </ApprovalCard>
-  ```
+```js
+<ApprovalCard>
+  <CommentDetail
+    author="Sam"
+    timeAgo="Today at 4:00PM"
+    commentText="Thank you!"
+    source={faker.image.avatar()}
+  />
+</ApprovalCard>
+```
+
+## 15. Component Reuse
+
+- Passing children to a component and then showing the children inside of parents component, we can provide as many elements as we wish.
+- One key thing that we have to keep in mind is that whenever we want to use the technique, we always have to make sure that we go into the target component (ApprovalCard component) and make sure that we somewhere reference props.children inside of there.
+
+```js
+<ApprovalCard>
+  <h4>Warning!</h4>
+  <div>You sure you want to do this?</div>
+</ApprovalCard>
+```

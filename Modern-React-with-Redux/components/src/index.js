@@ -8,6 +8,10 @@ const App = () => {
   return (
     <div className="ui container comments">
       <ApprovalCard>
+        <h4>Warning!</h4>
+        <div>You sure you want to do this?</div>
+      </ApprovalCard>
+      <ApprovalCard>
         {/* passing CommentDetail component as props to ApprovalCard component */}
         <CommentDetail
           author="Sam"
