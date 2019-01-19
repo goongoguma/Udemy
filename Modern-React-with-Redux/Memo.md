@@ -211,19 +211,35 @@ window.navigator.geolocation.getCurrentPosition(
   - So to make sure that the parents or react components constructor function gets called, we call super with props.
   - In other words, Super is a reference to the parent's constructor function.
 
-  ## 22. App Lifecycle Walkthrough
+## 22. App Lifecycle Walkthrough
 
-  - Steps from the first load up to showing result on browser.
-    - JS file loaded by browser
-    - Instance of App component is created
-    - App components 'constructor' function gets called
-    - State object is created and assigned to the 'this.state' property
-    - We call geolocation service
-    - React calls the components render method
-    - _App returns JSX, gets rendered to page as HTML_
-    - We get result of geolocation!
-    - We update our state object with a call to 'this.setState'
-    - React sees that we updated the state of a component
-    - React calls our 'render' method a seconde time
-    - _Render method returns some (updated) JSX_
-    - React takes that JSX and updates content on the screen
+- Steps from the first load up to showing result on browser.
+  - JS file loaded by browser
+  - Instance of App component is created
+  - App components 'constructor' function gets called
+  - State object is created and assigned to the 'this.state' property
+  - We call geolocation service
+  - React calls the components render method
+  - _App returns JSX, gets rendered to page as HTML_
+  - We get result of geolocation!
+  - We update our state object with a call to 'this.setState'
+  - React sees that we updated the state of a component
+  - React calls our 'render' method a seconde time
+  - _Render method returns some (updated) JSX_
+  - React takes that JSX and updates content on the screen
+
+## 23. Introducing Lifecycle Method
+
+- Component Lifecycle flow
+  - constructor
+  - render
+  - (content visible on screen)
+  - componentDidMount
+    - If we define a function inside of a class(out of the render method), and define specifically 'componenDidMount()'. It is automatically called only one time when the component first gets rendered on a screen.
+  - (Sit and wait for updates in setState...)
+  - componentDidUpdate
+    - If we define a function inside of a class(out of the render method), and define specifically 'componenDidUpdate()'. It is automatically called anytime when the component gets updated itself.
+      (Anytime the component updates, the render method would be called, it will return JSX, it would be shown on the screen, and right after that componentWillUpdate would be called.)
+  - (Sit and wait until this component is no longer shown)
+  - componentWillUnmount
+    - It is usually used if we do want some clean-up after the component.
