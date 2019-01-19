@@ -259,3 +259,7 @@ window.navigator.geolocation.getCurrentPosition(
   - It is used when we remove component from the screen and we need to do some clean-up after it.
   - It would be using frequently when we work with non react libraries such as using Google maps inside of a react application.
 - There are other three lifecycles. shouldComponentUpdate, getDerivedStateFromProps, getSnapshotBeforeUpdate. However, these methods are rarely used.
+
+## 25. Adding Some Styling
+
+- When a css file is imported to js file, webpack is going to see that we are importing a css file. It is going to take the contents out of there and then stick it into the index.html file.
