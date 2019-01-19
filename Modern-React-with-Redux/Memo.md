@@ -243,3 +243,19 @@ window.navigator.geolocation.getCurrentPosition(
   - (Sit and wait until this component is no longer shown)
   - componentWillUnmount
     - It is usually used if we do want some clean-up after the component.
+
+## 24. Why Lifecycle Methods?
+
+- componentDidMount
+  - The method is a perfect location to do some initial data loading for the component.
+  - Or kick off some outside process like getting the users current position if you only have to do this one time.
+  - According to react-document, do not data loading inside of constructor function even if you can do it. Instead use componentDidMount.
+  - Reason is that if you always centralize all of your data loading stuff inside of componentDidMount method, it is going to lead to more clear code.
+- componentDidUpdate
+  - It gets called everytime that a component is updated in case the state changes or the component gets a new set of props from its parent etc.
+  - This would be a good location to do some data loading that needs to be done every single time that a component is updated.
+  - A good example is that if we wanted to make some type of network request every single time that user clicks on a button or every single time that they enter some text into an input or every single time that we get some new props from a parent component.
+- componentWillUnmount
+  - It is used when we remove component from the screen and we need to do some clean-up after it.
+  - It would be using frequently when we work with non react libraries such as using Google maps inside of a react application.
+- There are other three lifecycles. shouldComponentUpdate, getDerivedStateFromProps, getSnapshotBeforeUpdate. However, these methods are rarely used.
