@@ -203,9 +203,27 @@ window.navigator.geolocation.getCurrentPosition(
 - Constructor
   - constructor function is going to be called any time an instance of the class is created. In other words any time that we create a new instance of the app component and show it on the screen. It is going to be automatically and instantly called before anything else.
 - Super
+
   - The app component is extending or borrowing functionality from the react component base class (React.Component).
     It has a constructor function of its own that goes through some amount of setup our real component for us.
   - When we define a constructor function inside of our App class, we are essentially overriding or replacing the consturctor function that is inside of the reactor component class.
   - But we still want to make sure that all the set up code inside of the React.Component constructor function still gets called.
   - So to make sure that the parents or react components constructor function gets called, we call super with props.
   - In other words, Super is a reference to the parent's constructor function.
+
+  ## 22. App Lifecycle Walkthrough
+
+  - Steps from the first load up to showing result on browser.
+    - JS file loaded by browser
+    - Instance of App component is created
+    - App components 'constructor' function gets called
+    - State object is created and assigned to the 'this.state' property
+    - We call geolocation service
+    - React calls the components render method
+    - _App returns JSX, gets rendered to page as HTML_
+    - We get result of geolocation!
+    - We update our state object with a call to 'this.setState'
+    - React sees that we updated the state of a component
+    - React calls our 'render' method a seconde time
+    - _Render method returns some (updated) JSX_
+    - React takes that JSX and updates content on the screen
