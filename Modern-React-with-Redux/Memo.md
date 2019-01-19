@@ -263,3 +263,25 @@ window.navigator.geolocation.getCurrentPosition(
 ## 25. Adding Some Styling
 
 - When a css file is imported to js file, webpack is going to see that we are importing a css file. It is going to take the contents out of there and then stick it into the index.html file.
+
+## 26. Avoiding Conditionals in render()
+
+- In general, anytime we make a component we always try as much as possible to do not have multiple 'return' statement in render method.
+- If we ever have to have conditional logic, we are always going to instead put it into a helper method.
+
+```js
+renderContent() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage}</div>;
+    } else if (!this.state.errorMessage && this.state.lat) {
+      return (
+        <SeasonDisplay
+          lat={this.state.lat}
+          errorMessage={this.state.errorMessage}
+        />
+      );
+    } else {
+      return <Spinner />;
+    }
+  }
+```

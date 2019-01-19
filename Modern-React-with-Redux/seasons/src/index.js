@@ -24,8 +24,7 @@ class App extends React.Component {
     );
   }
 
-  // React syas we have to define render!!
-  render() {
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>;
     } else if (!this.state.errorMessage && this.state.lat) {
@@ -38,6 +37,10 @@ class App extends React.Component {
     } else {
       return <Spinner />;
     }
+  }
+
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
