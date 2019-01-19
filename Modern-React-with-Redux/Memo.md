@@ -195,5 +195,17 @@ window.navigator.geolocation.getCurrentPosition(
   - You will confuse props with state.
   - 'State' is a JS object that contains data relevant to a singular component.
   - Updating 'state' on a component causes the component to instantly rerender.
-  - State must be initialized when a component is created.
+  - _State must be initialized when a component is created._
   - _State can only be updated using the function'setState'_.
+
+## 21. Initializing State Through Constructors
+
+- Constructor
+  - constructor function is going to be called any time an instance of the class is created. In other words any time that we create a new instance of the app component and show it on the screen. It is going to be automatically and instantly called before anything else.
+- Super
+  - The app component is extending or borrowing functionality from the react component base class (React.Component).
+    It has a constructor function of its own that goes through some amount of setup our real component for us.
+  - When we define a constructor function inside of our App class, we are essentially overriding or replacing the consturctor function that is inside of the reactor component class.
+  - But we still want to make sure that all the set up code inside of the React.Component constructor function still gets called.
+  - So to make sure that the parents or react components constructor function gets called, we call super with props.
+  - In other words, Super is a reference to the parent's constructor function.
