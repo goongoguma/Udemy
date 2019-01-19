@@ -147,3 +147,14 @@
   <div>You sure you want to do this?</div>
 </ApprovalCard>
 ```
+
+## 16. Class-Based Components
+
+- Functional Components
+  - Good for simple content
+- Class Components
+  - Good for just about everything else
+- Benefits of Class Components
+  - Easier code organiztion
+  - Can use 'state' -> Easier to handle user input
+  - Understands lifecycle events -> Easier to do things when the app first starts
