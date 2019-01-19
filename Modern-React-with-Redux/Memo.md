@@ -158,3 +158,42 @@
   - Easier code organiztion
   - Can use 'state' -> Easier to handle user input
   - Understands lifecycle events -> Easier to do things when the app first starts
+
+## 17. Getting a USERS Physical Location
+
+- You can find it in MDN.
+- type 'window.navigator.geolocation.getCurrentPosition();' inside of App component.
+
+```js
+window.navigator.geolocation.getCurrentPosition(
+  position => console.log(position), // you can check your current position here
+  err => console.log(err) // in case the user does not allow to share their location
+);
+```
+
+## 18. Handling Async Operations with Functional Components
+
+- Steps of what happens inside of user's browser
+  - JS file loaded by browser
+  - App component gets created
+  - We call geolocation service (it will take sometime to get the result back from a server)
+  - App returns JSX, gets rendered to page as HTML
+  - We get result of geolocation
+  - Tell the component to rerender itself with this new information
+
+## 19. Refactoring from Frunctional to Class Components
+
+- Rules of Class Components
+  - Must be a JavaScript Class
+  - Must extend (subclass) React.Component
+  - Must define a 'render' method that returns some amount of JSX
+
+## 20. The Rules of State
+
+- Rule of State
+  - Only usable with class components.
+  - You will confuse props with state.
+  - 'State' is a JS object that contains data relevant to a singular component.
+  - Updating 'state' on a component causes the component to instantly rerender.
+  - State must be initialized when a component is created.
+  - _State can only be updated using the function'setState'_.
