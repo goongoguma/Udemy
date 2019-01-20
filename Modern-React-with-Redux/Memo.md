@@ -304,4 +304,8 @@ renderContent() {
 - The key idea is that we are storing information inside of react components on state property not inside the DOM. (input value indicates 'go look at state to get current value')
 - In order words, user types the input, the input know what the text is. And then we call onChange and inform the component about the new input. And then we re-render the component, we set the value of the input with essentially the value that is already in there.
 - React application driving and storing all the data not HTML side.
--
+
+## 31. Understanding 'this' in JavaScript
+
+- What is 'this' used for in a class?
+- How is the value of 'this' determined in a function?
