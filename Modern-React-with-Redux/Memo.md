@@ -316,4 +316,14 @@ renderContent() {
   - Third party package
 - Fetch
   - Function built into modern browsers
-  - But fetch is more basic and lower level function to use to fetch data. 
+  - But fetch is more basic and lower level function to use to fetch data.
+
+## 33. Handling Requests with Async/Await
+
+- Component renders itself one time with no list of images
+- onSearchSubmit method called
+- Request made to unsplash
+- ...wait...
+- Request complete
+- Set image data on state of App component
+- App component re-renders and shows images
