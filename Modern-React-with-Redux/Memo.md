@@ -285,3 +285,23 @@ renderContent() {
     }
   }
 ```
+
+## 27. App Overview
+
+- Stuff to still figure out
+  - How do we get feedback from the user? (user-interaction, event)
+  - How do we fetch data from some outside API or server?
+  - How do we show lists of records?
+
+## 30. More on Controlled Element
+
+- Input working flow
+  - User types in input
+  - Callback gets invoked
+  - We call setState with the new value
+  - Component rerenders
+  - Input is told what its value is (coming from state) (whatever we assign to the value prop is what the input is going to show)
+- The key idea is that we are storing information inside of react components on state property not inside the DOM. (input value indicates 'go look at state to get current value')
+- In order words, user types the input, the input know what the text is. And then we call onChange and inform the component about the new input. And then we re-render the component, we set the value of the input with essentially the value that is already in there.
+- React application driving and storing all the data not HTML side.
+-
