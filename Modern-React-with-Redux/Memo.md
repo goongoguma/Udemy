@@ -327,3 +327,9 @@ renderContent() {
 - Request complete
 - Set image data on state of App component
 - App component re-renders and shows images
+
+## 34. Creating Custom Clients
+
+- Nice thing about axios is that you can kind of set up a pre-configured instance of the axios client that has default properties set for where it is going to make a request to, headers and even params.
+- Create a file only for using axios.
+- create method is going to create an instance of the axios client with a couple of defaulted properties. In order wors it allows us to create a customized little copy of that is customized just towards making requests to some specific url with headers.
