@@ -309,3 +309,11 @@ renderContent() {
 
 - What is 'this' used for in a class?
 - How is the value of 'this' determined in a function?
+
+## 32. Axios vs Fetch
+
+- Axios
+  - Third party package
+- Fetch
+  - Function built into modern browsers
+  - But fetch is more basic and lower level function to use to fetch data. 
