@@ -376,3 +376,7 @@ componentDidMount() {
     this.setState({ spans: spans });
   };
 ```
+
+## 37. Reminder on Event Handlers
+
+- Do not assign the value property to input tag without onChange property.
