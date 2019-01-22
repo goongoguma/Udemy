@@ -360,3 +360,17 @@ renderContent() {
 - However, 0 will be printed out in console.
 - Reason is the instant after we have rendered the image in componentDidMount method, the image itself has not actually loaded. Because a DOM element is going to attempt to make a request to some outside service to actually load up the raw image file. (Reaching out to the url that we are referencing and downloading the image.)
 - In order words, the reason of we see 0 for every one of these results is because we are a console.log in these values out before we have even had a chance to load the image up.
+
+## 36. Callbacks on Image Load
+
+- In order to fix this, we are going to reference the 'this.imageRef.current' and add event-listener to it.
+
+```js
+componentDidMount() {
+    this.imageRef.current.addEventListener("load", this.setSpans);
+  }
+
+  setSpans = () => {
+    console.log(this.imageRef.current.clientHeight);
+  };
+```
