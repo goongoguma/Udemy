@@ -333,3 +333,30 @@ renderContent() {
 - Nice thing about axios is that you can kind of set up a pre-configured instance of the axios client that has default properties set for where it is going to make a request to, headers and even params.
 - Create a file only for using axios.
 - create method is going to create an instance of the axios client with a couple of defaulted properties. In order wors it allows us to create a customized little copy of that is customized just towards making requests to some specific url with headers.
+
+## 35. Accessing the DOM with Refs
+
+- What we are going to do?
+  - Let the ImageCard render itself and its image
+  - Reach into the DOM and figure out the height of the image
+  - Set the image height on state to get the component to rerender
+- When re-rendering, assign a 'grid-row-end' to make sure the image takes up the appropriate space When we want to access DOM elements directly using react, we make use of 'ref' system.
+- React Refs
+  - It gives access to a single DOM element.
+  - We create refs in the constructor, assign them to instance variables, then pass to a particular JSX element as props.
+
+```js
+ constructor(props) {
+    super(props);
+    this.imageRef = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log(this.imageRef.current.clientHeight);
+  }
+
+```
+
+- However, 0 will be printed out in console.
+- Reason is the instant after we have rendered the image in componentDidMount method, the image itself has not actually loaded. Because a DOM element is going to attempt to make a request to some outside service to actually load up the raw image file. (Reaching out to the url that we are referencing and downloading the image.)
+- In order words, the reason of we see 0 for every one of these results is because we are a console.log in these values out before we have even had a chance to load the image up.
