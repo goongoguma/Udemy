@@ -380,3 +380,11 @@ componentDidMount() {
 ## 37. Reminder on Event Handlers
 
 - Do not assign the value property to input tag without onChange property.
+
+## 38. Accessing the Youtube API
+
+- React app is goint to make use of axios library.
+- It is going to make a network request over to the YouTube API.
+- YouTube API is then going to respond to us with a list of videos to show on the screen.
+- The list of videos is going to be an array of objects where every object represents a different videos.
+- But first, get the API key at console.developers.google.com
