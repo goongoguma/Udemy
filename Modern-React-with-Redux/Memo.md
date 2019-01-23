@@ -440,3 +440,10 @@ componentDidMount() {
   </div>
 </div>
 ```
+
+## 37. Displaying a Video Player
+
+- iframe is like any other HTML tag such as div or a span
+- But iframe is going to attempt to make a request to some outside website that the user is currently visiting on the screen.
+- Therefore, we are going to create iframe element and tell it to make a request on its own without any Ajax stuff over to some very specific YouTube address.
+-
