@@ -533,7 +533,7 @@ const deletePolicy = name => {
 };
 ```
 
-- How to create reducers
+- How to create reducers and dispatch data, get data
 
 ```js
 // Reducers (Departments)
@@ -605,3 +605,8 @@ store.getStaste();
 - Then we wait until we need to somehow updates our state again at some point in the future.
 - Each object that store calls such as store.dispatch(), store.getState() is separate execution of entire redux cycle. So at any point in time along the application, we can take this store obejct and pull our state out of it and read the current state where the current data for the application.
 - We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state in there manually.
+
+## 42. React-Redux
+
+- React-Redux is thrid library that we are going to use to make sure that react in redux can talk to each other. 
+- It has a bunch of helper functions inside of it to get redux to work nicely with react.
