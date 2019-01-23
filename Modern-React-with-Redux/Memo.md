@@ -610,3 +610,11 @@ store.getStaste();
 
 - React-Redux is thrid library that we are going to use to make sure that react in redux can talk to each other. 
 - It has a bunch of helper functions inside of it to get redux to work nicely with react.
+
+## 43. Song app Overview
+
+- This time we are going to use react with redux to build the app
+- We are going to create two reducers(Song list reducer, Selected song reducer) and one action creators(select song) into redux side application.
+- Using action creatore, we are going to change the state. 
+- If you want to change what the currently selected song is we are gong to call the action creator(select song). That will dispatch an action and tell selected song reducer to update its data and reflect the new current present picked song.
+
