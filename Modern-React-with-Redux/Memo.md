@@ -35,6 +35,7 @@
 33. 콜백과 이미지 로딩
 34. 이벤트 핸들러 작성할때의 주의점
 35. Youtube API 사용해보기
+36. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기
 
 ## 1. Critical Question related to React
 
@@ -413,6 +414,7 @@ componentDidMount() {
 
 - When we want to communicate from a child's component back up to some parent component, we usually make use of a callback.
 - Beware of a syntax just function call or arrow function in onClick method.
+- reference : https://www.udemy.com/react-redux/learn/v4/t/lecture/12531374?start=0
 
 ```js
 // this
