@@ -36,6 +36,8 @@
 34. 이벤트 핸들러 작성할때의 주의점
 35. Youtube API 사용해보기
 36. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기
+37. 비디오앱 완성
+38. 리덕스에 대해서
 
 ## 1. Critical Question related to React
 
@@ -452,3 +454,39 @@ componentDidMount() {
   <iframe src={`https://www.youtube.com/emb{video.id.videoId}`} />
 </div>
 ```
+
+## 38. What is Redux?
+
+- State management library
+- Makes creating complex application easier
+- Not required to create a React app
+- Not explicitly designed to work with React
+
+## 39. Redux by Analogy
+
+- How we are going to study redux?
+  - Story(analogy) to help you understand Redux
+  - Write some code in Codepen with Redux only
+  - Work on a React App
+  - Understand how to integrate React with Redux
+- Redux Cycle (Insurance Company metaphor)
+  - Action Creator (Person dropping off the form)
+    - It is a function that is going to create or return a plain JS object
+  - Action (the form)
+    - JS object that created by the creator
+    - It's purpose is to describe some change that we want to make to the data inside of our application
+    - It has type property and payload property
+      - type property
+        - type property on in action describes some change that we want to make inside of our data
+      - payload property
+        - It describes some contexts around the change that we want to make
+  - Dispatch (form receiver)
+    - It is going to take in action and make copies of that object and then pass it off to a bunch of different places inside of an application
+  - Reducers (Departments)
+    - What dispatch does leads us to reducer. 
+    - It is a function for taking in an action and some existing amount of data.
+    - It is going to process that action and then make some change to the data and then return it so that it can then be centralized in some other location.
+  - State (Compiled department data)
+    - In redux, state property is a central repository of all information that has been created by our reducers. 
+    - All the information gets consolidated inside the state object so that are react application can very easily reach in to our redux application and get access to all of the data of the application.
+    - In that way our react app does not have to go around to each separate reducer.
