@@ -37,7 +37,10 @@
 35. Youtube API 사용해보기
 36. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기
 37. 비디오앱 완성
-38. 리덕스에 대해서
+38. 리덕스에 대해서1
+39. 리덕스에 대해서2
+40. 리덕스 써보기
+41. 리덕스 키노트
 
 ## 1. Critical Question related to React
 
@@ -490,6 +493,8 @@ componentDidMount() {
     - In redux, state property is a central repository of all information that has been created by our reducers.
     - All the information gets consolidated inside the state object so that the react application can very easily reach in to our redux application and get access to all of the data of the application.
     - In that way our react app does not have to go around to each separate reducer.
+  - Store
+    - It is the assembly of a collection of different reducers and action creators
 
 ## 40. Modeling with Redux
 
@@ -559,5 +564,44 @@ const accounting = (bagOfMoney = 100, action) => {
   }
   return bagOfMoney;
 };
+
+const { createStore, combineReducers } = Redux;
+
+const ourDepartments = combineReducers({
+  // Each of these variables are the names of our different reducers
+  accounting: accounting,
+  claimHistory: claimHistory,
+  policies: policies
+});
+
+// store object represents entire redux application
+// It contains references to all of our different reducers and to all of our state produced by those reducers
+const store = createStore(ourDepartments);
+
+// we want to pass the dispatch function an action when we sent it in action
+store.dispatch(createPolicy("Alex", 20));
+store.dispatch(createPolicy("Jim", 30));
+store.dispatch(createPolicy("Max", 40)); // total 190
+
+store.dispatch(createPolicy("Max", 120)); // total 70 left
+store.dispatch(createPolicy("Max", 50)); // total 20 left
+
+store.dispatch(deletePolicy("Bob"));
+
+// It is a function that is going to essentially get our entire assembled repository of data
+store.getStaste();
 ```
+
 - The goal of reducer is to take some existing data, some action and then modify and return that existing data based upon the contents of an action.
+
+## 41. Important Redux Notes
+
+- Action Creator -> Action -> dispatch -> Reducers -> State -> Wait until we need to update state again
+- Anytime we want to change the state or the data of an application, we are going to call an action creator.
+- Calling an action creator is going to produce an action object. It describes exactly how we want to change data inside of application that action object gets fed to dispatch function.
+- This is going to make copies action obeject and feed those copies to each of different reducers.
+- Reducers run and they are going to process those actions modify their data and then eventually return some new data.
+- The data gets returned gets form into some new state object. 
+- Then we wait until we need to somehow updates our state again at some point in the future.
+- Each object that store calls such as store.dispatch(), store.getState() is separate execution of entire redux cycle. So at any point in time along the application, we can take this store obejct and pull our state out of it and read the current state where the current data for the application.
+- We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state in there manually.
