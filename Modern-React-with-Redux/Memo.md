@@ -483,10 +483,81 @@ componentDidMount() {
   - Dispatch (form receiver)
     - It is going to take in action and make copies of that object and then pass it off to a bunch of different places inside of an application
   - Reducers (Departments)
-    - What dispatch does leads us to reducer. 
+    - What dispatch does leads us to reducer.
     - It is a function for taking in an action and some existing amount of data.
     - It is going to process that action and then make some change to the data and then return it so that it can then be centralized in some other location.
   - State (Compiled department data)
-    - In redux, state property is a central repository of all information that has been created by our reducers. 
-    - All the information gets consolidated inside the state object so that are react application can very easily reach in to our redux application and get access to all of the data of the application.
+    - In redux, state property is a central repository of all information that has been created by our reducers.
+    - All the information gets consolidated inside the state object so that the react application can very easily reach in to our redux application and get access to all of the data of the application.
     - In that way our react app does not have to go around to each separate reducer.
+
+## 40. Modeling with Redux
+
+- How to create action creator and action
+
+```js
+// People dropping off a form (action creator)
+const createPolicy = (name, amount) => {
+  return {
+    // action
+    type: "CREATE_POLICY",
+    payload: {
+      name,
+      amount
+    }
+  };
+};
+
+const createClaim = (name, amountOfMoneyToCollect) => {
+  return {
+    type: "CREATE_CLAIM",
+    payload: {
+      name,
+      amountOfMoneyToCollect
+    }
+  };
+};
+
+const deletePolicy = name => {
+  return {
+    type: "DELETE_POLICY",
+    payload: {
+      name
+    }
+  };
+};
+```
+
+- How to create reducers
+
+```js
+// Reducers (Departments)
+const claimHistory = (oldListOfClaims = [], action) => {
+  if (action.type === "CREATE_CLAIM") {
+    // we care about this action (Form)
+    return [...oldListOfClaims, action.payload];
+  }
+  // we don't care the action (form!)
+  return oldListOfClaims;
+};
+
+const policies = (listOfPolicies = [], action) => {
+  if (action.type === "CREATE_POLICY") {
+    return [...listOfPolicies, action.payload.name];
+  } else if (action.type === "DELETE_POLICY") {
+    return listOfPolicies.filter(name => name !== action.payload.name);
+  }
+
+  return listOfPolicies;
+};
+
+const accounting = (bagOfMoney = 100, action) => {
+  if (action.type === "CREATE_CLAIM") {
+    return bagOfMoney - action.payload.amountOfMoneyToCollect;
+  } else if (action.type === "CREATE_POLICY") {
+    return bagOfMoney + action.payload.amountOfMoneyToCollect;
+  }
+  return bagOfMoney;
+};
+```
+- The goal of reducer is to take some existing data, some action and then modify and return that existing data based upon the contents of an action.
