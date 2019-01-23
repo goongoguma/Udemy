@@ -41,6 +41,9 @@
 39. 리덕스에 대해서2
 40. 리덕스 써보기
 41. 리덕스 키노트
+42. React-Redux 라이브러리
+43. React와 Redux를 이용해 앱 만들기
+44. 앱 Overview
 
 ## 1. Critical Question related to React
 
@@ -601,20 +604,35 @@ store.getStaste();
 - Calling an action creator is going to produce an action object. It describes exactly how we want to change data inside of application that action object gets fed to dispatch function.
 - This is going to make copies action obeject and feed those copies to each of different reducers.
 - Reducers run and they are going to process those actions modify their data and then eventually return some new data.
-- The data gets returned gets form into some new state object. 
+- The data gets returned gets form into some new state object.
 - Then we wait until we need to somehow updates our state again at some point in the future.
 - Each object that store calls such as store.dispatch(), store.getState() is separate execution of entire redux cycle. So at any point in time along the application, we can take this store obejct and pull our state out of it and read the current state where the current data for the application.
 - We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state in there manually.
 
 ## 42. React-Redux
 
-- React-Redux is thrid library that we are going to use to make sure that react in redux can talk to each other. 
+- React-Redux is thrid library that we are going to use to make sure that react in redux can talk to each other.
 - It has a bunch of helper functions inside of it to get redux to work nicely with react.
 
 ## 43. Song app Overview
 
 - This time we are going to use react with redux to build the app
 - We are going to create two reducers(Song list reducer, Selected song reducer) and one action creators(select song) into redux side application.
-- Using action creatore, we are going to change the state. 
+- Using action creator, we are going to change the state.
 - If you want to change what the currently selected song is we are gong to call the action creator(select song). That will dispatch an action and tell selected song reducer to update its data and reflect the new current present picked song.
 
+## 44. How React-Redux Works?
+
+- We are going to create two new components (Provider, Connect) using react-redux.
+- create Store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the app inside of Provider component).
+- Then Provider component is going to have eternal reference to the Store. (Provider is literally providing information to all of the different components inside of the application.)
+- After that we are going to find every component inside of the application that needs to somehow access the data that is stored inside of the Store (SongList component).
+- Therfore we are going to create Connect component right above(in the hierarchy) the SongList component. So SongList component is going to be wrapped with Connect component.
+- Connect component is very special. Because it communicates with the Provider component not through props but a completely different system called context system.
+- (context system allows any parent component to communicate directly with any child component even if there are other components in between them.)
+- So at some point, when we put the Connect component in there, we are going to configure the Connect component and tell it when it gets rendered on the screen(when it renders the SongList as a child), it needs to reach back up Provider component and tell it that needs to get the list of songs that are contained within the Store.
+- Connect component in turn, take the list of songs and pass it as a prop down into our SongList component.
+- We call action creator, we take the action that gets returned and we send it into the store.dispatch function.
+- _Entire flow is essentially we are going to create the Provider component and pass it as a reference to redux store then anytime we have a component that needs to interact with the redux store(SongList component in this case), it is going to be wrapped up with Connect component._
+- _Then configure the Connect component by telling it what different pieces of states we want out of our store and what different action creators we want to have wired up as well_
+- _After that Connect component is going to makes sure that all the data(both the state and the action creators) shows up inside of our component as props._
