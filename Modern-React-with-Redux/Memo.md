@@ -716,3 +716,16 @@ export default connect(
 
 - Connect function is going to take selectSong action creator and pass it into the component as a prop.
 - When selectSong is called, it is going to automatically take the action that gets returned and send it it to redux's dispatch function.
+- _Importantly, you must dispatch an action to update the store. You cannot directly modify props by doing this.props.something = 'some new value". What Stephen is saying in this lecture is that when we update our Redux store thru a dispatched action, mapStateToProps will automatically rerun and return to us this new state object._
+
+## 50. Redux is Not Magic
+
+- Redux does not automatically detect action creators being called.
+- Redux does not automatically detect a function returning an object that is an action.
+- selectSong is not a normal JS function. It is an action. However, redux does not recognize selectSong as what it is automatically.
+- If we want to make sure that an action eventually makes its way over to reducers, we have to take the action that gets returned and we have to pass it into the dispatch function.
+- If we just use function call with arguments none of these function calls are going to update the store.
+- Function call returns the actions but never got sent into redux.
+- When we pass action creators into the connect function, it does a special operation on the functions inside of the object.
+- connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, the *connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us.*
+- So anytime we want to call an action creator from a component, we are always going to pass it into connect function.
