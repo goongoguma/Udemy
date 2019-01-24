@@ -31,7 +31,7 @@
 29. Axios vs Fetch
 30. Async/Await 사용해보기
 31. Axios 초기설정하기
-32. ref를 사용법
+32. ref 사용법
 33. 콜백과 이미지 로딩
 34. 이벤트 핸들러 작성할때의 주의점
 35. Youtube API 사용해보기
@@ -477,13 +477,13 @@ componentDidMount() {
   - Understand how to integrate React with Redux
 - Redux Cycle (Insurance Company metaphor)
   - Action Creator (Person dropping off the form)
-    - It is a function that is going to create or return a plain JS object
+    - It is a function that is going to create or return a plain JS object(action)
   - Action (the form)
     - JS object that created by the creator
     - It's purpose is to describe some change that we want to make to the data inside of our application
     - It has type property and payload property
       - type property
-        - type property on in action describes some change that we want to make inside of our data
+        - type property in action describes some change that we want to make inside of our data
       - payload property
         - It describes some contexts around the change that we want to make
   - Dispatch (form receiver)
@@ -491,7 +491,7 @@ componentDidMount() {
   - Reducers (Departments)
     - What dispatch does leads us to reducer.
     - It is a function for taking in an action and some existing amount of data.
-    - It is going to process that action and then make some change to the data and then return it so that it can then be centralized in some other location.
+    - It is going to process that action and then make some change to the data and then return it so that it can then be centralized in some other location(state).
   - State (Compiled department data)
     - In redux, state property is a central repository of all information that has been created by our reducers.
     - All the information gets consolidated inside the state object so that the react application can very easily reach in to our redux application and get access to all of the data of the application.
@@ -553,7 +553,7 @@ const policies = (listOfPolicies = [], action) => {
   if (action.type === "CREATE_POLICY") {
     return [...listOfPolicies, action.payload.name];
   } else if (action.type === "DELETE_POLICY") {
-    return listOfPolicies.filter(name => name !== action.payload.name);
+    return listOfPolicies.filter(policy => policy !== action.payload.name);
   }
 
   return listOfPolicies;
@@ -572,9 +572,9 @@ const { createStore, combineReducers } = Redux;
 
 const ourDepartments = combineReducers({
   // Each of these variables are the names of our different reducers
-  accounting: accounting,
-  claimHistory: claimHistory,
-  policies: policies
+  accounting,
+  claimHistory,
+  policies
 });
 
 // store object represents entire redux application
@@ -602,12 +602,12 @@ store.getStaste();
 - Action Creator -> Action -> dispatch -> Reducers -> State -> Wait until we need to update state again
 - Anytime we want to change the state or the data of an application, we are going to call an action creator.
 - Calling an action creator is going to produce an action object. It describes exactly how we want to change data inside of application that action object gets fed to dispatch function.
-- This is going to make copies action obeject and feed those copies to each of different reducers.
+- This is going to make copies action object and feed those copies to each of different reducers.
 - Reducers run and they are going to process those actions modify their data and then eventually return some new data.
 - The data gets returned gets form into some new state object.
 - Then we wait until we need to somehow updates our state again at some point in the future.
 - Each object that store calls such as store.dispatch(), store.getState() is separate execution of entire redux cycle. So at any point in time along the application, we can take this store obejct and pull our state out of it and read the current state where the current data for the application.
-- We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state in there manually.
+- We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state.
 
 ## 42. React-Redux
 
@@ -624,9 +624,9 @@ store.getStaste();
 ## 44. How React-Redux Works?
 
 - We are going to create two new components (Provider, Connect) using react-redux.
-- create Store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the app inside of Provider component).
+- create Store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the App inside of Provider component).
 - Then Provider component is going to have eternal reference to the Store. (Provider is literally providing information to all of the different components inside of the application.)
-- After that we are going to find every component inside of the application that needs to somehow access the data that is stored inside of the Store (SongList component).
+- After that we are going to find every component inside of the application that needs to somehow access the data that is stored inside of the Store (like SongList component).
 - Therfore we are going to create Connect component right above(in the hierarchy) the SongList component. So SongList component is going to be wrapped with Connect component.
 - Connect component is very special. Because it communicates with the Provider component not through props but a completely different system called context system.
 - (context system allows any parent component to communicate directly with any child component even if there are other components in between them.)
@@ -636,3 +636,65 @@ store.getStaste();
 - _Entire flow is essentially we are going to create the Provider component and pass it as a reference to redux store then anytime we have a component that needs to interact with the redux store(SongList component in this case), it is going to be wrapped up with Connect component._
 - _Then configure the Connect component by telling it what different pieces of states we want out of our store and what different action creators we want to have wired up as well_
 - _After that Connect component is going to makes sure that all the data(both the state and the action creators) shows up inside of our component as props._
+
+## 45. Wiring Up the Provider
+
+- When we make use of the react-redux library, we don't usually mess around with the store directly.
+- Instead we pass it off to the provider and it is essentially takes care of everything from there.
+
+```js
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);
+```
+
+## 46. The Connect Function
+
+- We are able to connect to Provider component using Connect function
+
+```js
+class SongList extends React.Component {
+  render() {
+    return <div>SongList</div>;
+  }
+}
+
+// connect function is called twice. (function inside of another function)
+export default connect()(SongList);
+```
+
+## 47. Configuring Connect with MapStateToProps
+
+- We are going to specifically tell the connecting that we want to get a list of songs out of the redux store from the Provider.
+- So anytime that our list of songs and inside of our store changes, Provider is going to automatically notify the Connect component.
+- Then it is going to pass our list of songs down to our SongList component.
+- After defining mapStateToProps function and then going to take it and pass it as the first argument to the Connect function.
+- state argument in mapStateToProps is essentially going to be our entire list of songs from the song list reducer.
+- We can figure Connect component by passing it a function.
+- The object returned from mapStateToProps function is going to show up as props inside of the component
+
+```js
+class SongList extends React.Component {
+  render() {
+    // this.props === {songs: state.songs}
+    return <div>SongList</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return { songs: state.songs };
+};
+
+export default connect(mapStateToProps)(SongList);
+```
+
+- 정리하자면...
+1.  reducer 폴더안에서 index.js를 생성. index.js는 안에 있는 reducer 함수들을 combinReducers라는 객체로 묶어 export한다.
+2.  메인 index.js 파일은 redux의 Provider, createStore 그리고 reducer 폴더에서 export한 index.js를 reducers라는 이름으로 import한다.
+3.  App 컴포넌트가 SongList 컴포넌트를 반환하고 있으므로 App 컴포넌트를 Provider 컴포넌트로 감싸고 props 형식으로 createStore(reducers)를 store라는 이름으로 내려준다.
+4.  Provider와 연결하기 위해 SongList 컴포넌트에 connect()()를 만들어준 뒤 두번째 인수에 SongList 컴포넌트를 입력
+5.  mapStateToProps 함수를 만들어 state를 인수로 받았는데 이 state는 reducer에 담긴 모든 정보를 포함하고 있다. state에서 원하는 정보를 return한 뒤 connect의 첫번째 인수로 mapStateToProps를 넣는다. 참고로 반환된 값(객체)는 내려받은 값이기 때문에 props와 같다고 할 수 있다. 
+
