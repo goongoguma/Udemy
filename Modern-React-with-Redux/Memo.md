@@ -748,3 +748,15 @@ export default connect(
   - Middleware applies to the library 'redux'
   - Redux-Thunk is a middleware that is going to help us make network requests from the redux side of app.
 
+## 54. How to Fetch Data in a Redux App
+
+- General Data Loading with Redux
+  - Component gets rendered onto the screen
+  - Component's 'componentDidMount' lifecycle method gets called
+  - We call action creator from 'componentDidMount'
+  - Action creator runs code to make an API request
+  - API responds with data
+  - Action creator returns an 'action' with the fetched data on the 'payload' property
+  - Some reducer sees the action, returns the data off the 'payload'
+  - Because we generated some new state obejct, redux/react-redux cause our React app to be rendered
+
