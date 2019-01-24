@@ -27,6 +27,7 @@ class SongList extends React.Component {
 }
 
 const mapStateToProps = state => {
+  // state argument shows updated state from reducers
   console.log(state);
   return { songs: state.songs };
 };

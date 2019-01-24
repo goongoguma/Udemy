@@ -729,3 +729,7 @@ export default connect(
 - When we pass action creators into the connect function, it does a special operation on the functions inside of the object.
 - connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, the *connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us.*
 - So anytime we want to call an action creator from a component, we are always going to pass it into connect function.
+
+## 51. Functional Components with Connect
+
+- SongDetail component has no functionality tied to it such as event handler that causes a change to a redux state. So we do not need to wire up any action creators to our songDetail component. 
