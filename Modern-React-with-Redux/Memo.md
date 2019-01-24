@@ -691,10 +691,28 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(SongList);
 ```
 
-- 정리하자면...
+## 48. 정리하자면...
+
 1.  reducer 폴더안에서 index.js를 생성. index.js는 안에 있는 reducer 함수들을 combinReducers라는 객체로 묶어 export한다.
 2.  메인 index.js 파일은 redux의 Provider, createStore 그리고 reducer 폴더에서 export한 index.js를 reducers라는 이름으로 import한다.
 3.  App 컴포넌트가 SongList 컴포넌트를 반환하고 있으므로 App 컴포넌트를 Provider 컴포넌트로 감싸고 props 형식으로 createStore(reducers)를 store라는 이름으로 내려준다.
 4.  Provider와 연결하기 위해 SongList 컴포넌트에 connect()()를 만들어준 뒤 두번째 인수에 SongList 컴포넌트를 입력
-5.  mapStateToProps 함수를 만들어 state를 인수로 받았는데 이 state는 reducer에 담긴 모든 정보를 포함하고 있다. state에서 원하는 정보를 return한 뒤 connect의 첫번째 인수로 mapStateToProps를 넣는다. 참고로 반환된 값(객체)는 내려받은 값이기 때문에 props와 같다고 할 수 있다. 
+5.  mapStateToProps 함수를 만들어 state를 인수로 받았는데 이 state는 reducer에 담긴 모든 정보를 포함하고 있다. state에서 원하는 정보를 return한 뒤 connect의 첫번째 인수로 mapStateToProps를 넣는다. 참고로 반환된 값(객체)는 내려받은 값이기 때문에 props와 같다고 할 수 있다.
 
+## 49. Calling Action Creators from Components
+
+- Connect component is going to be used not only to get data out of our store but the it can also be used to get action creators correctly into the SongList.
+- And put it into as a second argument of Connect function in the form of object.
+
+```js
+export default connect(
+  // these are all props
+  mapStateToProps,
+  {
+    selectSong
+  }
+)(SongList);
+```
+
+- Connect function is going to take selectSong action creator and pass it into the component as a prop.
+- When selectSong is called, it is going to automatically take the action that gets returned and send it it to redux's dispatch function.
