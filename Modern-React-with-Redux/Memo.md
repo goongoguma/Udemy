@@ -727,9 +727,16 @@ export default connect(
 - If we just use function call with arguments none of these function calls are going to update the store.
 - Function call returns the actions but never got sent into redux.
 - When we pass action creators into the connect function, it does a special operation on the functions inside of the object.
-- connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, the *connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us.*
+- connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, the _connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us._
 - So anytime we want to call an action creator from a component, we are always going to pass it into connect function.
 
 ## 51. Functional Components with Connect
 
-- SongDetail component has no functionality tied to it such as event handler that causes a change to a redux state. So we do not need to wire up any action creators to our songDetail component. 
+- SongDetail component has no functionality tied to it such as event handler that causes a change to a redux state. So we do not need to wire up any action creators to our songDetail component.
+
+## 52. Conditional Rendering and Wrap up
+
+- In integrating react and redux, we are going to create our components as we usually do.
+- We are going to then select some very specific components inside of our application that need to receive some information or need to make changes to the state
+- if we need to make changes to the state or receive information, we are going to import that connect function or compoent and then at the bottom of the file we can define a mapStateToProps function.
+- And then pass that function as the first argument in connect function, actual component that we care about as a second function call.
