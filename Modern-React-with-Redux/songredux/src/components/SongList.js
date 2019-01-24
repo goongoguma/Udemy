@@ -4,6 +4,7 @@ import { selectSong } from "../actions";
 
 class SongList extends React.Component {
   renderList() {
+    console.log(this.props);
     return this.props.songs.map(song => {
       return (
         <div className="item" key={song.title}>

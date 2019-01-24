@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectSong } from "../actions";
 
-const SongDetail = ({ song }) => {
-  if (!song) {
+const SongDetail = props => {
+  console.log(props);
+  if (!props.song) {
     return <div>Select a Song</div>;
   }
 
@@ -11,16 +12,16 @@ const SongDetail = ({ song }) => {
     <div>
       <h3>Details for:</h3>
       <p>
-        Title: {song.title}
+        Title: {props.song.title}
         <br />
-        Duration: {song.duration}
+        Duration: {props.song.duration}
       </p>
     </div>
   );
 };
 
 const mapStateToProps = state => {
-  console.log(state.selectedSongReducer);
+  console.log(state);
   return {
     song: state.selectedSongReducer
   };

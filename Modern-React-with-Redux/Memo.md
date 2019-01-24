@@ -734,9 +734,17 @@ export default connect(
 
 - SongDetail component has no functionality tied to it such as event handler that causes a change to a redux state. So we do not need to wire up any action creators to our songDetail component.
 
-## 52. Conditional Rendering and Wrap up
+## 52. Conditional Rendering and Wrappin up
 
 - In integrating react and redux, we are going to create our components as we usually do.
 - We are going to then select some very specific components inside of our application that need to receive some information or need to make changes to the state
 - if we need to make changes to the state or receive information, we are going to import that connect function or compoent and then at the bottom of the file we can define a mapStateToProps function.
 - And then pass that function as the first argument in connect function, actual component that we care about as a second function call.
+
+## 53. Initial App Setup
+
+- Redux-Thunk
+  - Middleware is a function that are going to slightly change the behavior of the redux store and help us make requests in a redux application.
+  - Middleware applies to the library 'redux'
+  - Redux-Thunk is a middleware that is going to help us make network requests from the redux side of app.
+
