@@ -969,7 +969,7 @@ export const fetchPosts = () => {
   - It produces 'state' or data to be used inside of you app using only previous state and the action (reducers are pure).
     - The first time the reducer gets called during that initialization process, it is going to receive two arguments.
     - The first argument is going to have a value of 'undefined'.
-    - And then the second argument will be some action obejct. 
+    - And then the second argument will be some action obejct.
     - The reducer takes these two arguments and returns some inital some state value.
     - But in many cases, we will defaulted to be the value of first argument as an empty array or empty string etc.
   - It must not return reach out of itsef(or function) to decide what value to return (reducers are pure).
@@ -982,28 +982,35 @@ export const fetchPosts = () => {
   };
   // GOOD!
   export default (prevState, action) => {
-  return prevState + action // not literally thou 
+  return prevState + action // not literally thou
   };
   ```
   - It must not mutate its input 'state' argument.
   ```js
   export default (prevState, action) => {
     // BAD!
-    state[0] = 'Sam'
-    state.pop()
-    state.push()
-    state.name = 'Mike'
-    state.age = 30
+    state[0] = "Sam";
+    state.pop();
+    state.push();
+    state.name = "Mike";
+    state.age = 30;
   };
   ```
-    - If you have a reducer that is always returning a number or a string, you do not need to worry about the mutataion rule. Because those values are immutable.
-    - You only have to worry about mutation when you are working with an array or an object. 
+  - If you have a reducer that is always returning a number or a string, you do not need to worry about the mutataion rule. Because those values are immutable.
+  - You only have to worry about mutation when you are working with an array or an object.
 
 ## 64. A Misleading Rule
 
 - But the rule 'It must not mutate its input 'state' argument.' is extremely misleading. Possibly even false!
 - Here is the truth
-  *- YOU CAN MUTATE IT ALL DAY AND NOT SEE ANY ERRORS!*
+  _- YOU CAN MUTATE IT ALL DAY AND NOT SEE ANY ERRORS!_
   - However, there is one tiny little corner case in which mutating the state argument is going to land you in trouble.
-  - To be honest, it is a lot easier to tell beginners to just not mutate the state argument than to tell them about this corner case and help them to understand. 
-  - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning preState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen. 
+  - To be honest, it is a lot easier to tell beginners to just not mutate the state argument than to tell them about this corner case and help them to understand.
+  - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning preState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen.
+
+## 65. Safe State Updates in Reducers
+
+- (in object, order goes from right to left)
+- {...state, name: 'Sam'} instead state.name = 'Sam'
+- {...state, age: 30} instead state.age = 30
+- {state, age: undefined} instead delete state.name (or you can use lodash library)
