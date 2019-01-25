@@ -804,9 +804,36 @@ export const fetchPosts = async () => {
   };
 };
 ```
+
 - The code seems right but that is a bad approach because we are specifically breaking the ruels of redux and action creator.
 - When you see the console. You got an arror saying 'Actions must be plain objects. Use custom middleware for async actions.'
 
 ## 57. Understanding Async Action Creators
 
+- Let's find out the problem
+- You might be asked for interview question.
+- What is wrong with 'fetchPosts'?
+  - When you go back to action creator file and look at the function, it looks like the function returning a plain JS object. In fact, it is not!!
+  - Since the code is transfiled by babel to ES5 code, when babel transfiles async, await function which are functions that do not exist in ES5, those two become a huge chunk of syntax that using switch method and returns request object. That is why the action creator is not working as expected.
 
+  ```js
+  export const fetchPosts = async () => {
+    // BAD APPROACH!!
+    const res = await jsonPlaceholder.get("/posts");
+    return {
+      type: "FETCH-POSTS",
+      payload: res
+    };
+  };
+
+  // Above code is transfiled by babel to ES5 like below code
+
+  export const fetchPosts = asyn() => {
+    case 0:
+    // request object is returned not plain object
+      return jsonPlaceholder.get('/posts)
+    case 1:
+      return { type: 'FETCH_POSTS', payload: response};
+  }
+  ```
+  - By the time our action gets to a reducer, we will not have fetched our data!
