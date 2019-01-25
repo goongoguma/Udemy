@@ -944,6 +944,7 @@ const res = await jsonPlaceholder.get("/posts");
 - If we are returning a function, if we ever want to dispatch an action, we will instead call the dispatch function manually with the action that we are trying to dispatch.
 - Instead, call dispatch and pass in my action obejct.
 - In redux-thunk, we can use async/await. Because once we have redux-thunk, the async/await syntax is only going to modify the return values of inner function. (remember that if we use async/await in a synchronous action creator, it causes us return a request object not an action )
+
 ```js
 export const fetchPosts = () => {
   return async (dispatch, getState) => {
@@ -958,5 +959,42 @@ export const fetchPosts = () => {
 
 - We are going to create a separate file for each reducer.
 - The idea is that as we start to work on larger projects with many reducers, puttem all inside of one file is probably not going to scale too well.
-- We are going to create another component called postReducer. It is responsible for watching for actions with type 'FETCH_POST' and anytime it sees that it is going to pull off the res that in all the data inside of it and add it into some array. 
+- We are going to create another component called postReducer. It is responsible for watching for actions with type 'FETCH_POST' and anytime it sees that it is going to pull off the res that in all the data inside of it and add it into some array.
 - Therefore we are going to eventually have a list of sorts with all of different posts that have been fetched from our API.
+
+## 63. Return Values from Reducers
+
+- Rules of Reducers
+  - It must return any value besides of 'undefined'.
+  - It produces 'state' or data to be used inside of you app using only previous state and the action (reducers are pure).
+    - The first time the reducer gets called during that initialization process, it is going to receive two arguments.
+    - The first argument is going to have a value of 'undefined'.
+    - And then the second argument will be some action obejct. 
+    - The reducer takes these two arguments and returns some inital some state value.
+    - But in many cases, we will defaulted to be the value of first argument as an empty array or empty string etc.
+  - It must not return reach out of itsef(or function) to decide what value to return (reducers are pure).
+    - Anytime that we call a reducer with an action and previous state value, reducer is not supposed to reach out of the function. In order words, we are not supposed to make an API request or try to read some file off a hard-drive or reach into DOM and try to pull some value out of a div or a label or input etc.
+    - The only thing that we are going to return is some computation done on the two arguments.
+  ```js
+  // BAD!
+  export default () => {
+  return document.querySelector('input)
+  };
+  // GOOD!
+  export default (prevState, action) => {
+  return prevState + action // not literally thou 
+  };
+  ```
+  - It must not mutate its input 'state' argument.
+  ```js
+  export default (prevState, action) => {
+    // BAD!
+    state[0] = 'Sam'
+    state.pop()
+    state.push()
+    state.name = 'Mike'
+    state.age = 30
+  };
+  ```
+    - If you have a reducer that is always returning a number or a string, you do not need to worry about the mutataion rule. Because those values are immutable.
+    - You only have to worry about mutation when you are working with an array or an object. 
