@@ -54,6 +54,19 @@
 52. 정리하기
 53. Redux-Thunk를 이용해 앱 만들어보기
 54. 리덕스를 이용해 데이터 불러오기
+55. 더미 action creator 연결해주기
+56. Axios와 Action creator를 이용해 서버에 데이터 가져오기
+57. Action creator에서 비동기 요청 에러 1
+58. Action creator에서 비동기 요청 에러 2
+59. 리덕스 미들웨어
+60. Redux-Thunk의 역할
+61. 비동기 action creator 만드는법
+62. 리듀서의 규칙 1
+63. 리듀서의 규칙 2
+64. 상태를 변형시켜도 된다 하지만...
+65. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법
+66. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정
+67. 어떻게 유저 정보를 보여줄것인가? 
 
 ## 1. Critical Question related to React
 
