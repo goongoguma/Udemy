@@ -1030,3 +1030,15 @@ export const fetchPosts = () => {
   - Redux sees that we have not returned the same object in memory the second time the reducer ran. Instead we return a brand new value (action.payload).
   - So the PostList component is going to be rendered to the screen a second time. Also mapStateToProps is going to be called a second time, we are now going to get the new value of state.post and new props.posts property is going to show up inside of the component. The render method gets called again and we see the second result in console.log.
   - (action -> postReducer -> default value -> PostList component rendered -> componentDidMount in PostList component -> fetching data -> action -> reducer -> value in action.payload property -> Redux finds not the same value before -> PostList component -> mapStateToProps -> get a new value from state -> render method gets called -> second result shows up)
+
+## 67. Displaying Users (Getting user information)
+
+- How to get user information?
+  - Fetch Posts
+  - Show posts in PostList
+  - Each element in PostList shows UserHeader component
+  - UserHeader is given ID of user to show
+  - Each UserHeader attempts to fetch its user
+  - Fetch User
+  - Show users in each UserHeader
+  
