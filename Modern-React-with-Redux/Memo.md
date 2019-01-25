@@ -898,9 +898,11 @@ const res = await jsonPlaceholder.get("/posts");
     - If an action object gets returned, it must have a type.
     - If an action object gets returned, it can optionally have a 'payload'.
 - Redux-Thnk flow
+
   - When redux-thunk meets plain JS object, redux-thunk sends it to reducers
   - However, when redux-thunk meets a function, it works differently.
-  - Redux-thunk invokes the function and it passes into the dispatch and getState functions as arguments. 
+  - Redux-thunk invokes the function and it passes into the dispatch and getState functions as arguments.
+
   ```js
   export const fetchPosts = () => {
     return function(dispatch, getState) {
@@ -912,10 +914,42 @@ const res = await jsonPlaceholder.get("/posts");
     };
   };
   ```
-    - We can pass actions into the dispatch function, those actions will be sent through all of our different middleware and eventually forwarding it off to the reducers. In order words, dispatch funtion has unlimited power to initiate changes to the data on the redux side of app. 
-    - getState can be called on a redux store and that will return all of the data inside of it.
-    - Through dispatch, we can change any data we want and getState, we can read or access any data that we want. 
-  - We wait for our requests to finish. In order words, we are going to wait to return or dispatch any action ultil we eventually get a response from our Typicode API. 
-  - Once we eventually get the response, *we are then going to use the dispatch function to manually dispatch an action at some point of time in the future.*
-  - After that we get a new action in form of a plain object or a function but mostly object. (when function gets returned, the flow goes again.) 
-  
+
+  - We can pass actions into the dispatch function, those actions will be sent through all of our different middleware and eventually forwarding it off to the reducers. In order words, dispatch funtion has unlimited power to initiate changes to the data on the redux side of app.
+  - getState can be called on a redux store and that will return all of the data inside of it.
+  - Through dispatch, we can change any data we want and getState, we can read or access any data that we want.
+  - We wait for our requests to finish. In order words, we are going to wait to return or dispatch any action ultil we eventually get a response from our Typicode API.
+  - Once we eventually get the response, _we are then going to use the dispatch function to manually dispatch an action at some point of time in the future._
+  - After that we get a new action in form of a plain object or a function but mostly object. (when function gets returned, the flow goes again.)
+
+## 61. Shortened Syntax with Redux-Thunk (how to create an asynchronous action creators)
+
+- To wire up redux-thunk, import applyMiddleware from redux and thunk from redux-thunk in root index.js file.
+
+  ```js
+  import { createStore, applyMiddleware } from "redux";
+  import thunk from "redux-thunk";
+
+  const store = createStore(reducer, applyMiddleware(thunk));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector("#root")
+  );
+  ```
+
+- When we are making use of redux-thunk, we are not going to return any actions from the inner function anymore. (but you can make another action creator after action creator function.)
+- Inside of the inner function, we do not need to return in action.
+- If we are returning a function, if we ever want to dispatch an action, we will instead call the dispatch function manually with the action that we are trying to dispatch.
+- Instead, call dispatch and pass in my action obejct.
+- In redux-thunk, we can use async/await. Because once we have redux-thunk, the async/await syntax is only going to modify the return values of inner function. (remember that if we use async/await in a synchronous action creator, it causes us return a request object not an action )
+```js
+export const fetchPosts = () => {
+  return async (dispatch, getState) => {
+    const res = await jsonPlaceholder.get("/posts");
+
+    dispatch({ type: "FETCH_POST", payload: res });
+  };
+};
+```
