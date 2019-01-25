@@ -998,3 +998,12 @@ export const fetchPosts = () => {
   ```
     - If you have a reducer that is always returning a number or a string, you do not need to worry about the mutataion rule. Because those values are immutable.
     - You only have to worry about mutation when you are working with an array or an object. 
+
+## 64. A Misleading Rule
+
+- But the rule 'It must not mutate its input 'state' argument.' is extremely misleading. Possibly even false!
+- Here is the truth
+  *- YOU CAN MUTATE IT ALL DAY AND NOT SEE ANY ERRORS!*
+  - However, there is one tiny little corner case in which mutating the state argument is going to land you in trouble.
+  - To be honest, it is a lot easier to tell beginners to just not mutate the state argument than to tell them about this corner case and help them to understand. 
+  - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning preState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen. 
