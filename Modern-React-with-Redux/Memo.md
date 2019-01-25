@@ -953,3 +953,10 @@ export const fetchPosts = () => {
   };
 };
 ```
+
+## 62. Rules of Reducers
+
+- We are going to create a separate file for each reducer.
+- The idea is that as we start to work on larger projects with many reducers, puttem all inside of one file is probably not going to scale too well.
+- We are going to create another component called postReducer. It is responsible for watching for actions with type 'FETCH_POST' and anytime it sees that it is going to pull off the res that in all the data inside of it and add it into some array. 
+- Therefore we are going to eventually have a list of sorts with all of different posts that have been fetched from our API.
