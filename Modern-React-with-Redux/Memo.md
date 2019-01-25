@@ -877,7 +877,45 @@ const res = await jsonPlaceholder.get("/posts");
 - We can have as many or as few middleware as we want.
 - It is a function that gets called with every action we dispatch.
 - It has the ability to _STOP, MODIFY_, or otherwise mess around with actions.
-  - Simple example would be to create a middleware that simply console.log every action that you dispatch. 
+  - Simple example would be to create a middleware that simply console.log every action that you dispatch.
 - Tons of open source middleware exist.
 - Most popular use of middleware is for dealing with async actions.
 - We are going to use a middleware called 'Redux-Thunk' to solve our async issues.
+
+## 60. Behind the Scenes of Redux-Thunk
+
+- What Redux-Thunk does?
+  - Redux-Thunk is all purpose middleware that allows us to deal with asynchronous action creators but it also allows us to do many other things as well.
+  - Noraml rules in vanila redux
+    - Action creators must return action obejcts
+    - Action must have a type property
+    - Actions can optionally have a 'payload'
+  - Rules with Redux-Thunk
+    - Action creators can return action objects
+      (or)
+    - Action creators can return functions!
+    - (if you return a function, redux-thunk is going to automatically call that function for you)
+    - If an action object gets returned, it must have a type.
+    - If an action object gets returned, it can optionally have a 'payload'.
+- Redux-Thnk flow
+  - When redux-thunk meets plain JS object, redux-thunk sends it to reducers
+  - However, when redux-thunk meets a function, it works differently.
+  - Redux-thunk invokes the function and it passes into the dispatch and getState functions as arguments. 
+  ```js
+  export const fetchPosts = () => {
+    return function(dispatch, getState) {
+      const promise = jsonPlaceholder.get("/posts");
+      return {
+        type: "FETCH-POSTS",
+        payload: promise
+      };
+    };
+  };
+  ```
+    - We can pass actions into the dispatch function, those actions will be sent through all of our different middleware and eventually forwarding it off to the reducers. In order words, dispatch funtion has unlimited power to initiate changes to the data on the redux side of app. 
+    - getState can be called on a redux store and that will return all of the data inside of it.
+    - Through dispatch, we can change any data we want and getState, we can read or access any data that we want. 
+  - We wait for our requests to finish. In order words, we are going to wait to return or dispatch any action ultil we eventually get a response from our Typicode API. 
+  - Once we eventually get the response, *we are then going to use the dispatch function to manually dispatch an action at some point of time in the future.*
+  - After that we get a new action in form of a plain object or a function but mostly object. (when function gets returned, the flow goes again.) 
+  
