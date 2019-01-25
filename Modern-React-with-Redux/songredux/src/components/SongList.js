@@ -35,7 +35,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {
-    selectSong
-  }
+  { selectSong }
 )(SongList);

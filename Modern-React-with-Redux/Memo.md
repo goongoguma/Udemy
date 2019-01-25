@@ -44,6 +44,16 @@
 42. React-Redux 라이브러리
 43. React와 Redux를 이용해 앱 만들기
 44. 앱 Overview
+45. Provider 사용하기
+46. Connect 사용하기
+47. mapStateToProps를 사용해서 state 가져오기
+48. 중간정리
+49. 컴포넌트에서 action creators 불러오기
+50. 왜 컴포넌트를 import하고 다시 connect에 넣는지?
+51. 함수형 컴포넌트를 이용해 connect 사용해보기
+52. 정리하기
+53. Redux-Thunk를 이용해 앱 만들어보기
+54. 리덕스를 이용해 데이터 불러오기
 
 ## 1. Critical Question related to React
 
@@ -624,13 +634,13 @@ store.getStaste();
 ## 44. How React-Redux Works?
 
 - We are going to create two new components (Provider, Connect) using react-redux.
-- create Store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the App inside of Provider component).
-- Then Provider component is going to have eternal reference to the Store. (Provider is literally providing information to all of the different components inside of the application.)
+- create store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the App component inside of Provider component).
+- Then Provider component is going to have eternal reference to the store. (Provider is literally providing information to all of the different components inside of the application.)
 - After that we are going to find every component inside of the application that needs to somehow access the data that is stored inside of the Store (like SongList component).
 - Therfore we are going to create Connect component right above(in the hierarchy) the SongList component. So SongList component is going to be wrapped with Connect component.
 - Connect component is very special. Because it communicates with the Provider component not through props but a completely different system called context system.
 - (context system allows any parent component to communicate directly with any child component even if there are other components in between them.)
-- So at some point, when we put the Connect component in there, we are going to configure the Connect component and tell it when it gets rendered on the screen(when it renders the SongList as a child), it needs to reach back up Provider component and tell it that needs to get the list of songs that are contained within the Store.
+- So at some point, when we put the Connect component in there, we are going to configure the Connect component and tell it when it gets rendered on the screen(when it renders the SongList as a child), it needs to reach back up Provider component and tell it that needs to get the list of songs that are contained within the store.
 - Connect component in turn, take the list of songs and pass it as a prop down into our SongList component.
 - We call action creator, we take the action that gets returned and we send it into the store.dispatch function.
 - _Entire flow is essentially we are going to create the Provider component and pass it as a reference to redux store then anytime we have a component that needs to interact with the redux store(SongList component in this case), it is going to be wrapped up with Connect component._
@@ -668,7 +678,7 @@ export default connect()(SongList);
 
 ## 47. Configuring Connect with MapStateToProps
 
-- We are going to specifically tell the connecting that we want to get a list of songs out of the redux store from the Provider.
+- We are going to specifically tell the connect function that we want to get a list of songs out of the redux store from the Provider.
 - So anytime that our list of songs and inside of our store changes, Provider is going to automatically notify the Connect component.
 - Then it is going to pass our list of songs down to our SongList component.
 - After defining mapStateToProps function and then going to take it and pass it as the first argument to the Connect function.
@@ -701,20 +711,18 @@ export default connect(mapStateToProps)(SongList);
 
 ## 49. Calling Action Creators from Components
 
-- Connect component is going to be used not only to get data out of our store but the it can also be used to get action creators correctly into the SongList.
+- Connect component is going to be used not only to get data out of our store but it can also be used to get action creators correctly into the SongList.
 - And put it into as a second argument of Connect function in the form of object.
 
 ```js
 export default connect(
   // these are all props
   mapStateToProps,
-  {
-    selectSong
-  }
+  { selectSong }
 )(SongList);
 ```
 
-- Connect function is going to take selectSong action creator and pass it into the component as a prop.
+- Connect function is going to take selectSong action creator and pass it into the component as a prop inside of event-handler.
 - When selectSong is called, it is going to automatically take the action that gets returned and send it it to redux's dispatch function.
 - _Importantly, you must dispatch an action to update the store. You cannot directly modify props by doing this.props.something = 'some new value". What Stephen is saying in this lecture is that when we update our Redux store thru a dispatched action, mapStateToProps will automatically rerun and return to us this new state object._
 
@@ -727,7 +735,7 @@ export default connect(
 - If we just use function call with arguments none of these function calls are going to update the store.
 - Function call returns the actions but never got sent into redux.
 - When we pass action creators into the connect function, it does a special operation on the functions inside of the object.
-- connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, the _connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us._
+- connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, _the connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us._
 - So anytime we want to call an action creator from a component, we are always going to pass it into connect function.
 
 ## 51. Functional Components with Connect
@@ -738,7 +746,7 @@ export default connect(
 
 - In integrating react and redux, we are going to create our components as we usually do.
 - We are going to then select some very specific components inside of our application that need to receive some information or need to make changes to the state
-- if we need to make changes to the state or receive information, we are going to import that connect function or compoent and then at the bottom of the file we can define a mapStateToProps function.
+- if we need to make changes to the state or receive information, we are going to import that connect function or component and then at the bottom of the file we can define a mapStateToProps function.
 - And then pass that function as the first argument in connect function, actual component that we care about as a second function call.
 
 ## 53. Initial App Setup
@@ -751,12 +759,36 @@ export default connect(
 ## 54. How to Fetch Data in a Redux App
 
 - General Data Loading with Redux
-  - Component gets rendered onto the screen
-  - Component's 'componentDidMount' lifecycle method gets called
-  - We call action creator from 'componentDidMount'
-  - Action creator runs code to make an API request
-  - API responds with data
-  - Action creator returns an 'action' with the fetched data on the 'payload' property
-  - Some reducer sees the action, returns the data off the 'payload'
-  - Because we generated some new state obejct, redux/react-redux cause our React app to be rendered
+  - (This is a common pattern)
+  1. Component gets rendered onto the screen
+  2. Component's 'componentDidMount' lifecycle method gets called
+  3. We call action creator from 'componentDidMount'
+  - (From 1 to 3, Components are generally responsible for fetching data they need by calling an action creator)
+  4. Action creator runs code to make an API request
+  5. API responds with data
+  6. Action creator returns an 'action' with the fetched data on the 'payload' property
+  - (From 4 to 6, Action creators are responsible for making API requests and we are going to use Redux-Thunk)
+  7. Some reducer sees the action, returns the data off the 'payload'
+  8. Because we generated some new state obejct, redux/react-redux cause our React app to be rendered
+  - (From 7 to 8, We get fetched data into a component by generating new state in our redux store, then getting that into our component through mapStateToProps)
 
+## 55. Wiring Up an Action Creator
+
+- Set up the dummy action creator and imports it in PostList.js
+- And put the creator into connect function and call it using props in componenDidMount method.
+
+```js
+class PostList extends React.Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+  render() {
+    return <div>Post List</div>;
+  }
+}
+
+export default connect(
+  null,
+  { fetchPosts }
+)(PostList);
+```
