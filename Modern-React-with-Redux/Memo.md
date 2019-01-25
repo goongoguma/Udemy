@@ -842,20 +842,42 @@ export const fetchPosts = async () => {
 
 - We might think we can use promise instead async and await?
 - If we do that by the time our action gets to a reducer, we will not have fetched our data!
-- When the data flows from action creator to reducers, all of those steps are going to be executed in a fraction of a fraction of a second. 
+- When the data flows from action creator to reducers, all of those steps are going to be executed in a fraction of a fraction of a second.
 - But that causes an issue with the fact that we are making an asynchronous requests.
 - When action creator called, we are going to make the request over to Typicode API and that request take some unknown amount of time to eventaully get a response back from that API.
-- So by the time we finally get a response from the API, our action has long since been processed by our reducers. 
-- The reducers have already ran and they have looked inside that promise object and thinks 'the request is not completed and there is nothing that we can do insdie of the reudcers to somehow delay them from running.'
+- So by the time we finally get a response from the API, our action has long since been processed by our reducers.
+- The reducers have already ran and they have looked inside that promise object and thinks 'the request is not completed and there is nothing that we can do inside of the reudcers to somehow delay them from running.'
 - So
   ```js
-   return {
+  return {
     type: "FETCH-POSTS",
     payload: promise
   };
   ```
-this alternative syntax, it gets sent off to the reducers but all happened so quickly that it happens and completes itself way before ever get any data back from our API right below.
+  this alternative syntax, it gets sent off to the reducers but all happened so quickly that it happens and completes itself way before ever get any data back from our API right below.
+
 ```js
 const res = await jsonPlaceholder.get("/posts");
 ```
-- In order words, even if we use this alternate syntax without the async or awaits, we would still run into an issue where we could not get access to our data. 
+
+- In order words, even if we use this alternate syntax without the async or awaits, we would still run into an issue where we could not get access to our data.
+
+## 59. Middlewares in Redux
+
+- Synchronous action creator
+  - It immediately retunrs an action object with all the relevant data attached that object and it is ready to be processed by a reducers.
+  - Instantly returns an action with data ready to go.
+- Asynchronous action creator
+  - Takes some amount of time for it to get its data ready to go.
+  - It is one that is going to require a little bit of time before it is ready to eventually dispatch an action.
+  - Anytime that you have an action creator that makes a network request, it is always going to qualify as an async action creator.
+  - If you want to have asynchonous action creator inside of a redux application, you have to install something called a middleware.
+  - That is going to allow you to deal with these asynchronous action creators.
+- Action that created by action creator goes to dispatch and be sent to middleware not reducers.
+- We can have as many or as few middleware as we want.
+- It is a function that gets called with every action we dispatch.
+- It has the ability to _STOP, MODIFY_, or otherwise mess around with actions.
+  - Simple example would be to create a middleware that simply console.log every action that you dispatch. 
+- Tons of open source middleware exist.
+- Most popular use of middleware is for dealing with async actions.
+- We are going to use a middleware called 'Redux-Thunk' to solve our async issues.
