@@ -775,7 +775,7 @@ export default connect(
 ## 55. Wiring Up an Action Creator
 
 - Set up the dummy action creator and imports it in PostList.js
-- And put the creator into connect function and call it using props in componenDidMount method.
+- And put the creator into connect function and call it using props in componenDidMount method. (step from 1 to 3)
 
 ```js
 class PostList extends React.Component {
@@ -792,3 +792,21 @@ export default connect(
   { fetchPosts }
 )(PostList);
 ```
+
+## 56. Making a Request From an Action Creator
+
+```js
+export const fetchPosts = async () => {
+  const res = await jsonPlaceholder.get("/posts");
+  return {
+    type: "FETCH-POSTS",
+    payload: res
+  };
+};
+```
+- The code seems right but that is a bad approach because we are specifically breaking the ruels of redux and action creator.
+- When you see the console. You got an arror saying 'Actions must be plain objects. Use custom middleware for async actions.'
+
+## 57. Understanding Async Action Creators
+
+
