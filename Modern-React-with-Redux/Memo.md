@@ -1014,3 +1014,19 @@ export const fetchPosts = () => {
 - {...state, name: 'Sam'} instead state.name = 'Sam'
 - {...state, age: 30} instead state.age = 30
 - {state, age: undefined} instead delete state.name (or you can use lodash library)
+
+## 66. Dispatching Correct Values
+
+- Why do we have two console.logs?
+  - When the application first loads up inside of the browser, all of our reducers run one initial time.
+  - So the instant the application loads up inside the browser, the postReducer runs with an action of some initialization type.
+  - Whatever it is, it is not going to match the case 'FETCH_POSTS'. So, we are going to return default state value of an empty array.
+  - Therefore, the application first boots up, we are going to have a state object that has a 'FETCH_POSTS' property and the property is going to contain the empty array.
+  - After all of the reducers run, the react side of application is going to be rendered one time on the screen.
+  - So the postList component is going to be displayed on the screen one time.
+  - During that initial one time, we are going to have the render method called and that is going to invoke the console.log empty array.
+  - Immediately after the PostList component shows up on the screen, the _componentDidMount lifecycle_ method will be called and then we go through the entire process of running off to the API and fetching some data.
+  - After we get some data back and dispatch the action to reducer, the reducer sees the action has a type of 'FETCH_POSTS', it returns whatever value is inside of the action.payload property.
+  - Redux sees that we have not returned the same object in memory the second time the reducer ran. Instead we return a brand new value (action.payload).
+  - So the PostList component is going to be rendered to the screen a second time. Also mapStateToProps is going to be called a second time, we are now going to get the new value of state.post and new props.posts property is going to show up inside of the component. The render method gets called again and we see the second result in console.log.
+  - (action -> postReducer -> default value -> PostList component rendered -> componentDidMount in PostList component -> fetching data -> action -> reducer -> value in action.payload property -> Redux finds not the same value before -> PostList component -> mapStateToProps -> get a new value from state -> render method gets called -> second result shows up)
