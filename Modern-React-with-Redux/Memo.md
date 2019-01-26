@@ -1084,7 +1084,7 @@ export const fetchPosts = () => {
 - After create a new memoizefunction, connects it with fetchUser function
 
   ```js
-    export const fetchUser = id => {
+  export const fetchUser = id => {
     return (dispatch, getState) => {
       _fetchUser(id, dispatch);
     };
@@ -1096,11 +1096,58 @@ export const fetchPosts = () => {
 
     dispatch({ type: "FETCH_USER", payload: res.data });
   });
-
   ```
-- However if you refetch the user some reason like if you have made a change to a user or if you know that the user data has been updated on your API etc. 
+
+- However if you refetch the user some reason like if you have made a change to a user or if you know that the user data has been updated on your API etc.
 - Unfortunately you would not be able to do it again using this action creator. So if you want to do it then you have to create another action creator that has the same logic except memoiztion step.
 - So this is not the best solution.
 
+## 71. Alternate Overfetching Solution
+
+- We are going to create new action creator called 'fetchPostsAndUsers()'.
+  - Logic that we are going to execute inside of the component
+    - Call 'fetchPosts'
+    - Get list of posts
+    - Find all unique userId's from list of posts
+    - Iterate over unique userId's
+    - Call 'fetchUser' with each userId
+  - fetchPostsAndUsers action creator is not going to have some logic inside of it to make a network request over to our API.
+
+## 72. Action Creators in Action Creators.
+
+- Create new action creator 'fetchPostsAndUsers'
+- Inside of there, call other action creators
+- However if we just call action creators inside of the new action creator, those creators are not going to be dispatched to reducers.
+- So when we call action creators inside of the new action creator, we have to pass the result of calling those into the dispatch function.
+- When action creator inside of fetachPostsAndUsers is called, redux thunk is going to see the inner function of the action creator and invoke it and pass in dispatch as the first argument. So then the inner function is going to make a request over to API, get the list of posts and then it is going to dispatch its own action internally and start that entire process of updating the reducer.
+- SO WHENVER WE CALL AN ACTION CREATOR FROM INSIDE OF AN ACTION CREATOR, WE NNED TO MAKE SURE THAT WE DISPATCH THE RESULT OF CALLING THE ACTION CREATOR.
+
+  ```js
+  export const fetchPostsAndUsers = () => {
+    return async dispatch => {
+      dispatch(fetchPosts());
+    };
+  };
+
+  export const fetchPosts = () => {
+    return async (dispatch, getState) => {
+      const res = await jsonPlaceholder.get("/posts");
+
+      dispatch({ type: "FETCH_POSTS", payload: res.data });
+    };
+  };
+  ```
+
+- But whenver we call fetchPosts that is going to initialte a asynchronous request over to the API.
+- We need to somehow make sure that we do not attempt to get the our list of posts that have been fetched until fetchPosts action creator has completed and has fetched all the appropriate data.
+- So we are going to put 'await' keyword in front of dispatch method in order to make sure that when we dispatch that action creator and the inner function eventually gets called, await keyword is essentially make sure that we wait for the API request to be completed befroe we move on and do things inside of new action creator.
+
+```js
+export const fetchPostsAndUsers = () => {
+  return async dispatch => {
+    await dispatch(fetchPosts());
+  };
+};
+```
 
 
