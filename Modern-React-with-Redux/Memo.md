@@ -1150,4 +1150,30 @@ export const fetchPostsAndUsers = () => {
 };
 ```
 
+## 73. Finding Unique User Ids
 
+- It is easy to get the state of post. We can use getState object to do it.
+  ```js
+   return async (dispatch, getState) => {
+    await dispatch(fetchPosts());
+    console.log(getState().posts);
+  };
+  ```
+- After we get the data from getState().posts, we need to iterate through it list of posts find a unique user IDs and then fetch user for each one. 
+- To do that, we can use Lodash library, memoization step.
+- lodash is working with the list of posts and pulling out the userIds and finding just the unique ones pretty easy and straightforward.
+- We use lodash version of map to get all userId
+  ```js
+  _.map(getState().posts, "userId");
+  ```
+- And use _.uniq to return an array with the unique user ids
+  ```js
+  const userIds = _.uniq(_.map(getState().posts, "userId"));
+  console.log(userIds); // [1,2,3,4,5,6,7,8,9,10]
+  ```
+- Last thing to do is iterate over the variable userIds which contains the array of user ids for every id, we need to call fetchUser action creator.
+  ```js
+   userIds.forEach(id => dispatch(fetchUser(id)));
+  ```
+- No await keyword this time. Because we do not care at all about waiting for eash user to be fetched inside a fetchPosts users. (이미 필요한 데이터는 다 있으니까 기다릴 필요가 없음)
+- And remove componentDidMount lifecycle from UserHeader component because the lifecycle method is keep attempting to fetch the data.  
