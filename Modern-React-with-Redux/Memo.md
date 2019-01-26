@@ -1069,3 +1069,13 @@ export const fetchPosts = () => {
     };
   };
   ```
+
+## 69. That's the Issue! (overfetching users)
+
+- When you see the network tab in developer tool, you will find out that the application requets for userId number 10 times in a row.
+- Everytime that a UserHeader component is rendered on the screen, componentDidMount is called and fetch user with particular userId. 
+- So essentially becasue we are rendering out a hundred instances of UserHeader, the action creator gets called a hundred different times even though we are fetching some very very repetitive data. 
+
+## 70. Memoizing Functions
+
+
