@@ -1195,8 +1195,8 @@ export const fetchPostsAndUsers = () => {
 - Instead with redux-thunk, we could also optionally return a function.  
 - If we return a function, it would be automatically called with the dispatch and getState arguments and that essentially gave us total control over changing or getting information out of our redux store. 
 - Anytime that we expect to make an API request from an actual creator, we are always going to make use of something like redux-thunk. 
-- When we return a function from our action creators, we use interesting syntax righ here :
-  ```js
+- When we return a function from our action creators, we use interesting syntax righ here:
+```js
   export const fetchPosts = () => {
   return async (dispatch, getState) => {
     const res = await jsonPlaceholder.get("/posts");
@@ -1204,11 +1204,11 @@ export const fetchPostsAndUsers = () => {
     dispatch({ type: "FETCH_POSTS", payload: res.data });
   };
 };
-  ```
+```
 - The syntax right here is we have a function that returns a function (outer function => inner function). And it is very common syntax in redux-thunk.
 - Alternate solution to solving overfetching issue, we created a new action creator that somehow called other action creators and made sure that we still dispatch the result of calling those action creators. 
   
-  ```js
+```js
   export const fetchPostsAndUsers = () => {
       return async (dispatch, getState) => {
         await dispatch(fetchPosts());
@@ -1216,13 +1216,12 @@ export const fetchPostsAndUsers = () => {
         userIds.forEach(id => dispatch(fetchUser(id)));
       };
     };
-  
-  ```
+```
 
 - In reducer, in frist argument is what I refer to as states and whatever was returned from this reducer or the last time that it ran. 
 - So we run this reducer over and over again, whenever we return shows up as the first argument. 
 - We also learned that we usually make use of switch statment syntax inside of reducer. And it is very common pattern.
-  ```js
+```js
   export default (state = [], action) => {
   switch (action.type) {
     case "FETCH_POSTS":
@@ -1231,7 +1230,7 @@ export const fetchPostsAndUsers = () => {
       return state;
   }
 };
- ```
+```
 - And remember that anytime that we return some data from a reducer, we always have to return a new array or a new object or a different valued string or a different value number, if we expect redux to realize that we made a change to the data inside of our application. 
 - If we ever just return the exact same object or array, redux has that very simple comparison where it just checks to see if that is the same object or array in memory.
 - And if it is, redux says 'oh no data has changed' and it does not update the rest of your application and tell the react side of the app to actually re-render itself and pull down new state and show some new content on the screen.
