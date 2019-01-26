@@ -1073,9 +1073,34 @@ export const fetchPosts = () => {
 ## 69. That's the Issue! (overfetching users)
 
 - When you see the network tab in developer tool, you will find out that the application requets for userId number 10 times in a row.
-- Everytime that a UserHeader component is rendered on the screen, componentDidMount is called and fetch user with particular userId. 
-- So essentially becasue we are rendering out a hundred instances of UserHeader, the action creator gets called a hundred different times even though we are fetching some very very repetitive data. 
+- Everytime that a UserHeader component is rendered on the screen, componentDidMount is called and fetch user with particular userId.
+- So essentially becasue we are rendering out a hundred instances of UserHeader, the action creator gets called a hundred different times even though we are fetching some very very repetitive data.
 
-## 70. Memoizing Functions
+## 70. One Time Memoization
+
+- In order to repetitive data request, we use memoize library.
+- Using \_.memoize, create new function.
+- Do not use \_.memoize inside of fetchUser function. It won't work
+- After create a new memoizefunction, connects it with fetchUser function
+
+  ```js
+    export const fetchUser = id => {
+    return (dispatch, getState) => {
+      _fetchUser(id, dispatch);
+    };
+  };
+
+  // private function
+  const _fetchUser = _.memoize(async (id, dispatch) => {
+    const res = await jsonPlaceholder.get(`/users/${id}`);
+
+    dispatch({ type: "FETCH_USER", payload: res.data });
+  });
+
+  ```
+- However if you refetch the user some reason like if you have made a change to a user or if you know that the user data has been updated on your API etc. 
+- Unfortunately you would not be able to do it again using this action creator. So if you want to do it then you have to create another action creator that has the same logic except memoiztion step.
+- So this is not the best solution.
+
 
 
