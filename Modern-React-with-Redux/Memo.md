@@ -67,6 +67,13 @@
 65. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법
 66. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정
 67. 어떻게 유저 정보를 보여줄것인가?
+68. mapStateToProps를 이용해 필요한 정보 가져오기
+69. 반복요청 문제 발생
+70. memoize를 통한 문제 해결방법 
+71. 다른 방법
+72. 새로운 action creator를 생성함으로써 문제 해결방법
+73. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기
+74. redux-thunk 정리
 
 ## 1. Critical Question related to React
 
@@ -1211,7 +1218,7 @@ export const fetchPostsAndUsers = () => {
     };
   
   ```
-  
+
 - In reducer, in frist argument is what I refer to as states and whatever was returned from this reducer or the last time that it ran. 
 - So we run this reducer over and over again, whenever we return shows up as the first argument. 
 - We also learned that we usually make use of switch statment syntax inside of reducer. And it is very common pattern.
