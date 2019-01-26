@@ -66,7 +66,7 @@
 64. 상태를 변형시켜도 된다 하지만...
 65. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법
 66. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정
-67. 어떻게 유저 정보를 보여줄것인가? 
+67. 어떻게 유저 정보를 보여줄것인가?
 
 ## 1. Critical Question related to React
 
@@ -818,7 +818,7 @@ export const fetchPosts = async () => {
 };
 ```
 
-- The code seems right but that is a bad approach because we are specifically breaking the ruels of redux and action creator.
+- The code seems right but that is a bad approach because we are specifically breaking the rules of redux and action creator.
 - When you see the console. You got an arror saying 'Actions must be plain objects. Use custom middleware for async actions.'
 
 ## 57. Understanding Async Action Creators
@@ -828,7 +828,7 @@ export const fetchPosts = async () => {
 - What is wrong with 'fetchPosts'?
 
   - When you go back to action creator file and look at the function, it looks like the function returning a plain JS object. In fact, it is not!!
-  - Since the code is transfiled by babel to ES5 code, when babel transfiles async, await function which are functions that do not exist in ES5, those two become a huge chunk of syntax that using switch method and returns request object. That is why the action creator is not working as expected.
+  - Since the code is transfiled by babel to ES5 code, when babel transfiles async/await function which are functions that do not exist in ES5, those two become a huge chunk of syntax that using switch method and returns request object. That is why the action creator is not working as expected.
 
   ```js
   export const fetchPosts = async () => {
@@ -873,7 +873,7 @@ export const fetchPosts = async () => {
 const res = await jsonPlaceholder.get("/posts");
 ```
 
-- In order words, even if we use this alternate syntax without the async or awaits, we would still run into an issue where we could not get access to our data.
+- In order words, even if we use this alternate syntax without the async/awaits, we would still run into an issue where we could not get access to our data.
 
 ## 59. Middlewares in Redux
 
@@ -901,14 +901,14 @@ const res = await jsonPlaceholder.get("/posts");
   - Redux-Thunk is all purpose middleware that allows us to deal with asynchronous action creators but it also allows us to do many other things as well.
   - Noraml rules in vanila redux
     - Action creators must return action obejcts
-    - Action must have a type property
+    - Action must have a 'type' property
     - Actions can optionally have a 'payload'
   - Rules with Redux-Thunk
     - Action creators can return action objects
       (or)
     - Action creators can return functions!
     - (if you return a function, redux-thunk is going to automatically call that function for you)
-    - If an action object gets returned, it must have a type.
+    - If an action object gets returned, it must have a 'type'.
     - If an action object gets returned, it can optionally have a 'payload'.
 - Redux-Thnk flow
 
@@ -918,20 +918,18 @@ const res = await jsonPlaceholder.get("/posts");
 
   ```js
   export const fetchPosts = () => {
-    return function(dispatch, getState) {
-      const promise = jsonPlaceholder.get("/posts");
-      return {
-        type: "FETCH-POSTS",
-        payload: promise
-      };
+    return async (dispatch, getState) => {
+      const res = await jsonPlaceholder.get("/posts");
+
+      dispatch({ type: "FETCH_POSTS", payload: res.data });
     };
   };
   ```
 
-  - We can pass actions into the dispatch function, those actions will be sent through all of our different middleware and eventually forwarding it off to the reducers. In order words, dispatch funtion has unlimited power to initiate changes to the data on the redux side of app.
+  - We can pass actions into the dispatch function, those actions will be sent through all of our different middlewares and eventually forwarding it off to the reducers. In order words, dispatch funtion has unlimited power to initiate changes to the data on the redux side of app.
   - getState can be called on a redux store and that will return all of the data inside of it.
   - Through dispatch, we can change any data we want and getState, we can read or access any data that we want.
-  - We wait for our requests to finish. In order words, we are going to wait to return or dispatch any action ultil we eventually get a response from our Typicode API.
+  - We wait for our requests to finish. In order words, we are going to wait to return or dispatch any action until we eventually get a response from our Typicode API.
   - Once we eventually get the response, _we are then going to use the dispatch function to manually dispatch an action at some point of time in the future._
   - After that we get a new action in form of a plain object or a function but mostly object. (when function gets returned, the flow goes again.)
 
@@ -986,7 +984,7 @@ export const fetchPosts = () => {
     - The reducer takes these two arguments and returns some inital some state value.
     - But in many cases, we will defaulted to be the value of first argument as an empty array or empty string etc.
   - It must not return reach out of itsef(or function) to decide what value to return (reducers are pure).
-    - Anytime that we call a reducer with an action and previous state value, reducer is not supposed to reach out of the function. In order words, we are not supposed to make an API request or try to read some file off a hard-drive or reach into DOM and try to pull some value out of a div or a label or input etc.
+    - Anytime that we call a reducer with an action and previous state value, reducer is not supposed to reach out of the function. In order words, reducers are not supposed to make an API request or try to read some file off a hard-drive or reach into DOM and try to pull some value out of a div or a label or input etc.
     - The only thing that we are going to return is some computation done on the two arguments.
   ```js
   // BAD!
@@ -1019,7 +1017,7 @@ export const fetchPosts = () => {
   _- YOU CAN MUTATE IT ALL DAY AND NOT SEE ANY ERRORS!_
   - However, there is one tiny little corner case in which mutating the state argument is going to land you in trouble.
   - To be honest, it is a lot easier to tell beginners to just not mutate the state argument than to tell them about this corner case and help them to understand.
-  - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning preState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen.
+  - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning prevState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen.
 
 ## 65. Safe State Updates in Reducers
 
@@ -1030,13 +1028,13 @@ export const fetchPosts = () => {
 
 ## 66. Dispatching Correct Values
 
-- Why do we have two console.logs?
+- Why do we have two result for one console.log?
   - When the application first loads up inside of the browser, all of our reducers run one initial time.
   - So the instant the application loads up inside the browser, the postReducer runs with an action of some initialization type.
   - Whatever it is, it is not going to match the case 'FETCH_POSTS'. So, we are going to return default state value of an empty array.
   - Therefore, the application first boots up, we are going to have a state object that has a 'FETCH_POSTS' property and the property is going to contain the empty array.
   - After all of the reducers run, the react side of application is going to be rendered one time on the screen.
-  - So the postList component is going to be displayed on the screen one time.
+  - So the PostList component is going to be displayed on the screen one time.
   - During that initial one time, we are going to have the render method called and that is going to invoke the console.log empty array.
   - Immediately after the PostList component shows up on the screen, the _componentDidMount lifecycle_ method will be called and then we go through the entire process of running off to the API and fetching some data.
   - After we get some data back and dispatch the action to reducer, the reducer sees the action has a type of 'FETCH_POSTS', it returns whatever value is inside of the action.payload property.
@@ -1054,4 +1052,20 @@ export const fetchPosts = () => {
   - Each UserHeader attempts to fetch its user
   - Fetch User
   - Show users in each UserHeader
-  
+
+## 68. Extracting Logic to MapStateToProps
+
+- UserHeader component gets access to the user ID and it also gets access to the entire list of users.
+- However the UserHeader component is not really well-suited to take the entire array of users. Because the purpose of the component is to show one singular user on the screen. But we are giving it way more data than it ever needs.
+- It would be a lot better if we could figure out some way to pass it just the user that it cares about.
+- In UserHeader component, mapStateToProps function seems just like a little bit unnecessary. Everytime we want to pull some data out of a component, we have to define this really repetitive function.
+- But there is another way that would have been really nice to pull data out of the redux store.
+- So essentially rather than finding the appropriate user inside of the component, we want to find it in side of mapStateToProps.
+- We can refers props of the component using 'ownProps' object as a second argument of mapStateToProps function.
+  ```js
+  const mapStatetoProps = (state, ownProps) => {
+    return {
+      user: state.users.find(user => user.id === ownProps.userId)
+    };
+  };
+  ```
