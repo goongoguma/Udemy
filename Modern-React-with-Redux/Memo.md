@@ -1261,7 +1261,7 @@ export const fetchPostsAndUsers = () => {
     - It decides how to work with react, how to change content out depending upon some different rules and some other low level logic.
   - React Router Dom
     - Navigation for dom-based apps
-    - To get an actual implementation of react-router that works insdie of specifically the browser.
+    - To get an actual implementation of react-router that works inside of specifically the browser.
     - Anytime that you want to use react-router on a project to handle navigation, you are always going to installing react router dom, not react router.
   - React Router Native
     - Navigation for React Native apps
@@ -1319,14 +1319,17 @@ export const fetchPostsAndUsers = () => {
 <Link to="/pagetwo">Navigate to PageTwo</Link>
 ```
 - Using inspector, when you click <Link>, what actually showed up in Element console is <a> tag.
-- So when you use the link tag, you are still showing an <a> tag on the screen.
+- And also user does not get any additional requests being made for any html document.
+- So when you use the <Link> tag, you are still showing an <a> tag on the screen.
 - What we want to do with <Link>
   - User wants to navigate to another page in our app
   - User clicks a 'Link' tag
   - *React router prevents the browser from navigating to the new page and fetching new index.html file!*
   - URL still changes
   - 'History' object sees updated url, takes it and sends it to BrowserRouter
-  - BrowserRouter communicates the url to Route components
+  - BrowserRouter communicates the url down to all the different Route components
+  - Route components rerender to show new set of components depending upon the path that the user is visiting.
+- So when you make use of the <Link> tag, we are not dumping all of our react and JS data, we are just showing a different set of components on the screen.
 - This is where Singl Page App(SPA) comes from.
   - It means that we are only loading up a single HTML document. 
   - We still allow the user to navigate around the application by clicking on various link tags.
@@ -1361,3 +1364,14 @@ export const fetchPostsAndUsers = () => {
   - With HashRouter, you are supposed to be setting up your backend server do not take a loog at anything after the hash.
   - If anyone ever makes requests to localhost:3000, you are always going to respond with index.html file. 
   - And your application loads up, the application will then look at whatever is after the hash and then use that to determine what content to show on the screen. 
+
+## 83. Component Scaffolding
+
+- Index Page : StreamList (/)
+- Show Stream : StreamShow (/streams/show)
+- Create Stream : StreamCreate (/streams/new)
+- Edit Stream : StreamEdit (/streams/edit)
+- Delete Stream : StreamDelete (/streams/delete)
+
+
+
