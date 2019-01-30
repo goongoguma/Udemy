@@ -1400,4 +1400,41 @@ export const fetchPostsAndUsers = () => {
 </BrowserRouter>
   ```
 
+## 86. OAuth-Based Authentication
+
+- Email/Password Authentication
+  - We store a record in a database with the user's email and password. 
+  - When the user tries to login, we compare email/pw with whats stored in DB.
+  - A user is 'logged in' when they enter the correct email/pw.
+- OAuth Authentication
+  - User authenticates with outside service provider (Google, Linkedin, Facebook).
+  - User authorizes our app to access their information.
+  - Outside provider tells us about the user.
+  - We are trusting the outside prov ider to correctly handle identification of a user.
+  - OAuth can be used for user identification in our app and our app making actions on behalf of user.
+  - So OAuth is not only about authentication but also about letting our application get access to all that user's data on some outside service provider. 
+
+## 87. OAuth for Servers vs Browser Apps
+
+- OAuth for Servers
+  - Results in a 'token' that a server can use to make requests on behalf of the user.
+  - Usually used when we have an app that needs to access user data when they are not logged in.
+  - Difficult to setup because we need to store a lot of info about the user.
+- OAuth for JS Browser Apps
+  - Results in a 'token' that a browser app can use ot make requests on behalf of the user.
+  - Usually used when we have an app that only needs to access user data while they are logged in.
+  - Very easy to set up thanks to Google's JS lib to automate flow.
+- Google OAuth Login Flow
+  - User clicks 'Login with Google' button
+  - We use google's JS lib to initiate OAuth process
+  - Google's JS lib makes auth request to Google
+  - Google displays confirmation screen to user in popup window
+  - User accepts
+  - Popup window closes
+  - Google's JS library invokes a callback in our React/Redux app
+  - Callback provided with 'authoriztion' token and profile info for user
+  - If user happens to log out our application or Google servers, we are going to get another callback invoked. 
+  - This callback is going to say 'user just logged out'.
+
+
 
