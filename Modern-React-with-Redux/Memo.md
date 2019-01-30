@@ -1336,3 +1336,28 @@ export const fetchPostsAndUsers = () => {
   - We are essentially tricking the user into thinking that they really are going to different pages. 
   - But in fact, we are just showing in hiding different components. 
 
+## 82. Different Router Types
+
+- BrowserRouter
+  - Uses everything after Top Level Domain(.com, .net) or port as the 'path'
+  - ex : localhost:3000/pagetwo
+- HashRouter
+  - Uses everything after a # as the 'path'
+  - ex : localhose:3000/#/pagetwo
+- MemoryRouter
+  - Does not use the url to track navigation (same url wherever you go)
+  - ex : localhost:3000/
+- Deploy BrowserRouter could be very challenging.
+- What is going on behind the scenes with the BrowserRouter
+  - If you ask react development server for some resource that some route that is not defined, rather then returning a 404 error, the react app development server is going to respond with your index.html file and that is the key to how all of browser router works. 
+  - If you ask for any route whatsoever, the react server is going to always respond with index.html file as opposed to returning a 404 error. 
+  - This is important because all of our definitions are stuffed into the JS or client side of application. 
+  - So an user goes over to our application and they click on link to navigate over to pagetwo and we refresh the page, we are making a request to our server for the route /pagetwo. 
+  - And our dev server, if you click on the request and then click on response in network tab, it decides automatically return the html file. 
+  - After browser loads up all html, it sees that there is a link inside, bundle.js file that contains all of our applications code. So Application loads up -> react-router loads up -> history object that is created by the browser router, inspects current url -> It seems that we are at the route of '/pagetwo' or whatsoever -> the history object tells the BrowserRouter, we are at '/pagetwo' -> BrowserRouter object tells routers inside of the object that we are at '/pagetwo' so render yourself appropriately.
+- This mechanism of always responding with HTML file if route is undefined is not typical in any traditional server.
+- Therefore, this is why it is so challenging to set up or deploy an application that makes use of the BrowserRouter.
+- HashRouter
+  - With HashRouter, you are supposed to be setting up your backend server do not take a loog at anything after the hash.
+  - If anyone ever makes requests to localhost:3000, you are always going to respond with index.html file. 
+  - And your application loads up, the application will then look at whatever is after the hash and then use that to determine what content to show on the screen. 
