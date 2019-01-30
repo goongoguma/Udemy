@@ -1373,5 +1373,10 @@ export const fetchPostsAndUsers = () => {
 - Edit Stream : StreamEdit (/streams/edit)
 - Delete Stream : StreamDelete (/streams/delete)
 
+## 84. Always Visible Components
+
+- We want our head component to always be visible no matter what url, user is trying to look at. 
+- In order to do so, we are going to add the header component to our app component outside of the BrowserRouter.
+- If we have a component that is not listed inside the browser router, it will always be shown 100% of the time irrespective of what the current path is. 
 
 
