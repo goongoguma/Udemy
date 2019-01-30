@@ -1379,4 +1379,25 @@ export const fetchPostsAndUsers = () => {
 - In order to do so, we are going to add the header component to our app component outside of the BrowserRouter.
 - If we have a component that is not listed inside the browser router, it will always be shown 100% of the time irrespective of what the current path is. 
 
+## 85. Link Inside Routers
+
+- Error : You should not use <Link> outside a <Router> occurs
+- The error saysing that any component that is not a child of our router cannot contain any react router related components. 
+- So we are going to make sure that the App component renders the browser router as it still is but we are going to simply take our Header component and move it underneath the BrowserRouter.
+- Because the Header component is not going to be wrapped up inside of route, the header will continue to always be visible. 
+- BrowserRouter 아래에 있지만 Header 컴포넌트에 Route를 사용하지 않음으로써 화면에 렌더링되게 만든다는것. 
+- So the Header component is a child of the browser router and so it can successfully make use of a link element.
+  ```js
+<BrowserRouter>
+  <div>
+    <Header />
+    <Route path="/" exact component={StreamList} />
+    <Route path="/streams/new" exact component={StreamCreate} />
+    <Route path="/streams/edit" exact component={StreamEdit} />
+    <Route path="/streams/delete" exact component={StreamDelete} />
+    <Route path="/streams/show" component={StreamShow} />
+  </div>
+</BrowserRouter>
+  ```
+
 
