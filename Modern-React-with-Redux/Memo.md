@@ -1067,7 +1067,7 @@ export const fetchPosts = () => {
 - It would be a lot better if we could figure out some way to pass it just the user that it cares about.
 - In UserHeader component, mapStateToProps function seems just like a little bit unnecessary. Everytime we want to pull some data out of a component, we have to define this really repetitive function.
 - But there is another way that would have been really nice to pull data out of the redux store.
-- So essentially rather than finding the appropriate user inside of the component, we want to find it in side of mapStateToProps.
+- So essentially rather than finding the appropriate user inside of the component, we want to find it inside of mapStateToProps.
 - We can refers props of the component using 'ownProps' object as a second argument of mapStateToProps function.
   ```js
   const mapStatetoProps = (state, ownProps) => {
@@ -1124,10 +1124,10 @@ export const fetchPosts = () => {
 
 - Create new action creator 'fetchPostsAndUsers'
 - Inside of there, call other action creators
-- However if we just call action creators inside of the new action creator, those creators are not going to be dispatched to reducers.
+- However if we just call action creators inside of the new action creator, it is not going to be dispatched to reducers.
 - So when we call action creators inside of the new action creator, we have to pass the result of calling those into the dispatch function.
-- When action creator inside of fetachPostsAndUsers is called, redux thunk is going to see the inner function of the action creator and invoke it and pass in dispatch as the first argument. So then the inner function is going to make a request over to API, get the list of posts and then it is going to dispatch its own action internally and start that entire process of updating the reducer.
-- SO WHENVER WE CALL AN ACTION CREATOR FROM INSIDE OF AN ACTION CREATOR, WE NNED TO MAKE SURE THAT WE DISPATCH THE RESULT OF CALLING THE ACTION CREATOR.
+- When action creator inside of fetachPostsAndUsers is called, redux-thunk is going to see the inner function of the action creator and invoke it and pass in dispatch as the first argument. So then the inner function is going to make a request over to API, get the list of posts and then it is going to dispatch its own action internally and start that entire process of updating the reducer.
+- SO WHENVER WE CALL AN ACTION CREATOR FROM INSIDE OF ANOTHER ACTION CREATOR, WE NEED TO MAKE SURE THAT WE DISPATCH THE RESULT OF CALLING THE ACTION CREATOR.
 
   ```js
   export const fetchPostsAndUsers = () => {
@@ -1145,9 +1145,9 @@ export const fetchPosts = () => {
   };
   ```
 
-- But whenver we call fetchPosts that is going to initialte a asynchronous request over to the API.
+- But whenver we call fetchPosts that is going to initiate an asynchronous request over to the API.
 - We need to somehow make sure that we do not attempt to get the our list of posts that have been fetched until fetchPosts action creator has completed and has fetched all the appropriate data.
-- So we are going to put 'await' keyword in front of dispatch method in order to make sure that when we dispatch that action creator and the inner function eventually gets called, await keyword is essentially make sure that we wait for the API request to be completed befroe we move on and do things inside of new action creator.
+- So we are going to put 'await' keyword in front of dispatch method in order to make sure that when we dispatch that action creator and the inner function eventually gets called, await keyword is essentially make sure that we wait for the API request to be completed before we move on and do things inside of new action creator.
 
 ```js
 export const fetchPostsAndUsers = () => {
@@ -1183,7 +1183,7 @@ export const fetchPostsAndUsers = () => {
    userIds.forEach(id => dispatch(fetchUser(id)));
   ```
 - No await keyword this time. Because we do not care at all about waiting for eash user to be fetched inside a fetchPosts users. (이미 필요한 데이터는 다 있으니까 기다릴 필요가 없음)
-- And remove componentDidMount lifecycle from UserHeader component because the lifecycle method is keep attempting to fetch the data.  
+- And remove componentDidMount lifecycle from UserHeader component because the lifecycle method keeps attempting to fetch the data.  
 
 ## 74. App Wrapup
 
@@ -1231,6 +1231,108 @@ export const fetchPostsAndUsers = () => {
   }
 };
 ```
-- And remember that anytime that we return some data from a reducer, we always have to return a new array or a new object or a different valued string or a different value number, if we expect redux to realize that we made a change to the data inside of our application. 
+- *And remember that anytime that we return some data from a reducer, we always have to return a new array or a new object or a different valued string or a different value number, if we expect redux to realize that we made a change to the data inside of our application.*
 - If we ever just return the exact same object or array, redux has that very simple comparison where it just checks to see if that is the same object or array in memory.
 - And if it is, redux says 'oh no data has changed' and it does not update the rest of your application and tell the react side of the app to actually re-render itself and pull down new state and show some new content on the screen.
+
+## 75. Streaming App Outline
+
+- We are going to have our react application running inside the user's browser.
+- We are going to have a small API server that essentially lists out all streams or channels that video can watch.
+- the API is going to record what streams or channels exist
+- And we are going to have RTMP(Real Time Messaging Protocol) Server that is actually responsible for hadling the video streams itself. 
+- RTMP server is very straightforward.
+
+ ## 76. App Challenges
+
+- Need to be able to navigate around to separate pages in our app 
+- Need to allow user to login/logout
+- Need to handle forms in Redux
+- Need to master *CRUD(Create Read Update Destroy)* operations in React/Redux 
+- Errors will likely occur! Need good error handling 
+
+## 77. Intoroducing React Router
+
+- React Router family
+  - React Rounter
+    - Core navigation library 
+    - We do not install this manually
+    - It is a core library of everything inside the react-router general project
+    - It decides how to work with react, how to change content out depending upon some different rules and some other low level logic.
+  - React Router Dom
+    - Navigation for dom-based apps
+    - To get an actual implementation of react-router that works insdie of specifically the browser.
+    - Anytime that you want to use react-router on a project to handle navigation, you are always going to installing react router dom, not react router.
+  - React Router Native
+    - Navigation for React Native apps
+  - React Router Redux
+    - Bindings between Redux and React-Router (not necessary)
+    - It is a library that is very similar to react-redux library. 
+    - It is essentially a compatibility layer to get react router and redux to play along with each other. 
+
+## 78. How React Router works?
+
+- React router does not care that we went to a domain of localhost or we were at port 3000.
+- Instead react router only cares about all the characters that are listed after the domain definition and the port definition. 
+- So localhost:3000 is interpreted as being localhost:3000/
+- If we go to localhost:3000/pageone, react router only cares about everything after the port and the domain. So react router would only care about /pageone. 
+- When we created the application and loaded up inside the browser, we created an instance of the BrowserRouter component. 
+- BrowserRouter component internally creates an object of its own called history object.
+- This object is going to look at the inside of the address bar.
+- It is going to extract just that portion of the url that react router curioust about (just everything after domain name and the port).
+- History object is then going to communicate the path over to browser router and then browser router is then going to communicate that path down to route components. 
+- The route components are going to decide either to show themselves or hide themselves depending upon the path inside of the url that the user is visiting, and the path property that it was passed when it was created. 
+
+## 79. How Paths Get Matched
+
+- Inse of react router application, we can very easily have multiple route components that match a given url and all show themselves to the user. 
+- So by deeply nesting routes, we can customize how some part of our app looks depending upon the url 
+- And we do not have to pass down some deep configuration through redux or props or something like that to configure how a very deeply nested child component renders itself.
+- 'exact' keyword.
+```js
+<Route path="/" exact component={PageOne} />
+```
+  - A single route or single url or single path can be matched by different routes inside of application. 
+  - When you add on a prop name of exact, it causes react router to change the rule that it uses for matching the path slightly. 
+  - It essentially changes to extracted path equal the string path (extractedPth === path).
+  - It only modifies the route that you add it to. 
+
+## 80. How to Not Navigate with React Router
+
+- Bad Navigation
+  - You add an <a> tag to your application with href='/pagetwo' and click it
+  - Your browser makes a request to localhost:3000/pagetwo
+  - Development server responds with index.html file
+  - *Browser receives index.html file, dumps old HTML file it was showing (including all of your react/redux state data!)*
+    - If you put anchor tags inside of your app and then you click on one, you are making a brand new request to some outside server that is going to return a brand new HTML document and then show it on the screen.
+    - During the process, the normal operation of the browser is to dump all variables in memory which means all JS data gets entirely dumped. 
+    - So that means that in  the context of your react redux application, any data that you had loaded up like any API requests or user had typed in anything whatsoever is going to be 100% wiped. 
+    - Therefore, you would have to refetched all the data at second time or have user typed all the data in. 
+    - (You can check in developer console, network tab)
+  - index.html file lists our JS files in script tags - browser downloads and executes these scripts
+  - Our app starts up.
+
+## 81. Navigating with React Router
+
+- Instead of using href and <a> tag, use <Link> to tag.
+```js
+<Link to="/pagetwo">Navigate to PageTwo</Link>
+```
+- Using inspector, when you click <Link>, what actually showed up in Element console is <a> tag.
+- So when you use the link tag, you are still showing an <a> tag on the screen.
+- What we want to do with <Link>
+  - User wants to navigate to another page in our app
+  - User clicks a 'Link' tag
+  - *React router prevents the browser from navigating to the new page and fetching new index.html file!*
+  - URL still changes
+  - 'History' object sees updated url, takes it and sends it to BrowserRouter
+  - BrowserRouter communicates the url to Route components
+- This is where Singl Page App(SPA) comes from.
+  - It means that we are only loading up a single HTML document. 
+  - We still allow the user to navigate around the application by clicking on various link tags.
+  - But when they navigate around, they still are making use of the same document. 
+  - We are just showing and hiding different sets of components based upon the url. 
+  - This is how we handle navigation inside react writer application. 
+  - We are essentially tricking the user into thinking that they really are going to different pages. 
+  - But in fact, we are just showing in hiding different components. 
+
