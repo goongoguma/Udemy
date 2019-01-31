@@ -1519,7 +1519,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 
 ## 90. Sending a User Into the OAuth Flow
 
-- In console, get a reference to that Auth instance object.
+- In console, get a reference to that auth instance object.
   ```js
   const auth = gapi.auth2.getAuthInstance()
   ```
@@ -1530,6 +1530,14 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - When you call signIn method. login popup window apprears.
   - In order to check that user is signed in, type 'auth.isSignedIn.get() according to the document.
 - In theory if we had asked for any other scopes around this user such as ability to modify their email or their Google Drive files, we could now use this library to modify those files or those emails.
+
+## 91. Rendering Authentication Status
+
+- What we are going to do?
+  - Get a reference to the 'auth' object after it is initialized.
+  - Figure out if the user is currently signed in.
+  - Print their authentication status on the screen.
+
 
 
 
