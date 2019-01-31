@@ -1750,5 +1750,9 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   this.auth.isSignedIn.listen(this.onAuthChange(this.state.isSignedIn));
   ```
 
+## 98. Fixed Action Types
+
+- When login button is clicked, nothing is happening.
+- This is a common bug 
   
 
