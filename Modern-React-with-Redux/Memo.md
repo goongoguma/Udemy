@@ -1620,6 +1620,44 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   };
   ```
 
+## 93. Redux Architecture Design
+
+- How to setup Google OAuth using redux?
+  - Inside of GoogleAuth Component, we have got onSignIngClick, onSignOutgClick.
+  - Whenever we call those methods, we are going to be accessing the Auth2 instance and that is going to start either signIn flow our signOut flow. 
+  - Either way, the library is going to eventually call onAuthChange method inside of the component. 
+  - In order to integrate redux into this flow, we are going to make sure that anytime that onAuthChange is called, we call some appropriate action creators. 
+  - Action creator called something like signIn or signOut.
+  - These action creators are called when user successfully signs in or signs out.
+  - When we call action creators and they will return in action.
+  - That action is going to show up in a reducer called something like AuthReducer.
+  - The reducer probably going to be an object or something like that and holds simple boolean value that reflects whether or not the user is currently signed in or signed out.
+  - But we already have boolean value inside of GoogleAuth component.
+  - because GoogleAuth components is already holding the value.
+  ```js
+  renderAuthButton() {
+    if (this.state.isSignedIn === null) {
+      return null;
+    } else if (this.state.isSignedIn) {
+      return (
+        <button className="ui red google button" onClick={this.onSignOutClick}>
+          <i className="google icon" />
+          Sign Out
+        </button>
+      );
+    } else {
+      return (
+        <button className="ui red google button" onClick={this.onSignInClick}>
+          <i className="google icon" />
+          Sign In with Google
+        </button>
+      );
+    }
+  }
+  ```
+  - Answer is we are going to need login state many other places inside of the app.
+  - If we store the value inside of state which is central place where the data is stored, through reducer it would be easier to get access no matter where we are. 
+
 
 
 
