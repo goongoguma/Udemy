@@ -1535,8 +1535,55 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 
 - What we are going to do?
   - Get a reference to the 'auth' object after it is initialized.
+  ```js
+  gapi.auth2.getAuthInstance()
+  ```
   - Figure out if the user is currently signed in.
   - Print their authentication status on the screen.
+- When we loaded up 'client:auth2' , we had to pass in callback function that was that invoked after additional module inside of the library was successfully loaded up.
+- Similar fashion, when we call 'gapi.client.init' executes an asynchronous network request over to Google's API server in order to initialize our client. 
+- So we want to get some type of callback function or some type of notice for when that initialization set up is all done. 
+- So we are going to .then statement
+- Inside of then, we can write some amount of code that will be only executed once our entire gpi library is ready to go. 
+- Which means inside of then method, we can start to figure out whether or not the user is currently signed in and then attempt to print out that status on the screen.
+  ```js
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      window.gapi.client
+        .init({
+          clientId:
+            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+          scope: "email"
+        })
+        .then(() => {
+          this.auth = window.gapi.auth2.getAuthInstance();
+        });
+    });
+  }
+  ```
+- After running .then method, inside of any other function inside my class, I can reference 'this.auth'.
+- This will give me a reference to that auth instance that I can use to sign the user in or sign them out or get the users current authentication status.
+- But keep in mind that when the component gets called, our component has already been rendered to the screen. 
+- So now if we want to update the text or what content the component shows, we need to somehow get the component to rerender. 
+- Therefore we are going to be making use of component level state.
+- When we update the state, it will cause the component to automatically render and we can then print up the authentication status on the screen.
+  ```js
+  state = { isSignedIn: null };
+  
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      window.gapi.client
+        .init({
+          clientId:
+            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+          scope: "email"
+        })
+        .then(() => {
+          this.auth = window.gapi.auth2.getAuthInstance();
+          this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+        });
+    });
+  ``` 
 
 
 
