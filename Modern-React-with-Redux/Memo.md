@@ -1585,6 +1585,41 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
     });
   ``` 
 
+## 92. Updating Auth State
+
+- Login or Logout state does not rerender on a screen automatically. We have to keep refresh the page in order to see the changed login status.
+- In order to make the status rerender on a screen we are going to use another method in `getAuthInstance()`.
+- In 'isSignedIn' method inside of 'getAuthInstance()', there are couple of methods we can find. 
+- These are private functions that we are not supposed to call. 
+- It links to prototype property and the property has listen method.
+- So we can pass callback function to listen method. 
+- If we do that, listen method will be invoked anytime that users on authentication status is changed. 
+- So we can setState inside of listen method and then somehow we could update the text inside the header anytime tuer signs in or signs out.
+  ```js
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      // it returns promise
+      window.gapi.client
+        .init({
+          clientId:
+            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+          scope: "email"
+        })
+        .then(() => {
+          this.auth = window.gapi.auth2.getAuthInstance();
+          this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+          this.auth.isSignedIn.listen(this.onAuthChange);
+        });
+    });
+  }
+
+  onAuthChange = () => {
+    this.setState({
+      isSignedIn: this.auth.isSignedIn.get()
+    });
+  };
+  ```
+
 
 
 
