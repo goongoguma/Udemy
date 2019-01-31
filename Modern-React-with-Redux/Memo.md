@@ -1729,7 +1729,26 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```
 - Last thing we have to do is communicate the state back over to the GoogleAuth component.
 
+## 96. Handling Auth Status Through Redux 
+- We have to Auth piece of state back into our GoogleAuth Component.
+- We now essentially extracted that information to our redux store.
+- So now we need to pipe the information back into the component that was already containing that data.
+- It feels a little bit awkward to do it but this is correct way to do it.
 
+## 97. Handling Auth Status Through Redux
+
+- When we finished initializing our library, we are going to assign the auth instance to this.auth
+  ```js
+  this.auth = window.gapi.auth2.getAuthInstance();
+  ```
+- then we immediately update our state inside of our redux store,
+  ```js
+  this.onAuthChange(this.auth.isSignedIn.get());
+  ```
+- and then we will basically sit around and wait for the authentication status to change at some point in the future
+  ```js
+  this.auth.isSignedIn.listen(this.onAuthChange(this.state.isSignedIn));
+  ```
 
   
 
