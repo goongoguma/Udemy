@@ -1504,7 +1504,7 @@ componentDidMount() {
   ```js
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
-      window.gapi.clinet.init({
+      window.gapi.client.init({
         clientId:
           "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
         scope: "email"
@@ -1514,5 +1514,24 @@ componentDidMount() {
   ```
 - But it is just going to initialize the library.
 - It is not going to actually take the user goes through OAuth uprocess. 
+
+reference : https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2getauthinstance
+
+## 90. Sending a User Into the OAuth Flow
+
+- In console, get a reference to that Auth instance object.
+  ```js
+  const auth = gapi.auth2.getAuthInstance()
+  ```
+- variable auth contains many objects and you can check those in documentation.
+- Trigger the flow for the user manually. 
+  - so rather than clicking on any button or anything like that, we are going to just try to manually use methods we got to get the user to signIn.
+  - Basically we need to call signIn method. 
+  - When you call signIn method. login popup window apprears.
+  - In order to check that user is signed in, type 'auth.isSignedIn.get() according to the document.
+- In theory if we had asked for any other scopes around this user such as ability to modify their email or their Google Drive files, we could now use this library to modify those files or those emails.
+
+
+
   
 
