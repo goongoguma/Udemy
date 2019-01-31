@@ -74,6 +74,19 @@
 72. 새로운 action creator를 생성함으로써 문제 해결방법
 73. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기
 74. redux-thunk 정리
+75. Streaming App intro
+76. 앱 만들때의 어려운점
+77. 리액트 라우터 소개 
+78. 리액트 라우터가 작동법
+79. exact 키워드
+80. 리액트 라우터에서 a태그를 쓰면 안되는 이유
+81. a태그 대신 Link태그 사용하기
+82. 여러 타입의 라우터들
+83. 앱 구성요소 컴포넌트
+84. 헤더 컴포넌트 만들기
+85. 에러 : You should not use Link outside a Router occur
+86. Email/Password Authentication vs OAuth Authentication
+87.  OAuth for Servers vs Browser Apps
 
 ## 1. Critical Question related to React
 
@@ -1262,7 +1275,7 @@ export const fetchPostsAndUsers = () => {
   - React Router Dom
     - Navigation for dom-based apps
     - To get an actual implementation of react-router that works inside of specifically the browser.
-    - Anytime that you want to use react-router on a project to handle navigation, you are always going to installing react router dom, not react router.
+    - Anytime that you want to use react router on a project to handle navigation, you are always going to installing react router dom, not react router.
   - React Router Native
     - Navigation for React Native apps
   - React Router Redux
@@ -1280,12 +1293,12 @@ export const fetchPostsAndUsers = () => {
 - BrowserRouter component internally creates an object of its own called history object.
 - This object is going to look at the inside of the address bar.
 - It is going to extract just that portion of the url that react router curioust about (just everything after domain name and the port).
-- History object is then going to communicate the path over to browser router and then browser router is then going to communicate that path down to route components. 
+- History object is then going to communicate the path over to BrowserRouter and then BrowserRouter is then going to communicate that path down to route components. 
 - The route components are going to decide either to show themselves or hide themselves depending upon the path inside of the url that the user is visiting, and the path property that it was passed when it was created. 
 
 ## 79. How Paths Get Matched
 
-- Inse of react router application, we can very easily have multiple route components that match a given url and all show themselves to the user. 
+- Inside of react router application, we can very easily have multiple route components that match a given url and all show themselves to the user. 
 - So by deeply nesting routes, we can customize how some part of our app looks depending upon the url 
 - And we do not have to pass down some deep configuration through redux or props or something like that to configure how a very deeply nested child component renders itself.
 - 'exact' keyword.
@@ -1300,28 +1313,29 @@ export const fetchPostsAndUsers = () => {
 ## 80. How to Not Navigate with React Router
 
 - Bad Navigation
-  - You add an <a> tag to your application with href='/pagetwo' and click it
+  - You add an 'a tag' to your application with href='/pagetwo' and click it
   - Your browser makes a request to localhost:3000/pagetwo
   - Development server responds with index.html file
   - *Browser receives index.html file, dumps old HTML file it was showing (including all of your react/redux state data!)*
     - If you put anchor tags inside of your app and then you click on one, you are making a brand new request to some outside server that is going to return a brand new HTML document and then show it on the screen.
     - During the process, the normal operation of the browser is to dump all variables in memory which means all JS data gets entirely dumped. 
-    - So that means that in  the context of your react redux application, any data that you had loaded up like any API requests or user had typed in anything whatsoever is going to be 100% wiped. 
+    - So that means that in the context of your react redux application, any data that you had loaded up like any API requests or user had typed in anything whatsoever is going to be 100% wiped. 
     - Therefore, you would have to refetched all the data at second time or have user typed all the data in. 
     - (You can check in developer console, network tab)
-  - index.html file lists our JS files in script tags - browser downloads and executes these scripts
+  - index.html file lists our JS files in script>tags 
+  - browser downloads and executes these scripts
   - Our app starts up.
 
 ## 81. Navigating with React Router
 
-- Instead of using href and <a> tag, use <Link> to tag.
+- Instead of using href and 'a tag', use 'Link tag'.
 ```js
 <Link to="/pagetwo">Navigate to PageTwo</Link>
 ```
-- Using inspector, when you click <Link>, what actually showed up in Element console is <a> tag.
+- Using inspector, when you click 'Link tag', what actually showed up in Element console is 'a tag'.
 - And also user does not get any additional requests being made for any html document.
-- So when you use the <Link> tag, you are still showing an <a> tag on the screen.
-- What we want to do with <Link>
+- So when you use the 'Link tag', you are still showing an 'a tag' on the screen.
+- What we want to do with 'Link tag'.
   - User wants to navigate to another page in our app
   - User clicks a 'Link' tag
   - *React router prevents the browser from navigating to the new page and fetching new index.html file!*
@@ -1329,13 +1343,13 @@ export const fetchPostsAndUsers = () => {
   - 'History' object sees updated url, takes it and sends it to BrowserRouter
   - BrowserRouter communicates the url down to all the different Route components
   - Route components rerender to show new set of components depending upon the path that the user is visiting.
-- So when you make use of the <Link> tag, we are not dumping all of our react and JS data, we are just showing a different set of components on the screen.
+- So when you make use of the 'Link tag', we are not dumping all of our react and JS data, we are just showing a different set of components on the screen.
 - This is where Singl Page App(SPA) comes from.
   - It means that we are only loading up a single HTML document. 
   - We still allow the user to navigate around the application by clicking on various link tags.
   - But when they navigate around, they still are making use of the same document. 
   - We are just showing and hiding different sets of components based upon the url. 
-  - This is how we handle navigation inside react writer application. 
+  - This is how we handle navigation inside react router application. 
   - We are essentially tricking the user into thinking that they really are going to different pages. 
   - But in fact, we are just showing in hiding different components. 
 
@@ -1357,11 +1371,11 @@ export const fetchPostsAndUsers = () => {
   - This is important because all of our definitions are stuffed into the JS or client side of application. 
   - So an user goes over to our application and they click on link to navigate over to pagetwo and we refresh the page, we are making a request to our server for the route /pagetwo. 
   - And our dev server, if you click on the request and then click on response in network tab, it decides automatically return the html file. 
-  - After browser loads up all html, it sees that there is a link inside, bundle.js file that contains all of our applications code. So Application loads up -> react-router loads up -> history object that is created by the browser router, inspects current url -> It seems that we are at the route of '/pagetwo' or whatsoever -> the history object tells the BrowserRouter, we are at '/pagetwo' -> BrowserRouter object tells routers inside of the object that we are at '/pagetwo' so render yourself appropriately.
+  - After browser loads up all html, it sees that there is a link inside, bundle.js file that contains all of our applications code. So Application loads up -> react router loads up -> history object that is created by BrowserRouter, inspects current url -> It seems that we are at the route of '/pagetwo' or whatsoever -> the history object tells the BrowserRouter, we are at '/pagetwo' -> BrowserRouter object tells routers inside of the object that we are at '/pagetwo' so render yourself appropriately.
 - This mechanism of always responding with HTML file if route is undefined is not typical in any traditional server.
 - Therefore, this is why it is so challenging to set up or deploy an application that makes use of the BrowserRouter.
 - HashRouter
-  - With HashRouter, you are supposed to be setting up your backend server do not take a loog at anything after the hash.
+  - With HashRouter, you are supposed to be setting up your backend server do not take a long at anything after the hash.
   - If anyone ever makes requests to localhost:3000, you are always going to respond with index.html file. 
   - And your application loads up, the application will then look at whatever is after the hash and then use that to determine what content to show on the screen. 
 
@@ -1377,27 +1391,27 @@ export const fetchPostsAndUsers = () => {
 
 - We want our head component to always be visible no matter what url, user is trying to look at. 
 - In order to do so, we are going to add the header component to our app component outside of the BrowserRouter.
-- If we have a component that is not listed inside the browser router, it will always be shown 100% of the time irrespective of what the current path is. 
+- If we have a component that is not listed inside the BrowserRouter, it will always be shown 100% of the time irrespective of what the current path is. 
 
 ## 85. Link Inside Routers
 
-- Error : You should not use <Link> outside a <Router> occurs
-- The error saysing that any component that is not a child of our router cannot contain any react router related components. 
+- Error : You should not use 'Link tag' outside a 'Router' occurs
+- The error saying that any component that is not a child of our router cannot contain any react router related components. 
 - So we are going to make sure that the App component renders the browser router as it still is but we are going to simply take our Header component and move it underneath the BrowserRouter.
 - Because the Header component is not going to be wrapped up inside of route, the header will continue to always be visible. 
 - BrowserRouter 아래에 있지만 Header 컴포넌트에 Route를 사용하지 않음으로써 화면에 렌더링되게 만든다는것. 
-- So the Header component is a child of the browser router and so it can successfully make use of a link element.
+- So the Header component is a child of the BrowserRouter and so it can successfully make use of a link element.
   ```js
-<BrowserRouter>
-  <div>
-    <Header />
-    <Route path="/" exact component={StreamList} />
-    <Route path="/streams/new" exact component={StreamCreate} />
-    <Route path="/streams/edit" exact component={StreamEdit} />
-    <Route path="/streams/delete" exact component={StreamDelete} />
-    <Route path="/streams/show" component={StreamShow} />
-  </div>
-</BrowserRouter>
+  </BrowserRouter>
+      <div>
+      <Header />
+      <Route path="/" exact component={StreamList} />
+      <Route path="/streams/new" exact component={StreamCreate} />
+      <Route path="/streams/edit" exact component={StreamEdit} />
+      <Route path="/streams/delete" exact component={StreamDelete} />
+      <Route path="/streams/show" component={StreamShow} />
+    </div>
+  </BrowserRouter>
   ```
 
 ## 86. OAuth-Based Authentication
@@ -1410,7 +1424,7 @@ export const fetchPostsAndUsers = () => {
   - User authenticates with outside service provider (Google, Linkedin, Facebook).
   - User authorizes our app to access their information.
   - Outside provider tells us about the user.
-  - We are trusting the outside prov ider to correctly handle identification of a user.
+  - We are trusting the outside provider to correctly handle identification of a user.
   - OAuth can be used for user identification in our app and our app making actions on behalf of user.
   - So OAuth is not only about authentication but also about letting our application get access to all that user's data on some outside service provider. 
 
@@ -1421,7 +1435,7 @@ export const fetchPostsAndUsers = () => {
   - Usually used when we have an app that needs to access user data when they are not logged in.
   - Difficult to setup because we need to store a lot of info about the user.
 - OAuth for JS Browser Apps
-  - Results in a 'token' that a browser app can use ot make requests on behalf of the user.
+  - Results in a 'token' that a browser app can use to make requests on behalf of the user.
   - Usually used when we have an app that only needs to access user data while they are logged in.
   - Very easy to set up thanks to Google's JS lib to automate flow.
 - Google OAuth Login Flow
@@ -1436,5 +1450,69 @@ export const fetchPostsAndUsers = () => {
   - If user happens to log out our application or Google servers, we are going to get another callback invoked. 
   - This callback is going to say 'user just logged out'.
 
+## 88. Creating OAuth Credentials
 
+- Steps for Setting Up OAuth
+  - Create a new project at console.developers.google.com/
+  - Set up OAuth confirmation screen
+  - Generate an OAuth Client ID
+  - Install Google's API library, initialize it with the OAuth Client ID
+  - Make sure the library gets called anytime the user clicks on the 'Login with Google' button.
+
+## 89. Wiring Up the Google API Library
+
+- Unfortunately Google themselves do not offer the library over npm, we are just going to add a manual script tag into the index.html. 
+  ```js
+  <script src="https://apis.google.com/js/api.js"></script>
+  ```
+- In order to check the code is working, type 'gapi' in console. If it is, you are going to see object '{load: f}'.
+- So we are going to create a new React component that is going to essentially wrap the the Google library and make sure our user do the entire OAuth process. 
+- When you print out gapi in console, you will see that it only has a single function tied to it called '{load: f}'. 
+- load means load up some internal library by making a follow up request over to Google servers and fetching some additional amount of JS code and then adding it essentially to Google library. 
+- To do so, we are going to call 'gapi.load' and then we are going to pass in a 'clint:auth2'.
+- gapi.load('client:auth2')
+- we can run that line of code and we will see the additional request automatically made to fetch some additional JS code and load it up into that library.
+- then we type 'gapi' again, some additional properties have been added inside of the object. 
+- After we load up the additional library, we can then register or initialize it with our OAuth client id by calling 'gapi.client.init({clientId: 'clientId'})'
+- gapi -> gapi.load('client:auth2') -> gapi.client.init({clientId: 'clientId'})
+- We want to make GoogleAuth component loads up the client portion of the library one time when the component is first rendered onto the screen.
+- In order to do that, we are going to use componentDidMount lifecycle in the component.
+```js
+componentDidMount() {
+  window.gapi.load("client:auth2");
+}
+```
+- So now, anytime that the GoogleAuth component is rendered onto the screen, we are going to try to load up the client portion of the library. 
+- When we load up that library, it takes some amount of time for the library to reach over to Google servers and download some additional JS code. 
+- Therefore, we need to get a callback of when that process is completed.
+- And the callback function is only going to be called after 'client:auth2' library has been successfully loaded up gapi. 
+  ```js
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      window.gapi.clinet.init({
+        clientId:
+          "123aslf12909vaojviwe"
+      });
+    });
+  }
+  ```
+- So after we successfully load up the client library, we are going to initialize our appication with the clientId that we had generated. 
+- And also we have to put another option in addition to clientId. It is 'scope'.
+- In scope property, we are going to specify the different scopes that we want to load up when we take user or we want to fetch when the user goes through OAuth process. 
+- (Scope is essentially talking about what different parts of the user's profile, email or the user account that we want to get access to)
+- We want to access user's email. so add email as a string. 
+  ```js
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      window.gapi.clinet.init({
+        clientId:
+          "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+        scope: "email"
+      });
+    });
+  }
+  ```
+- But it is just going to initialize the library.
+- It is not going to actually take the user goes through OAuth uprocess. 
+  
 
