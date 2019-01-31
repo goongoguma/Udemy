@@ -1658,6 +1658,76 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - Answer is we are going to need login state many other places inside of the app.
   - If we store the value inside of state which is central place where the data is stored, through reducer it would be easier to get access no matter where we are. 
 
+## 94. Connecting Auth with Action Creators
+
+- Create action creators
+```js
+  export const signIn = () => {
+  return {
+    type: "SIGN_IN"
+  };
+};
+
+  export const signOut = () => {
+    return {
+      type: "SIGN_OUT"
+    };
+  };
+```
+- Wire up GoogleAuth component with action creators.
+- And put it into onAuthChange method
+  ```js
+  onAuthChange = isSignedIn => {
+    if (isSignedIn) {
+      this.props.signIn();
+    } else {
+      this.props.signOut();
+    }
+  };
+  ```
+- Depends what argument onAuthChange component will get, action that is going to be dispatched will be different.
+
+## 95. Building the Auth Reducer
+
+- Create reducer name authReducer.
+- reducer has default state in form of object because we are going to eventually have one other property related to authentication.
+- But we are going to need default state of null in this case so we are going to create initialiser.
+- So in addition to having just some boolean value or no value to indicate whether or not the user signed in, we are going to have some other piece of data inside of the object. 
+- And the easiest way to arrange all these data is to make use of an object.
+- But we probably start to off this property being set to null.
+- So in order to initialize default argument of state, we are going to create an initializer above the reducer.
+  
+  ```js
+   export default (state = {}, action)  => {};
+
+   // to
+
+    // make variable name all capitalized to make other engineers that this is supposed to be a true constant object, do not modify it.
+    const INITIAL_STATE = {
+    isSignedIn: null
+  };
+    export default (state = INITIAL_STATE, action)  => {};
+
+    //to
+
+    const INITIAL_STATE = {
+    isSignedIn: null
+  };
+
+  export default (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+      case "SIGN_IN":
+      // spread syntax because I want to modify a property
+        return { ...state, isSignedIn: true };
+      case "SIGN_OUT":
+        return { ...state, isSignedIn: false };
+      default:
+        return state;
+    }
+  };
+
+  ```
+- Last thing we have to do is communicate the state back over to the GoogleAuth component.
 
 
 
