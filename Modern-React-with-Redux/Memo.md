@@ -1754,5 +1754,67 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 
 - When login button is clicked, nothing is happening.
 - This is a common bug 
+- In order to prevent this situation, create a new file name types.js in action folder.
+- And set actions value as a variable.
+  ```js
+  export const SIGN_IN = "SIGN_IN";
+  export const SIGN_OUT = "SIGN_OUT";
+  ```
+
+## 99. Recording the User'sID
+
+- Some point in time, we need to make sure that each stream is somehow associated with the user who created it (delete, edit etc).
+- In order to do so, we are going to create each stream record inside the API server that contains the ID of the user who created it.
+- We can find the username using.
+  ```js
+  gapi.auth2.getAuthInstance().currentUser
+  ```
+- This contains information about the user who is currently signed in to our application.
+- Inside of this current object, we can find Google ID for this user.
+- When user login using Google account, Google assigns them id automatically. 
+- Therefore, use this ID, we can track which user created which stream.
+- We can find ID that assigned by Google using this
+  ```js
+  gapi.auth2.getAuthInstance().currentUser.get().getId() // 11115784693215
+  ```
+- So we want to essentially store this ID inside of our auth reducer. 
+- In order to mark which user created the stream very easily by using ID
+  - pass 'this.auth.currentUser.get().getId()' as an argument when user signs in.
+  ```js
+  onAuthChange = isSignedIn => {
+    if (isSignedIn) {
+      this.props.signIn(this.auth.currentUser.get().getId());
+    } else {
+      this.props.signOut();
+    }
+  };
+  ```
+  - So now when we call this action creator, we are going to also pass on the idea of the user who has signed in.
+  - And change action creator, reducer with it (both have to receive userId)
+  ```js
+  export const signIn = userId => {
+  return {
+    type: SIGN_IN,
+    payload: userId
+    };
+  };
+  const INITIAL_STATE = {
+    isSignedIn: null,
+    userId: null
+  };
+
+  export default (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+      case SIGN_IN:
+        return { ...state, isSignedIn: true, userId: action.payload };
+      case SIGN_OUT:
+        return { ...state, isSignedIn: false, userId: null };
+      default:
+        return state;
+    }
+  };
+```
+
+
   
 
