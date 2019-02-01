@@ -1934,16 +1934,109 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
 - Whenever we place a field tag, we are always going to provide it some number of props. 
 - name prop is always required inside of Field component. It is a name of the property that field is going to manage.
 - The names we are going to put together are `Title` and `Description`.
-  ```js
+```js
   <Field name='title'/>
   <Field name='description'/>
-  ```
+```
 - But you are going to see the error message frequently saying 
   ```js
   Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
   ```
 - Because when we show this field component, the field itself has no idea how to render some type of input element on the screen. So a field does not know how to show a text input, checkbox, dropdown etc.
 - A Field is just a component that is going to be part of the system that is going to automatically handle all of the forms put together but it individually is not responsible for actually getting to show up on the screen.
--
+
+## 105. Automatically Handling Events
+
+- In order to tell Field component how to show an actual text input on the screen, we have to assign a prop to it called component. 
+- Component props is going to be either a real component or a function for the field to call.
+- It needs to return some element that is going to actually be shown on the screen. 
+```js
+  <Field name='title' component={} />
+  <Field name='description'/>
+```
+- Therefore Field element in total is really just about hooking up all of the infrastructure that redux form is actually doing for us. When we actually want to show some content or some form element on a screen, it is up to us to show the actual input element and customize it in some fashion.
+- We can do so using component props. 
+- We are going to create helper method and wire it up with component props.
+```js
+class StreamCreate extends React.Component {
+  renderInput() {
+    return <div>I am an input</div>;
+  }
+
+  render() {
+    return (
+      <form>
+        <Field name="title" component={this.renderInput} />
+        <Field name="description" component={this.renderInput} />
+      </form>
+    );
+  }
+}
+```
+- But we can check that two `I am an input` rendered on a screen.
+- Here is important lesson:
+  - Redux from is about automating many processes such as making sure that your form data is inside the redux store, getting that data back into the component and helping you getting the data into the appropriate input elements. 
+  - *However, redux form does not really know a lot about what you are doing!*
+  - It does not know you are showing a text input.
+  - It does not know you are showing a dropdown.
+  - It does not know you are showing a checkbox.
+  - It does not know you are not showing any input element at all.
+  - Redux form is just kind of going to assume that you are doing the correct thing.
+- So to do things the right way, we are going to return an input element.
+```js
+renderInput() {
+  return <input />
+}
+```
+- But it is not controlled input.
+- Anytime that the Field tag calls `this.renderInput`, it is going to pass in some number of arguments. 
+- First, pass `formProps` into an argument and console.log it.
+```js
+renderInput(formProps) {
+  console.log(formProps);
+  return <input />;
+}
+```
+- Inside of formProps object, we have keys of input and meta.
+  - input property has actual field name of title. 
+  - So the object is meant to essentially be customizing the input.
+  - Inside of input properties, we can find many familiar looking callback handlers including `onChange` and `value` props.
+  - So our job is take that onChange handler and wire up into input element, take the value prop and hook it up to the input element as well.
+- So essentially we are supposed to take this formProps, take the input property out of it and hook up the relevant properties to the text input. 
+```js
+renderInput(formProps) {
+    return (
+      <input
+        onChange={formProps.input.onChange}
+        value={formProps.input.value}
+      />
+    );
+  }
+```
+- Everytime that you create a new form through
+```js
+reduxForm({
+  form: "streamCreate"
+})(StreamCreate);
+```
+- You pass the property name `form`.
+- Whatever name of object you put inside of first argument of `reduxForm`, redux form is going to start to store all the values for inside of it. (redux form을 이용해 유저가 form을 생성하게 되면 이 객체의 값, 여기서는 streamCreate에 저장된다는것.)
+- There is another way to shorten the syntax of `renderInput` method.
+```js
+renderInput(formProps) {
+    return (
+      <input {...formProps.input}/>
+    );
+  }
+```
+- `...formProps.input` takes all those key value pairs and add them as properties to the input element. 
+- So essentially take that entire input object, take all the properties out there and add them as props to the input element. 
+- We can destructure the syntax
+```js
+renderInput({ input }) {
+    return <input {...input} />;
+  }
+```
+
   
 
