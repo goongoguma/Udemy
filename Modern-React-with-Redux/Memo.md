@@ -2203,6 +2203,10 @@ onSubmit(e) {
 - However even if we click in and click out input fields, we still do not see any error message that we intend. 
 - But if you check Elements tab in developer console, you can check the error message!
 - *The problem is the fact that semantic UI by default is going to hide error messages. It sets `display:none`*
+- Do it like below to set css.
+  ```js
+  <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
+  ```
   
 
   
