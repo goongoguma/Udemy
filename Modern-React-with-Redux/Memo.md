@@ -2066,6 +2066,31 @@ renderInput({ input, label }) {
   }
 ```
 
+## 107. Handling Form Submission
+
+- Inside of props that received by redux form library, it contains `handleSubmit` callback function. 
+- We then call that function with `onSubmit` callback method that we defined insdie of the component.
+```js
+onSubmit(e) {
+    e.preventDefault();
+  }
+
+<form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
+```
+- When we go through this entire process, it is going to change exactly how `onSubmit` gets called.
+  - Internally whenever the form gets submitted, now `handleSubmit` is going to automatically receive that event object and automatically call `preventDefault()` for us.
+  - Redux form takes care it for us.
+  - In fact, `onSubmit` does not need `e` at all. Instead it is going to be called with whatever values existed inside of our two inputs.
+  - So usually we refer to the argument something like as `formValues` 
+  ```js
+  onSubmit(formValues) {
+    console.log(formValues);
+  }
+  ```
+  - formValue argument contains the inputs that user typed and submitted.
+
+
+
 
 
   
