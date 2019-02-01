@@ -1856,5 +1856,38 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
 - So when you enable this debug session, redux dev tools is going to make sure that all the data stays around between refreshes of the page. 
 - This is incredibly useful when we start doing some advanced feature development. 
 
+## 102. Form with Redux Form
+
+- install redux form on npm.
+- How have we handled form up to this time in react. 
+  - state -> input element value -> input element onChange -> setState -> state
+- Using redux, we are going to store input data insdie of redux store and anytime a user changes an element, we are going to call an action creator. And that is going to attempt to change that data inside of a redux store.
+- Handling inputs with Redux Form
+  - We are going to have some reducer that is going to hold all the states of our different form inside of our application.
+  - So that might be value of some input element or the selection of some dropdown or the current checkboxes that are checked inside of application. 
+  - Essentially all of form data is going to exist inside of our redux store and all that form data is going to be maintained by a reducer. 
+  - Then in order to make sure that we can get the data from that store into our input elements whatever user types in, they are going to have mapStatetoProps. 
+  - It is going to take the data out of the redux store and get it into our component as props.
+  - So we are going to take that props object and all the different values inside there and pass them into our different input elements as values.
+  - Then, anytime user makes a change to an element, we are going to have some callback handler inside of our component.
+  - That is going to call action creator and try to update the form data inside of a redux store.
+- Good thing is redux form is essentially going to do all of that stuff for us.
+  - redux form includes reducer, mapStateToProps function, action creator.
+  - Only thing that we have to do is make sure that we eventually get some form information in a component down into some given input element.
+  - And make sure that the input element understands that it needs to call some callback handler provided redux form anytime that gets changed. 
+
+## 103. Connecting Redux Form
+
+- Wire up redux form library inside of index.js in reducers file.
+  ```js
+  import { reducer as formReducer } from "redux-form";
+
+  export default combineReducers({
+    auth: authReducer,
+    form: formReducer
+  });
+```
+
+
   
 
