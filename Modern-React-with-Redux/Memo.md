@@ -86,7 +86,19 @@
 84. 헤더 컴포넌트 만들기
 85. 에러 : You should not use Link outside a Router occur
 86. Email/Password Authentication vs OAuth Authentication
-87.  OAuth for Servers vs Browser Apps
+87. OAuth for Servers vs Browser Apps
+88. OAuth 설정 단계
+89. 구글 API 초기 연동하기 (OAuth 요청보내기)
+90. 구글 API에서 데이터 가져오기 (OAuth에 필요한 데이터 가져오기)
+91. 가져온 데이터를 이용해 상태 변환시켜주기 
+92. listen 메소드를 이용해 상태 변환 후 화면에 렌더링 해주기
+93. 리덕스 연결시키기
+94. Action creator 만들기
+95. 리듀서 만들기
+96. 리듀서에서 컴포넌트로
+97. 리덕스를 이용해 OAuth 다루기
+98. 변수로 action의 타입 설정해주기
+99. 유저의 ID를 redux state에 저장하기
 
 ## 1. Critical Question related to React
 
@@ -1465,16 +1477,16 @@ export const fetchPostsAndUsers = () => {
   ```js
   <script src="https://apis.google.com/js/api.js"></script>
   ```
-- In order to check the code is working, type 'gapi' in console. If it is, you are going to see object '{load: f}'.
+- In order to check the code is working, type `gapi` in console. If it is, you are going to see object `{load: f}`.
 - So we are going to create a new React component that is going to essentially wrap the the Google library and make sure our user do the entire OAuth process. 
-- When you print out gapi in console, you will see that it only has a single function tied to it called '{load: f}'. 
+- When you print out gapi in console, you will see that it only has a single function tied to it called `{load: f}`. 
 - load means load up some internal library by making a follow up request over to Google servers and fetching some additional amount of JS code and then adding it essentially to Google library. 
-- To do so, we are going to call 'gapi.load' and then we are going to pass in a 'clint:auth2'.
-- gapi.load('client:auth2')
+- To do so, we are going to call `gapi.load` and then we are going to pass in a `clint:auth2`.
+- gapi.load(`client:auth2`)
 - we can run that line of code and we will see the additional request automatically made to fetch some additional JS code and load it up into that library.
-- then we type 'gapi' again, some additional properties have been added inside of the object. 
-- After we load up the additional library, we can then register or initialize it with our OAuth client id by calling 'gapi.client.init({clientId: 'clientId'})'
-- gapi -> gapi.load('client:auth2') -> gapi.client.init({clientId: 'clientId'})
+- then we type `gapi` again, some additional properties have been added inside of the object. 
+- After we load up the additional library, we can then register or initialize it with our OAuth client id by calling 'gapi.client.init({clientId:'your cliend Id'})'
+- gapi -> gapi.load('client:auth2') -> gapi.client.init({clientId: 'your cliend Id'})
 - We want to make GoogleAuth component loads up the client portion of the library one time when the component is first rendered onto the screen.
 - In order to do that, we are going to use componentDidMount lifecycle in the component.
 ```js
@@ -1485,19 +1497,19 @@ componentDidMount() {
 - So now, anytime that the GoogleAuth component is rendered onto the screen, we are going to try to load up the client portion of the library. 
 - When we load up that library, it takes some amount of time for the library to reach over to Google servers and download some additional JS code. 
 - Therefore, we need to get a callback of when that process is completed.
-- And the callback function is only going to be called after 'client:auth2' library has been successfully loaded up gapi. 
+- And the callback function is only going to be called after `client:auth2` library has been successfully loaded up gapi. 
   ```js
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
       window.gapi.clinet.init({
         clientId:
-          "123aslf12909vaojviwe"
+          "wfeiooqwi5494411119641"
       });
     });
   }
   ```
-- So after we successfully load up the client library, we are going to initialize our appication with the clientId that we had generated. 
-- And also we have to put another option in addition to clientId. It is 'scope'.
+- So after we successfully load up the client library, we are going to initialize our application with the clientId that we had generated. 
+- And also we have to put another option in addition to clientId. It is `scope`.
 - In scope property, we are going to specify the different scopes that we want to load up when we take user or we want to fetch when the user goes through OAuth process. 
 - (Scope is essentially talking about what different parts of the user's profile, email or the user account that we want to get access to)
 - We want to access user's email. so add email as a string. 
@@ -1506,14 +1518,14 @@ componentDidMount() {
     window.gapi.load("client:auth2", () => {
       window.gapi.client.init({
         clientId:
-          "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+          "wfeiooqwi5494411119641.apps.googleusercontent.com",
         scope: "email"
       });
     });
   }
   ```
 - But it is just going to initialize the library.
-- It is not going to actually take the user goes through OAuth uprocess. 
+- It is not going to actually take the user goes through OAuth process. 
 
 reference : https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2getauthinstance
 
@@ -1528,20 +1540,20 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - so rather than clicking on any button or anything like that, we are going to just try to manually use methods we got to get the user to signIn.
   - Basically we need to call signIn method. 
   - When you call signIn method. login popup window apprears.
-  - In order to check that user is signed in, type 'auth.isSignedIn.get() according to the document.
-- In theory if we had asked for any other scopes around this user such as ability to modify their email or their Google Drive files, we could now use this library to modify those files or those emails.
+  - In order to check that user is signed in, type `auth.isSignedIn.get()`.
+- Just for a note, in theory if we had asked for any other scopes around this user such as ability to modify their email or their Google Drive files, we could now use this library to modify those files or those emails.
 
 ## 91. Rendering Authentication Status
 
 - What we are going to do?
-  - Get a reference to the 'auth' object after it is initialized.
+  - Get a reference to the `auth` object after it is initialized.
   ```js
-  gapi.auth2.getAuthInstance()
+  const auth = gapi.auth2.getAuthInstance()
   ```
   - Figure out if the user is currently signed in.
   - Print their authentication status on the screen.
-- When we loaded up 'client:auth2' , we had to pass in callback function that was that invoked after additional module inside of the library was successfully loaded up.
-- Similar fashion, when we call 'gapi.client.init' executes an asynchronous network request over to Google's API server in order to initialize our client. 
+- When we loaded up `client:auth2`, we had to pass in callback function that was that invoked after additional module inside of the library was successfully loaded up.
+- Similar fashion, when we call `gapi.client.init`, it executes an asynchronous network request over to Google's API server in order to initialize our client. 
 - So we want to get some type of callback function or some type of notice for when that initialization set up is all done. 
 - So we are going to .then statement
 - Inside of then, we can write some amount of code that will be only executed once our entire gpi library is ready to go. 
@@ -1552,7 +1564,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
       window.gapi.client
         .init({
           clientId:
-            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+           "wfeiooqwi5494411119641.apps.googleusercontent.com",
           scope: "email"
         })
         .then(() => {
@@ -1561,7 +1573,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
     });
   }
   ```
-- After running .then method, inside of any other function inside my class, I can reference 'this.auth'.
+- After running .then method, inside of any other function inside my class, I can reference `this.auth`.
 - This will give me a reference to that auth instance that I can use to sign the user in or sign them out or get the users current authentication status.
 - But keep in mind that when the component gets called, our component has already been rendered to the screen. 
 - So now if we want to update the text or what content the component shows, we need to somehow get the component to rerender. 
@@ -1575,7 +1587,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
       window.gapi.client
         .init({
           clientId:
-            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+           "wfeiooqwi5494411119641.apps.googleusercontent.com",
           scope: "email"
         })
         .then(() => {
@@ -1588,13 +1600,13 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 ## 92. Updating Auth State
 
 - Login or Logout state does not rerender on a screen automatically. We have to keep refresh the page in order to see the changed login status.
-- In order to make the status rerender on a screen we are going to use another method in `getAuthInstance()`.
-- In 'isSignedIn' method inside of 'getAuthInstance()', there are couple of methods we can find. 
+- In order to make the state rerender on a screen we are going to use another method in `getAuthInstance()`.
+- In `isSignedIn` method inside of `getAuthInstance()`, there are couple of methods we can find. 
 - These are private functions that we are not supposed to call. 
-- It links to prototype property and the property has listen method.
+- It links to prototype property and the it has `listen` method.
 - So we can pass callback function to listen method. 
 - If we do that, listen method will be invoked anytime that users on authentication status is changed. 
-- So we can setState inside of listen method and then somehow we could update the text inside the header anytime tuer signs in or signs out.
+- So we can setState inside of listen method and then somehow we could update the text inside the header anytime user signs in or signs out.
   ```js
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
@@ -1602,7 +1614,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
       window.gapi.client
         .init({
           clientId:
-            "1042485390822-m5ktk6ebb54ucr797pj4u3psgn702qvu.apps.googleusercontent.com",
+            "wfeiooqwi5494411119641.apps.googleusercontent.com",
           scope: "email"
         })
         .then(() => {
@@ -1624,6 +1636,15 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 
 - How to setup Google OAuth using redux?
   - Inside of GoogleAuth Component, we have got onSignIngClick, onSignOutgClick.
+  ```js
+  onSignInClick = () => {
+    this.auth.signIn();
+  };
+
+  onSignOutClick = () => {
+    this.auth.signOut();
+  };
+  ```
   - Whenever we call those methods, we are going to be accessing the Auth2 instance and that is going to start either signIn flow our signOut flow. 
   - Either way, the library is going to eventually call onAuthChange method inside of the component. 
   - In order to integrate redux into this flow, we are going to make sure that anytime that onAuthChange is called, we call some appropriate action creators. 
@@ -1702,7 +1723,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 
    // to
 
-    // make variable name all capitalized to make other engineers that this is supposed to be a true constant object, do not modify it.
+    // make variable name all capitalized to make other engineers know that this is supposed to be a true constant object, do not modify it.
     const INITIAL_STATE = {
     isSignedIn: null
   };
@@ -1747,7 +1768,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```
 - and then we will basically sit around and wait for the authentication status to change at some point in the future
   ```js
-  this.auth.isSignedIn.listen(this.onAuthChange(this.state.isSignedIn));
+  this.auth.isSignedIn.listen(this.onAuthChange());
   ```
 
 ## 98. Fixed Action Types
@@ -1771,7 +1792,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```
 - This contains information about the user who is currently signed in to our application.
 - Inside of this current object, we can find Google ID for this user.
-- When user login using Google account, Google assigns them id automatically. 
+- When user login using Google account, Google assigns them ID automatically. 
 - Therefore, use this ID, we can track which user created which stream.
 - We can find ID that assigned by Google using this
   ```js
@@ -1779,7 +1800,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```
 - So we want to essentially store this ID inside of our auth reducer. 
 - In order to mark which user created the stream very easily by using ID
-  - pass 'this.auth.currentUser.get().getId()' as an argument when user signs in.
+  - pass `this.auth.currentUser.get().getId()` as an argument when user signs in.
   ```js
   onAuthChange = isSignedIn => {
     if (isSignedIn) {
@@ -1790,14 +1811,16 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   };
   ```
   - So now when we call this action creator, we are going to also pass on the idea of the user who has signed in.
-  - And change action creator, reducer with it (both have to receive userId)
+  - And change action creator and reducer a bit. (both have to receive userId)
   ```js
+  // action creator
   export const signIn = userId => {
   return {
     type: SIGN_IN,
     payload: userId
     };
   };
+  // reducer
   const INITIAL_STATE = {
     isSignedIn: null,
     userId: null
