@@ -1887,7 +1887,63 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
     form: formReducer
   });
 ```
+```
 
+## 104. Creating Forms
 
+- Import `Field`, `reduxForm` from `redux-form`
+  ```js
+  import { Field, reduxForm } from "redux-form";
+  ```
+- `Field` is supposed to be a react component that eventually showed on a screen.
+- reduxForm is a function (It has exact same functionality as connect function from react-redux library).
+- reduxForm makes sure we can call action creator and get some form data in to a component. And that happens automatically.
+- Set reudxForm function just like connect in react-redux
+  ```js
+  // reduxForm returns a function and we immediately call that function with StreamCreate
+  export default reduxForm()(StreamCreate);
+  ```
+- However, unlike connect function, reduxForm receives single object and we are going to put configuration into that object.
+  ```js
+  export default reduxForm({ form: 'streamCreate'})(StreamCreate);
+  ```
+- Since StreamCreate has hooked up redux form, the component is now going to be passed many additional props that it was not being passed before.
+  ```js
+    class StreamCreate extends React.Component {
+    render() {
+      // you can check props using consol.log
+      console.log(this.props);
+      return <div>StreamCreate</div>;
+    }
+  }
+  ```
+- So essentially we are able to pick through the list of props that StreamCreate passed in, find the different props that are relevant and make use of them to actually build out our form.
+- We make use of the Field component anytime that we want to show a field to the user. 
+  ```js
+  class StreamCreate extends React.Component {
+    render() {
+      return (
+        <form>
+          <Field />
+        </form>
+      );
+    }
+  }
+```
+```
+- Whenever we place a field tag, we are always going to provide it some number of props. 
+- name prop is always required inside of Field component. It is a name of the property that field is going to manage.
+- The names we are going to put together are `Title` and `Description`.
+  ```js
+  <Field name='title'/>
+  <Field name='description'/>
+  ```
+- But you are going to see the error message frequently saying 
+  ```js
+  Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+  ```
+- Because when we show this field component, the field itself has no idea how to render some type of input element on the screen. So a field does not know how to show a text input, checkbox, dropdown etc.
+- A Field is just a component that is going to be part of the system that is going to automatically handle all of the forms put together but it individually is not responsible for actually getting to show up on the screen.
+-
   
 
