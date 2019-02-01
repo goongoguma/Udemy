@@ -1929,8 +1929,8 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
       );
     }
   }
-```
-```
+  ```
+
 - Whenever we place a field tag, we are always going to provide it some number of props. 
 - name prop is always required inside of Field component. It is a name of the property that field is going to manage.
 - The names we are going to put together are `Title` and `Description`.
@@ -2089,7 +2089,123 @@ onSubmit(e) {
   ```
   - formValue argument contains the inputs that user typed and submitted.
 
+## 108. Validation of Form Inputs
 
+- Steps for validation
+  - Form is initially rendered OR user interacts with it 
+  - Redux calls function `validate`.
+    - The function is going to be called with all the current values in the form.  
+    - The function is going to be essentially the opportunity to check to see if the user entered is valid or invalid input.
+  - After we do series of if statment that input is whether valid or invalid below,
+  ```js
+    const validate = formValues => {
+    console.log(formValues);
+    if(!formValues.title) {
+    
+    }
+  };
+  ```
+  if user returns valid input, we are going to return an empty object.
+  - When we return an empty object that essentially tells redux form that nothing is wrong with our form and it is completely valid and the user can submit it if they want to.
+  - But if a user did anything incorrectly then we are going to return an object. 
+  - Each invalid field that user enters, we are going to put a key value pair on an object with the name of the fields that the user entered in and error message to show to the user. 
+    - for example, if user inputs invalid title -> `errors = { title:'You must enter a title'}`
+  - When redux forms sees the object, it is going to think that there is a value inside the object that means the user must have done something incorrectly.
+  ```js
+    const validate = formValues => {
+    const errors = {};
+    if (!formValues.title) {
+      errors.title = "You must enter a title";
+    } else {
+      errors.description = "You must enter a description";
+    }
+    return errors;
+  };
+  ```
+  - *In order words, if we return empty object from `validate` redux form assumes that everything went OK. So it is only when we put a key value pair into the object that redux form realizes that something just went wrong*
+
+## 109. Displaying Validation Message
+
+- Wire up `validate` function to redux form
+  ```js
+    export default reduxForm({
+    form: "streamCreate",
+    validate
+  })(StreamCreate);
+  ```
+- So we have wired `validate` function up to our component.  
+- `validate` function is going to be called every sing time that the form is initially rendered or the user interacts with it anyway.
+- Now our `validate` function is getting called. 
+- If we return the object from the `validate` function then redux form is going to automatically rerender our component.
+- To actually get these error messages to appear on a screen, redux form is going to take a look at every `Field` component that gets rendered in order words, It is going to look at each `Field` name property.
+- And then it is going to look at the erros object that we return from `validate`.
+- If `Field` has same name as a property that exists inside that object then redux form is going to take the message and pass it to our `renderInput` fuction. Idea is that our errors object has property name that is identical to the name property inside of `Field` component and it contains a string that error message will be passed down to `renderInput` function. 
+- *Remember that the big connection between the `validation` function and getting the message into `renderInput` function is all about the `Field name`.*
+- We can check error message using `meta` property.
+  ```js
+  renderInput({ input, label, meta }) {
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input} />
+        <div>{meta.error}</div>
+      </div>
+    );
+  }
+  ```
+
+## 110. Showing Errors on Touch
+
+- We got air message to print up underneath each field. 
+- But we want to show this error message whenever a user submits the form.
+- We want to show the error message after the user clicks into a field, enter some text and then clicks out of it.
+- We are going to use `touched` property in `meta` property to do it.
+- If `touched` is equal to true, we probably want to take that as an opportunity to show our error message to the user.
+- And vice versa.
+- We are going to use helper function to do it inside of `renderInput` function.
+  ```js
+  renderError({ error, touched }) {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      );
+    }
+  }
+  renderInput({ input, label, meta }) {
+    console.log(meta);
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input} autoComplete="off" />
+        {this.renderError(meta)}
+      </div>
+    );
+  }
+  ```
+- But you are going to see error message `TypeError: Cannot read property 'renderError' of undefined`.
+  - The error comes from `renderError` function.
+  - Because when `renderInput` is called inside of `Field` component, it is going to be called with unknown value of `this`. In other words the keyword `this` inside of `renderInput` is going to be known to us.
+  - So we are going to turn `renderInput` function to arrow function syntax. (it is okay to turn `renderError` function to arrow funtion as well)
+  ```js
+   renderInput = ({ input, label, meta }) => {
+    console.log(meta);
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input} autoComplete="off" />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
+  ```
+- However even if we click in and click out input fields, we still do not see any error message that we intend. 
+- But if you check Elements tab in developer console, you can check the error message!
+- *The problem is the fact that semantic UI by default is going to hide error messages. It sets `display:none`*
+  
+
+  
 
 
 
