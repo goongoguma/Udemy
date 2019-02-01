@@ -2038,5 +2038,35 @@ renderInput({ input }) {
   }
 ```
 
+## 106. Customizing Form Fields
+
+- When we pass elements to Field component, it does not know what to do with it
+- Therefore we have to pass those elements in argument of renderInput to render on a screen.
+```js
+renderInput({ input, label }) {
+    return (
+      <div className="field">
+        <label>{label}</label>
+        <input {...input} />
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <form className="ui form">
+        <Field name="title" component={this.renderInput} label="Enter Title" />
+        <Field
+          name="description"
+          component={this.renderInput}
+          label="Enter Description"
+        />
+      </form>
+    );
+  }
+```
+
+
+
   
 
