@@ -99,6 +99,17 @@
 97. 리덕스를 이용해 OAuth 다루기
 98. 변수로 action의 타입 설정해주기
 99. 유저의 ID를 redux state에 저장하기
+100. Redux Dev Tools 설치 및 설정
+101. Redux Dev Tools 디버그 세션
+102. 리덕스 폼 라이브러리
+103. 리덕스 폼 연결하기
+104. 폼 만들기 및 에러발생
+105. 에러문제 해결 및 폼 렌더링하기
+106. 폼 커스터마이징 하기
+107. 폼 submisstion 다루기
+108. 폼의 유효성 설정해주기
+109. 에러 메세지 렌더링하기 
+110. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정
 
 ## 1. Critical Question related to React
 
@@ -1839,7 +1850,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 ```
 ```
 
-## 100. Using Redux Dev Tools to instpect the Store
+## 100. Using Redux Dev Tools to inspect the Store
 
 - Install redux-devtools-extenstion from https://github.com/zalmoxisus/redux-devtools-extension
 - This is extension that is going to allow you to very easily debug redux store. 
@@ -1849,10 +1860,10 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 ## 101. Debug Sessions with Redux Dev Tools
 
 ```js
-localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
+localhost:3000?debug_session='random String'
 ```
 - With this address, redux dev tools is going to see that you are trying to start up a debug session.
-- Debug session is where redux dev tools is going to automatically save all of the data inside of your redux store and persist it across refreches of you application.
+- Debug session is where redux dev tools is going to automatically save all of the data inside of your redux store and persist it across refreshes of you application.
 - So when you enable this debug session, redux dev tools is going to make sure that all the data stays around between refreshes of the page. 
 - This is incredibly useful when we start doing some advanced feature development. 
 
@@ -1861,7 +1872,7 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
 - install redux form on npm.
 - How have we handled form up to this time in react. 
   - state -> input element value -> input element onChange -> setState -> state
-- Using redux, we are going to store input data insdie of redux store and anytime a user changes an element, we are going to call an action creator. And that is going to attempt to change that data inside of a redux store.
+- Using redux, we are going to store input data inside of redux store and anytime a user changes an element, we are going to call an action creator. And that is going to attempt to change that data inside of a redux store.
 - Handling inputs with Redux Form
   - We are going to have some reducer that is going to hold all the states of our different form inside of our application.
   - So that might be value of some input element or the selection of some dropdown or the current checkboxes that are checked inside of application. 
@@ -1891,23 +1902,23 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
 
 ## 104. Creating Forms
 
-- Import `Field`, `reduxForm` from `redux-form`
+- In StreamCreate.js file, import `Field`, `reduxForm` from `redux-form`
   ```js
   import { Field, reduxForm } from "redux-form";
   ```
 - `Field` is supposed to be a react component that eventually showed on a screen.
-- reduxForm is a function (It has exact same functionality as connect function from react-redux library).
-- reduxForm makes sure we can call action creator and get some form data in to a component. And that happens automatically.
-- Set reudxForm function just like connect in react-redux
+- `reduxForm` is a function (It has exact same functionality as connect function from react-redux library).
+- `reduxForm` makes sure we can call action creator and get some form data into a component. And that happens automatically.
+- Set `reduxForm` function just like connect in react-redux
   ```js
   // reduxForm returns a function and we immediately call that function with StreamCreate
   export default reduxForm()(StreamCreate);
   ```
-- However, unlike connect function, reduxForm receives single object and we are going to put configuration into that object.
+- However, unlike connect function, `reduxForm` receives single object and we are going to put configuration into that object.
   ```js
   export default reduxForm({ form: 'streamCreate'})(StreamCreate);
   ```
-- Since StreamCreate has hooked up redux form, the component is now going to be passed many additional props that it was not being passed before.
+- Since `StreamCreate` has hooked up redux form, the component is now going to be passed many additional props that it was not being passed before.
   ```js
     class StreamCreate extends React.Component {
     render() {
@@ -1917,8 +1928,8 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
     }
   }
   ```
-- So essentially we are able to pick through the list of props that StreamCreate passed in, find the different props that are relevant and make use of them to actually build out our form.
-- We make use of the Field component anytime that we want to show a field to the user. 
+- So essentially we are able to pick through the list of props that `StreamCreate` passed in, find the different props that are relevant and make use of them to actually build out our form.
+- We make use of the `Field` component anytime that we want to show a field to the user. 
   ```js
   class StreamCreate extends React.Component {
     render() {
@@ -1931,32 +1942,30 @@ localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
   }
   ```
 
-- Whenever we place a field tag, we are always going to provide it some number of props. 
-- name prop is always required inside of Field component. It is a name of the property that field is going to manage.
+- Whenever we place a `Field` component, we are always going to provide it some number of props. 
+- name prop is always required inside of `Field` component. It is a name of the property that field is going to manage.
 - The names we are going to put together are `Title` and `Description`.
 ```js
   <Field name='title'/>
   <Field name='description'/>
 ```
 - But you are going to see the error message frequently saying 
-  ```js
-  Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
-  ```
-- Because when we show this field component, the field itself has no idea how to render some type of input element on the screen. So a field does not know how to show a text input, checkbox, dropdown etc.
-- A Field is just a component that is going to be part of the system that is going to automatically handle all of the forms put together but it individually is not responsible for actually getting to show up on the screen.
+  `Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.`
+- Because when we show this `Field` component, the `Field` itself has no idea how to render some type of input element on the screen. So a `Field` does not know how to show a text input, checkbox, dropdown etc.
+- A `Field` is just a component that is going to be part of the system that is going to automatically handle all of the forms put together but it individually is not responsible for actually getting to show up on the screen.
 
 ## 105. Automatically Handling Events
 
-- In order to tell Field component how to show an actual text input on the screen, we have to assign a prop to it called component. 
-- Component props is going to be either a real component or a function for the field to call.
+- In order to tell `Field` component how to show an actual text input on the screen, we have to assign a prop to it called `component`. 
+- `Component` props is going to be either a real component or a function for the field to call.
 - It needs to return some element that is going to actually be shown on the screen. 
 ```js
   <Field name='title' component={} />
   <Field name='description'/>
 ```
-- Therefore Field element in total is really just about hooking up all of the infrastructure that redux form is actually doing for us. When we actually want to show some content or some form element on a screen, it is up to us to show the actual input element and customize it in some fashion.
-- We can do so using component props. 
-- We are going to create helper method and wire it up with component props.
+- Therefore *`Field` element in total is really just about hooking up all of the infrastructure that redux form is actually doing for us.* When we actually want to show some content or some form element on a screen, it is up to us to show the actual input element and customize it in some fashion.
+- We can do so using `component` props. 
+- We are going to create helper method and wire it up with `component` props.
 ```js
 class StreamCreate extends React.Component {
   renderInput() {
@@ -1973,9 +1982,9 @@ class StreamCreate extends React.Component {
   }
 }
 ```
-- But we can check that two `I am an input` rendered on a screen.
+- And now, we can check that two `I am an input` rendered on a screen.
 - Here is important lesson:
-  - Redux from is about automating many processes such as making sure that your form data is inside the redux store, getting that data back into the component and helping you getting the data into the appropriate input elements. 
+  - Redux form is about automating many processes such as making sure that your form data is inside the redux store, getting that data back into the component and helping you getting the data into the appropriate input elements. 
   - *However, redux form does not really know a lot about what you are doing!*
   - It does not know you are showing a text input.
   - It does not know you are showing a dropdown.
@@ -1989,7 +1998,7 @@ renderInput() {
 }
 ```
 - But it is not controlled input.
-- Anytime that the Field tag calls `this.renderInput`, it is going to pass in some number of arguments. 
+- Anytime that the `Field` tag calls `this.renderInput`, it is going to pass in some number of arguments. 
 - First, pass `formProps` into an argument and console.log it.
 ```js
 renderInput(formProps) {
@@ -1998,11 +2007,11 @@ renderInput(formProps) {
 }
 ```
 - Inside of formProps object, we have keys of input and meta.
-  - input property has actual field name of title. 
+  - input property has actual `Field` name of title. 
   - So the object is meant to essentially be customizing the input.
   - Inside of input properties, we can find many familiar looking callback handlers including `onChange` and `value` props.
   - So our job is take that onChange handler and wire up into input element, take the value prop and hook it up to the input element as well.
-- So essentially we are supposed to take this formProps, take the input property out of it and hook up the relevant properties to the text input. 
+- So essentially we are supposed to take these formProps, take the input property out of it and hook up the relevant properties to the text input. 
 ```js
 renderInput(formProps) {
     return (
@@ -2020,7 +2029,7 @@ reduxForm({
 })(StreamCreate);
 ```
 - You pass the property name `form`.
-- Whatever name of object you put inside of first argument of `reduxForm`, redux form is going to start to store all the values for inside of it. (redux form을 이용해 유저가 form을 생성하게 되면 이 객체의 값, 여기서는 streamCreate에 저장된다는것.)
+- Whatever name of object you put inside of first argument of `reduxForm`, `reduxForm` is going to start to store all the values for inside of it. (`reduxForm`을 이용해 유저가 form을 생성하게 되면 이 객체의 값, 여기서는 streamCreate에 저장된다는것.)
 - There is another way to shorten the syntax of `renderInput` method.
 ```js
 renderInput(formProps) {
@@ -2040,8 +2049,8 @@ renderInput({ input }) {
 
 ## 106. Customizing Form Fields
 
-- When we pass elements to Field component, it does not know what to do with it
-- Therefore we have to pass those elements in argument of renderInput to render on a screen.
+- When we pass elements to `Field` component, it does not know what to do with it
+- Therefore we have to pass those elements in argument of `renderInput` to render on a screen.
 ```js
 renderInput({ input, label }) {
     return (
@@ -2134,7 +2143,7 @@ onSubmit(e) {
   })(StreamCreate);
   ```
 - So we have wired `validate` function up to our component.  
-- `validate` function is going to be called every sing time that the form is initially rendered or the user interacts with it anyway.
+- `validate` function is going to be called every single time that the form is initially rendered or the user interacts with it anyway.
 - Now our `validate` function is getting called. 
 - If we return the object from the `validate` function then redux form is going to automatically rerender our component.
 - To actually get these error messages to appear on a screen, redux form is going to take a look at every `Field` component that gets rendered in order words, It is going to look at each `Field` name property.
