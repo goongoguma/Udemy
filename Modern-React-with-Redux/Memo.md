@@ -1837,7 +1837,24 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
     }
   };
 ```
+```
 
+## 100. Using Redux Dev Tools to instpect the Store
+
+- Install redux-devtools-extenstion from https://github.com/zalmoxisus/redux-devtools-extension
+- This is extension that is going to allow you to very easily debug redux store. 
+- But the extension is available only for Chrome and Firefox.
+- And configure according to Advanced store setup.
+
+## 101. Debug Sessions with Redux Dev Tools
+
+```js
+localhost:3000?debug_session='random String such as asdfjwioejf;weijfwef'
+```
+- With this address, redux dev tools is going to see that you are trying to start up a debug session.
+- Debug session is where redux dev tools is going to automatically save all of the data inside of your redux store and persist it across refreches of you application.
+- So when you enable this debug session, redux dev tools is going to make sure that all the data stays around between refreshes of the page. 
+- This is incredibly useful when we start doing some advanced feature development. 
 
   
 
