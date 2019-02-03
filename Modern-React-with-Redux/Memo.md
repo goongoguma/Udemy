@@ -2260,7 +2260,39 @@ onSubmit(e) {
 - And type `npm start` to start up the server in port 3001.
 - So now we have a listed resource at `localhost:3001/streams`.
 - We can make use of this json server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
-- So if we want to get a list of our streams we are going to make a `get, post, delete etc` request to `localhost:3001/streams`
+- So if we want to get a list of our streams we are going to make a `get, post, delete etc` request to `localhost:3001/streams`.
+
+## 113. Creating Streams Through Action Creators
+
+- We have our API server put together, we need to make sure that anytime that user submits the form in `StreamCreate` component, we attepmt to make ajax request or a network request over to our API running on `localhost:3001`.
+- So to make a network request, we are going to first define an action creator.
+- We are going to make usre that we wire up that action creator to our component through the `connect` function.
+- We are going to call the action creator from `onSubmit` function. 
+- And then the action creator is going to use `axios` to make the network request over to our API.
+- Setting up `axios` in streams.js file in `apis` folder
+  ```js
+    export default axios.create({
+    baseURL: "http://localhost:3001"
+  });
+  ```
+- After setting `axios`, create action creator `createStream`
+  ```js
+    // createStreams takes input value as a formValues argument
+    export const createStream = formValues => {
+    return async dispatch => {
+      streams.post('/streams', formValues)
+    };
+  };
+  ```
+- And wire up `connect` function and action creator in `StreamCreate` component.
+- But we have one problem. because we have already wired up redux form exact same way as the `connect` function.
+  ```js
+    export default reduxForm({
+    form: "streamCreate",
+    validate
+  })(StreamCreate);
+  ```
+
 
   
 
