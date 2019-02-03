@@ -110,6 +110,8 @@
 108. 폼의 유효성 설정해주기
 109. 에러 메세지 렌더링하기 
 110. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정
+111. Streams의 API 설정
+112. JSON Server을 이용해 DB 만들기
 
 ## 1. Critical Question related to React
 
@@ -2216,7 +2218,49 @@ onSubmit(e) {
   ```js
   <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
   ```
-  
+
+## 111. Creating Streams
+
+- The real question is how do we communicate from our react application up to API server and tell the API server that there is now a new stream that is available for viewing. 
+- We are trying to take the title and description and put it up to API server so that other users can fetch a list of all the different available streams.
+- Our API server is essentially going to have a plain list of records. Each record is going to represent one individual stream and each stream is going to have ID, a title of the stream and a description in a form of object
+  ```js
+  {id:1, title 'My Stream', description: 'Some stream'}
+  {id:2, title 'Code Stream', description: 'Coding'}
+  ```
+- So we are going to take the list of streams right from API server and send them down to our react application and show them on the screen.
+- Then whenever a user selects a stream, we are going to make sure that our react application reaches out to the RTMP server and the server is going to take whatever stream with id is coming in and stream that video over to our react application.
+- Streamer's computer creates stream id 2 -> RTMP -> API Server -> When viewer asking the stream id 2 -> API server responses to viewer.
+- Therefore, we are going to take the title and description from our form and try to create some new record on that API server. 
+
+## 112. REST-ful Convertions
+
+- We are going to put together with API server using `JSON Server`.
+- The reason of using `JSON Server` because it has a extremely strict adherence to RESTful conventions. 
+- REST Conventions
+  - It is a predefined system for defining different routes on an API that work with a given type of records.
+  - In order words, the term RESTful convetions is essentially referring to a standardized system of routes and request methods used to commit or operate all different actions.
+  - But we do not have to define a API server to behave in any which way. We can have it behave in anyway we want.
+  - However in order to make our API is easier to work with for like other engineers, we usually try to do follow these restful conventions.
+- We are going to create a new folder name `api` outside of `client` folder and create `db.json` file inside of it (we are using different terminal).
+- `db.json` file wors as a database.
+  ```js
+  {
+  "streams": []
+  }
+  ```
+- Add command in scripts in `package.json` file.
+  ```js
+  "scripts": {
+    // start command is going to start up the json server running on port 3001 and it is going to watch db.json file for any changes that get made to it. 
+    "start": "json-server -p 3001 -w db.json"
+  },
+  ```
+- That is literally all the code we have to wrtie to get the API server up and running. 
+- And type `npm start` to start up the server in port 3001.
+- So now we have a listed resource at `localhost:3001/streams`.
+- We can make use of this json server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
+- So if we want to get a list of our streams we are going to make a `get, post, delete etc` request to `localhost:3001/streams`
 
   
 
