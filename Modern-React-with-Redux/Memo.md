@@ -112,6 +112,8 @@
 110. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정
 111. Streams의 API 설정
 112. JSON Server을 이용해 DB 만들기
+113. Action creator 만들어주기
+114.  
 
 ## 1. Critical Question related to React
 
@@ -2238,12 +2240,12 @@ onSubmit(e) {
 - We are going to put together with API server using `JSON Server`.
 - The reason of using `JSON Server` because it has a extremely strict adherence to RESTful conventions. 
 - REST Conventions
-  - It is a predefined system for defining different routes on an API that work with a given type of records.
+  - It is a predefined system for defining different routes on a API that work with a given type of records.
   - In order words, the term RESTful convetions is essentially referring to a standardized system of routes and request methods used to commit or operate all different actions.
   - But we do not have to define a API server to behave in any which way. We can have it behave in anyway we want.
   - However in order to make our API is easier to work with for like other engineers, we usually try to do follow these restful conventions.
 - We are going to create a new folder name `api` outside of `client` folder and create `db.json` file inside of it (we are using different terminal).
-- `db.json` file wors as a database.
+- `db.json` file works as a database.
   ```js
   {
   "streams": []
@@ -2252,24 +2254,24 @@ onSubmit(e) {
 - Add command in scripts in `package.json` file.
   ```js
   "scripts": {
-    // start command is going to start up the json server running on port 3001 and it is going to watch db.json file for any changes that get made to it. 
+    // start command is going to start up the JSON server running on port 3001 and it is going to watch db.json file for any changes that get made to it. 
     "start": "json-server -p 3001 -w db.json"
   },
   ```
 - That is literally all the code we have to wrtie to get the API server up and running. 
 - And type `npm start` to start up the server in port 3001.
 - So now we have a listed resource at `localhost:3001/streams`.
-- We can make use of this json server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
+- We can make use of this JSON server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
 - So if we want to get a list of our streams we are going to make a `get, post, delete etc` request to `localhost:3001/streams`.
 
 ## 113. Creating Streams Through Action Creators
 
 - We have our API server put together, we need to make sure that anytime that user submits the form in `StreamCreate` component, we attepmt to make ajax request or a network request over to our API running on `localhost:3001`.
 - So to make a network request, we are going to first define an action creator.
-- We are going to make usre that we wire up that action creator to our component through the `connect` function.
+- We are going to make use that we wire up that action creator to our component through the `connect` function.
 - We are going to call the action creator from `onSubmit` function. 
 - And then the action creator is going to use `axios` to make the network request over to our API.
-- Setting up `axios` in streams.js file in `apis` folder
+- Setting up `axios` in `streams.js` file in `apis` folder
   ```js
     export default axios.create({
     baseURL: "http://localhost:3001"
@@ -2277,7 +2279,7 @@ onSubmit(e) {
   ```
 - After setting `axios`, create action creator `createStream`
   ```js
-    // createStreams takes input value as a formValues argument
+    // createStreams takes input value as formValues argument
     export const createStream = formValues => {
     return async dispatch => {
       streams.post('/streams', formValues)
@@ -2285,13 +2287,64 @@ onSubmit(e) {
   };
   ```
 - And wire up `connect` function and action creator in `StreamCreate` component.
-- But we have one problem. because we have already wired up redux form exact same way as the `connect` function.
+- But we have one problem. because we have already wired up `redux form` exact same way as the `connect` function.
   ```js
     export default reduxForm({
     form: "streamCreate",
     validate
   })(StreamCreate);
   ```
+
+## 114. Creating a Stream with REST Conventions
+
+- It is going to be a little bit challenging to hook up both the `connect` function and `redux form` to this componnet.
+  ```js
+    const formWrapped = reduxForm({
+    form: "streamCreate",
+    validate
+  })(StreamCreate);
+
+  export default connect(
+    null,
+    { createStream }
+  )(formWrapped);
+  ```
+- And set action creator `createStream` inside of `onSubmit` function
+  ```js
+   onSubmit = (formValues) => {
+    this.props.createStream(formValues);
+  }
+  ```
+- So now, whenever the user tries to estimate the form, we are going to validate the inputs. if the inputs are valid, we will call `onSubmit` and the function is going to call our action creator `createStream`, and then it is going to run the action creator and we are going to attempt to make a request over to our API server and create a new stream and we now that this is going to create a stream because we are following RESTful conventions.
+- After we have wired up action creator, send a request to server after you fill out the form.
+- When you check network tab in developer console, we are going to find out that there are two streams file have sent to server. 
+- One is OPTIONS request and the other one contains the contents that you have filled out in the form.
+  ```js
+  {title: "my stream", description: "i love it ", id: 1}
+  ```
+- And go back to `db.json` file in api folder and check that the request is inside of the file.
+  ```js
+    {
+    "streams": [
+      {
+        "title": "my stream",
+        "description": "i love it ",
+        "id": 1
+      }
+    ]
+  }
+  ```
+- Now let's make sure that streams that we created show on the original `StreamList` component.
+
+## 115. Dispatching Actions After Stream Creation
+
+- We need to somehow get a handle on the response that comes back from the post request.
+- Because it contains the actual saved record of the stream that we just created. 
+
+
+
+
+
 
 
   
