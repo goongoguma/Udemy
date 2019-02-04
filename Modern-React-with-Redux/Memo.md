@@ -2433,7 +2433,42 @@ onSubmit(e) {
     }
   }
   ```
+- This is called key interpolation.
+  ```js
+  return {...state, [action.payload.id]: action.payload};
+  ```
+- So this essentially means we don't know exactly what key we want to add to the object.
+- We know that `action.payload.id` property is the key that we want to add but we want to somehow add in that key when the code runs.
+- The idea is whatever the number or string or value takes and creates a new key using it inside of overall object. 
+- And to that key assigns `action.payload`.
+- Easier Example
+  ```js
+  const animalSounds = { cat: 'meow', dog: 'bark'}
+  const animal = 'lion'
+  const sound = 'roar'
+  {...animalSounds, [animal]:sound} // { cat: 'meow', dog: 'bark', lion: 'roar' }
+  ```
 
+## 119. Handling Fetching, Creating and Updating
+
+- Create `streamReducer` file inside of reducer folder.
+- It does all streams related works.
+- Set up separate case statements to handle each of different types. And each of those different types has different response get back from the API.
+- For example, when we see an action with the type of `FETCH_STREAMS` specifically thast means we are getting back an array of records. And we are going to want to take that array of records and merge them all into the state object. 
+  ```js
+  export default (state = {}, action) => {
+    switch (action.type) {
+      case FETCH_STREAM:
+        return { ...state, [action.payload.id]: action.payload };
+      case CREATE_STREAM:
+        return { ...state, [action.payload.id]: action.payload };
+      case EDIT_STREAM:
+        return { ...state, [action.payload.id]: action.payload };
+      default:
+        return state;
+    }
+  };
+  ```
 
 
 
