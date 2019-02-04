@@ -2340,6 +2340,62 @@ onSubmit(e) {
 
 - We need to somehow get a handle on the response that comes back from the post request.
 - Because it contains the actual saved record of the stream that we just created. 
+  ```js
+    export const createStream = formValues => {
+    return async dispatch => {
+      const res = await streams.post("/streams", formValues);
+    };
+  };
+  ```
+- So now we have a handle on the stream that just got created, we are probably going to want to dispatch an action with a payload that stream and then we can eventually create a reducer and pick up that stream that was created and save it inside there or whatever it is we want to do.
+  ```js
+    export const createStream = formValues => {
+    return async dispatch => {
+      const res = await streams.post("/streams", formValues);
+
+      dispatch({type: CREATE_STREAM, payload: res.data})
+    };
+  };
+  ```
+
+## 116. Bulk Action Creators
+
+- Since we follow the RESTful conventions, we know what results we expected. So it would be convenient to create action creators in advance. 
+  ```js
+  export const fetchStreams = () => {
+    return async dispatch => {
+      const res = await streams.get("/streams");
+
+      dispatch({ type: FETCH_STREAMS, payload: res.data });
+    };
+  };
+
+  export const fetchStream = id => {
+    return async dispatch => {
+      const res = await streams.get(`/streams/${id}`);
+
+      dispatch({ type: FETCH_STREAM, payload: res.data });
+    };
+  };
+
+  export const editStream = (id, formValues) => {
+    return async dispatch => {
+      const res = await streams.put(`streams/${id}`, formValues);
+
+      dispatch({ type: EDIT_STREAM, payload: res.data });
+    };
+  };
+
+  export const deleteStream = id => {
+    return async dispatch => {
+      await streams.delete(`streams/${id}`);
+
+      dispatch({ type: DELETE_STREAM, payload: id });
+    };
+  };
+  ```
+
+
 
 
 
