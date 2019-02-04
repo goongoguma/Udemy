@@ -2469,6 +2469,17 @@ onSubmit(e) {
     }
   };
   ```
+## 120. Deleting Properties with Omit
+
+- In order to make `DELETE_STREAM`, we are going to use `_omit` in `lodash` library.
+- Install `lodash` library and import it in `streamReducer` file.
+  ```js
+  case DELETE_STREAM:
+      return _.omit(state, action.payload)
+  ```
+- But in this case, we do not have to reference `.id` property because in `deleteStream`, `action.payload` itself is the ID.
+- Nice thing about `_.omit` is that it is not going to change the original state object. Instead it creates a new object with all the properties from states without whatever we passed in as the `action.payload`.
+  
 
 
 
