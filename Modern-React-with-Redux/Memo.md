@@ -2395,6 +2395,46 @@ onSubmit(e) {
   };
   ```
 
+## 117. Object-Based Reducers
+
+- This time, instead of returning an array, reducer is going to return an object that has all the streams inside of it. 
+- Inside of the object, we are going to have a collection of key value pairs.
+  ```js
+  {
+    1: stream with ID 1
+    22: stream with ID 22
+    37: stream with ID 37
+  }
+  ```
+- So in order to kind of access any given stream inside the object, we would just have to reference our streams piece of states out of our redux store and then essentially try to access the appropriate ID inside there. 
+- And that will give us the stream that we are looking for.
+- If we make use of object instead of array for reducer, the updating process would be much more straightforward.
+- We would put down the curly braces to indicate a new object.
+- We would take all the records out of our old state object and add them in and then we would add in a  new key value pair.
+- In this case, the key would be the ID of the stream that we just updated. 
+  ```js
+  {...state, 65: Stream65}
+  ```
+- So basically the syntax of updating our state is going to be so much easier when we are making use of an object instead of an array.
+
+## 118. Key Interpolation Syntax
+
+- Syntax of updating our state using object
+  ```js
+  const streamReducer = (state={}, action) => {
+    switch(action.type) {
+      case EDIT_STREAM:
+        // const newState = {...state};
+        // newState[action.payload.id] = action.payload;
+        // return newState
+        return {...state, [action.payload.id]: action.payload};
+        default:
+        return state;
+    }
+  }
+  ```
+
+
 
 
 
