@@ -2480,6 +2480,43 @@ onSubmit(e) {
 - But in this case, we do not have to reference `.id` property because in `deleteStream`, `action.payload` itself is the ID.
 - Nice thing about `_.omit` is that it is not going to change the original state object. Instead it creates a new object with all the properties from states without whatever we passed in as the `action.payload`.
   
+## 121. Merging Lists of Records 
+
+- So now we are trying to make sure that we can take an array of streams from our API and merge them all into our state object.
+- It would be easier if we dealing with array but since we are using an object, we have to figure out a clever solution.
+- When we get a list of strings from the API, they come back in an array and each stream has an ID, title and description properties. 
+- In order to get these array form of data merged into our obejct, we are going to use a function from `lodash` called `mapKeys`.
+- It is a function that is going to take an array and then return an object.
+- The keys of new object are going to be taken from each individual record inside of the array. 
+- So we can call `mapKeys` and pass in the list of streams that we got from the API. And as the second argument, we will put in a string of ID. 
+  ```JS
+  mapKeys(streams, 'id')
+  ```
+- The string of ID tells `lodash` that everyone of objects inside of the original array use a key taken from the id property of each one.
+- (the data we get from the API is form of an array that objects are in it.)
+- Essentially what we are going to do with `mapKeys(streams, 'id')` is 
+  - Create a new object
+  - Look at object inside of original array
+  - Look at the id property of that object inside of the array
+  - Whatever that value is, use id property as the key for the entire object that newly created. 
+  - (Suppose, we use the object that contains `id:12` inside of the data that we fetched, `mapKeys` function is going to use it as key when it gets added into the new object. So essentially we create a new key of 12 and then we assign the original object to that key.)
+  - Example:
+  ```js
+    const numbers = [
+    { id: 3},
+    { id: 5},
+    { id: 7}
+  ]
+  _.mapKeys(numbers, 'id')
+  //  key for each one is whatever the 'id' property was 
+  // {"3":{"id":"3"}, "5":{"id":"5"}, "7":{"id":"7"}}
+  ```
+- Using `mapKeys` function, create a reducer.
+  ```js
+   case FETCH_STREAMS:
+      return { ...state, ..._.mapKeys(action.payload, "id") };
+  ```
+  
 
 
 
