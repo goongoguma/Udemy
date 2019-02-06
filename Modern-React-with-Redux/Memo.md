@@ -2548,6 +2548,55 @@ onSubmit(e) {
   )(StreamList);
   ```
 
+## 123. Rendering All Streams
+
+- Now that we are loadinig up our list of streams into the application, we want to make sure that data get rendered out by the StreamList component. 
+- The first thing we need to do is to make sure that we get our list of streams available as props inside of the component. 
+- But here is the part that things get a little bit interesting.
+- Our list of streams is actually stored inside of an object.
+- We will leave data inside of obejct form because it makes it really easy to update add and delete records. 
+- But when we eventually take these streams and get them into a component through `mapStateToProps`, usually we will turn that object into an actual array. 
+- The reason of this is just to make sure that it is really easy to map over and run that `mapStateToProps` function.
+- To get a list of just `state.streams` inside of an array and not have to worry about the object nature of the thing, we are going to call `Object.values` and then pass in state.streams.
+  ```js
+    const mapStateToProps = state => {
+    return { streams: Object.values(state.streams) };
+  };
+  ```
+- `Object.values` 
+  - It is a built in JS function.
+  - It is going to take an object as an argument.
+  - All the different values inside of the object are going to be pulled out and then inserted into an array. 
+- So now inside of the component, we are going to have a prop called `this.props.streams` and that is going to be an array of all of our different streams. 
+- Create `renderList` function to take that list of streams and just render them out as a list on the screen.
+
+  ```js
+  renderList() {
+    return this.props.streams.map(stream => {
+      return (
+        <div className="item" key={stream.id}>
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            {stream.title}
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  }
+  ```
+- And renders the function inside of `render` method.
+  ```js
+  render() {
+    return (
+      <div>
+        <h2>Streams</h2>
+        <div className="ui celled list">{this.renderList()}</div>
+      </div>
+    );
+  }
+  ```
+  
 
   
 
