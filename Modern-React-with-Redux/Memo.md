@@ -2722,6 +2722,41 @@ renderCreate() {
 }
 ```
 
+## 127. When to Navigate Users
+
+- Even though, a user successfully creates a stream, there is nothing on the screen. 
+- We should automatically navigate the user back over to our list of streams after we have successfully created the stream. 
+- Intentional Navigation
+  - User clicks on a `Link` componenet.
+- Programmatic Navigation
+  - We run code to forcibly navigate the user through our app.
+- We are going to use `Programmatic Navigation` to navigate the user.
+- But we have to think about when exactly we want to navigate the user.
+- Bad Approach
+  - User submits the form
+  - We make request to backend API to create stream
+  - We navigate user back to the list of streams
+  - (Time passes...)
+  - API responds with error, stream was not created and user doesn't know!
+- Good Approach
+  - User submits the form
+  - We make request to backend API to create the stream
+  - (Time passes...)
+  - API responds with success or error
+  - We either show error to the user or navigate them back to list of streams.
+- We only want to trigger navigation from our `createStream` action creator after we get a successful response back from our API.
+- It might be a little bit more ideal to do the navigation after we dispatch the action.
+```js
+export const createStream = formValues => {
+  return async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const res = await streams.post("/streams", { ...formValues, userId });
+
+    dispatch({ type: CREATE_STREAM, payload: res.data });
+    // Do some programmatic navigation to get the user back to the root route
+  };
+};
+```
 
 
 
