@@ -2626,7 +2626,53 @@ export const createStream = formValues => {
 };
 ```
 
+## 125. Conditionally Showing Edit and Delete
 
+- Now we have our streams associated with the user who created them, we are going to update our `StreamList` component and make sure that these treams that were created by me have buttons. 
+- So we have to make sure that `StreamList` component understands the idea of the user who is currently signed into our application.
+- We have already stored the information inside of redux store. 
+- So essentially whenever we iterate thorugh the list of streams and render them out on the screen, we just want to compare the current userId with a userId associate at the stream. 
+- If they are equal, then we want to show those buttons on the right hand side of each stream.
+- To get the inforemation of userId into our component, we need to use the `mapStateToProps` function.
+```js
+const mapStateToProps = state => {
+  return {
+    streams: Object.values(state.streams),
+    currentUserId: state.auth.userId
+  };
+};
+```
+- We are going to create helper method `renderAdmin`. So we do not have to put a ton of checking logic for our userId inside of `renderList` function. 
+- Whenever `renderAdmin` function gets called, we are going to pass in the stream that we are currently iterating over. 
+```js
+renderAdmin(stream) {
+    if (stream.userId === this.props.currentUserId) {
+      return (
+        <div className="right floated content">
+          <button className="ui button primary">EDIT</button>
+          <button className="ui button negative">DELETE</button>
+        </div>
+      );
+    }
+  }
+
+  renderList() {
+    return this.props.streams.map(stream => {
+      return (
+        <div className="item" key={stream.id}>
+          {this.renderAdmin(stream)}
+          <i className="large middle aligned icon camera" />
+          <div className="content">
+            {stream.title}
+            <div className="description">{stream.description}</div>
+          </div>
+        </div>
+      );
+    });
+  }
+```
+- Once we sign out, we are not going to see any button anymore.
+- Now, we need to make sure that at the bottom of the page, whenever user is logged in, we show the button to allow a suer to create a stream. 
 
 
   
