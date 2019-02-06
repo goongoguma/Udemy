@@ -2672,7 +2672,57 @@ renderAdmin(stream) {
   }
 ```
 - Once we sign out, we are not going to see any button anymore.
-- Now, we need to make sure that at the bottom of the page, whenever user is logged in, we show the button to allow a suer to create a stream. 
+- Now, we need to make sure that at the bottom of the page, whenever user is logged in, we show the button to allow a user to create a stream. 
+
+## 126. Linking to Stream Creation
+
+- We need to make sure that if the user is logged in, we show a button at the very bottom that says `Create Stream`.
+- So if a user clicks on the button, it should be taken to a page where a user can create a new stream.
+- Create a helper method `renderCreate` that renders a create button.
+- Remember that we only want to show this button if the user is signed in.
+- We already have some information about the current signIn status of the user inside the prop's object of our component. In the form of `currentUserId`.
+- Whenever the user is not signed in, `currentUserId` is set to null.
+- But we are not going to use the `currentUserId` for it.
+- Because we actually have a property inside of our state object already. That is meant to be used anytime that we want to check to see if a user is sigend in or not signed in.
+- And that is the `isSignedIn` property
+- Now inorder to get that `isSignedIn` property into `StreamList` component, we have to add it to our `mapStateToProps` function.
+```js
+const mapStateToProps = state => {
+  return {
+    streams: Object.values(state.streams),
+    currentUserId: state.auth.userId,
+    isSignedIn: state.auth.isSignedIn
+  };
+};
+```
+- When `Create Stream` button is clicked, a new page will be rendered. Therfore we are going to import `Link` in react-router-dom to use it.  
+```js
+import {Link} from 'react-router-dom'
+renderCreate() {
+    if (this.props.isSignedIn) {
+      return (
+        <div style={{ textAlign: "right" }}>
+          <Link to="/streams/new" className="ui button primary">
+            Create Stream
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Streams</h2>
+        <div className="ui celled list">{this.renderList()}</div>
+        {this.renderCreate()}
+      </div>
+    );
+  }
+}
+```
+
+
 
 
   
