@@ -113,7 +113,14 @@
 111. Streams의 API 설정
 112. JSON Server을 이용해 DB 만들기
 113. Action creator 만들어주기
-114.  
+114. RESTful api를 이용해 stream 만들기 
+115. Stream을 만든 후에 actions를 dispatch하기
+116. 필요한 Action creators 만들기
+117. 객체를 반환하는 reducer의 장점
+118. Key Interpolation
+119. Streaming과 관련된 다양한 reducers 만들어주기
+120. Lodash 라이브러리의 _omit 사용해 객체 지우기
+121. Lodash 라이브러리를 이용해 배열에서 객체 반환하기 
 
 ## 1. Critical Question related to React
 
@@ -2317,7 +2324,7 @@ onSubmit(e) {
   ```
 - So now, whenever the user tries to estimate the form, we are going to validate the inputs. if the inputs are valid, we will call `onSubmit` and the function is going to call our action creator `createStream`, and then it is going to run the action creator and we are going to attempt to make a request over to our API server and create a new stream and we now that this is going to create a stream because we are following RESTful conventions.
 - After we have wired up action creator, send a request to server after you fill out the form.
-- When you check network tab in developer console, we are going to find out that there are two streams file have sent to server. 
+- When you check network tab in developer console, we are going to find out that there are two streams file have been sent to server. 
 - One is OPTIONS request and the other one contains the contents that you have filled out in the form.
   ```js
   {title: "my stream", description: "i love it ", id: 1}
@@ -2399,18 +2406,18 @@ onSubmit(e) {
 
 - This time, instead of returning an array, reducer is going to return an object that has all the streams inside of it. 
 - Inside of the object, we are going to have a collection of key value pairs.
-  ```js
+- So in order to kind of access any given stream inside the object, we would just have to reference our streams piece of states out of our redux store and then essentially try to access the appropriate ID inside there. 
+   ```js
   {
     1: stream with ID 1
     22: stream with ID 22
     37: stream with ID 37
   }
   ```
-- So in order to kind of access any given stream inside the object, we would just have to reference our streams piece of states out of our redux store and then essentially try to access the appropriate ID inside there. 
 - And that will give us the stream that we are looking for.
 - If we make use of object instead of array for reducer, the updating process would be much more straightforward.
 - We would put down the curly braces to indicate a new object.
-- We would take all the records out of our old state object and add them in and then we would add in a  new key value pair.
+- We would take all the records out of our old state object and add them in and then we would add in a new key value pair.
 - In this case, the key would be the ID of the stream that we just updated. 
   ```js
   {...state, 65: Stream65}
@@ -2454,7 +2461,7 @@ onSubmit(e) {
 - Create `streamReducer` file inside of reducer folder.
 - It does all streams related works.
 - Set up separate case statements to handle each of different types. And each of those different types has different response get back from the API.
-- For example, when we see an action with the type of `FETCH_STREAMS` specifically thast means we are getting back an array of records. And we are going to want to take that array of records and merge them all into the state object. 
+- For example, when we see an action with the type of `FETCH_STREAMS` specifically that means we are getting back an array of records. And we are going to want to take that array of records and merge them all into the state object. 
   ```js
   export default (state = {}, action) => {
     switch (action.type) {
@@ -2477,7 +2484,7 @@ onSubmit(e) {
   case DELETE_STREAM:
       return _.omit(state, action.payload)
   ```
-- But in this case, we do not have to reference `.id` property because in `deleteStream`, `action.payload` itself is the ID.
+- But in this case, we do not have to reference `.id` property because in `DELETE_STREAM`, `action.payload` itself is the ID.
 - Nice thing about `_.omit` is that it is not going to change the original state object. Instead it creates a new object with all the properties from states without whatever we passed in as the `action.payload`.
   
 ## 121. Merging Lists of Records 
@@ -2516,6 +2523,8 @@ onSubmit(e) {
    case FETCH_STREAMS:
       return { ...state, ..._.mapKeys(action.payload, "id") };
   ```
+
+
   
 
 
