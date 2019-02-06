@@ -2524,6 +2524,30 @@ onSubmit(e) {
       return { ...state, ..._.mapKeys(action.payload, "id") };
   ```
 
+## 122. Fetching a List of All Streams
+
+- In order to show the streams at StreamList component as soon as it renders, we are going to change the component function base to class base and add `componentDidMount` lifesycle.
+- After that, wire up `connect` function and `fetchStreams` function.
+  ```js
+  import React from "react";
+  import { connect } from "react-redux";
+  import { fetchStreams } from "../../actions";
+
+  class StreamList extends React.Component {
+    componentDidMount() {
+      this.props.fetchStreams();
+    }
+    render() {
+      return <div>StreamList</div>;
+    }
+  }
+
+  export default connect(
+    null,
+    { fetchStreams }
+  )(StreamList);
+  ```
+
 
   
 
