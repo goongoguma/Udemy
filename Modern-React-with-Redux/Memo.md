@@ -2596,7 +2596,38 @@ onSubmit(e) {
     );
   }
   ```
-  
+
+## 124. Associating Streams with Users
+
+- We got the list of streams to render but remember that we want to show some buttons on individual streams that say delete and edit.
+- These buttons should only be visible if I was the person who created the stream.
+- So it is kind of good tie up for the authentication and fetching the list of streams part of the application.
+- In order to figure out which stream was created by who, we need to actually attach a user ID to our streams when they get created. 
+- So what we need to add on a userId to the stream object.
+  ```js
+  {
+    id: 1,
+    title: "my stream",
+    description: "i love it"
+    userId: "ID of whoever created this"
+  }
+- Essentially we need to somehow get our userId inside of our `createStream` action creator. 
+- When we return a function from an action creator, the function gets called automatically by `redux thunk` with two arguements (`dispatch, getState`).
+- `getState` function allows us to reach the redux store and pull out some piece of information. 
+- So add `getState` argument inside of `createStream` action creator.
+```js
+export const createStream = formValues => {
+  return async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const res = await streams.post("/streams", { ...formValues, userId });
+
+    dispatch({ type: CREATE_STREAM, payload: res.data });
+  };
+};
+```
+
+
+
 
   
 
