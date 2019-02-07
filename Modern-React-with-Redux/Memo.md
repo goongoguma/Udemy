@@ -2893,6 +2893,41 @@ import history from "../history";
 - Suppose in `/streams/edit/17`, then we can take that 17 and pass it as a prop into the `StreamEdit` component. 
 - Then `StreamEdit` component will know that it needs to show the stream 17 and allow a user to ddit specifically the stream with ID 17. 
 
+## 133. Wildcard Navigation
+
+- There are two seperate things to do
+- First off we need to make sure that anytime that a user clicks on Edit button, they go to a route of something like `streams/edit` and then the ID of the stream that the user just clicked on the button for. 
+- After that we need to make sure that we also update our routing information inside of our App.js file to make sure that anytime that a user goes to a URL like `streams/edits/:id`, it shows the `StreamEdit` component. 
+- At present, we have wired up our routing rules to say that anytime a user goes to `stream/edit`, they see the StreamEdit component. So we are going to do a little tweak around our routing rules. 
+- We are going to change Edit button to `Link`.
+- But in this case we are not going to use fixed value in `Link to`. Instead we need to essentially take the idea of the stream and insert it into the `Link to` string we generate. 
+  ```js
+  renderAdmin(stream) {
+    if (stream.userId === this.props.currentUserId) {
+      return (
+        <div className="right floated content">
+          <Link to={`/streams/edit/${stream.id}`} className="ui button primary">
+            Edit
+          </Link>
+          <button className="ui button negative">DELETE</button>
+        </div>
+      );
+    }
+  }
+  ```
+- If we click on one of buttons that we want to go to the StreamEdit component or that page, the information in the URL is trying to convey that we want to edit the stream with an ID of that page.  
+- So now the next thing we need to do is make sure that we update our routing rules inside of App.js file. 
+- We need to make sure that `Route path` understands that if a user ever goes to streams at it and then some ID, we still want to show `StreamEdit`.
+- To do so, we are going to put on another forward `/` at the very end, add `:id`.
+  ```js
+   <Route path="/streams/edit/:id" component={StreamEdit} />
+  ```
+- So now if a user goes to `streams/edit/` anything, we are going to show the StreamEdit component. 
+- For a quick note, as soon as puts `:`, anything inside of URL, that means this is going to be essentially a variable and he could have any value that you want for that part of the URL. 
+- The colon(`:`) is what turns anything into a variable sorts.
+- Next thing we need to do is to make usre that anytime that a user comes to `StreamEdit` page, we somehow get that number out of the URL and we communicate that number down into `StreamEdit`. So That StreamEdit component knows exactly what stream it is trying to change. 
+
+
 
   
 
