@@ -121,6 +121,13 @@
 119. Streaming과 관련된 다양한 reducers 만들어주기
 120. Lodash 라이브러리의 _omit 사용해 객체 지우기
 121. Lodash 라이브러리를 이용해 배열에서 객체 반환하기 
+122. 모든 streams 가져오기
+123. 모든 Streams 렌더링하기 
+124. userId와 action creator 연결시키기
+125. 조건에 맞춰 버튼 보여주기 1
+126. 조건에 맞춰 버튼 보여주기 2
+127. 
+
 
 ## 1. Critical Question related to React
 
@@ -2527,7 +2534,7 @@ onSubmit(e) {
 ## 122. Fetching a List of All Streams
 
 - In order to show the streams at StreamList component as soon as it renders, we are going to change the component function base to class base and add `componentDidMount` lifesycle.
-- After that, wire up `connect` function and `fetchStreams` function.
+- After that, wire up `connect` function and `fetchStreams` action creator.
   ```js
   import React from "react";
   import { connect } from "react-redux";
@@ -2550,7 +2557,7 @@ onSubmit(e) {
 
 ## 123. Rendering All Streams
 
-- Now that we are loadinig up our list of streams into the application, we want to make sure that data get rendered out by the StreamList component. 
+- Now that we are loading up our list of streams into the application, we want to make sure that data get rendered out by the StreamList component. 
 - The first thing we need to do is to make sure that we get our list of streams available as props inside of the component. 
 - But here is the part that things get a little bit interesting.
 - Our list of streams is actually stored inside of an object.
@@ -2628,12 +2635,12 @@ export const createStream = formValues => {
 
 ## 125. Conditionally Showing Edit and Delete
 
-- Now we have our streams associated with the user who created them, we are going to update our `StreamList` component and make sure that these treams that were created by me have buttons. 
+- Now we have our streams associated with the user who created them, we are going to update our `StreamList` component and make sure that these streams that were created by me have buttons. 
 - So we have to make sure that `StreamList` component understands the idea of the user who is currently signed into our application.
 - We have already stored the information inside of redux store. 
 - So essentially whenever we iterate thorugh the list of streams and render them out on the screen, we just want to compare the current userId with a userId associate at the stream. 
 - If they are equal, then we want to show those buttons on the right hand side of each stream.
-- To get the inforemation of userId into our component, we need to use the `mapStateToProps` function.
+- To get the information of userId into our component, we need to use the `mapStateToProps` function.
 ```js
 const mapStateToProps = state => {
   return {
@@ -2685,7 +2692,7 @@ renderAdmin(stream) {
 - But we are not going to use the `currentUserId` for it.
 - Because we actually have a property inside of our state object already. That is meant to be used anytime that we want to check to see if a user is sigend in or not signed in.
 - And that is the `isSignedIn` property
-- Now inorder to get that `isSignedIn` property into `StreamList` component, we have to add it to our `mapStateToProps` function.
+- Now in order to get that `isSignedIn` property into `StreamList` component, we have to add it to our `mapStateToProps` function.
 ```js
 const mapStateToProps = state => {
   return {
@@ -2757,6 +2764,46 @@ export const createStream = formValues => {
   };
 };
 ```
+
+## 128. History References
+
+- The good news it that programmatic navigation sometimes with react router dom is really is but sometimes it is not easy at all.
+- But we are in on scenarios where it is not easy to do programmatic navigation.
+- Remember that we have a `BrowserRouter` at the very top of our component hierarchy, internally `BrowserRouter` creates `history` object. Anytime that address changes, the `history` object is going to communicate the change over to the `BrowserRouter`.
+- But `history` object is not only about watching the address bar. It also has the ability to change the address bar as well.
+- And that is how we are going to do programmatic navigation.
+- However it is kind of challenging for us to write code that can get a handle of a reference to that history object. 
+- Normal Operation in React router
+  - Internally the `BrowserRouter` creates the `history` object then anytime that the `BrowserRouter` renders some component, `BrowserRouter` passes that `history` object as a prop down to the component.
+  - So inside of any component that gets rendered directly by react router, it is going to receive the `history` object. So the component could very easily trigger some navigation inside of it. 
+- But in our case, we are not trying to do navigation from a component, we are trying to do navigation from an action creator. 
+- *Getting access to the `history` object inside of an action creator or any none react component* is what is a little bit challenging. 
+- It is hard to get a reference to that `history` object. 
+- So the solution would be to do something like this.
+  - So we have got `history` object that gets created by the `BrowserRouter`, it communicates the `history` object down to our component and then we could say that anytime that our component calls our action creator, the component should pass along the `history` object into the action creator. 
+- So essentially saying that inside of our action creator, we would receive not only our form values but also some `history` object as well.
+```js
+export const createStream = (formValues, history) => {
+  return async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const res = await streams.post("/streams", { ...formValues, userId });
+
+    dispatch({ type: CREATE_STREAM, payload: res.data });
+    // Do some programmatic navigation to get the user back to the root route
+  };
+};
+```
+- Now this is kind of a pain because it means that every single time we want to do programmatic navigation, we would have to write our action creators to be called with a `history` object and we would make sure that all of our components called the action creator with the `history` object as well. 
+- So even though this is possible but not super ideal. 
+- We are going to alternative solution.
+- We are going to create a `history` object instead.
+- So we are going to create a `history` object inside of a dedicated file inside of our project. Then anytime that we want to get access to that `history` object, we are just going to import that file very easily because we are maintaining control over the `history` object ourselves and we are not allowing react router to create the history object itself. 
+- When we create `history` object, we are going to create a `history` object that is the corresponding type to whatever router we had created. 
+- We are creating our own history object, we are no longer going to create a `BrowserRouter` object as the top of our component hierarchy.
+- Instead we are going to create a `Plain Router`.
+- We create `Plain Router` when we create the `history` object ourselves. 
+
+
 
 
 
