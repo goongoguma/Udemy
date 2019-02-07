@@ -2927,6 +2927,23 @@ import history from "../history";
 - The colon(`:`) is what turns anything into a variable sorts.
 - Next thing we need to do is to make usre that anytime that a user comes to `StreamEdit` page, we somehow get that number out of the URL and we communicate that number down into `StreamEdit`. So That StreamEdit component knows exactly what stream it is trying to change. 
 
+## 134. More on Route Params
+
+- We now need to make sure that we somehow gget that little piece of information out of the URL and communicate it down to StreamEdit.
+- We are going to add it on a reference to the props argument that this thing recieves and then I am going console.log it.
+- We can check that there are 4 properties inside of props.
+- All the props that you see are coming from react-dom. 
+- We only have access to these props specifically because the `StreamEdit` component inside of the file is being rendered by a route component. 
+- Because `StreamEdit` is being rendered by route, react router dom automatically is going to add in a bunch of different props to `StreamEdit` (history, location, match, staticContext).
+- We can find the ID value inside of `params` in `match` props.
+- Also we can put addition params inside of it
+  ```js
+  <Route path="/streams/edit/:id/:anotherId" component={StreamEdit} />
+  ```
+- Know we know exact ID of the stream that we are trying to edit, anytime that we click on the `Edit` button.
+- Next thing, I want to try to load up some information about that particular stream and show it on the screen. Because eventually we want to allow a user to edit the information.
+- But whenever we go to the StreamEdit page, we want to show the existing title and the existing description of the stream as it currently is. 
+
 
 
   
