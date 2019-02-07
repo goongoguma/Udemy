@@ -2875,7 +2875,23 @@ import history from "../history";
 - Inside of the file, it contains all the different records we have created. 
 - So if you want to make any changes manually the data inside of the application, you can just change the file.  
 
-  
+## 132. URL-Based Selection
+
+- Anytime a user comes to EditStream page, we are going to allow them the opportunity to edit the title or the description of already created stream.
+- We are going to talke about how a user can get to the page and how we are going to figure out what stream a user is trying to edit. 
+- We need to communicate which edit button the user clicked over index page to edit page. 
+- Option no.1
+  - Selection Reducer
+  - When a user clicks on a stream to edit it, use a 'selectionReducer' to record what stream is being edited. 
+- Option no.2
+  - URL-based selection
+  - Put the ID of the stream being edited in the URL
+  - We are going to essentially make sure that whenever a user clicks on the 'Edit' button, they will go to some address or some path that has the ID of the stream that they are trying to edit inside of the address bar.
+- Anytime that you see colon and then some label inside the path that essentially means it has a variable.
+  ex. `/streams/edit/:id`
+- So because we can put the idea of the record that the user is trying to edit inside the URL, we can make use of react router dom to look at the URL and pull off just that portion of the URL. 
+- Suppose in `/streams/edit/17`, then we can take that 17 and pass it as a prop into the `StreamEdit` component. 
+- Then `StreamEdit` component will know that it needs to show the stream 17 and allow a user to ddit specifically the stream with ID 17. 
 
 
   
