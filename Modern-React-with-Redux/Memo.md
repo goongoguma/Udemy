@@ -2796,15 +2796,78 @@ export const createStream = (formValues, history) => {
 - Now this is kind of a pain because it means that every single time we want to do programmatic navigation, we would have to write our action creators to be called with a `history` object and we would make sure that all of our components called the action creator with the `history` object as well. 
 - So even though this is possible but not super ideal. 
 - We are going to alternative solution.
+- Remember that the `BrowserRouter` internally creates the `history` object and the fact that the `BrowserRouter` maintains that `history` object is what makes it challenging. 
 - We are going to create a `history` object instead.
 - So we are going to create a `history` object inside of a dedicated file inside of our project. Then anytime that we want to get access to that `history` object, we are just going to import that file very easily because we are maintaining control over the `history` object ourselves and we are not allowing react router to create the history object itself. 
 - When we create `history` object, we are going to create a `history` object that is the corresponding type to whatever router we had created. 
 - We are creating our own history object, we are no longer going to create a `BrowserRouter` object as the top of our component hierarchy.
 - Instead we are going to create a `Plain Router`.
 - We create `Plain Router` when we create the `history` object ourselves. 
+- Programmatic navigation을 할때에는 `history` 객체를 사용해야한다.
+- 하지만 기존의 `BrowserRouter`에 내장되어있는 `history` 객체에 접근하는게 번거롭다.
+- 그러므로 `history` 객체를 따로 만들어주고 그 객체를 쓰기 위해 `BrowserRouter`가 아닌 `Router`를 쓰겠다는것.
+
+## 129. Creating a Browser History Object
+
+- Create new file history.js in src folder.
+- We are going to create a `history` object and export it for use throughout our entire application.
+- So the idea is that we maintain the `history` obejct as opposed to react router. 
+- Because we are creating it, it is going to be a lot easier to get access to it and change what page the user is looking at. 
+- So at the top of the file, import `createHistory`.
+```js
+import createHistory from "history/createBrowserHistory";
+```
+- History package was installed automatically with react router dom. 
+- `createHistory` is a function that we can call to create a new `history` object. 
+- And export it
+```js
+export default createHistory();
+```
+- After that, we are going to create `Plain Router` instead of `BrowserRouter`.
+- If you pass custom `history` object to `BrowserRouter` in App component after import `history` object from history.js file, 
+```js
+import history from "../history";
+<BrowserRouter history = {history}>
+- (Anytime that we pass in a prop called `history`, the router is going to attempt to use it instead of default `history` object.)
+- You will get an error inside of console saying
+  ```js 
+  Warning: <BrowserRouter> ignores the history prop.
+  ```
+- Therefore we need to import a `Plain Router` and we will pass our `history` object into that router. 
+- To do so, instead of `BrowserRouter`, we are going to import just `Router`. And replace `BrowserRouter` tag to `Router` tag.
+  ```js
+  import { Router, Route } from "react-router-dom";
+  <Router history={history}>
+    <div>
+      <Header />
+      <Route path="/" exact component={StreamList} />
+      <Route path="/streams/new" component={StreamCreate} />
+      <Route path="/streams/edit" component={StreamEdit} />
+      <Route path="/streams/delete" component={StreamDelete} />
+      <Route path="/streams/show" component={StreamShow} />
+    </div>
+  </Router>
+  ```
+- You will not see any error inside of console and if you start to click around, the navigation occurs exactly as it did before. 
+- So the only change is that we are now in charge of that `history` object as opposed to react router dom created internally.
+- Now we have got the `history` object which means we can trigger direct navigation or programmatic navigation from our `createStream` action creator.
 
 
+## 130. Implementing Programmatic Navigation
 
+- We can import `history` into our action creator file and use it to automatically navigate our user around the application.
+  ```js
+  export const createStream = formValues => {
+  return async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const res = await streams.post("/streams", { ...formValues, userId });
+
+    dispatch({ type: CREATE_STREAM, payload: res.data });
+    history.push('/')
+  };
+};
+  ```
+  
 
 
   
