@@ -2944,6 +2944,31 @@ import history from "../history";
 - Next thing, I want to try to load up some information about that particular stream and show it on the screen. Because eventually we want to allow a user to edit the information.
 - But whenever we go to the StreamEdit page, we want to show the existing title and the existing description of the stream as it currently is. 
 
+## 135. Selecting Records from State
+
+- This time, we are going to try to print up some information about the stream that the user is trying to access from our `StreamEdit` component.
+- Let's make sure that we can load up the appropriate stream, so we know what default title and description we should put into two text inputs.
+- First off we need to know the ID of the stream that the user is trying to see. We can find ID inside of `match -> params -> id`.
+- Second we need to know about is the list of streams inside of a `redux state object`.  
+- So essentially between the props object and the list of streams that we have inside of our state store, we can somehow select the stream with an ID then print up some information about it inside of our component. 
+- We are going to use `connect` function to get a list of streams into the component. 
+- We want to print up the title and description insdie of `StreamEdit`.
+- The component has access to the props object and that props object is what knows about ID that we are trying to show. But the props obejct appears to only be accessible inside of the StreamEdit function.
+- On the other hand, `mapStateToProps` function is what knows about the big list of streams that is entirely that entirely stored inside of our state object. 
+- So one source of information is up there, and the other source of information is available down there.
+- Therefore, we are going to use `ownProps` argument.
+- Also remember that streams property is an object where the keys of that object are the IDs of all the streams that we have loaded up. Therefore, anytime we want to select a record out of that object by using an ID, all we have to do is use the bracket notation.
+  ```js
+    const mapStateToProps = (state, ownProps) => {
+    return{stream: state.streams[ownProps.match.params.id]}
+  }
+  ```
+- So this should select the appropriate stream out of the object that contains all of our streams inside of redux store, assign that to the stream property insdie this object and then return it from `mapStateToProps` fucntion.
+- So finally stream property in `mapStateToProps` contains the stream that our user is trying to edit.
+- But if we `console.log(props)` inside of `StreamEdit` component, we can find that stream property is undefined that means we did not successfully pull the appropriate stream out of our streams object. 
+- However, when you navigate back to main index page, and come back to `StreamEdit` page, stream property appears correctly. 
+- Is seems like when we first loaded up the page, we had no stream. But then when we started to navigate around a little bit, it seemed like the streams suddenly showed up.
+
 
 
   
