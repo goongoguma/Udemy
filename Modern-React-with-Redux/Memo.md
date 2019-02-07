@@ -2096,7 +2096,7 @@ renderInput({ input, label }) {
 ## 107. Handling Form Submission
 
 - Inside of props that received by redux form library, it contains `handleSubmit` callback function. 
-- We then call that function with `onSubmit` callback method that we defined insdie of the component.
+- We then call that function with `onSubmit` callback method that we defined inside of the component.
 ```js
 onSubmit(e) {
     e.preventDefault();
@@ -3050,6 +3050,27 @@ import history from "../history";
   ```
   - So now we are going to expect the parent component to pass down a callback called `onSubmit`, and this is going to be called with whatever values are coming out of our form. 
 
+## 139. Refactoring Stream Creation
+
+- `StreamCreate` is no longer going to be showing a form. So we don't need a filed or redux form anymore. 
+- We need to import `StreamCreate` component. 
+- We don't need to render an error and inputs anymore. 
+- We are not going to show a form, Field and button anymore. So entire jsx inside of render method can be removed.
+- And we will replace that with just enough to show the form and a header at the top.
+- We can place our `StreamForm` component inside of render method and pass `onSubmit`. 
+  ```js
+    render() {
+      return (
+        <div>
+          <h3>Create a Stream</h3>
+          <StreamForm onSubmit={this.onSubmit} />
+        </div>
+      );
+    }
+  }
+  ```
+- We also do not need `validation` function because the validation is being handled by `StreamForm` component.
+- And no wrapping `reduxForm` anymore.
 
 
 
