@@ -11,39 +11,10 @@
       "id": 2
     },
     {
-      "title": "good",
-      "description": "morning ",
+      "title": "TOP",
+      "description": "TEEMO",
+      "userId": "118141778575859650932",
       "id": 3
-    },
-    {
-      "title": "I created this stream",
-      "description": "This was made by me!",
-      "userId": "118141778575859650932",
-      "id": 4
-    },
-    {
-      "title": "Unexpected Behavior",
-      "description": "Didn't expect that ",
-      "userId": "118141778575859650932",
-      "id": 5
-    },
-    {
-      "description": "Navigation",
-      "title": "Programmatic",
-      "userId": "118141778575859650932",
-      "id": 6
-    },
-    {
-      "description": "Navigation",
-      "title": "Programmatic",
-      "userId": "118141778575859650932",
-      "id": 7
-    },
-    {
-      "title": "Programmatic Navigation",
-      "description": "You won't see this coming! ",
-      "userId": "118141778575859650932",
-      "id": 8
     }
   ]
 }

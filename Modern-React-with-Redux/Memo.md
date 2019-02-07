@@ -2272,7 +2272,7 @@ onSubmit(e) {
     "start": "json-server -p 3001 -w db.json"
   },
   ```
-- That is literally all the code we have to wrtie to get the API server up and running. 
+- That is literally all the code we have to write to get the API server up and running. 
 - And type `npm start` to start up the server in port 3001.
 - So now we have a listed resource at `localhost:3001/streams`.
 - We can make use of this JSON server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
@@ -2857,16 +2857,24 @@ import history from "../history";
 
 - We can import `history` into our action creator file and use it to automatically navigate our user around the application.
   ```js
-  export const createStream = formValues => {
-  return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const res = await streams.post("/streams", { ...formValues, userId });
+    export const createStream = formValues => {
+    return async (dispatch, getState) => {
+      const { userId } = getState().auth;
+      const res = await streams.post("/streams", { ...formValues, userId });
 
-    dispatch({ type: CREATE_STREAM, payload: res.data });
-    history.push('/')
+      dispatch({ type: CREATE_STREAM, payload: res.data });
+      history.push('/')
+    };
   };
-};
   ```
+## 131. Manually Changing API Records
+
+- How you can clean up and manually manipulate some of the different streams that get created when you are using JSON server API.
+- Using terminal, go inside the folder that `db.json` file is in.
+- `db.json` holds all data inside of our application.
+- Inside of the file, it contains all the different records we have created. 
+- So if you want to make any changes manually the data inside of the application, you can just change the file.  
+
   
 
 
