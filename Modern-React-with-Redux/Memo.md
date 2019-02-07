@@ -126,7 +126,7 @@
 124. userId와 action creator 연결시키기
 125. 조건에 맞춰 버튼 보여주기 1
 126. 조건에 맞춰 버튼 보여주기 2
-127. 
+
 
 
 ## 1. Critical Question related to React
@@ -3022,8 +3022,33 @@ import history from "../history";
     return <div>{this.props.stream.title}</div>;
   }
   ```
-- We are going to use this pattern in StreamDelete component and StreamShow component because both streams need to load up appropriate stream in order to show some details about it on the screen. 
+- We are going to use this pattern in `StreamDelete` component and `StreamShow` component because both streams need to load up appropriate stream in order to show some details about it on the screen. 
 
+## 138. Real Code Reuse!
+
+- We can start to think about putting together the actual edit stream form.
+- When you compare two mockups (Create Stream page and Edit Stream page), they are really similar compare to each other. 
+- Big differences are headers of two are different and create stream does not have any initial title and description. Whereas edit stream is going to put the current title, description into the input so that a user can change it. 
+- And different action creator gets called when the user presses the submit button.
+- We are going to create a total of three components between create and edit pages.
+- We are going to have a `StreamCreate`, `StreamEdit` and `StreamForm`. 
+- The vast majority of showing text inputs, handling changes, wiring up to redux form, all that kind of stuff is all going to be done inside of new `StreamForm` component.
+- So all the logic that hooks up to redux form, all the logic that renders text inputs, all the logic that submits the form and handles the mission appropriately, we are going to place inside of `StreamForm` component.
+- We are going to refactore `StreamCreate`, `StreamEdit` components and they are going to show internally the `StreamForm` component.
+- We need to make sure that `StreamCreate` component passes down `onSubmit` callback to `StreamForm`.
+- In addition, StreamEdit component passes down `onSubmit` callback and `initialValues`.
+- Create StreamForm.js inside of src folder. 
+- `StreamCreate` component already has a tremendous amount of logic inside of it for showing the form and the error messaging and all that kind of stuff. So we want to take all the logic inside of the component and refactor `StreamCreate` to make sure that it does not call any action creator when it gets submitted. Instead `StreamForm` should call some `callback` that gets passed down from a parent component. 
+- Copy the code inside of `StreamCreate` component and gives some changes.
+  - And it does not action creator. It is a parent component that calls some action creator.
+  - `StreamForm` does not need connect function.
+  - `StreamForm` should attempt to call a callback passed down from props from some parent component. So `onSubmit` function calls `this.props.onSubmit(formValues)`.
+  ```js
+  onSubmit = formValues => {
+    this.props.onSubmit(formValues);
+  };
+  ```
+  - So now we are going to expect the parent component to pass down a callback called `onSubmit`, and this is going to be called with whatever values are coming out of our form. 
 
 
 
