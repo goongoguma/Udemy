@@ -2969,6 +2969,32 @@ import history from "../history";
 - However, when you navigate back to main index page, and come back to `StreamEdit` page, stream property appears correctly. 
 - Is seems like when we first loaded up the page, we had no stream. But then when we started to navigate around a little bit, it seemed like the streams suddenly showed up.
 
+## 136. Component Isolation with React Router
+
+- Steps for navigation according to ID
+  - User types in `/streams/edit/3` to address bar and hits enter 
+  - User loads up out app
+  - Redux state object is empty!
+  - We try to select stream with id '3' from state
+  - No streams were loaded, so we get undefined!
+    - So this is what exactly going on here.
+    - When we navigate directly to streams at 3, we have not loaded up any streams into our application. 
+    - So we immediately see zero data inside of our store when we try to pull some data out of it, that does not exist, we get undefined value. 
+  - We navigated to `/`
+  - `StreamList` fetches all of our streams using `componentDidMount`, update Redux state.
+  - We navigate back to `/streams/edit/3`
+  - We select stream with id of 3
+  - Data is now in redux store, so we see the appropriate stream. 
+- So the big issue is that we are trying to make get access to some data that has not yet been loaded up into the application. 
+- Big lesson here about react router is that anytime that you are using this kind of ID based selection out of the URL, we always have to obey this rule.
+- *WITH REACT-ROUTER, EACH COMPONENT NEEDS TO BE DESIGNED TO WORK IN ISOLATION (FETCH ITS OWN DATA!)*
+- We really cannot assume that any given component will get access to some data that might have been loaded up previously inside the application. 
+- If a user navigates directly to streams at 3, there are no streams to select from. So our StreamEdit component needs to load up the appropriate stream. It needs to call the action creator to reach out to the API and fetch the stream with ID 3 so that it can then show it on the screen. 
+- We need to make sure that every component is not going to have some dependency on a user visiting some other route inside of our application ahead of time.
+- A user could bookmark and then come back directly to a URL of streams and that would completely bypass the StreamList component which means users are always going to come directly to a given route inside the application.  
+- Therefore every route and every component shown by that route needs to fetch it own data and it cannot rely upon some other component fetching data ahead of time for it. 
+
+
 
 
 
