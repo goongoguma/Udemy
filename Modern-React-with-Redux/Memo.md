@@ -3169,7 +3169,33 @@ import history from "../history";
   />
   ```
 - If we change initial values inside of inputs and submit, it is going to trigger `onSubmit` callback we defined inside of `StreamEdit` and update values. 
+- But there is a small issue here. 
   
+## 141. Avoiding Changes to Properties
+
+- The application works just fine as is but this issue that might get you in trouble when you start working on other project and it comes down to how ytour back-end server is set up.
+- When you console.log your change, we will find out that there are some other properties are inside of the object beside of title and description(ID and userId). 
+- When we eventually call `onSubmit` callback in side of `StreamEdit`, we are getting some object that contains *what are supposed to be updates to our stream object*. In order words `formValues` is only supposed to contain properties that are supposed to change on our form.
+- And telling API that here are some change properties which are title and description that you should use to update some given `stream`.
+- The issue with this is that when we pass the ID or userID, it kind of makes it seem as though we have changed the ID or the userId. 
+- Therefore we want to trim down the properties inside of the object.
+- We put entire object of `stream` inside of `initialValues` and that causes the issue. 
+- We are going to use `lodash` to solve it. 
+  ```js
+  <StreamForm
+    initialValues={_. (this.props.stream, "titl  "description")}
+    onSubmit={this.onSubmit}
+  />
+  ```
+- Example of `pick` function in `lodash`
+  ```js
+    const profile = {
+    name: 'Sam',
+    age: 18,
+    favoriteColor: 'green'
+  }
+  _.pick(profie, 'name', 'age') // {"name" : "Sam", "age":18}
+  ```
 
 
 
