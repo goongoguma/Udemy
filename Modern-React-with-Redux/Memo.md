@@ -3445,6 +3445,50 @@ import history from "../history";
 - `stopPropagation` is going to make sure that the event does not continue to bubble up and go to parent `div` does causing our window to get dismissed by navigating to some other page. 
 - But modal might be used in many other locations insdie of the application where we want to show a modal and in everyone of those cases, we probably are going to want to have a different header and different content, different buttons and different things to occur whenever user clicks those buttons and back to different location expected by users.
 
+## 148. Making the Modal Reusable
+
+- We have hard coded text and button and route inside of `Modal` component but highly likely we are going to use this component other side of the component. 
+- We should configure the modal based upon some props that get passed into it from the parent component. 
+- That will make our `Modal` much more reusable if we ever want to use it again in the future. 
+- We are going to pass some couple of props that will be used to customize how the modal looks and behaves. 
+  ```js
+    const actions = (
+      <div>
+        <button className="ui button negative">Delete</button>
+        <button className="ui button">Cancel</button>
+      </div>
+    );
+    return (
+      <div>
+        StreamDelete
+        <Modal
+          title="Delete Stream"
+          content="Are you sure you want to delete this stream?"
+          actions={actions}
+        />
+      </div>
+    );
+
+    const Modal = props => {
+    return ReactDOM.createPortal(
+      <div
+        onClick={() => history.push("/")}
+        className="ui dimmer modals visible active"
+      >
+        <div
+          onClick={e => e.stopPropagation()}
+          className="ui standard modal visible active"
+        >
+          <div className="header">{props.title}</div>
+          <div className="content">{props.content}</div>
+          <div className="actions">{props.actions}</div>
+        </div>
+      </div>,
+      document.querySelector("#modal")
+    );
+  };
+  ```
+
 
 
 
