@@ -3406,8 +3406,44 @@ import history from "../history";
 - It is going to take the jsx and attempt to insert it as a child to `div` with the ID of modal. 
 - Now we can find `Modal` appears on the screen successfully.
 
+## 147. Hiding a Modal
 
-
+- We are going to use semantic-ui to style `Modal`.
+  ```js
+   <div className="header">Delete Stream</div>
+    <div className="content">
+      Are you sure you want to delete this stream?
+    </div>
+    <div className="actions">
+      <button className="ui primary button">Delete</button>
+      <button className="ui button">Cancel</button>
+    </div>
+  ```
+- Modal looks way better than before but when we click outside of modal, the modal is not dismissed. Let's figure out how to do it. 
+- So essentially if a user clicks on the background, we want to navigate the user to some other location or path inside of our app. 
+- We can get a user to navigate programmatically by making use of that `history` object that we created a little bit ago.
+- So import history from the history.js and set push in `div`
+  ```js
+  <div
+    onClick={() => history.push("/")}
+    className="ui dimmer modals visible active"
+  >
+  ```
+- However, it also works when we click the inside of popup box right next to buttons.
+- Because this is very basic event handling. This is event propagation. 
+- It is default JS, HTML behavior.
+- If we ever trigger an event on some child elements and that child element does not handle the event. 
+- The event is going to essentially bubble up to some parent element until it eventually gets caught with an event handler.
+- So if we click on any of the elements inside of `div` tag that has `className='ui dimmer modals visible active'`, the event handler is going to run the onClick event inside of that `div` tag which is going to run `history.push('/')`. 
+- In order to prevent event propagation, we can add a click event handler to `div className='ui standard modal visible active'`. 
+  ```js
+  <div
+    onClick={e => e.stopPropagation()}
+    className="ui standard modal visible active"
+  >
+  ```
+- `stopPropagation` is going to make sure that the event does not continue to bubble up and go to parent `div` does causing our window to get dismissed by navigating to some other page. 
+- But modal might be used in many other locations insdie of the application where we want to show a modal and in everyone of those cases, we probably are going to want to have a different header and different content, different buttons and different things to occur whenever user clicks those buttons and back to different location expected by users.
 
 
 
