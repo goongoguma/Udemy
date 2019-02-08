@@ -3505,6 +3505,23 @@ import history from "../history";
 - You can shorten `React.Fragment` as <></>.
 - But some code checker might think that <></> syntax is not valid. 
 
+## 150. OnDismiss From the Parent
+
+- `onClick` function inside of `div`, will always navigate user to the root route of the application. 
+- It is possible if we use a modal somewhere else that we will not want to take the user to the root route if they attempt to dismiss it. 
+- We might want to do some other behavior maybe try to dismiss the modal by some means. 
+- So `onClick` function should be provided by the parent component. 
+- Remove `() => history.push("/")`, we are going to call `props.onDismiss`, this is new prop that we need to add in from the parent component. 
+- In order to make `history` object inside of `StreamDelete` component, import the object and pass it down to `Modal` component. 
+  ```js
+  <Modal
+    title="Delete Stream"
+    content="Are you sure you want tdelete this stream?"
+    actions={actions}
+    onDismiss={() => history.push("/")}
+  />
+  ```
+  
 
 
 
