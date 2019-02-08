@@ -3197,6 +3197,28 @@ import history from "../history";
   _.pick(profie, 'name', 'age') // {"name" : "Sam", "age":18}
   ```
 
+## 142. Edit Form Submission
+
+- Whenever `onSubmit` inside of `StreamEdit` component gets called with `formValues` object, we need to call some appropriate action creator.  
+- Inside of `onSubmit`, we really have to do it call action creator.
+- In `editStream` action creator, `formValues` is supposed to be the changed properties of the `stream` and it contains only title and description. 
+  ```js
+  onSubmit = formValues => {
+    this.props.editStream(this.props.match.params.id, formValues);
+  };
+  ```
+- And do not forget to use custom `history` to navigate a user after complete the change. 
+  ```js
+    export const editStream = (id, formValues) => {
+    return async dispatch => {
+      const res = await streams.put(`streams/${id}`, formValues);
+
+      dispatch({ type: EDIT_STREAM, payload: res.data });
+      history.push('/')
+    };
+  };
+  ```
+
 
 
 
