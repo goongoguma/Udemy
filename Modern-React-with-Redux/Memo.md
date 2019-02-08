@@ -3220,6 +3220,29 @@ import history from "../history";
   ```
 - But when we edit a stream, you will find out that we have lost edit and delete buttons as well!
 
+## 143. PUT vs PATCH Requests
+
+- When we check the Response tab in Network tab in developer console, we do not find the ID of stream that we just editted.
+- Actually `PUT` request has a little side effect to it. That is very commonly not well implemented in a lot of back-end API. 
+- When you make a `PUT` request, the actual thing that happens is whatever properties you put insdie the body of that request are going to replace all the properties inside of the record that you are trying to update. 
+- In other words when we just made our update request were `PUT` requests, on submission that form, we posted the title and description property. 
+- The problem is that when we made `PUT` request to our API, the API said 'I see a title and description and I see you made a `PUT` request so I am going to take all the different properties inside the stream, the title, ID, description and userId as well. And I am going to replace them with just the properties that you posted to the API.'
+- *But remember that the one property that is usually immune to this is the ID property*
+- As you know we did not update our userId but our back-end API interpreted that 'you no longer want a userId' and so it just dropped of userId entirely.
+- This is the reason why buttons are not showed up. 
+- In orther words, `PUT` request is going to replace or update all properties of a record which could potentially lead to deleting properties off a record on the API.
+- If we really want to just update some properties, we are actually supposed to use a different type of request called a `PATCH` request so that the `PATCH` request, we are going to pass some properties inside of the body the request that are supposed to be updated on the API. And with the request, just those properties are going to be updated. 
+  ```js
+    export const editStream = (id, formValues) => {
+    return async dispatch => {
+      const res = await streams.patch(`streams/${id}`, formValues);
+
+      dispatch({ type: EDIT_STREAM, payload: res.data });
+      history.push("/");
+    };
+  };
+  ```
+
 
 
 
