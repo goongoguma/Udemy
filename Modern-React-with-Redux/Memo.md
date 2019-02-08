@@ -3089,6 +3089,88 @@ import history from "../history";
 - 그 값을 부모 컴포넌트인 `StreamCreate`에서 props로 내려준 `onSubmit`에 넣어주게되면
 - `StreamCreate` 컴포넌트의 `onSubmit` 함수는 받은 값으로 action creator를 실행함. 
 
+## 140. Setting Initial Values
+
+- We are going to do same thing for `StreamEdit` as well.
+- `StreamEdit` is going to be very similar to the work we just did inside of `StreamCreate`, the only big difference is that we want to make sure that the form is going to show some initial values inside of those inputs. 
+- How are we going to do that with `redux form`?
+- So we have StreamEdit that is showing StreamForm wrapped inside of the `redux form` helper.
+- Unlike we did for `StreamCreate` component, we are not actually passing props directly to our StreamForm component. 
+- Instead we are technically passing props to `redux form`. It then turns around and passes those props onto `StreamForm` component. 
+- So there are actually some very special props that we can pass down into the `redux form` that wrapped the component. 
+- One special prop name is `initialValues`.
+- `initialValues` contains title and description.
+- If we pass some `initialValues` prop from `StreamEdit` down to `redux form` wrapped `StreamForm`, it is going to provide some initial values of title and description to show inside of the text inputs inside of `StreamForm`.
+- This is a key topic for understanding how to set up any type of form with `redux form`.
+- Inside of `StreamEdit` component, along with `fetchStream`, import `editStrea` action creator as well. 
+  ```js
+  import { fetchStream, editStream } from "../../actions";
+  ```
+- `editStream` is what is going to eventually allow us to take the idea of a stream and some new properties for the stream and update our API record.
+- and import `StreamForm` component as well.
+  ```js
+  import StreamForm from './StreamForm'
+  ```
+- In order to take the value of inputs that user edits, create `onSubmit` function.
+  ```js
+  onSubmit = (formValues) => {
+    console.log(formValues)
+  }
+  ```
+- In `render` method, just returning a title of the stream, we are going to instead return a multi-line block of jsx. 
+  ```js
+  return (
+      <div>
+        <h3>Edit a Stream</h3>
+        // this is where we will specify our initial values. 
+        <StreamForm onSubmit={this.onSubmit} />
+      </div>
+    );
+  ```
+- We still need `mapStateToProps` to get some initial value for the form. 
+  ```js
+    const mapStateToProps = (state, ownProps) => {
+    return { stream: state.streams[ownProps.match.params.id] };
+  };
+  ```
+- We still want to have the `connect` function, `fetchStream` action creator. So only the change is we pass `editStream`.
+  ```js
+    export default connect(
+    mapStateToProps,
+    { fetchStream, editStream }
+  )(StreamEdit);
+  ```
+- In order to get initial values when a user edits the page, pass the props `initialValues` to `StreamForm` component.
+- Remember that `initialValues` is a special prop.
+- Since we are going to pass normal object through `initialValues` prop, we are going to use dobule curly braces.
+  ```js
+  return (
+      <div>
+        <h3>Edit a Stream</h3>
+        <StreamForm
+          initialValues={{ title: "EDIT ME", description: "CHANGE ME TOO" }}
+          onSubmit={this.onSubmit}
+        />
+      </div>
+    );
+  ```
+- Now we are passing `initialValues` down to a component that is wrapped by `redux form`, 
+  ```js
+  initialValues={{ title: "EDIT ME", description: "CHANGE ME TOO" }}
+  ```
+  this will be used a s the initial values inside of the form itself.
+- So `redux form` is going to if that `initialValues` property has a property of title and a property of description. And if they do then those values will be used as the initial values for the `Field` inside of `StreamForm` component.
+- Now we can check the initial values inside of the edit page. 
+- Remember that `stream` is an object witha title and a description property. So now the title and description off of our `stream` object will be used as the `initialValues` for the the form. 
+  ```js
+  <StreamForm
+    initialValues={this.props.stream}
+    onSubmit={this.onSubmit}
+  />
+  ```
+- If we change initial values inside of inputs and submit, it is going to trigger `onSubmit` callback we defined inside of `StreamEdit` and update values. 
+  
+
 
 
 
