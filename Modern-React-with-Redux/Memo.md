@@ -3243,6 +3243,37 @@ import history from "../history";
   };
   ```
 
+## 144. Why Use Portals?
+
+- This time we are going to build a modal window to the user that is going to force user to either delete a steram or not delete a stream.
+- But showing modal using react is bit challenging.
+- Any react application, all of our elements are nested inside of `div` with  ID or `root` and that is the normal operation of react. 
+- However there is a feature inside of react called `portals`. 
+- We are going to ultimately use a `portal` to kind of get around the requirement of having to nest all of our different components elements whatever you want to call it inside of `div` with ID of root. 
+- We are going to make a normal HTML document and we are going to try to get a little modal window to show up inside of it. And as we go though the process, you are going to realize that using typical react to do this might be little challenging.
+- Create modal.html file inside of public folder. 
+  ```html
+  <head>
+  <style>
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 300px;
+      background: green;
+    }
+    .content {
+      margin-left: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">I am a sidebar</div>
+  <div class="content"><h1>I am some content</h1></div>
+</body>
+  ```
+- You can check the text here : 'http://localhost:3000/modal.html
 
 
 
