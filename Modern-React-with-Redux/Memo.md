@@ -138,7 +138,7 @@
 136. 각 컴포넌트의 독립성
 137. StreamEdit 컴포넌트에서 stream 데이터 가져오기
 138. StreamForm 컴포넌트 만들기
-139. 
+139. StreamCreate 컴포넌트 재구성하기 
 
 
 
@@ -3084,6 +3084,10 @@ import history from "../history";
   ```
 - We also do not need `validation` function because the validation is being handled by `StreamForm` component.
 - And no wrapping `reduxForm` anymore.
+- `StreamForm`이 `redux form` 라이브러리를 사용함
+- `StreamForm` 컴포넌트의 form에 `handleSubmit`안에서 전달된 `onSubmit` 함수의 `formValues` 인수는 `redxu form`에 의해서 form의 input에 입력된 값을 가지게됨.
+- 그 값을 부모 컴포넌트인 `StreamCreate`에서 props로 내려준 `onSubmit`에 넣어주게되면
+- `StreamCreate` 컴포넌트의 `onSubmit` 함수는 받은 값으로 action creator를 실행함. 
 
 
 
