@@ -3489,6 +3489,22 @@ import history from "../history";
   };
   ```
 
+## 149. React Fragments
+
+- We are going to use `React.Fragment`.
+- It is jsx looking element that is going to allow us to return assigned multiple elements to a single variable. 
+- But when it gets rendered onto the screen, it does not actuallyt produce any HTML. 
+- So you can think of `React.Fragment` as being like an invisible element that does not have any impact on dom whatsoever. 
+  ```js
+  <React.Fragment>
+    <button className="ui buttonnegative">Delete</button>
+    <button className="uibutton">Cancel</button>
+  </React.Fragment>
+  ```
+- `React.Fragment` did not render anything into the DOM whatsoever. 
+- You can shorten `React.Fragment` as <></>.
+- But some code checker might think that <></> syntax is not valid. 
+
 
 
 
