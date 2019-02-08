@@ -126,6 +126,19 @@
 124. userId와 action creator 연결시키기
 125. 조건에 맞춰 버튼 보여주기 1
 126. 조건에 맞춰 버튼 보여주기 2
+127. Intentional Navigation vs Programmatic Navigation
+128. history 객체 참조하기
+129. 커스텀 history 객체 만들기
+130. 커스텀 history 객체 사용하기
+131. 직접 데이터 수정하기
+132. 수정 페이지 만드는 방법
+133. 아이디에 따른 수정페이지 설정 방법 1
+134. Route Params
+135. state와 ownProps를 이용해 원하는 아이디 불러오기
+136. 각 컴포넌트의 독립성
+137. StreamEdit 컴포넌트에서 stream 데이터 가져오기
+138. StreamForm 컴포넌트 만들기
+139. 
 
 
 
@@ -2767,7 +2780,7 @@ export const createStream = formValues => {
 
 ## 128. History References
 
-- The good news it that programmatic navigation sometimes with react router dom is really is but sometimes it is not easy at all.
+- The good news is that programmatic navigation sometimes with react router dom is really easy but sometimes it is not easy at all.
 - But we are in on scenarios where it is not easy to do programmatic navigation.
 - Remember that we have a `BrowserRouter` at the very top of our component hierarchy, internally `BrowserRouter` creates `history` object. Anytime that address changes, the `history` object is going to communicate the change over to the `BrowserRouter`.
 - But `history` object is not only about watching the address bar. It also has the ability to change the address bar as well.
@@ -2795,7 +2808,7 @@ export const createStream = (formValues, history) => {
 ```
 - Now this is kind of a pain because it means that every single time we want to do programmatic navigation, we would have to write our action creators to be called with a `history` object and we would make sure that all of our components called the action creator with the `history` object as well. 
 - So even though this is possible but not super ideal. 
-- We are going to alternative solution.
+- We are going to use alternative solution.
 - Remember that the `BrowserRouter` internally creates the `history` object and the fact that the `BrowserRouter` maintains that `history` object is what makes it challenging. 
 - We are going to create a `history` object instead.
 - So we are going to create a `history` object inside of a dedicated file inside of our project. Then anytime that we want to get access to that `history` object, we are just going to import that file very easily because we are maintaining control over the `history` object ourselves and we are not allowing react router to create the history object itself. 
@@ -2878,7 +2891,7 @@ import history from "../history";
 ## 132. URL-Based Selection
 
 - Anytime a user comes to EditStream page, we are going to allow them the opportunity to edit the title or the description of already created stream.
-- We are going to talke about how a user can get to the page and how we are going to figure out what stream a user is trying to edit. 
+- We are going to talk about how a user can get to the page and how we are going to figure out what stream a user is trying to edit. 
 - We need to communicate which edit button the user clicked over index page to edit page. 
 - Option no.1
   - Selection Reducer
@@ -2891,7 +2904,7 @@ import history from "../history";
   ex. `/streams/edit/:id`
 - So because we can put the idea of the record that the user is trying to edit inside the URL, we can make use of react router dom to look at the URL and pull off just that portion of the URL. 
 - Suppose in `/streams/edit/17`, then we can take that 17 and pass it as a prop into the `StreamEdit` component. 
-- Then `StreamEdit` component will know that it needs to show the stream 17 and allow a user to ddit specifically the stream with ID 17. 
+- Then `StreamEdit` component will know that it needs to show the stream 17 and allow a user to edit specifically the stream with ID 17. 
 
 ## 133. Wildcard Navigation
 
@@ -2923,24 +2936,24 @@ import history from "../history";
    <Route path="/streams/edit/:id" component={StreamEdit} />
   ```
 - So now if a user goes to `streams/edit/` anything, we are going to show the StreamEdit component. 
-- For a quick note, as soon as puts `:`, anything inside of URL, that means this is going to be essentially a variable and he could have any value that you want for that part of the URL. 
+- For a quick note, as soon as puts `:`, anything inside of URL, that means this is going to be essentially a variable and it could have any value that you want for that part of the URL. 
 - The colon(`:`) is what turns anything into a variable sorts.
-- Next thing we need to do is to make usre that anytime that a user comes to `StreamEdit` page, we somehow get that number out of the URL and we communicate that number down into `StreamEdit`. So That StreamEdit component knows exactly what stream it is trying to change. 
+- Next thing we need to do is to make sure that anytime that a user comes to `StreamEdit` page, we somehow get that number out of the URL and we communicate that number down into `StreamEdit`. So That StreamEdit component knows exactly what stream it is trying to change. 
 
 ## 134. More on Route Params
 
-- We now need to make sure that we somehow gget that little piece of information out of the URL and communicate it down to StreamEdit.
+- We now need to make sure that we somehow get that little piece of information out of the URL and communicate it down to StreamEdit.
 - We are going to add it on a reference to the props argument that this thing recieves and then I am going console.log it.
-- We can check that there are 4 properties inside of props.
+- We can check that there are 4 properties inside of props (history, location, match, staticContext).
 - All the props that you see are coming from react-dom. 
 - We only have access to these props specifically because the `StreamEdit` component inside of the file is being rendered by a route component. 
-- Because `StreamEdit` is being rendered by route, react router dom automatically is going to add in a bunch of different props to `StreamEdit` (history, location, match, staticContext).
+- Because `StreamEdit` is being rendered by route, react router dom automatically is going to add in a bunch of different props to `StreamEdit`.
 - We can find the ID value inside of `params` in `match` props.
 - Also we can put addition params inside of it
   ```js
   <Route path="/streams/edit/:id/:anotherId" component={StreamEdit} />
   ```
-- Know we know exact ID of the stream that we are trying to edit, anytime that we click on the `Edit` button.
+- Now we know exact ID of the stream that we are trying to edit, anytime that we click on the `Edit` button.
 - Next thing, I want to try to load up some information about that particular stream and show it on the screen. Because eventually we want to allow a user to edit the information.
 - But whenever we go to the StreamEdit page, we want to show the existing title and the existing description of the stream as it currently is. 
 
@@ -2953,7 +2966,7 @@ import history from "../history";
 - So essentially between the props object and the list of streams that we have inside of our state store, we can somehow select the stream with an ID then print up some information about it inside of our component. 
 - We are going to use `connect` function to get a list of streams into the component. 
 - We want to print up the title and description insdie of `StreamEdit`.
-- The component has access to the props object and that props object is what knows about ID that we are trying to show. But the props obejct appears to only be accessible inside of the StreamEdit function.
+- The component has accessed to the props object and that props object is what knows about ID that we are trying to show. But the props obejct appears to only be accessible inside of the StreamEdit function.
 - On the other hand, `mapStateToProps` function is what knows about the big list of streams that is entirely that entirely stored inside of our state object. 
 - So one source of information is up there, and the other source of information is available down there.
 - Therefore, we are going to use `ownProps` argument.
@@ -3034,7 +3047,7 @@ import history from "../history";
 - We are going to have a `StreamCreate`, `StreamEdit` and `StreamForm`. 
 - The vast majority of showing text inputs, handling changes, wiring up to redux form, all that kind of stuff is all going to be done inside of new `StreamForm` component.
 - So all the logic that hooks up to redux form, all the logic that renders text inputs, all the logic that submits the form and handles the mission appropriately, we are going to place inside of `StreamForm` component.
-- We are going to refactore `StreamCreate`, `StreamEdit` components and they are going to show internally the `StreamForm` component.
+- We are going to refactor `StreamCreate`, `StreamEdit` components and they are going to show internally the `StreamForm` component.
 - We need to make sure that `StreamCreate` component passes down `onSubmit` callback to `StreamForm`.
 - In addition, StreamEdit component passes down `onSubmit` callback and `initialValues`.
 - Create StreamForm.js inside of src folder. 
@@ -3053,7 +3066,7 @@ import history from "../history";
 ## 139. Refactoring Stream Creation
 
 - `StreamCreate` is no longer going to be showing a form. So we don't need a filed or redux form anymore. 
-- We need to import `StreamCreate` component. 
+- We need to import `StreamForm` component. 
 - We don't need to render an error and inputs anymore. 
 - We are not going to show a form, Field and button anymore. So entire jsx inside of render method can be removed.
 - And we will replace that with just enough to show the form and a header at the top.
