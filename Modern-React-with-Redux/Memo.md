@@ -3269,13 +3269,86 @@ import history from "../history";
   </style>
 </head>
 <body>
+  <div class="modal">
+    <div class="modal-body"><h1>I am a modal</h1></div>
+  </div>
   <div class="sidebar">I am a sidebar</div>
   <div class="content"><h1>I am some content</h1></div>
 </body>
   ```
 - You can check the text here : 'http://localhost:3000/modal.html
 
+## 145. More on Using Portals
 
+- We set HTML document like this below:
+  ```html
+    <head>
+    <style>
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 300px;
+        background-color: green;
+      }
+      .content {
+        margin-left: 300px;
+      }
+      .modal-body {
+        background-color: white;
+        margin: auto;
+        height: 30%;
+        width: 30%;
+      }
+      .modal {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        background-color: grey;
+        left: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal">
+      <div class="modal-body"><h1>I am a modal</h1></div>
+    </div>
+    <div class="sidebar">I am a sidebar</div>
+    <div class="content"><h1>I am some content</h1></div>
+  </body>
+  ```
+- But we can still see that sidebar 'I am a sidebar`.
+- The sidebar should not be displayed on top of the modal. 
+- We can fix this issue using `z-index`.
+  ```css
+  .modal {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      background-color: grey;
+      left: 0;
+      top: 0;
+      z-index: 10;
+    }
+  ```
+- But here is the problem. When we show a content of react, we are always showing all of our components inside of a single `div`.
+- So remember that `Modal` is always going to be deeply nested inside of our application. We might have a tremendous amount of HTML or jsx with a ton of styling as parents to the `Modal` component. 
+- Some assigned value of `z-index` creates something called a `stacking context`.
+- When we create `stacking context`, it essentially creates a new way of comparing different sibling elements that have assigned `z-index` values that might want to be rendered on top of each other.
+- Essentially when we create stacking context, we no longer compare sidebar's `z-index` with a `Modal`'s `z-index`.
+- Instead we compare sidebar's z-index with the root element that has the `stacking context` that contains `Modal`.
+- Someday you might work on an application that already has hundreds of components inside of it and you might have a super deeply nested component structure. So it is not always going to be quite so easy for us. 
+- So it is not always a good solution to delete `div` or to change the `z-index`. 
+- It is highly likely that if you are adding a modal into some existing application, you might end up having to break the entire layout and rewrite all the CSS for the project. 
+- Here is what we are going to do:
+  - Rather than showing our modal as a child of positioned, we are going to instead show the modal as a child of the body. 
+  - This essentially saying rather than follow the normal rules of react where we nest all of our components underneath each other, we should try to kind of like break or bend this rule a little bit and that is exactly what we are going to do by using this portal.
+  - With portal, we do not have to stick with typical react component hierarchy where everything is a child of `div` with ID of root. 
+  - Instead when we use a portal, we can essentially say 'Ok StreamDelete we want you to render a modal component but we don't want to have you render a modal as a direct child. Instead try to render the `Modal` component but make it a child of some other element in our HTML hierarchy such as body element. 
+  - So this is the purpose of `portal`.
+  - It allows us to render some element not as a direct child. We can instead render that element or that component as a child of some other element inside our HTML structure most commonly the body. 
 
   
 
