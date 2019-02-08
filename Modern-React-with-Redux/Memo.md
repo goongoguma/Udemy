@@ -3350,7 +3350,61 @@ import history from "../history";
   - So this is the purpose of `portal`.
   - It allows us to render some element not as a direct child. We can instead render that element or that component as a child of some other element inside our HTML structure most commonly the body. 
 
-  
+## 146. Creating a Portal
+
+- Create a new file Modal.js inside of components folder.
+- When we create portal, return value changes a little bit.
+  ```js
+  import React from "react";
+  import ReactDOM from "react-dom";
+
+  const Modal = props => {
+    return ReactDOM.createPotal(
+      <div className="ui dimmer modals visible active">
+        <div className="ui standard modal visible active">sadfasdfasdfasdfsvdfsf</div>
+      </div>
+    );
+  };
+
+  export default Modal;
+  ```
+- Two `div`s rendered directly on our body element as opposed to being deeply nested underneath like `StreamDelete`. 
+- After we attach `Modal` appropriately to the body element, we are going to provide a second argument to create a portal. 
+- If we try to attach `Modal` to the body or give a direct reference to the body then that portal is going to actually replace all the current content in the body. 
+- So instead what we usually do when we create a portal is we will go into our index.html file and we will create a new `div` with some ID and we will target that `div` to place our modal into. 
+- So create new tag right below root in index.html
+  ```html
+  <div id="root"></div>
+  <div id="modal"></div>
+  ```
+- And now we are going to provide a reference to id modal to create portal call. 
+  ```js
+    const Modal = props => {
+    return ReactDOM.createPortal(
+      <div className="ui dimmer modals visible active">
+        <div className="ui standard modal visible active">sadfasdfasdfasdf</div>
+      </div>,
+      document.querySelector("#modal")
+    );
+  };
+  ```
+- So `Modal` component will be rendered into `div` with an ID of modal.
+- Place `Modal` component inside of `StreamDelete` component.
+  ```js
+    const StreamDelete = () => {
+    return (
+      <div>
+        StreamDelete
+        <Modal />
+      </div>
+    );
+  };
+
+  export default StreamDelete;
+  ```
+- Anytime that we show `StreamDelete`, we are going to render `Modal`.
+- It is going to take the jsx and attempt to insert it as a child to `div` with the ID of modal. 
+- Now we can find `Modal` appears on the screen successfully.
 
 
 
