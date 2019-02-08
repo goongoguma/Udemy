@@ -3218,7 +3218,7 @@ import history from "../history";
     };
   };
   ```
-
+- But when we edit a stream, you will find out that we have lost edit and delete buttons as well!
 
 
 
