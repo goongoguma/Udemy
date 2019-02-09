@@ -3532,6 +3532,46 @@ import history from "../history";
     onDismiss={() => history.push("/")}
   />
   ```
+## 151. Reminder on Path Params
+
+- When we click on that Delete button, we actually attempt to delete the stream. And we click on Cancel, we have to make sure we dismiss the modal.
+- And it would be really helpful if the user understood what stream they were trying to delete. 
+- So it would be really nice if maybe inside of content, we printed out the title of the stream that the user was about to delete. 
+- So in order to show the title of a given stream we need to make sure that we have first loaded it up into the application. 
+- We need to first fetch the stream with idea of ID before we could show its title and description inside of the form.
+- And make sure that we reflect the ID of the stream that the user is trying to delete inside of URL. 
+- We are going to make sure that we attempt to fetch that stream from our API and then we are going to get the stream into our component so we can print the title of it inside of the modal itself.
+- So instead of when a user goes to `stream/delete`, we want to show to modal when a user goes to `stream/delte/id`.
+- First thing we need to do is make sure that we update the route that a user can go to and show that particular stream.
+- So go to App.js file and change the route of `steams/delete` to `streams/delete/:id`.
+  ```js
+  <Route path="/streams/delete/:id" component={StreamDelete} />
+  ```
+- Next thing we are going to do is make sure that anytime a user clicks on Delete button, we navigate to the appropriate URL to attempt to delete that very particular stream.  
+- Inside of `renderAdmin` function in `StreamList` component, at present it is showing simple button element. 
+  ```js
+   <div className="right floated content">
+      <Link to={`/streams/edit/${stream.id}`className="ui button primary">
+        Edit
+      </Link>
+      <button className="ui buttonegative">DELETE</button>
+    </div>
+  ```
+- Rather than having a button element, I want to instead show a `Link` element that a user can click on to navigate over to the `StreamDelete` page. 
+  ```js
+  div className="right floated content">
+    <Link to={`/streams/edit/${stream.`} className="ui button primary">
+      Edit
+    </Link>
+    <Link to={`/streams/delete{stream.id}`} className="ui buttnegative">DELETE</Link>
+  </div>
+  ```
+- If we look at the URL at the top, we should see streams delete and then the ID of stream that I am trying to delete. 
+  
+
+
+
+
 
   
 
