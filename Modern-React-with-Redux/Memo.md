@@ -139,6 +139,17 @@
 137. StreamEdit 컴포넌트에서 stream 데이터 가져오기
 138. StreamForm 컴포넌트 만들기
 139. StreamCreate 컴포넌트 재구성하기 
+140. 초기값 셋팅하기 
+141. Lodash를 이용해 필요한 값만 고르기
+142. 수정된 내용 제출
+143. PUT vs PATCH
+144. HTML을 사용해 modal 만들어보기
+145. Portal를 사용해 modal을 만드는 이유
+146. Portal를 사용해 modal 만들기
+147. Modal 숨기기
+148. Modal 재활용하기
+149. React.Fragment
+150. history 객체를 prop으로 내려주기
 
 
 
@@ -3102,7 +3113,7 @@ import history from "../history";
 - `initialValues` contains title and description.
 - If we pass some `initialValues` prop from `StreamEdit` down to `redux form` wrapped `StreamForm`, it is going to provide some initial values of title and description to show inside of the text inputs inside of `StreamForm`.
 - This is a key topic for understanding how to set up any type of form with `redux form`.
-- Inside of `StreamEdit` component, along with `fetchStream`, import `editStrea` action creator as well. 
+- Inside of `StreamEdit` component, along with `fetchStream`, import `editStream` action creator as well. 
   ```js
   import { fetchStream, editStream } from "../../actions";
   ```
@@ -3142,7 +3153,7 @@ import history from "../history";
   ```
 - In order to get initial values when a user edits the page, pass the props `initialValues` to `StreamForm` component.
 - Remember that `initialValues` is a special prop.
-- Since we are going to pass normal object through `initialValues` prop, we are going to use dobule curly braces.
+- Since we are going to pass normal object through `initialValues` prop, we are going to use double curly braces.
   ```js
   return (
       <div>
@@ -3158,10 +3169,10 @@ import history from "../history";
   ```js
   initialValues={{ title: "EDIT ME", description: "CHANGE ME TOO" }}
   ```
-  this will be used a s the initial values inside of the form itself.
+  this will be used as the initial values inside of the form itself.
 - So `redux form` is going to if that `initialValues` property has a property of title and a property of description. And if they do then those values will be used as the initial values for the `Field` inside of `StreamForm` component.
 - Now we can check the initial values inside of the edit page. 
-- Remember that `stream` is an object witha title and a description property. So now the title and description off of our `stream` object will be used as the `initialValues` for the the form. 
+- Remember that `stream` is an object with a title and a description property. So now the title and description off of our `stream` object will be used as the `initialValues` for the the form. 
   ```js
   <StreamForm
     initialValues={this.props.stream}
@@ -3177,7 +3188,7 @@ import history from "../history";
 - When you console.log your change, we will find out that there are some other properties are inside of the object beside of title and description(ID and userId). 
 - When we eventually call `onSubmit` callback in side of `StreamEdit`, we are getting some object that contains *what are supposed to be updates to our stream object*. In order words `formValues` is only supposed to contain properties that are supposed to change on our form.
 - And telling API that here are some change properties which are title and description that you should use to update some given `stream`.
-- The issue with this is that when we pass the ID or userID, it kind of makes it seem as though we have changed the ID or the userId. 
+- The issue with this is that when we pass the ID or userID, it kind of makes it seems as though we have changed the ID or userId. 
 - Therefore we want to trim down the properties inside of the object.
 - We put entire object of `stream` inside of `initialValues` and that causes the issue. 
 - We are going to use `lodash` to solve it. 
@@ -3224,7 +3235,7 @@ import history from "../history";
 
 - When we check the Response tab in Network tab in developer console, we do not find the ID of stream that we just editted.
 - Actually `PUT` request has a little side effect to it. That is very commonly not well implemented in a lot of back-end API. 
-- When you make a `PUT` request, the actual thing that happens is whatever properties you put insdie the body of that request are going to replace all the properties inside of the record that you are trying to update. 
+- When you make a `PUT` request, the actual thing that happens is whatever properties you put inside the body of that request are going to replace all the properties inside of the record that you are trying to update. 
 - In other words when we just made our update request were `PUT` requests, on submission that form, we posted the title and description property. 
 - The problem is that when we made `PUT` request to our API, the API said 'I see a title and description and I see you made a `PUT` request so I am going to take all the different properties inside the stream, the title, ID, description and userId as well. And I am going to replace them with just the properties that you posted to the API.'
 - *But remember that the one property that is usually immune to this is the ID property*
@@ -3243,12 +3254,12 @@ import history from "../history";
   };
   ```
 
-## 144. Why Use Portals?
+## 144. Why Use Portal?
 
 - This time we are going to build a modal window to the user that is going to force user to either delete a steram or not delete a stream.
 - But showing modal using react is bit challenging.
 - Any react application, all of our elements are nested inside of `div` with  ID or `root` and that is the normal operation of react. 
-- However there is a feature inside of react called `portals`. 
+- However there is a feature inside of react called `portal`. 
 - We are going to ultimately use a `portal` to kind of get around the requirement of having to nest all of our different components elements whatever you want to call it inside of `div` with ID of root. 
 - We are going to make a normal HTML document and we are going to try to get a little modal window to show up inside of it. And as we go though the process, you are going to realize that using typical react to do this might be little challenging.
 - Create modal.html file inside of public folder. 
@@ -3521,11 +3532,6 @@ import history from "../history";
     onDismiss={() => history.push("/")}
   />
   ```
-  
-
-
-
-
 
   
 
