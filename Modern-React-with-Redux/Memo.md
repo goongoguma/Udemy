@@ -3607,6 +3607,42 @@ import history from "../history";
     this.props.fetchStream(this.props.match.params.id);
   }
   ```
+
+## 153. Conditionally Showing Stream Details
+
+- Actually deleting as usual to get some information from our redux store into our component, we are going to use `mapStateToProps` function.
+  ```js
+    const mapStateToProps = (state, ownProps) => {
+    return {
+      stream: state.streams[ownProps.match.params.id]
+    }
+  }
+  ```
+- Quick reminder when the component first gets rendered to the screen, it is entirely possible that we will not have our stream loaded up just yet.
+- Remember the component is going to be rendered to the screen one time then our `componentDidMount` lifecycle method will be called. 
+- But before the lifecycle gets render, it would be better if we showed the modal right away and maybe we just do not have the text for the stream that is supposed to be displayed.
+- So the user will see a modal right away and then like a half second later, the title of the stream will appear inside of the content. 
+  ```js
+  renderContent() {
+    if (!this.props.stream) {
+      return "Are you sure you want to delete this stream?";
+    }
+
+    return `Are you sure you want to delete the stream with title : ${
+      this.props.stream.title
+    }`;
+  }
+  render() {
+    return (
+      <Modal
+        title="Delete Stream"
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push("/")}
+      />
+    );
+  }
+  ```
   
 
 
