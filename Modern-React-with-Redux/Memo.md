@@ -3567,6 +3567,46 @@ import history from "../history";
   </div>
   ```
 - If we look at the URL at the top, we should see streams delete and then the ID of stream that I am trying to delete. 
+
+## 152. Fetching the Deleting Stream
+
+- Now we nee to start to refactor the StreamDelete component. 
+- We are going to turn it into a class based component and we are going to make sure that anytime it gets rendered to the screen, it attempts to fetch the stream with the ID.
+- So we can show the title of it inside the body or content area of the modal. 
+  ```js
+    class StreamDelete extends React.Component {
+    renderActions() {
+      return (
+        <React.Fragment>
+          <button className="ui button negative">Delete</button>
+          <button className="ui button">Cancel</button>
+        </React.Fragment>
+      );
+    }
+
+    render() {
+      return (
+        <div>
+          StreamDelete
+          <Modal
+            title="Delete Stream"
+            content="Are you sure you want to delete this stream?"
+            actions={this.renderActions()}
+            onDismiss={() => history.push("/")}
+          />
+        </div>
+      );
+    }
+  }
+  ```
+- We can now add in a lifecycle method that will attempt to call the action creator to go and fetch the stream that we are trying to delete. 
+- Remember that we have to make sure that every component that gets rendered by react dom attempts to fetch its own data. 
+- Wire up action creator and lifecycle method inside of `StreamDelete` component to get a data inside of the component. 
+  ```js
+  componentDidMount() {
+    this.props.fetchStream(this.props.match.params.id);
+  }
+  ```
   
 
 
