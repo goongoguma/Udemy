@@ -3643,7 +3643,41 @@ import history from "../history";
     );
   }
   ```
-  
+
+## 154. Deleting a Stream
+
+- The last thing we have to do with our StreamDelete modal is make sure that two buttons actually do something. 
+- So if a user clicks on Cancel button, we probably want to just take the user back to the stream list page. 
+- We can just turn Cancel button into react router dom link tag instead. 
+  ```js
+  <React.Fragment>
+    <button className="ui button negative">Delete</button>
+    <Link to="/" className="button">
+      Cancel
+    </Link>
+  </React.Fragment>
+  ```
+- And when a user clicks Delete button, that is going to attempt to reach out to our API and delete that very particular stream. 
+- Whenever we want to delete a stream, we just need to pass the id of the stream that we want to do it. And also after we click the button, the user should navigate back to main page. 
+  ```js
+    export const deleteStream = id => {
+    return async dispatch => {
+      await streams.delete(`streams/${id}`);
+
+      dispatch({ type: DELETE_STREAM, payload: id });
+      history.push("/");
+    };
+  };
+  ```
+- Import `deleteStream` action creator to `StreamDelete` component and wire it up. 
+  ```js
+   <button
+      onClick={() =this.props.deleteStre(this.props.match.params.id)}
+      className="ui button negative"
+    >
+  ```
+- When delete request is successful, we are going to get empty object inside of preview tab in network tab.
+
 
 
 
