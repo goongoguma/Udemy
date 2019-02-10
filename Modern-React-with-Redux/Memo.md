@@ -150,6 +150,10 @@
 148. Modal 재활용하기
 149. React.Fragment
 150. history 객체를 prop으로 내려주기
+151. delete 요청에 ID 넣어주기
+152. StreamDelete 컴포넌트에서 해당 stream 가져오기
+153. 조건적으로 stream의 디테일 보여주기
+154. stream 지우기
 
 
 
@@ -605,7 +609,7 @@ componentDidMount() {
     - All the information gets consolidated inside the state object so that the react application can very easily reach in to our redux application and get access to all of the data of the application.
     - In that way our react app does not have to go around to each separate reducer.
   - Store
-    - It is the assembly of a collection of different reducers and action creators
+    - It is the assembly of a collection of different reducers and action creators.
 
 ## 40. Modeling with Redux
 
@@ -1531,11 +1535,11 @@ export const fetchPostsAndUsers = () => {
   <script src="https://apis.google.com/js/api.js"></script>
   ```
 - In order to check the code is working, type `gapi` in console. If it is, you are going to see object `{load: f}`.
-- So we are going to create a new React component that is going to essentially wrap the the Google library and make sure our user do the entire OAuth process. 
+- So we are going to create a new React component that is going to essentially wrap the Google library and make sure our user do the entire OAuth process. 
 - When you print out gapi in console, you will see that it only has a single function tied to it called `{load: f}`. 
 - load means load up some internal library by making a follow up request over to Google servers and fetching some additional amount of JS code and then adding it essentially to Google library. 
-- To do so, we are going to call `gapi.load` and then we are going to pass in a `clint:auth2`.
-- gapi.load(`client:auth2`)
+- To do so, we are going to call `gapi.load` and then we are going to pass in a `'clint:auth2'`.
+- gapi.load(`'client:auth2'`)
 - we can run that line of code and we will see the additional request automatically made to fetch some additional JS code and load it up into that library.
 - then we type `gapi` again, some additional properties have been added inside of the object. 
 - After we load up the additional library, we can then register or initialize it with our OAuth client id by calling 'gapi.client.init({clientId:'your cliend Id'})'
@@ -1649,6 +1653,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
         });
     });
   ``` 
+- For a quick note from future, If you want to sign in or sign out at this stage, you have to manually type in `gapi.auth2.getAuthInstance().signIn()` or `gapi.auth2.getAuthInstance().signOut()`.
 
 ## 92. Updating Auth State
 
@@ -1657,7 +1662,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 - In `isSignedIn` method inside of `getAuthInstance()`, there are couple of methods we can find. 
 - These are private functions that we are not supposed to call. 
 - It links to prototype property and the it has `listen` method.
-- So we can pass callback function to listen method. 
+- So we can pass *callback function* to listen method. 
 - If we do that, listen method will be invoked anytime that users on authentication status is changed. 
 - So we can setState inside of listen method and then somehow we could update the text inside the header anytime user signs in or signs out.
   ```js
@@ -1760,6 +1765,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   };
   ```
 - Depends what argument onAuthChange component will get, action that is going to be dispatched will be different.
+- onAuthChange 함수가 `this.auth.isSignedIn.listen`의 인수로 들어가게 되는데 `listen`은 boolean 값만 인수로 받는다. 즉 onAuthChange의 값은 boolean 값이라는것이며 그 값은 `isSignedIn`에 있는것 (아직 답변이 없으므로 이렇게 예상한다.)
 
 ## 95. Building the Auth Reducer
 
@@ -1823,10 +1829,19 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```js
   this.auth.isSignedIn.listen(this.onAuthChange());
   ```
-
+- 정리 
+  - 구글 로그인 버튼을 클릭
+  - `onSignClick` 함수가 실행되고 그 안에있던 로그인을 실행하게 하는 `this.auth.signIn()`이 따라서 실행된다.
+  - `this.auth.signIn()`이 실행됨에 따라 auth의 `this.auth.isSignedIn.get()`의 상태가 달라지므로 action을 실행하기 위해 `this.onAuthChange`의 인수로 넣어준다.
+  - 여기까지가 구글 API를 사용한다. 
+  - Boolean 값을 받은 `onAuthChange` 함수는 action creator를 실행시킨다.
+  - action -> reducer로 실행이된다.
+  - `mapStateToProps`로 상태를 받아와 기존에 this.state를 사용하던 `renderGoogleButton`에서 this.state를 지우고 대신 reducer에서 받아온 상태를 사용해준다
+  - 구글API에서 가져온 로그인 정보는 `onAuthChange`에서 action creator를 실행시킬때 사용하며 redux store에 있는 정보는 로그인버튼 보여줄때 사용함. 
+  
 ## 98. Fixed Action Types
 
-- When login button is clicked, nothing is happening.
+- When login button is clicked, nothing might be happening.
 - This is a common bug 
 - In order to prevent this situation, create a new file name types.js in action folder.
 - And set actions value as a variable.
@@ -1922,7 +1937,7 @@ localhost:3000?debug_session='random String'
   - Then in order to make sure that we can get the data from that store into our input elements whatever user types in, they are going to have mapStatetoProps. 
   - It is going to take the data out of the redux store and get it into our component as props.
   - So we are going to take that props object and all the different values inside there and pass them into our different input elements as values.
-  - Then, anytime user makes a change to an element, we are going to have some callback handler inside of our component.
+  - Then anytime user makes a change to an element, we are going to have some callback handler inside of our component.
   - That is going to call action creator and try to update the form data inside of a redux store.
 - Good thing is redux form is essentially going to do all of that stuff for us.
   - redux form includes reducer, mapStateToProps function, action creator.
@@ -1939,8 +1954,8 @@ localhost:3000?debug_session='random String'
     auth: authReducer,
     form: formReducer
   });
-```
-```
+  ```
+
 
 ## 104. Creating Forms
 
@@ -2189,7 +2204,7 @@ onSubmit(e) {
 - Now our `validate` function is getting called. 
 - If we return the object from the `validate` function then redux form is going to automatically rerender our component.
 - To actually get these error messages to appear on a screen, redux form is going to take a look at every `Field` component that gets rendered in order words, It is going to look at each `Field` name property.
-- And then it is going to look at the erros object that we return from `validate`.
+- And then it is going to look at the errors object that we return from `validate`.
 - If `Field` has same name as a property that exists inside that object then redux form is going to take the message and pass it to our `renderInput` fuction. Idea is that our errors object has property name that is identical to the name property inside of `Field` component and it contains a string that error message will be passed down to `renderInput` function. 
 - *Remember that the big connection between the `validation` function and getting the message into `renderInput` function is all about the `Field name`.*
 - We can check error message using `meta` property.
@@ -2204,10 +2219,18 @@ onSubmit(e) {
     );
   }
   ```
+- 정리
+  - 입력된 값을 판별하기 위해 `validate` 함수를 만들어준다.
+  - `validate` 함수는 `errors`라는 빈 객체를 가지고있다.
+  - 만약에 `formValues`에 `title`과 `description`이 없는경우에는 `errors`라는 객체에 메세지를 넣을것
+  - 하지만 두가지 모두 있을경우에는 빈 객체를 반환한다.
+  - `validate` 함수를 `reduxForm`에 연결시킨다.
+  - `reduxForm`에 연결시키게 되면 redux form은 자동적으로 `errors`객체안의 프로퍼티 이름과 `Field`컴포넌트안에 있는 이름을 비교한다.
+  - 만일 같은 이름이 존재할 경우 `Field` 컴포넌트와 연결되어있으며 `renderInput` 함수로 전달되어진 `formProps` 인수의 `meta` 프로퍼티 `error`의 값으로 `validate` 함수에서 생성이 된 객체의 값이 들어가게된다. 
 
 ## 110. Showing Errors on Touch
 
-- We got air message to print up underneath each field. 
+- We got error message to print up underneath each field. 
 - But we want to show this error message whenever a user submits the form.
 - We want to show the error message after the user clicks into a field, enter some text and then clicks out of it.
 - We are going to use `touched` property in `meta` property to do it.
@@ -3563,14 +3586,14 @@ import history from "../history";
     <Link to={`/streams/edit/${stream.`} className="ui button primary">
       Edit
     </Link>
-    <Link to={`/streams/delete{stream.id}`} className="ui buttnegative">DELETE</Link>
+    <Link to={`/streams/delete/{stream.id}`} className="ui buttnegative">DELETE</Link>
   </div>
   ```
 - If we look at the URL at the top, we should see streams delete and then the ID of stream that I am trying to delete. 
 
 ## 152. Fetching the Deleting Stream
 
-- Now we nee to start to refactor the StreamDelete component. 
+- Now we need to start to refactor the StreamDelete component. 
 - We are going to turn it into a class based component and we are going to make sure that anytime it gets rendered to the screen, it attempts to fetch the stream with the ID.
 - So we can show the title of it inside the body or content area of the modal. 
   ```js
@@ -3658,7 +3681,7 @@ import history from "../history";
   </React.Fragment>
   ```
 - And when a user clicks Delete button, that is going to attempt to reach out to our API and delete that very particular stream. 
-- Whenever we want to delete a stream, we just need to pass the id of the stream that we want to do it. And also after we click the button, the user should navigate back to main page. 
+- Whenever we want to delete a stream, we just need to pass the ID of the stream that we want to do it. And also after we click the button, the user should navigate back to main page. 
   ```js
     export const deleteStream = id => {
     return async dispatch => {
