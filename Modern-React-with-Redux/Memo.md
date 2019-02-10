@@ -2396,6 +2396,13 @@ onSubmit(e) {
   }
   ```
 - Now let's make sure that streams that we created show on the original `StreamList` component.
+- 정리 
+  - JSON 서버와 통신할 API 파일을 만든다.
+  - action creator를 이용해 서버와 통신할 것이다. 그러므로 redux-thunk가 필요하다.
+  - 메인 index.js 파일에 redux-thunk와 applyMiddleWare를 import 한뒤에 연결시켜준다.
+  - 서버에 데이터를 post할 action creator인 createBoard를 만들어준다. 
+  - action creator를 만들어줄때 post할때는 서버에 유저가 입력한 내용을 보내줘야 하므로 매개변수 formValues를 받게 만들어준다.
+  - 이제 connect를 이용해 BoardCreate 파일에 action creator를 연결시켜준뒤 form이 제출되면 작동되는 함수에 props로 formValues를 받은 action creator를 넣어준다. 
 
 ## 115. Dispatching Actions After Stream Creation
 
