@@ -2560,7 +2560,7 @@ onSubmit(e) {
   ```JS
   mapKeys(streams, 'id')
   ```
-- The string of ID tells `lodash` that everyone of objects inside of the original array use a key taken from the id property of each one.
+- The string of ID tells `lodash` that every one of objects inside of the original array use a key taken from the id property of each one.
 - (the data we get from the API is form of an array that objects are in it.)
 - Essentially what we are going to do with `mapKeys(streams, 'id')` is 
   - Create a new object
@@ -2584,6 +2584,8 @@ onSubmit(e) {
    case FETCH_STREAMS:
       return { ...state, ..._.mapKeys(action.payload, "id") };
   ```
+- 정리 
+  - db.json에서 가져온 배열형태의 데이터들을 lodash를 이용해 각 객체의 id가 키 값인 객체형태로 바꾸는것
 
 ## 122. Fetching a List of All Streams
 
@@ -2703,6 +2705,7 @@ const mapStateToProps = state => {
   };
 };
 ```
+
 - We are going to create helper method `renderAdmin`. So we do not have to put a ton of checking logic for our userId inside of `renderList` function. 
 - Whenever `renderAdmin` function gets called, we are going to pass in the stream that we are currently iterating over. 
 ```js
@@ -2835,7 +2838,7 @@ export const createStream = formValues => {
 - It is hard to get a reference to that `history` object. 
 - So the solution would be to do something like this.
   - So we have got `history` object that gets created by the `BrowserRouter`, it communicates the `history` object down to our component and then we could say that anytime that our component calls our action creator, the component should pass along the `history` object into the action creator. 
-- So essentially saying that inside of our action creator, we would receive not only our form values but also some `history` object as well.
+- So essentially saying that inside of our action creator, we would receive not only our `formvalues` but also some `history` object as well.
 ```js
 export const createStream = (formValues, history) => {
   return async (dispatch, getState) => {
@@ -3134,7 +3137,7 @@ import history from "../history";
 
 - We are going to do same thing for `StreamEdit` as well.
 - `StreamEdit` is going to be very similar to the work we just did inside of `StreamCreate`, the only big difference is that we want to make sure that the form is going to show some initial values inside of those inputs. 
-- How are we going to do that with `redux form`?
+- How are we going to do that with redux form?
 - So we have StreamEdit that is showing StreamForm wrapped inside of the `redux form` helper.
 - Unlike we did for `StreamCreate` component, we are not actually passing props directly to our StreamForm component. 
 - Instead we are technically passing props to `redux form`. It then turns around and passes those props onto `StreamForm` component. 
@@ -3200,7 +3203,7 @@ import history from "../history";
   initialValues={{ title: "EDIT ME", description: "CHANGE ME TOO" }}
   ```
   this will be used as the initial values inside of the form itself.
-- So `redux form` is going to if that `initialValues` property has a property of title and a property of description. And if they do then those values will be used as the initial values for the `Field` inside of `StreamForm` component.
+- So `redux form` is going to use if that `initialValues` property has a property of title and a property of description. And if they do then those values will be used as the initial values for the `Field` inside of `StreamForm` component.
 - Now we can check the initial values inside of the edit page. 
 - Remember that `stream` is an object with a title and a description property. So now the title and description off of our `stream` object will be used as the `initialValues` for the the form. 
   ```js
@@ -3224,7 +3227,7 @@ import history from "../history";
 - We are going to use `lodash` to solve it. 
   ```js
   <StreamForm
-    initialValues={_. (this.props.stream, "titl  "description")}
+    initialValues={_.pick(this.props.stream, "title", "description")}
     onSubmit={this.onSubmit}
   />
   ```
@@ -3385,7 +3388,7 @@ import history from "../history";
 - It is highly likely that if you are adding a modal into some existing application, you might end up having to break the entire layout and rewrite all the CSS for the project. 
 - Here is what we are going to do:
   - Rather than showing our modal as a child of positioned, we are going to instead show the modal as a child of the body. 
-  - This essentially saying rather than follow the normal rules of react where we nest all of our components underneath each other, we should try to kind of like break or bend this rule a little bit and that is exactly what we are going to do by using this portal.
+  - This essentially saying rather than follow the normal rules of react where we nest all of our components underneath each other, we should try to kind of break or bend this rule a little bit and that is exactly what we are going to do by using this portal.
   - With portal, we do not have to stick with typical react component hierarchy where everything is a child of `div` with ID of root. 
   - Instead when we use a portal, we can essentially say 'Ok StreamDelete we want you to render a modal component but we don't want to have you render a modal as a direct child. Instead try to render the `Modal` component but make it a child of some other element in our HTML hierarchy such as body element. 
   - So this is the purpose of `portal`.
@@ -3590,7 +3593,7 @@ import history from "../history";
 - Rather than having a button element, I want to instead show a `Link` element that a user can click on to navigate over to the `StreamDelete` page. 
   ```js
   div className="right floated content">
-    <Link to={`/streams/edit/${stream.`} className="ui button primary">
+    <Link to={`/streams/edit/${stream.id`} className="ui button primary">
       Edit
     </Link>
     <Link to={`/streams/delete/{stream.id}`} className="ui buttnegative">DELETE</Link>
