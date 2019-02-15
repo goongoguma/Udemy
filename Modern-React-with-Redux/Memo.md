@@ -3711,6 +3711,25 @@ import history from "../history";
   ```
 - When delete request is successful, we are going to get empty object inside of preview tab in network tab.
 
+## 155. Viewing a Stream
+
+- We are going to create StreamShow page. 
+- We are going to first focus on just making sure that we can load up particular stream and show some details about it on the page.
+- The entire process is going to be just about identical to what we have now gone through with edits and delete.
+- We are going to want to make a class based component and that is going to attempt to look at the URL, find the ID inside there, fetch that stream, get the stream out of our redux store and then show it inside the render method. 
+- In App.js folder, change the URL of StreamShow component.
+  ```js
+  <Route path="/streams/:id" component={StreamShow} />
+  ```
+- We are going to wrape `stream.title` inside of `renderList` method in `StreamList`.
+- So whenever a user clicks on the title, we attempt to navigate the user over to the appropriate page. 
+  ```js
+  <Link to={`/streams/${stream.id}`} className="header">
+    {stream.title}
+  </Link>
+  ```
+
+
 
 
 
