@@ -154,6 +154,8 @@
 152. StreamDelete 컴포넌트에서 해당 stream 가져오기
 153. 조건적으로 stream의 디테일 보여주기
 154. stream 지우기
+155. Stream에 링크걸어주기
+156. Switch 사용하기 
 
 
 
@@ -3728,6 +3730,44 @@ import history from "../history";
     {stream.title}
   </Link>
   ```
+
+## 156. Switcheds with React-Router
+
+- After we click a one of stream in the list and then click `Create Stream` button, we can see very strange behavior.
+- The word `StreamShow` appears under `Submit` button.
+- So it appears when we go to `stream/new`, we see bothe `StreamCreate` component and `StreamShow` component at the same time. 
+- Reminds that when we first started talking about react-router-dom, we spoke about how react router tries to match different paths greedily. 
+- In order words, if a given path mathes a route, the route will be shown no matter what react router dom does not try to just show one route, it is going to show every single route that matches the given path. 
+- With that in mind, see both routes.
+  ```js
+    <Route path="/streams/new" component={StreamCreate} />
+    <Route path="/streams/:id" component={StreamShow} />
+  ```
+- `:id` is essentially a vairiable. It does not only match variables that are numbers, it will match anything in that part of th URL.
+- So when we go to `streams/new` is essentially taking the text `new` because it thinks `new` is like a variable or a idea of sorts.
+- That is why we see both `StreamCreate` and `StreamShow`.
+- Therefore we need to figure out some way to only show one component. 
+- In order to do so we are going to import another helper component from react-router-dom.
+  ```js
+  import { Router, Route, Switch } from "react-router-dom";
+  ```
+- So `Switch` is going to look at all different routes and it is only going to show one of these given routes for any path that we go to. 
+  ```js
+  <Switch>
+    <Route path="/" exact component={StreamList} />
+    <Route path="/streams/new" component={StreamCreate} />
+    <Route path="/streams/edit/:id" component={StreamEdit} />
+    <Route path="/streams/delete/:id" component={StreamDelete} />
+    <Route path="/streams/:id" component={StreamShow} />
+  </Switch>
+  ```
+- Now whenever we go to `stream/new`, this route will be shown and react-router-dom is going to think that I am not going to show any other potential route. 
+
+
+
+
+
+
 
 
 
