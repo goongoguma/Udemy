@@ -3763,8 +3763,44 @@ import history from "../history";
   ```
 - Now whenever we go to `stream/new`, this route will be shown and react-router-dom is going to think that I am not going to show any other potential route. 
 
+## 157. Showing a Stream
 
+- In `StreamShow` component, we need to read the ID out of the URL and we need to call the action creator to fetch that particular stream and then use a `mapStateToProps` function to get that stream out of our redux store and into our component. 
+- We are going to user `fetchStream` ,`connect` function, `mapStateToProps` function.
+  ```js
+  import React from "react";
+  import { connect } from "react-redux";
+  import { fetchStream } from "../../actions";
 
+  class StreamShow extends React.Component {
+    componentDidMount() {
+      this.props.fetchStream(this.props.match.params.id);
+    }
+
+    render() {
+      if (!this.props.stream) {
+        return <div>LOADING...</div>;
+      }
+      const { title, description } = this.props.stream;
+      return (
+        <div>
+          <h1>{title}</h1>
+          <h5>{description}</h5>
+        </div>
+      );
+    }
+  }
+
+  const mapStateToProps = (state, ownProps) => {
+    return { stream: state.streams[ownProps.match.params.id] };
+  };
+
+  export default connect(
+    mapStateToProps,
+    { fetchStream }
+  )(StreamShow);
+
+  ```
 
 
 
