@@ -3809,6 +3809,17 @@ import history from "../history";
 - Context System
   - Gets data from a parent component to any nested child component. 
 
+## 159. Getting Data Out of Context
+
+- The context system is all about communication some information from a parent component down to a nested child.
+- In translation app, parent component is the `App`. and the nested child that we want to communicate some information to is both `Button` and `Field` components in order to communicate the information. 
+- In order to do that we are going to create Context Object.
+- There are two ways that we can get infromation into a context object.
+- And there are two ways that we can get information out or out of the pipe. 
+- Inside of parent component, we can create something called a `Provider` component and this component can essentially push information into the context object. 
+- This is how we get information into the Context object. 
+- Once we get some information out of the object, inside of a nested child component, we can create a component called a `Consumer` component.
+- This is how we get information out of the Context object. 
 
 
 
