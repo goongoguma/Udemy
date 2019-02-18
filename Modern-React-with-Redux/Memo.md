@@ -3888,6 +3888,19 @@ import history from "../history";
   </LanguageContext.Provider>
   ```
 
+## 163. Gotchas Around Providers
+
+- Consumer is another way that we can consume information out of the context.
+- The trick is understanding that whatever value we assign to the value prop of that component will be used update our `context object`.
+- What will happen when we rendered our application insdie the browser.
+  - Application loads up in the browser
+  - We create a context object with a default value of 'English'
+  - *App component gets rendered, creates a `Provider` that wraps `UserCreate`.*
+  - (*EACH SEPARATE USE OF LanguageContext.Provider CREATES A NEW SEPERATE 'PIPE' OF INFORMATION!*)
+  - `Provider` updates the value of the `context object` to `this.state.language`.
+  - `Button and Field` reach into `context object`, see the value from `this.state.language`.
+  - `Button and Field` render appropriate text to the screen
+- So the real lesson here is that `Provider` is essentially creating a separate type of information every single time you use `Provider`.
 
 
 
