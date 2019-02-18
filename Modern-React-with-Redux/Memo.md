@@ -3823,23 +3823,78 @@ import history from "../history";
 
 ## 160. Creating Context Objects 
 
+- We are going to start to focuse on create a `context object` inside of application that is going to communicate the currently selected language from our `App` component down to both the `Button` and `Field` components.
 - Create new folder name contexts and also create a new file name LanguageContext.
+- The purpose of the file is to create a `context object` and export it. 
+- The reason we are putting this into a separate file is that we can import the `context object` into only the component files we care about. 
 - We are going to use of it when we actually want to connect it.
 - And create `context` inside of the file.
+- We can create a default value by passing it directly into the `createContext` call. 
   ```js
   import React from "react";
   export default React.createContext('English');
   ```
 - After that wire it up using `static`.
+- We are going to making use of `this.context` to get information out of `context object`.
   ```js
-    class Button extends React.Component {
-    static contextType = LanguageContext;
-    console.log(this.context) // English
-    render() {
-      return <button className="ui button primary">Submit</button>;
+      import LanguageContext from "../contexts/LanguageContext";
+
+      class Button extends React.Component {
+      // this is how we hook up context object to a class component and it has to be called as 'contextType'
+      static contextType = LanguageContext;
+      
+      render() {
+        console.log(this.context) // English
+        return <button className="ui button primary">Submit</button>;
+      }
     }
+  ```
+
+## 161. Consuming the Context Value
+
+- Change the name of button and `Name` according to the value inside of Context Object
+  ```js
+  static contextType = LanguageContext;
+  render() {
+    const text = this.context === "English" ? "Name" : "성명";
+    return (
+      <div className="ui field">
+        <label>{text}</label>
+        <input />
+      </div>
+    );
+  }
+
+  render() {
+    const text = this.context === "English" ? "Submit" : "제출";
+    return <button className="ui button primary">{text}</button>;
   }
   ```
+
+## 162. The Context Provider
+- `App` component knows what the currently selected language is becasue remember we set up all that `state` stuff inside of the `App` component. 
+- So we now want to communicate some information from the `App` component into the `context object`. 
+- To do so, we are going to create `Provider` component. 
+- This is not the same thing in react-redux. 
+- So we are going to use `Provider` component to update the value inside of our `context object`.
+- `UserCreate` needs to know some information out of the `context object`.
+- When we render `LanguageContext.Provider`, we are going to assign a `value` prop. 
+- This is a very special property name. 
+- So to the `value`, I am going to pass the value that I want to put inside of my `context object`.
+- In our case the information that we want to communicate from app to the `context object` is our `state`.
+  ```js
+  <LanguageContext.Provider value={this.state.language}>
+    <UserCreate />
+  </LanguageContext.Provider>
+  ```
+
+
+
+
+- Our app component knows what the currently selected language is because we set up all that state stuff inside of the `App` component. 
+
+
+
 
 
 
