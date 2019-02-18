@@ -3821,6 +3821,25 @@ import history from "../history";
 - Once we get some information out of the object, inside of a nested child component, we can create a component called a `Consumer` component.
 - This is how we get information out of the Context object. 
 
+## 160. Creating Context Objects 
+
+- Create new folder name contexts and also create a new file name LanguageContext.
+- We are going to use of it when we actually want to connect it.
+- And create `context` inside of the file.
+  ```js
+  import React from "react";
+  export default React.createContext('English');
+  ```
+- After that wire it up using `static`.
+  ```js
+    class Button extends React.Component {
+    static contextType = LanguageContext;
+    console.log(this.context) // English
+    render() {
+      return <button className="ui button primary">Submit</button>;
+    }
+  }
+  ```
 
 
 
