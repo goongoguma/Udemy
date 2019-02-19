@@ -4060,6 +4060,34 @@ import history from "../history";
   }
   ```
 
+## 170. Connecting the Selector to the Store
+
+- Import `LanguageContext` inside of `LanguageSelector` component.
+- But `LanguageSelector` component does not need to access any other `context object`.
+- Therefore, we are going to use `this.context` approach.
+- Information we need is stored inside of `this.context` so we are going to change `this.props.onLanguageChage('English')` to `this.context.onLanguageChange('English')`.
+  ```js
+    class LanguageSelector extends React.Component {
+    static contextType = LanguageContext;
+    render() {
+      return (
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.context.onLanguageChange("English")}
+          />
+          <i
+            className="flag kr"
+            onClick={() => this.context.onLanguageChange("한국어")}
+          />
+        </div>
+      );
+    }
+  }
+  ```
+
+
 
 
 
