@@ -4035,9 +4035,30 @@ import history from "../history";
     }
   }
   ```
-- The component encapsulates all the data of around the currently selected language and it also implements the ability to change that data as well. 
+- The component encapsulates all the data of around the currently selected language and it also implements the ability to change that data as well.
 
+## 169. Rendering the LanguageStore
 
+- By rendering `LanguageStore` component, we are just implementing the `context object` inside of the component and making the current state and the ability to change it available to other components inside of our component hierarchy. 
+- Import `LanguageStore` component in `App` component. 
+- And remove `LanguageContext.Provider`, set up `LanguageStore` component instead.
+- And remove `state` initializtation and `onLanguageChange` function. Because `LanguageStore` component handles everything.  
+  ```js
+    class App extends React.Component {
+    render() {
+      return (
+        <div className="ui container">
+          <LanguageStore>
+            <LanguageSelector />
+              <ColorContext.Provider value="red">
+              <UserCreate />
+            </ColorContext.Provider>
+          </LanguageStore>
+        </div>
+      );
+    }
+  }
+  ```
 
 
 
