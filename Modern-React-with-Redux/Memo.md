@@ -156,6 +156,9 @@
 154. stream 지우기
 155. Stream에 링크걸어주기
 156. Switch 사용하기 
+157. Stream 보여주기
+158. Context System
+159. Context에서 데이터 가져오기
 
 
 
@@ -3766,7 +3769,7 @@ import history from "../history";
 ## 157. Showing a Stream
 
 - In `StreamShow` component, we need to read the ID out of the URL and we need to call the action creator to fetch that particular stream and then use a `mapStateToProps` function to get that stream out of our redux store and into our component. 
-- We are going to user `fetchStream` ,`connect` function, `mapStateToProps` function.
+- We are going to use `fetchStream` ,`connect` function, `mapStateToProps` function.
   ```js
   import React from "react";
   import { connect } from "react-redux";
@@ -3814,7 +3817,7 @@ import history from "../history";
 - The context system is all about communication some information from a parent component down to a nested child.
 - In translation app, parent component is the `App`. and the nested child that we want to communicate some information to is both `Button` and `Field` components in order to communicate the information. 
 - In order to do that we are going to create Context Object.
-- There are two ways that we can get infromation into a context object.
+- There are two ways that we can get information into a context object.
 - And there are two ways that we can get information out or out of the pipe. 
 - Inside of parent component, we can create something called a `Provider` component and this component can essentially push information into the context object. 
 - This is how we get information into the Context object. 
@@ -3823,7 +3826,7 @@ import history from "../history";
 
 ## 160. Creating Context Objects 
 
-- We are going to start to focuse on create a `context object` inside of application that is going to communicate the currently selected language from our `App` component down to both the `Button` and `Field` components.
+- We are going to start to focus on create a `context object` inside of application that is going to communicate the currently selected language from our `App` component down to both the `Button` and `Field` components.
 - Create new folder name contexts and also create a new file name LanguageContext.
 - The purpose of the file is to create a `context object` and export it. 
 - The reason we are putting this into a separate file is that we can import the `context object` into only the component files we care about. 
@@ -3901,12 +3904,59 @@ import history from "../history";
   - `Button and Field` reach into `context object`, see the value from `this.state.language`.
   - `Button and Field` render appropriate text to the screen
 - So the real lesson here is that `Provider` is essentially creating a separate type of information every single time you use `Provider`.
-
-
-
 - Our app component knows what the currently selected language is because we set up all that state stuff inside of the `App` component. 
 
+## 164. Accessing Data with Consumers
 
+- We are going to refactor `Button` component to make it use of `Consumer` instead of `context object`. 
+- When we are using `Consumer`, we do not have to specify a context type. 
+- We are providing a function as a child to react component. 
+- The component is going to take that child function and automatically invoke it for us. 
+- So anytime we make use of a `Consumer` to get a value out of that pipe or that context object, we are going to pass in a single function as a child,that child will be called with whatever value is inside of our pipe so we can implement some logic inside of `Consumer` component. 
+  ```js
+    class Button extends React.Component {
+    renderSubmit(value) {
+      return value === "English" ? "Submit" : "제출";
+    }
+
+    render() {
+      return (
+        <button className="ui button primary">
+          <LanguageContext.Consumer>
+            {value => this.renderSubmit(value)}
+          </LanguageContext.Consumer>
+        </button>
+      );
+    }
+  }
+  ```
+
+## 165. Pulling From Multiple Contexts
+
+- Why do we use `Consumer` instead of `this.context` 
+  - We will make use of `Consumer` anytime that we want to get information out of multiple different context objects inside of a single component.
+  - `this.context` is only used anytime we are accessing a single context object inside a component. 
+- We can create another context and wire it up with another `Provider` context as well. 
+
+  ```js
+  <ColorContext.Provider value="red">
+  <LanguageContext.Provider value={this.state.language}>
+    <UserCreate />
+  </LanguageContext.Provider></ColorContext.Provider>
+  ```
+- So now we have two different context objects that can provide information to the `UserCreate` component.
+- And wrap it with `Consumer` component just we did.
+  ```js
+  <ColorContext.Consumer>
+    {color => (
+      <button className={`ui button ${color}`}>
+        <LanguageContext.Consumer>
+          {value => this.renderSubmit(value)}
+        </LanguageContext.Consumer>
+      </button>
+        )}
+  </ColorContext.Consumer>
+  ```
 
 
 
