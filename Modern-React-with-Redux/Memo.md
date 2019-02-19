@@ -3958,6 +3958,43 @@ import history from "../history";
   </ColorContext.Consumer>
   ```
 
+## 166. Replacing Redux with Context
+
+- We are going to refactor the code
+- We are going to create `LanguageSelector` component and assign `onLanguageChange` callback from `App` component as props. 
+  ```js
+  onLanguageChange = language => {
+    this.setState({
+      language
+    });
+  };
+   <LanguageSelector onLanguageChange={this.onLanguageChange} />
+
+    class LanguageSelector extends React.Component {
+    render() {
+      return (
+        <div>
+          Select a language:
+          <i
+            className="flag us"
+            onClick={() => this.props.onLanguageChange("English")}
+          />
+          <i
+            className="flag kr"
+            onClick={() => this.props.onLanguageChange("한국어")}
+          />
+        </div>
+      );
+    }
+  }
+  ```
+
+## 167. Creating a Store Component
+
+- If we want to use Context in place of Redux...
+  - We need to be able to get data to any component in our hierarchy.
+  - We need to be able to separate our view logic from business logic.
+  - We need to ba able to split up business logic (not have a single file with 10000 lines of code)
 
 
 
