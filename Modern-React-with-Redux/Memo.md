@@ -3996,6 +3996,48 @@ import history from "../history";
   - We need to be able to separate our view logic from business logic.
   - We need to ba able to split up business logic (not have a single file with 10000 lines of code)
 
+## 168. Implementing a Language Store
+
+- `LanguageStore` is going to contain all of our business logic and our data and make it available to other components inside of our component hierarchy over the context system.
+- Inside of `LanguageContext` component we are going to set up some state property that is going to maintain the currently selected language. 
+- We are also going to implement a callback function inside there that gives other components the ability to change that currently selected language so inside of language.
+  ```js
+  const Context = React.createContext("English");
+
+  class LanguageStore extends React.Component {
+    state = { language: "English" };
+
+    onLanguageChange = language => {
+      this.setState({ language });
+    };
+  }
+  ```
+- Inside of `render` method, we are going to set up a `LanguageContext Provider`. 
+
+  ```js
+  const Context = React.createContext("English");
+
+  export class LanguageStore extends React.Component {
+    state = { language: "English" };
+
+    onLanguageChange = language => {
+      this.setState({ language });
+    };
+
+    render() {
+      return (
+        <Context.Provider
+          value={{ ...this.state, onLanguageChange: this.onLanguageChange }}
+        >
+          {this.props.children}
+        </Context.Provider>
+      );
+    }
+  }
+  ```
+- The component encapsulates all the data of around the currently selected language and it also implements the ability to change that data as well. 
+
+
 
 
 
