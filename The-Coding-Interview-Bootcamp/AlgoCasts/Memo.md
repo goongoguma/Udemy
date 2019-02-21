@@ -673,3 +673,33 @@ https://github.com/StephenGrider/algocasts
 - It is a ways of organizing information with optimal 'runtime complexity' for adding or removing records
 - So in other words, these different data structures that we are going to look at all have very well optimized ways of accessing or editing data.
 - Javascript natively implements several data structures. You will still be asked about 'inferior' data structures.
+
+## 19. The Queue Data Structure
+
+- The process of adding a record into a queue is referred to as in queueing or adding a record and then taking something out from the other end is thought of as dequeuing or removing a record.
+- It follows a principle of `First-In-First-Out`.
+- In Javascript, when we want to implement a queue, we use `unshift() and pop()` methods.
+
+## 20. Implementing a Queue
+
+- Solution 1:
+
+  ```js
+  class Queue {
+    constructor() {
+      this.data = [];
+    }
+
+    add(record) {
+      this.data.unshift(record);
+    }
+
+    remove() {
+      return this.data.pop();
+    }
+  }
+  ```
+
+## 21. What's a Weave?
+
+-
