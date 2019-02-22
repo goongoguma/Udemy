@@ -541,14 +541,14 @@ https://github.com/StephenGrider/algocasts
 - `Runtime Complexity` describes how performant an algorithm is.
 - An interviewer will ask you a question you will solve it on a computer or on a whiteboard and then they will turn to you and say OK what is the runtime complexity of the solution you just did?
 - So the goal of this section is to make sure that you have the ability to identify a given runtime complexity.
-- When we talk about runtime complexity, we are really asing a very discrete question.
+- When we talk about runtime complexity, we are really asking a very discrete question.
 - ex. how much more processing power/time is required to run your algorithm if we double the inputs?
 - Common run times that we will use to identify many different algorithm.
 
   - 1 (Constant Time)
     - No matter how many elements we are working with, the algorithm/operation/ whatever will always take the same amount of time.
   - log(n) (Logarithmic Time)
-    - You have this if doubling the number of elements you are iterating over doesn't dobule the amount of work.
+    - You have this if doubling the number of elements you are iterating over doesn't double the amount of work.
     - Always assume that searching operations are log(n).
   - n (Linear Time)
     - Iterating through all elements in a collection of data. If you see a for loop spanning from '0' to 'array.length', you probably have 'n' or linear runtime.
@@ -559,14 +559,14 @@ https://github.com/StephenGrider/algocasts
     - one plus a little bit for every element we add to our input set.
     - usually many different sorting algorithm.
   - n^2 (Quadratic Time)
-    - Every element in a collection has to be compared to every other lement. 'The handshake problem'.
+    - Every element in a collection has to be compared to every other element. 'The handshake problem'.
     - As soons as we started to increase or add one element to our input to the algorithm, it started to take dramatically more time to produce the result set.
   - 2^n (Exponential Time)
     - If you add a 'single' element to a collection, the processing power required doubles.
 
 ## 16. More on Runtime Complexity
 
-- Bit 'O' Notation
+- Big 'O' Notation
   - It is another way of referencing runtime complexity.
   - O(n) : Linear
   - O(1) : Constant
@@ -623,7 +623,7 @@ https://github.com/StephenGrider/algocasts
   }
   ```
 
-- When the program calculte fib function using recursive solution, 1, 2, 3, 4 these all appear to have been computed rather quickly like around one milisecond. But then by increasing up to 15. It took about a thousand times longer to compute!
+- When the program calculate fib function using recursive solution, 1, 2, 3, 4 these all appear to have been computed rather quickly like around one milisecond. But then by increasing up to 15. It took about a thousand times longer to compute!
 - Why are we seeing such a dramatic increase in time for such a small increase in the value.
 - We've got 15 calls to the function with number 5.
 - But when the number is increased to 6, we've got 27 calls total.
@@ -702,4 +702,126 @@ https://github.com/StephenGrider/algocasts
 
 ## 21. What's a Weave?
 
--
+- Solution 1 :
+
+  ```js
+  // queue.js
+  class Queue {
+    constructor() {
+      this.data = [];
+    }
+
+    add(record) {
+      this.data.unshift(record);
+    }
+
+    remove() {
+      return this.data.pop();
+    }
+
+    peek() {
+      return this.data[this.data.length - 1];
+    }
+  }
+  // index.js
+  const Queue = require("./queue");
+
+  function weave(sourceOne, sourceTwo) {
+    const q = new Queue();
+
+    while (sourceOne.peek() || sourceTwo.peek()) {
+      if (sourceOne.peek()) {
+        q.add(sourceOne.remove());
+      }
+      if (sourceTwo.peek()) {
+        q.add(sourceTwo.remove());
+      }
+    }
+    return q;
+  }
+  ```
+
+## 22. Stack Data Structure
+
+- Difference between the stack and the queue
+
+  - The order in which items are added and removed.
+  - FILO (First In Last Out)
+
+- Solution 1 :
+
+  ```js
+  class Stack {
+    constructor() {
+      this.data = [];
+    }
+
+    push(data) {
+      return this.data.push(data);
+    }
+
+    pop() {
+      return this.data.pop();
+    }
+
+    peek() {
+      return this.data[this.data.length - 1];
+    }
+  }
+  ```
+
+## 23. Queue From Stack Question
+
+- Solution :
+
+  ```js
+  class Queue {
+    constructor() {
+      this.first = new Stack();
+      this.second = new Stack();
+    }
+
+    add(record) {
+      this.first.push(record);
+    }
+
+    remove() {
+      while (this.first.peek()) {
+        this.second.push(this.first.pop());
+      }
+
+      const record = this.second.pop();
+
+      while (this.second.peek()) {
+        this.first.push(this.second.pop());
+      }
+      return record;
+    }
+
+    peek() {
+      while (this.first.peek()) {
+        this.second.push(this.first.pop());
+      }
+
+      const record = this.second.peek();
+
+      while (this.second.peek()) {
+        this.first.push(this.second.pop());
+      }
+
+      return record;
+    }
+  }
+  ```
+
+## 24. Tree Overview
+
+- One of the most common things that you are going to be asked or probably the most common operation that you are going to have to learn to do is `tree traversal`.
+- The word `tree traversal`, we are talking about iterating through all the different elements within a tree.
+- We really care about our ability to iterate through all the different elements within a tree.
+- There are two big ways that we are going to learn about how to iterate through a tree which means the order in which elements we iterate through the tree.
+- So we start talking about tree traversal, there are two distinct ways in which we order the elements and iterate through those elements.
+- First one is `Breadth-First Traversal`. (너비 우선 탐색)
+  - In this method, we iterate at each level of the tree from left to right.
+- Second one is `Depth-First Traversal`. (깊이 우선 탐색)
+  - We start at the very top of the tree and then we go down the very left hand side as far as we can go then as soon as we hit the bottom, we go back up to the closest parent and then go back down again.

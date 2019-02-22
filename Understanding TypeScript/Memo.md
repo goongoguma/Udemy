@@ -67,7 +67,7 @@ let hobbies: any[] = ["cooking", "Sports"]; // it works!
 ## 9. Tuples
 
 - New type available in TS.
-- It is just a rrays with mixed types and a limited number of items.
+- It is just arrays with mixed types and a limited number of items.
   ```js
   let address: [string, number] = ["Superstreet", 99];
   ```
@@ -92,7 +92,7 @@ let hobbies: any[] = ["cooking", "Sports"]; // it works!
   enum Color {
     Grey, // 0
     Green = 100, // 100
-    Blue // 2
+    Blue
   }
   let myColor: Color = Color.Green
   let myColor2: Color = Color.Blue
@@ -213,7 +213,7 @@ let complex: { data: number[], output: (all: boolean) => number[] } = {
 
 ## 16. Creating custom Types with Type Aliases
 
-- Suppose we want to create a `complex2` variable that works same with `complex` variable above.
+- Suppose we want to create a `complex2` variable that works same as `complex` variable above.
 
 ```js
 let complex2: { data: number[], output: (all: boolean) => number[] } = {
@@ -225,7 +225,7 @@ let complex2: { data: number[], output: (all: boolean) => number[] } = {
 };
 ```
 
-- We have to copy it from `complex` and paste it into `complex2`.
+- We have to copy the code from `complex` and paste it into `complex2`.
 - But we can use alias to store a type.
 
   - type alias
