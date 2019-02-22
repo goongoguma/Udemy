@@ -2,6 +2,7 @@ import React from "react";
 import LanguageContext from "../contexts/LanguageContext";
 
 class LanguageSelector extends React.Component {
+  // using static contextType, LanguageSelector can reach out to LanguageContext component
   static contextType = LanguageContext;
   render() {
     return (

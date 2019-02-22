@@ -159,6 +159,19 @@
 157. Stream 보여주기
 158. Context System
 159. Context에서 데이터 가져오기
+160. Context 객체 만들기
+161. Context Value 사용법 (this.context)
+162. Context Provider
+163. Provider의 특징
+164. Consumer를 이용해 데이터에 접근하기
+165. 여러개의 Context 사용해보기
+166. Redux를 Context로 대체하기
+167. Context를 위한 Store 컴포넌트 만들기
+168. LanguageStore 만들기
+169. LanguageStore 사용법
+170. LanguageSelector와 LanguageStore 연동하기 (this.context)
+171. LanguageStore를 Field와 Button 컴포넌트에 연동시키기
+172. Context vs Redux 다시보기
 
 
 
@@ -3928,12 +3941,12 @@ import history from "../history";
         </button>
       );
     }
-  }
+  }11
   ```
 
 ## 165. Pulling From Multiple Contexts
 
-- Why do we use `Consumer` instead of `this.context` 
+- Why do we use `Consumer` i1111111nstead of `this.context` 
   - We will make use of `Consumer` anytime that we want to get information out of multiple different context objects inside of a single component.
   - `this.context` is only used anytime we are accessing a single context object inside a component. 
 - We can create another context and wire it up with another `Provider` context as well. 
@@ -4086,6 +4099,51 @@ import history from "../history";
     }
   }
   ```
+
+## 171. Connecting the Field and Button to the Store
+- We have to make sure that Field component is going to reach into the context and pull out the language.
+- But remember that previously we had wired up our context object to just contain a string of either English or Korean.
+- Now our context is actually an object that has both a language property.
+  ```js
+   return (
+    <Context.Provider
+      value={{ ...this.state, onLanguageChange: this.onLanguageChange }}
+    >
+      {this.props.children}
+    </Context.Provider>
+  );
+  ```
+- So in order to get our `Field` to work correctly, we need to make sure that we tried to access `this.context.language`.
+  ```js
+  const text = this.context.language === "English" ? "Name" : "성명";
+  ```
+- From now, when you click flags, language field is correctly changing.
+- We have to do same thing with `Button` as well.
+  ```js
+   <ColorContext.Consumer>
+    {color => (
+      <button className={`ui button ${color}`}>
+        <LanguageContext.Consumer>
+          {({ language }) => this.renderSubmit(language)}
+        </LanguageContext.Consumer>
+      </button>
+    )}
+  </ColorContext.Consumer>
+  ```
+- Now button and field text start to change. 
+
+## 172. Context vs Redux Recap
+
+- Here is the reason why you should continue to use Redux
+  - Redux
+    - Excellent documentation
+    - Well-known design patterns
+    - Tremendous amount of open source libs
+  - Context
+    - No need for an extra lib
+    - Hard to build a 'store' component with cross cutting concerns
+    - In orther words we would probably want to build a separate store component for each type of resource we have inside of our application. 
+
 
 
 
