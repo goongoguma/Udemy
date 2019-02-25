@@ -1,181 +1,181 @@
 - ## Tutorial Memo Index
 
-1. 리액트란 무엇인가?
-2. Create-React-App에 대해 알아보기
-3. 자바스크립트 모듈
-4. 함수형 컴포넌트
-5. JSX?
-6. JSX의 인라인 CSS스타일
-7. Class vs ClassName
-8. JSX에서 JS 변수 사용하기
-9. JSX에서 사용하지 못하는 값
-10. 컴포넌트의 3가지 요소
-11. faker 라이브러리 사용하기
-12. 컴포넌트를 다른 컴포넌트로 넘겨주기
-13. 새로운 컴포넌트에서 JSX 가져오기
-14. 리액트 props
-15. 컴포넌트의 재활용
-16. 클래스 컴포넌트
-17. 사용자의 위치정보 받는법
-18. 함수형 컴포넌트에서 비동기 처리해주기
-19. 함수형 컴포넌트에서 클래스 컴포넌트로 전환
-20. state의 규칙
-21. constructor를 사용한 state의 초기화
-22. geolocation 앱의 작동 순서
-23. 라이프사이클 사용해보기
-24. 왜 라이프사이클을 사용할까?
-25. 스타일링 해주기
-26. JSX에서 함수를 이용해 값 표기하기
-27. 사진 검색 앱 Overview
-28. Controlled Element?
-29. Axios vs Fetch
-30. Async/Await 사용해보기
-31. Axios 초기설정하기
-32. ref 사용법
-33. 콜백과 이미지 로딩
-34. 이벤트 핸들러 작성할때의 주의점
-35. Youtube API 사용해보기
-36. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기
-37. 비디오앱 완성
-38. 리덕스에 대해서1
-39. 리덕스에 대해서2
-40. 리덕스 써보기
-41. 리덕스 키노트
-42. React-Redux 라이브러리
-43. React와 Redux를 이용해 앱 만들기
-44. 앱 Overview
-45. Provider 사용하기
-46. Connect 사용하기
-47. mapStateToProps를 사용해서 state 가져오기
-48. 중간정리
-49. 컴포넌트에서 action creators 불러오기
-50. 왜 컴포넌트를 import하고 다시 connect에 넣는지?
-51. 함수형 컴포넌트를 이용해 connect 사용해보기
-52. 정리하기
-53. Redux-Thunk를 이용해 앱 만들어보기
-54. 리덕스를 이용해 데이터 불러오기
-55. 더미 action creator 연결해주기
-56. Axios와 Action creator를 이용해 서버에 데이터 가져오기
-57. Action creator에서 비동기 요청 에러 1
-58. Action creator에서 비동기 요청 에러 2
-59. 리덕스 미들웨어
-60. Redux-Thunk의 역할
-61. 비동기 action creator 만드는법
-62. 리듀서의 규칙 1
-63. 리듀서의 규칙 2
-64. 상태를 변형시켜도 된다 하지만...
-65. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법
-66. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정
-67. 어떻게 유저 정보를 보여줄것인가?
-68. mapStateToProps를 이용해 필요한 정보 가져오기
-69. 반복요청 문제 발생
-70. memoize를 통한 문제 해결방법 
-71. 다른 방법
-72. 새로운 action creator를 생성함으로써 문제 해결방법
-73. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기
-74. redux-thunk 정리
-75. Streaming App intro
-76. 앱 만들때의 어려운점
-77. 리액트 라우터 소개 
-78. 리액트 라우터가 작동법
-79. exact 키워드
-80. 리액트 라우터에서 a태그를 쓰면 안되는 이유
-81. a태그 대신 Link태그 사용하기
-82. 여러 타입의 라우터들
-83. 앱 구성요소 컴포넌트
-84. 헤더 컴포넌트 만들기
-85. 에러 : You should not use Link outside a Router occur
-86. Email/Password Authentication vs OAuth Authentication
-87. OAuth for Servers vs Browser Apps
-88. OAuth 설정 단계
-89. 구글 API 초기 연동하기 (OAuth 요청보내기)
-90. 구글 API에서 데이터 가져오기 (OAuth에 필요한 데이터 가져오기)
-91. 가져온 데이터를 이용해 상태 변환시켜주기 
-92. listen 메소드를 이용해 상태 변환 후 화면에 렌더링 해주기
-93. 리덕스 연결시키기
-94. Action creator 만들기
-95. 리듀서 만들기
-96. 리듀서에서 컴포넌트로
-97. 리덕스를 이용해 OAuth 다루기
-98. 변수로 action의 타입 설정해주기
-99. 유저의 ID를 redux state에 저장하기
-100. Redux Dev Tools 설치 및 설정
-101. Redux Dev Tools 디버그 세션
-102. 리덕스 폼 라이브러리
-103. 리덕스 폼 연결하기
-104. 폼 만들기 및 에러발생
-105. 에러문제 해결 및 폼 렌더링하기
-106. 폼 커스터마이징 하기
-107. 폼 submisstion 다루기
-108. 폼의 유효성 설정해주기
-109. 에러 메세지 렌더링하기 
-110. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정
-111. Streams의 API 설정
-112. JSON Server을 이용해 DB 만들기
-113. Action creator 만들어주기
-114. RESTful api를 이용해 stream 만들기 
-115. Stream을 만든 후에 actions를 dispatch하기
-116. 필요한 Action creators 만들기
-117. 객체를 반환하는 reducer의 장점
-118. Key Interpolation
-119. Streaming과 관련된 다양한 reducers 만들어주기
-120. Lodash 라이브러리의 _omit 사용해 객체 지우기
-121. Lodash 라이브러리를 이용해 배열에서 객체 반환하기 
-122. 모든 streams 가져오기
-123. 모든 Streams 렌더링하기 
-124. userId와 action creator 연결시키기
-125. 조건에 맞춰 버튼 보여주기 1
-126. 조건에 맞춰 버튼 보여주기 2
-127. Intentional Navigation vs Programmatic Navigation
-128. history 객체 참조하기
-129. 커스텀 history 객체 만들기
-130. 커스텀 history 객체 사용하기
-131. 직접 데이터 수정하기
-132. 수정 페이지 만드는 방법
-133. 아이디에 따른 수정페이지 설정 방법 1
-134. Route Params
-135. state와 ownProps를 이용해 원하는 아이디 불러오기
-136. 각 컴포넌트의 독립성
-137. StreamEdit 컴포넌트에서 stream 데이터 가져오기
-138. StreamForm 컴포넌트 만들기
-139. StreamCreate 컴포넌트 재구성하기 
-140. 초기값 셋팅하기 
-141. Lodash를 이용해 필요한 값만 고르기
-142. 수정된 내용 제출
-143. PUT vs PATCH
-144. HTML을 사용해 modal 만들어보기
-145. Portal를 사용해 modal을 만드는 이유
-146. Portal를 사용해 modal 만들기
-147. Modal 숨기기
-148. Modal 재활용하기
-149. React.Fragment
-150. history 객체를 prop으로 내려주기
-151. delete 요청에 ID 넣어주기
-152. StreamDelete 컴포넌트에서 해당 stream 가져오기
-153. 조건적으로 stream의 디테일 보여주기
-154. stream 지우기
-155. Stream에 링크걸어주기
-156. Switch 사용하기 
-157. Stream 보여주기
-158. Context System
-159. Context에서 데이터 가져오기
-160. Context 객체 만들기
-161. Context Value 사용법 (this.context)
-162. Context Provider
-163. Provider의 특징
-164. Consumer를 이용해 데이터에 접근하기
-165. 여러개의 Context 사용해보기
-166. Redux를 Context로 대체하기
-167. Context를 위한 Store 컴포넌트 만들기
-168. LanguageStore 만들기
-169. LanguageStore 사용법
-170. LanguageSelector와 LanguageStore 연동하기 (this.context)
-171. LanguageStore를 Field와 Button 컴포넌트에 연동시키기
-172. Context vs Redux 다시보기
+- [1. 리액트란 무엇인가?](#1)
+- [2. Create-React-App에 대해 알아보기](#2)
+- [3. 자바스크립트 모듈](#3)
+- [3. 함수형 컴포넌트](#4)
+- [4. JSX?](#5)
+- [5. JSX의 인라인 CSS스타일](#6)
+- [6. Class vs ClassName](#7)
+- [7. JSX에서 JS 변수 사용하기](#8)
+- [8. JSX에서 사용하지 못하는 값](#9)
+- [9.  컴포넌트의 3가지 요소](#10)
+- [10. faker 라이브러리 사용하기](#11)
+- [11. 컴포넌트를 다른 컴포넌트로 넘겨주기](#12)
+- [12. 새로운 컴포넌트에서 JSX 가져오기](#13)
+- [13. 리액트 props](#14)
+- [14. 컴포넌트의 재활용](#15)
+- [15. 클래스 컴포넌트](#16)
+- [16. 사용자의 위치정보 받는법](#17)
+- [17. 함수형 컴포넌트에서 비동기 처리해주기](#18)
+- [18. 함수형 컴포넌트에서 클래스 컴포넌트로 전환](#19)
+- [19. state의 규칙](#20)
+- [20. constructor를 사용한 state의 초기화](#21)
+- [21. geolocation 앱의 작동 순서](#22)
+- [22. 라이프사이클 사용해보기](#23)
+- [23. 왜 라이프사이클을 사용할까?](#24)
+- [24. 스타일링 해주기](#25)
+- [25. JSX에서 함수를 이용해 값 표기하기](#26)
+- [26. 사진 검색 앱 Overview](#27)
+- [27. Controlled Element?](#28)
+- [28. Axios vs Fetch](#29)
+- [29. Async/Await 사용해보기](#30)
+- [30. Axios 초기설정하기](#31)
+- [31. ref 사용법](#32)
+- [32. 콜백과 이미지 로딩](#33)
+- [33. 이벤트 핸들러 작성할때의 주의점](#34)
+- [34. Youtube API 사용해보기](#35)
+- [35. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기](#36)
+- [36. 비디오앱 완성](#37)
+- [37. 리덕스에 대해서1](#38)
+- [38. 리덕스에 대해서2](#39)
+- [39. 리덕스 써보기](#40)
+- [40. 리덕스 키노트](#41)
+- [41. React-Redux 라이브러리](#42)
+- [42. React와 Redux를 이용해 앱 만들기](#43)
+- [43. 앱 Overview](#44)
+- [44. Provider 사용하기](#45)
+- [45. Connect 사용하기](#46)
+- [46. mapStateToProps를 사용해서 state 가져오기](#47)
+- [47. 중간정리](#48)
+- [48. 컴포넌트에서 action creators 불러오기](#49)
+- [49. 왜 컴포넌트를 import하고 다시 connect에 넣는지?](#50)
+- [50. 함수형 컴포넌트를 이용해 connect 사용해보기](#51)
+- [51. 정리하기](#52)
+- [52. Redux-Thunk를 이용해 앱 만들어보기](#53)
+- [53. 리덕스를 이용해 데이터 불러오기](#54)
+- [54. 더미 action creator 연결해주기](#55)
+- [55. Axios와 Action creator를 이용해 서버에 데이터 가져오기](#56)
+- [56. Action creator에서 비동기 요청 에러 1](#57)
+- [57. Action creator에서 비동기 요청 에러 2](#58)
+- [58. 리덕스 미들웨어](#59)
+- [59. Redux-Thunk의 역할](#60)
+- [60. 비동기 action creator 만드는법](#61)
+- [61. 리듀서의 규칙 1](#62)
+- [62. 리듀서의 규칙 2](#63)
+- [63. 상태를 변형시켜도 된다 하지만...](#64)
+- [64. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법](#65)
+- [65. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정](#66)
+- [66. 어떻게 유저 정보를 보여줄것인가?](#67)
+- [67. mapStateToProps를 이용해 필요한 정보 가져오기](#68)
+- [68. 반복요청 문제 발생](#69)
+- [69. memoize를 통한 문제 해결방법 ](#70)
+- [70. 다른 방법](#71)
+- [71. 새로운 action creator를 생성함으로써 문제 해결방법](#72)
+- [72. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기](#73)
+- [73. redux-thunk 정리](#74)
+- [74. Streaming App intro](#75)
+- [75. 앱 만들때의 어려운점](#76)
+- [76. 리액트 라우터 소개 ](#77)
+- [77. 리액트 라우터가 작동법](#78)
+- [78. exact 키워드](#79)
+- [79. 리액트 라우터에서 a태그를 쓰면 안되는 이유](#80)
+- [80. a태그 대신 Link태그 사용하기](#81)
+- [81. 여러 타입의 라우터들](#82)
+- [82. 앱 구성요소 컴포넌트](#83)
+- [83. 헤더 컴포넌트 만들기](#84)
+- [84. 에러 : You should not use Link outside a Router occur](#85)
+- [85. Email/Password Authentication vs OAuth Authentication](#86)
+- [86. OAuth for Servers vs Browser Apps](#87)
+- [87. OAuth 설정 단계](#88)
+- [88. 구글 API 초기 연동하기 (OAuth 요청보내기)](#89)
+- [89. 구글 API에서 데이터 가져오기 (OAuth에 필요한 데이터 가져오기)](#90)
+- [90. 가져온 데이터를 이용해 상태 변환시켜주기 ](#91)
+- [91. listen 메소드를 이용해 상태 변환 후 화면에 렌더링 해주기](#92)
+- [92. 리덕스 연결시키기](#93)
+- [93. Action creator 만들기](#94)
+- [94. 리듀서 만들기](#95)
+- [95. 리듀서에서 컴포넌트로](#96)
+- [96. 리덕스를 이용해 OAuth 다루기](#97)
+- [97. 변수로 action의 타입 설정해주기](#98)
+- [98. 유저의 ID를 redux state에 저장하기](#99)
+- [99.  Redux Dev Tools 설치 및 설정](#100)
+- [100. Redux Dev Tools 디버그 세션](#101)
+- [101. 리덕스 폼 라이브러리](#102)
+- [102. 리덕스 폼 연결하기](#103)
+- [103. 폼 만들기 및 에러발생](#104)
+- [104. 에러문제 해결 및 폼 렌더링하기](#105)
+- [105. 폼 커스터마이징 하기](#106)
+- [106. 폼 submisstion 다루기](#107)
+- [107. 폼의 유효성 설정해주기](#108)
+- [108. 에러 메세지 렌더링하기](#109)
+- [109. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정](#110)
+- [110. Streams의 API 설정](#111)
+- [111. JSON Server을 이용해 DB 만들기](#112)
+- [112. Action creator 만들어주기](#113)
+- [113. RESTful api를 이용해 stream 만들기(#)](#114)
+- [114. Stream을 만든 후에 actions를 dispatch하기](#115)
+- [115. 필요한 Action creators 만들기](#116)
+- [116. 객체를 반환하는 reducer의 장점](#117)
+- [117. Key Interpolation](#118)
+- [118. Streaming과 관련된 다양한 reducers 만들어주기](#119)
+- [119. Lodash 라이브러리의 _omit 사용해 객체 지우기](#120)
+- [120. Lodash 라이브러리를 이용해 배열에서 객체 반환하기](#121)
+- [121. 모든 streams 가져오기](#122)
+- [122. 모든 Streams 렌더링하기 ](#123)
+- [123. userId와 action creator 연결시키기](#124)
+- [124. 조건에 맞춰 버튼 보여주기 1](#125)
+- [125. 조건에 맞춰 버튼 보여주기 2](#126)
+- [126. Intentional Navigation vs Programmatic Navigation](#127)
+- [127. history 객체 참조하기](#128)
+- [128. 커스텀 history 객체 만들기](#129)
+- [129. 커스텀 history 객체 사용하기](#130)
+- [130. 직접 데이터 수정하기](#131)
+- [131. 수정 페이지 만드는 방법](#132)
+- [132. 아이디에 따른 수정페이지 설정 방법 1](#133)
+- [133. Route Params](#134)
+- [134. state와 ownProps를 이용해 원하는 아이디 불러오기](#135)
+- [135. 각 컴포넌트의 독립성](#136)
+- [136. StreamEdit 컴포넌트에서 stream 데이터 가져오기](#137)
+- [137. StreamForm 컴포넌트 만들기](#138)
+- [138. StreamCreate 컴포넌트 재구성하기 ](#139)
+- [139. 초기값 셋팅하기 ](#140)
+- [140. Lodash를 이용해 필요한 값만 고르기](#141)
+- [141. 수정된 내용 제출](#142)
+- [142. PUT vs PATCH](#143)
+- [143. HTML을 사용해 modal 만들어보기](#144)
+- [144. Portal를 사용해 modal을 만드는 이유](#145)
+- [145. Portal를 사용해 modal 만들기](#146)
+- [146. Modal 숨기기](#147)
+- [147. Modal 재활용하기](#148)
+- [148. React.Fragment](#149)
+- [149. history 객체를 prop으로 내려주기](#150)
+- [150. delete 요청에 ID 넣어주기](#151)
+- [151. StreamDelete 컴포넌트에서 해당 stream 가져오기](#152)
+- [152. 조건적으로 stream의 디테일 보여주기](#153)
+- [153. stream 지우기](#154)
+- [154. Stream에 링크걸어주기](#155)
+- [155. Switch 사용하기 ](#156)
+- [156. Stream 보여주기](#157)
+- [157. Context System](#158)
+- [158. Context에서 데이터 가져오기](#159)
+- [159. Context 객체 만들기](#160)
+- [160. Context Value 사용법 (this.context)](#161)
+- [161. Context Provider](#162)
+- [162. Provider의 특징](#163)
+- [163. Consumer를 이용해 데이터에 접근하기](#164)
+- [164. 여러개의 Context 사용해보기](#165)
+- [165. Redux를 Context로 대체하기](#166)
+- [166. Context를 위한 Store 컴포넌트 만들기](#167)
+- [167. LanguageStore 만들기](#168)
+- [168. LanguageStore 사용법](#169)
+- [169. LanguageSelector와 LanguageStore 연동하기 (this.context)](#170)
+- [170. LanguageStore를 Field와 Button 컴포넌트에 연동시키기](#171)
+- [171. Context vs Redux 다시보기](#172)
 
 
 
-## 1. Critical Question related to React
+<h2 name="1">1. Critical Question related to React</h2>
 
 - What is React and its purpose?
 
@@ -208,7 +208,7 @@
   - React knows what a component is and how to make components work together.
   - ReactDOM knows how to take a component and make it show up in the DOM.
 
-## 2. Exploring a Create-React-App Project
+<h2 name="2">2. Exploring a Create-React-App Project</h2>
 
 - src : Folder where we put all the source code we write.
 - public : Folder that stores static files like images.
@@ -217,7 +217,7 @@
 - package-lock.json : Records the exact version of packages that we install.
 - README.md : Instructions on how to use this project.
 
-## 3. JavaScript Module Systems
+<h2 name="3">3. JavaScript Module Systems</h2>
 
 - import React from 'react'
   - import : we want to get code from some other file or dependency
@@ -225,38 +225,38 @@
   - from : We are about to specify the name of the library or file we are importing from
   - 'react' : The name of the dependency or path to the file we are importing from node_modules
 
-## 4. Displaying Content with Functional Components
+<h2 name="4">4. Displaying Content with Functional Components
 
 - A component is a _Function_ or _Class_ that produces HTML to show the user using JSX and handles feedback from the user using Event Handlers.
 
-## 5. What is JSX?
+<h2 name="5">5. What is JSX?
 
 - It is a special dialect of JS (it is not HTML!)
 - Browsers do not understand JSX code. We write JSX then run tools to turn it into normal JS
 - Very similar in form and function to HTML with a couple differences.
 
-## 6. Inline Styling with JSX
+<h2 name="6">6. Inline Styling with JSX
 
 - JSX vs HTML
   - Adding custom styling to an element uses different syntax.
     - HTML : <div style="background-color:red;"></div>
     - JSX : <div style={{backgroundColor:'red'}}></div>
 
-## 7. Class vs ClassName
+<h2 name="7">7. Class vs ClassName
 
 - Adding a class to an element uses different syntax.
   - HTML : class
   - JSX : className (to avoid collision of words with class in component)
 
-## 8. Referencing JS Variables in JSX
+<h2 name="8">8. Referencing JS Variables in JSX
 
 - JSX can reference JS variables and function call inside of {}.
 
-## 9. Values JSX Can't show
+<h2 name="9">9. Values JSX Can't show
 
 - We are not allowed to take plain JS object and reference it inside of JSX to print it up as 'text'.
 
-## 10. Three Tenets of Components
+<h2 name="10">10. Three Tenets of Components
 
 - Component Nesting
   - A component can be shown inside of another.
@@ -265,12 +265,12 @@
 - Component Configuration
   - We should be able to configure a component when it is created. When we create different components, we have ability to somehow customize them when they are created.
 
-## 11. Specifying Images in JSX
+<h2 name="11">11. Specifying Images in JSX</h2>
 
 - We are going to use library called 'faker'.
   - It automatically generates massive amount of realistic fake data.
 
-## 12. Showing Custom Children
+<h2 name="12">12. Showing Custom Children</h2>
 
 - When we pass one component to another as child component, It is going to show up inside of the component on the prop's object and specifically on a property of the prop's object called the children property.
 
@@ -285,7 +285,7 @@
 </ApprovalCard>
 ```
 
-## 13. Extracting JSX to New Components
+<h2 name="13">13. Extracting JSX to New Components</h2>
 
 - Steps for creating a reusable and configurable component
 
@@ -295,12 +295,12 @@
   - Create a new component in the new file, paste the JSX into it
   - Make the new component configurable by using React's 'props' system.
 
-## 14. React's Props System
+<h2 name="14">14. React's Props System</h2>
 
 - Props is a system for passing data from a parent component to a child component.
 - Goal is to customize or configure a child component.
 
-## 15. Component Reuse
+<h2 name="15">15. Component Reuse</h2>
 
 - Passing children to a component and then showing the children inside of parents component, we can provide as many elements as we wish.
 - One key thing that we have to keep in mind is that whenever we want to use the technique, we always have to make sure that we go into the target component (ApprovalCard component) and make sure that we somewhere reference props.children inside of there.
@@ -312,7 +312,7 @@
 </ApprovalCard>
 ```
 
-## 16. Class-Based Components
+<h2 name="16">16. Class-Based Components</h2>
 
 - Functional Components
   - Good for simple content
@@ -323,7 +323,7 @@
   - Can use 'state' -> Easier to handle user input
   - Understands lifecycle events -> Easier to do things when the app first starts
 
-## 17. Getting a USERS Physical Location
+<h2 name="17">17. Getting a USERS Physical Location</h2>
 
 - You can find it in MDN.
 - type 'window.navigator.geolocation.getCurrentPosition();' inside of App component.
@@ -335,7 +335,7 @@ window.navigator.geolocation.getCurrentPosition(
 );
 ```
 
-## 18. Handling Async Operations with Functional Components
+<h2 name="18">18. Handling Async Operations with Functional Components</h2>
 
 - Steps of what happens inside of user's browser
   - JS file loaded by browser
@@ -345,14 +345,14 @@ window.navigator.geolocation.getCurrentPosition(
   - We get result of geolocation
   - Tell the component to rerender itself with this new information
 
-## 19. Refactoring from Frunctional to Class Components
+<h2 name="19">19. Refactoring from Frunctional to Class Components</h2>
 
 - Rules of Class Components
   - Must be a JavaScript Class
   - Must extend (subclass) React.Component
   - Must define a 'render' method that returns some amount of JSX
 
-## 20. The Rules of State
+<h2 name="20">20. The Rules of State</h2>
 
 - Rule of State
   - Only usable with class components.
@@ -362,7 +362,7 @@ window.navigator.geolocation.getCurrentPosition(
   - _State must be initialized when a component is created._
   - _State can only be updated using the function'setState'_.
 
-## 21. Initializing State Through Constructors
+<h2 name="21">21. Initializing State Through Constructors</h2>
 
 - Constructor
   - constructor function is going to be called any time an instance of the class is created. In other words any time that we create a new instance of the app component and show it on the screen. It is going to be automatically and instantly called before anything else.
@@ -375,7 +375,7 @@ window.navigator.geolocation.getCurrentPosition(
   - So to make sure that the parents or react components constructor function gets called, we call super with props.
   - In other words, Super is a reference to the parent's constructor function.
 
-## 22. App Lifecycle Walkthrough
+<h2 name="22">22. App Lifecycle Walkthrough</h2>
 
 - Steps from the first load up to showing result on browser.
   - JS file loaded by browser
@@ -392,7 +392,7 @@ window.navigator.geolocation.getCurrentPosition(
   - _Render method returns some (updated) JSX_
   - React takes that JSX and updates content on the screen
 
-## 23. Introducing Lifecycle Method
+<h2 name="23">23. Introducing Lifecycle Method</h2>
 
 - Component Lifecycle flow
   - constructor
@@ -408,7 +408,7 @@ window.navigator.geolocation.getCurrentPosition(
   - componentWillUnmount
     - It is usually used if we do want some clean-up after the component.
 
-## 24. Why Lifecycle Methods?
+<h2 name="24">24. Why Lifecycle Methods?</h2>
 
 - componentDidMount
   - The method is a perfect location to do some initial data loading for the component.
@@ -424,11 +424,11 @@ window.navigator.geolocation.getCurrentPosition(
   - It would be using frequently when we work with non react libraries such as using Google maps inside of a react application.
 - There are other three lifecycles. shouldComponentUpdate, getDerivedStateFromProps, getSnapshotBeforeUpdate. However, these methods are rarely used.
 
-## 25. Adding Some Styling
+<h2 name="25">25. Adding Some Styling</h2>
 
 - When a css file is imported to js file, webpack is going to see that we are importing a css file. It is going to take the contents out of there and then stick it into the index.html file.
 
-## 26. Avoiding Conditionals in render()
+<h2 name="26">26. Avoiding Conditionals in render()</h2>
 
 - In general, anytime we make a component we always try as much as possible to do not have multiple 'return' statement in render method.
 - If we ever have to have conditional logic, we are always going to instead put it into a helper method.
@@ -450,14 +450,14 @@ renderContent() {
   }
 ```
 
-## 27. App Overview
+<h2 name="27">27. App Overview</h2>
 
 - Stuff to still figure out
   - How do we get feedback from the user? (user-interaction, event)
   - How do we fetch data from some outside API or server?
   - How do we show lists of records?
 
-## 28. More on Controlled Element
+<h2 name="28">28. More on Controlled Element</h2>
 
 - Input working flow
   - User types in input
@@ -469,7 +469,7 @@ renderContent() {
 - In order words, user types the input, the input know what the text is. And then we call onChange and inform the component about the new input. And then we re-render the component, we set the value of the input with essentially the value that is already in there.
 - React application driving and storing all the data not HTML side.
 
-## 29. Axios vs Fetch
+<h2 name="29">29. Axios vs Fetch</h2>
 
 - Axios
   - Third party package
@@ -477,7 +477,7 @@ renderContent() {
   - Function built into modern browsers
   - But fetch is more basic and lower level function to use to fetch data.
 
-## 30. Handling Requests with Async/Await
+<h2 name="30">30. Handling Requests with Async/Await</h2>
 
 - Component renders itself one time with no list of images
 - onSearchSubmit method called
@@ -487,13 +487,13 @@ renderContent() {
 - Set image data on state of App component
 - App component re-renders and shows images
 
-## 31. Creating Custom Clients
+<h2 name="31">31. Creating Custom Clients</h2>
 
 - Nice thing about axios is that you can kind of set up a pre-configured instance of the axios client that has default properties set for where it is going to make a request to, headers and even params.
 - Create a file only for using axios.
 - create method is going to create an instance of the axios client with a couple of defaulted properties. In order wors it allows us to create a customized little copy of that is customized just towards making requests to some specific url with headers.
 
-## 32. Accessing the DOM with Refs
+<h2 name="32">32. Accessing the DOM with Refs</h2>
 
 - What we are going to do?
   - Let the ImageCard render itself and its image
@@ -520,7 +520,7 @@ renderContent() {
 - Reason is the instant after we have rendered the image in componentDidMount method, the image itself has not actually loaded. Because a DOM element is going to attempt to make a request to some outside service to actually load up the raw image file. (Reaching out to the url that we are referencing and downloading the image.)
 - In order words, the reason of we see 0 for every one of these results is because we are a console.log in these values out before we have even had a chance to load the image up.
 
-## 33. Callbacks on Image Load
+<h2 name="33">33. Callbacks on Image Load</h2>
 
 - In order to fix this, we are going to reference the 'this.imageRef.current' and add event-listener to it.
 
@@ -536,11 +536,11 @@ componentDidMount() {
   };
 ```
 
-## 34. Reminder on Event Handlers
+<h2 name="34">34. Reminder on Event Handlers</h2>
 
 - Do not assign the value property to input tag without onChange property.
 
-## 35. Accessing the Youtube API
+<h2 name="35">35. Accessing the Youtube API</h2>
 
 - React app is goint to make use of axios library.
 - It is going to make a network request over to the YouTube API.
@@ -548,7 +548,7 @@ componentDidMount() {
 - The list of videos is going to be an array of objects where every object represents a different videos.
 - But first, get the API key at console.developers.google.com
 
-## 36. Deeply Nested Callbacks
+<h2 name="36">36. Deeply Nested Callbacks</h2>
 
 - When we want to communicate from a child's component back up to some parent component, we usually make use of a callback.
 - Beware of a syntax just function call or arrow function in onClick method.
@@ -579,7 +579,7 @@ componentDidMount() {
 </div>
 ```
 
-## 37. Displaying a Video Player
+<h2 name="37">37. Displaying a Video Player</h2>
 
 - iframe is like any other HTML tag such as div or a span
 - But iframe is going to attempt to make a request to some outside website that the user is currently visiting on the screen.
@@ -591,14 +591,14 @@ componentDidMount() {
 </div>
 ```
 
-## 38. What is Redux?
+<h2 name="38">38. What is Redux?</h2>
 
 - State management library
 - Makes creating complex application easier
 - Not required to create a React app
 - Not explicitly designed to work with React
 
-## 39. Redux by Analogy
+<h2 name="39">39. Redux by Analogy</h2>
 
 - How we are going to study redux?
   - Story(analogy) to help you understand Redux
@@ -629,7 +629,7 @@ componentDidMount() {
   - Store
     - It is the assembly of a collection of different reducers and action creators.
 
-## 40. Modeling with Redux
+<h2 name="40">40. Modeling with Redux</h2>
 
 - How to create action creator and action
 
@@ -727,7 +727,7 @@ store.getStaste();
 
 - The goal of reducer is to take some existing data, some action and then modify and return that existing data based upon the contents of an action.
 
-## 41. Important Redux Notes
+<h2 name="41">41. Important Redux Notes</h2>
 
 - Action Creator -> Action -> dispatch -> Reducers -> State -> Wait until we need to update state again
 - Anytime we want to change the state or the data of an application, we are going to call an action creator.
@@ -739,19 +739,19 @@ store.getStaste();
 - Each object that store calls such as store.dispatch(), store.getState() is separate execution of entire redux cycle. So at any point in time along the application, we can take this store obejct and pull our state out of it and read the current state where the current data for the application.
 - We can only modify the state object(assembly of all the data) through the use of the dispatch function and the action creator and action. There is no way that we can somehow manually reach into the store and modify the state.
 
-## 42. React-Redux
+<h2 name="42">42. React-Redux</h2>
 
 - React-Redux is thrid library that we are going to use to make sure that react in redux can talk to each other.
 - It has a bunch of helper functions inside of it to get redux to work nicely with react.
 
-## 43. Song app Overview
+<h2 name="43">43. Song app Overview</h2>
 
 - This time we are going to use react with redux to build the app
 - We are going to create two reducers(Song list reducer, Selected song reducer) and one action creators(select song) into redux side application.
 - Using action creator, we are going to change the state.
 - If you want to change what the currently selected song is we are gong to call the action creator(select song). That will dispatch an action and tell selected song reducer to update its data and reflect the new current present picked song.
 
-## 44. How React-Redux Works?
+<h2 name="44">44. How React-Redux Works?</h2>
 
 - We are going to create two new components (Provider, Connect) using react-redux.
 - create store that contains all the reducers and pass it as prop in Provider components.(Provider component is going to be rendered at the top of application hierarchy even above the App component. So technically we are going to show the App component inside of Provider component).
@@ -767,7 +767,7 @@ store.getStaste();
 - _Then configure the Connect component by telling it what different pieces of states we want out of our store and what different action creators we want to have wired up as well_
 - _After that Connect component is going to makes sure that all the data(both the state and the action creators) shows up inside of our component as props._
 
-## 45. Wiring Up the Provider
+<h2 name="45">45. Wiring Up the Provider</h2>
 
 - When we make use of the react-redux library, we don't usually mess around with the store directly.
 - Instead we pass it off to the provider and it is essentially takes care of everything from there.
@@ -781,7 +781,7 @@ ReactDOM.render(
 );
 ```
 
-## 46. The Connect Function
+<h2 name="46">46. The Connect Function</h2>
 
 - We are able to connect to Provider component using Connect function
 
@@ -796,7 +796,7 @@ class SongList extends React.Component {
 export default connect()(SongList);
 ```
 
-## 47. Configuring Connect with MapStateToProps
+<h2 name="47">47. Configuring Connect with MapStateToProps</h2>
 
 - We are going to specifically tell the connect function that we want to get a list of songs out of the redux store from the Provider.
 - So anytime that our list of songs and inside of our store changes, Provider is going to automatically notify the Connect component.
@@ -821,7 +821,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(SongList);
 ```
 
-## 48. 정리하자면...
+<h2 name="48">48. 정리하자면...</h2>
 
 1.  reducer 폴더안에서 index.js를 생성. index.js는 안에 있는 reducer 함수들을 combinReducers라는 객체로 묶어 export한다.
 2.  메인 index.js 파일은 redux의 Provider, createStore 그리고 reducer 폴더에서 export한 index.js를 reducers라는 이름으로 import한다.
@@ -829,7 +829,7 @@ export default connect(mapStateToProps)(SongList);
 4.  Provider와 연결하기 위해 SongList 컴포넌트에 connect()()를 만들어준 뒤 두번째 인수에 SongList 컴포넌트를 입력
 5.  mapStateToProps 함수를 만들어 state를 인수로 받았는데 이 state는 reducer에 담긴 모든 정보를 포함하고 있다. state에서 원하는 정보를 return한 뒤 connect의 첫번째 인수로 mapStateToProps를 넣는다. 참고로 반환된 값(객체)는 내려받은 값이기 때문에 props와 같다고 할 수 있다.
 
-## 49. Calling Action Creators from Components
+<h2 name="49">49. Calling Action Creators from Components</h2>
 
 - Connect component is going to be used not only to get data out of our store but it can also be used to get action creators correctly into the SongList.
 - And put it into as a second argument of Connect function in the form of object.
@@ -846,7 +846,7 @@ export default connect(
 - When selectSong is called, it is going to automatically take the action that gets returned and send it it to redux's dispatch function.
 - _Importantly, you must dispatch an action to update the store. You cannot directly modify props by doing this.props.something = 'some new value". What Stephen is saying in this lecture is that when we update our Redux store thru a dispatched action, mapStateToProps will automatically rerun and return to us this new state object._
 
-## 50. Redux is Not Magic
+<h2 name="50">50. Redux is Not Magic</h2>
 
 - Redux does not automatically detect action creators being called.
 - Redux does not automatically detect a function returning an object that is an action.
@@ -858,25 +858,25 @@ export default connect(
 - connect functions include inside the object, it wraps them up in another JS function. When we call the new JS function, _the connect function is going to automatically calls action creator, it is going to automatically take the action that gets returned and call dispatch function for us._
 - So anytime we want to call an action creator from a component, we are always going to pass it into connect function.
 
-## 51. Functional Components with Connect
+<h2 name="51">51. Functional Components with Connect</h2>
 
 - SongDetail component has no functionality tied to it such as event handler that causes a change to a redux state. So we do not need to wire up any action creators to our songDetail component.
 
-## 52. Conditional Rendering and Wrappin up
+<h2 name="52">52. Conditional Rendering and Wrappin up</h2>
 
 - In integrating react and redux, we are going to create our components as we usually do.
 - We are going to then select some very specific components inside of our application that need to receive some information or need to make changes to the state
 - if we need to make changes to the state or receive information, we are going to import that connect function or component and then at the bottom of the file we can define a mapStateToProps function.
 - And then pass that function as the first argument in connect function, actual component that we care about as a second function call.
 
-## 53. Initial App Setup
+<h2 name="53">53. Initial App Setup</h2>
 
 - Redux-Thunk
   - Middleware is a function that are going to slightly change the behavior of the redux store and help us make requests in a redux application.
   - Middleware applies to the library 'redux'
   - Redux-Thunk is a middleware that is going to help us make network requests from the redux side of app.
 
-## 54. How to Fetch Data in a Redux App
+<h2 name="54">54. How to Fetch Data in a Redux App</h2>
 
 - General Data Loading with Redux
   - (This is a common pattern)
@@ -892,7 +892,7 @@ export default connect(
   8. Because we generated some new state obejct, redux/react-redux cause our React app to be rendered
   - (From 7 to 8, We get fetched data into a component by generating new state in our redux store, then getting that into our component through mapStateToProps)
 
-## 55. Wiring Up an Action Creator
+<h2 name="55">55. Wiring Up an Action Creator</h2>
 
 - Set up the dummy action creator and imports it in PostList.js
 - And put the creator into connect function and call it using props in componenDidMount method. (step from 1 to 3)
@@ -913,7 +913,7 @@ export default connect(
 )(PostList);
 ```
 
-## 56. Making a Request From an Action Creator
+<h2 name="56">56. Making a Request From an Action Creator</h2>
 
 ```js
 export const fetchPosts = async () => {
@@ -928,7 +928,7 @@ export const fetchPosts = async () => {
 - The code seems right but that is a bad approach because we are specifically breaking the rules of redux and action creator.
 - When you see the console. You got an arror saying 'Actions must be plain objects. Use custom middleware for async actions.'
 
-## 57. Understanding Async Action Creators
+<h2 name="57">57. Understanding Async Action Creators</h2>
 
 - Let's find out the problem
 - You might be asked for interview question.
@@ -958,7 +958,7 @@ export const fetchPosts = async () => {
   }
   ```
 
-## 58. More on Async Action Creators
+<h2 name="58">58. More on Async Action Creators</h2>
 
 - We might think we can use promise instead async and await?
 - If we do that by the time our action gets to a reducer, we will not have fetched our data!
@@ -982,7 +982,7 @@ const res = await jsonPlaceholder.get("/posts");
 
 - In order words, even if we use this alternate syntax without the async/awaits, we would still run into an issue where we could not get access to our data.
 
-## 59. Middlewares in Redux
+<h2 name="59">59. Middlewares in Redux</h2>
 
 - Synchronous action creator
   - It immediately retunrs an action object with all the relevant data attached that object and it is ready to be processed by a reducers.
@@ -1002,7 +1002,7 @@ const res = await jsonPlaceholder.get("/posts");
 - Most popular use of middleware is for dealing with async actions.
 - We are going to use a middleware called 'Redux-Thunk' to solve our async issues.
 
-## 60. Behind the Scenes of Redux-Thunk
+<h2 name="60">60. Behind the Scenes of Redux-Thunk</h2>
 
 - What Redux-Thunk does?
   - Redux-Thunk is all purpose middleware that allows us to deal with asynchronous action creators but it also allows us to do many other things as well.
@@ -1040,7 +1040,7 @@ const res = await jsonPlaceholder.get("/posts");
   - Once we eventually get the response, _we are then going to use the dispatch function to manually dispatch an action at some point of time in the future._
   - After that we get a new action in form of a plain object or a function but mostly object. (when function gets returned, the flow goes again.)
 
-## 61. Shortened Syntax with Redux-Thunk (how to create an asynchronous action creators)
+<h2 name="61">61. Shortened Syntax with Redux-Thunk (how to create an asynchronous action creators)</h2>
 
 - To wire up redux-thunk, import applyMiddleware from redux and thunk from redux-thunk in root index.js file.
 
@@ -1073,14 +1073,14 @@ export const fetchPosts = () => {
 };
 ```
 
-## 62. Rules of Reducers
+<h2 name="62">62. Rules of Reducers</h2>
 
 - We are going to create a separate file for each reducer.
 - The idea is that as we start to work on larger projects with many reducers, puttem all inside of one file is probably not going to scale too well.
 - We are going to create another component called postReducer. It is responsible for watching for actions with type 'FETCH_POST' and anytime it sees that it is going to pull off the res that in all the data inside of it and add it into some array.
 - Therefore we are going to eventually have a list of sorts with all of different posts that have been fetched from our API.
 
-## 63. Return Values from Reducers
+<h2 name="63">63. Return Values from Reducers</h2>
 
 - Rules of Reducers
   - It must return any value besides of 'undefined'.
@@ -1117,7 +1117,7 @@ export const fetchPosts = () => {
   - If you have a reducer that is always returning a number or a string, you do not need to worry about the mutataion rule. Because those values are immutable.
   - You only have to worry about mutation when you are working with an array or an object.
 
-## 64. A Misleading Rule
+<h2 name="64">64. A Misleading Rule</h2>
 
 - But the rule 'It must not mutate its input 'state' argument.' is extremely misleading. Possibly even false!
 - Here is the truth
@@ -1126,14 +1126,14 @@ export const fetchPosts = () => {
   - To be honest, it is a lot easier to tell beginners to just not mutate the state argument than to tell them about this corner case and help them to understand.
   - The reason we say 'It must not mutate its input 'state' argument.' is that if you accidentally return the same value (returning prevState) that is pumped into your reducer, redux is going to say 'no difference. Here is the same object or array in memory.' And so we have done absolutely no updates to any data inside of an application, and the react app does not need to be rendered itself. In order words, you will never see any updated content appear on the screen.
 
-## 65. Safe State Updates in Reducers
+<h2 name="65">65. Safe State Updates in Reducers</h2>
 
 - (in object, order goes from right to left)
 - {...state, name: 'Sam'} instead state.name = 'Sam'
 - {...state, age: 30} instead state.age = 30
 - {state, age: undefined} instead delete state.name (or you can use lodash library)
 
-## 66. Dispatching Correct Values
+<h2 name="66">66. Dispatching Correct Values</h2>
 
 - Why do we have two result for one console.log?
   - When the application first loads up inside of the browser, all of our reducers run one initial time.
@@ -1149,7 +1149,7 @@ export const fetchPosts = () => {
   - So the PostList component is going to be rendered to the screen a second time. Also mapStateToProps is going to be called a second time, we are now going to get the new value of state.post and new props.posts property is going to show up inside of the component. The render method gets called again and we see the second result in console.log.
   - (action -> postReducer -> default value -> PostList component rendered -> componentDidMount in PostList component -> fetching data -> action -> reducer -> value in action.payload property -> Redux finds not the same value before -> PostList component -> mapStateToProps -> get a new value from state -> render method gets called -> second result shows up)
 
-## 67. Displaying Users (Getting user information)
+<h2 name="67">67. Displaying Users (Getting user information)</h2>
 
 - How to get user information?
   - Fetch Posts
@@ -1160,7 +1160,7 @@ export const fetchPosts = () => {
   - Fetch User
   - Show users in each UserHeader
 
-## 68. Extracting Logic to MapStateToProps
+<h2 name="68">68. Extracting Logic to MapStateToProps</h2>
 
 - UserHeader component gets access to the user ID and it also gets access to the entire list of users.
 - However the UserHeader component is not really well-suited to take the entire array of users. Because the purpose of the component is to show one singular user on the screen. But we are giving it way more data than it ever needs.
@@ -1177,13 +1177,13 @@ export const fetchPosts = () => {
   };
   ```
 
-## 69. That's the Issue! (overfetching users)
+<h2 name="69">69. That's the Issue! (overfetching users)</h2>
 
 - When you see the network tab in developer tool, you will find out that the application requets for userId number 10 times in a row.
 - Everytime that a UserHeader component is rendered on the screen, componentDidMount is called and fetch user with particular userId.
 - So essentially becasue we are rendering out a hundred instances of UserHeader, the action creator gets called a hundred different times even though we are fetching some very very repetitive data.
 
-## 70. One Time Memoization
+<h2 name="70">70. One Time Memoization</h2>
 
 - In order to repetitive data request, we use memoize library.
 - Using \_.memoize, create new function.
@@ -1209,7 +1209,7 @@ export const fetchPosts = () => {
 - Unfortunately you would not be able to do it again using this action creator. So if you want to do it then you have to create another action creator that has the same logic except memoiztion step.
 - So this is not the best solution.
 
-## 71. Alternate Overfetching Solution
+<h2 name="71">71. Alternate Overfetching Solution</h2>
 
 - We are going to create new action creator called 'fetchPostsAndUsers()'.
   - Logic that we are going to execute inside of the component
@@ -1220,7 +1220,7 @@ export const fetchPosts = () => {
     - Call 'fetchUser' with each userId
   - fetchPostsAndUsers action creator is not going to have some logic inside of it to make a network request over to our API.
 
-## 72. Action Creators in Action Creators.
+<h2 name="72">72. Action Creators in Action Creators.</h2>
 
 - Create new action creator 'fetchPostsAndUsers'
 - Inside of there, call other action creators
@@ -1257,7 +1257,7 @@ export const fetchPostsAndUsers = () => {
 };
 ```
 
-## 73. Finding Unique User Ids
+<h2 name="73">73. Finding Unique User Ids</h2>
 
 - It is easy to get the state of post. We can use getState object to do it.
   ```js
@@ -1285,7 +1285,7 @@ export const fetchPostsAndUsers = () => {
 - No await keyword this time. Because we do not care at all about waiting for eash user to be fetched inside a fetchPosts users. (이미 필요한 데이터는 다 있으니까 기다릴 필요가 없음)
 - And remove componentDidMount lifecycle from UserHeader component because the lifecycle method keeps attempting to fetch the data.  
 
-## 74. App Wrapup
+<h2 name="74">74. App Wrapup</h2>
 
 - Inside of a root index file, we had imported redux-thunk and then we wired it up to a store through the use of applyMiddleware. 
 - applyMiddleware is a function from redux library itself, we passed it into second argument of the createStore call when we apply the middleware. 
@@ -1335,7 +1335,7 @@ export const fetchPostsAndUsers = () => {
 - If we ever just return the exact same object or array, redux has that very simple comparison where it just checks to see if that is the same object or array in memory.
 - And if it is, redux says 'oh no data has changed' and it does not update the rest of your application and tell the react side of the app to actually re-render itself and pull down new state and show some new content on the screen.
 
-## 75. Streaming App Outline
+<h2 name="75">75. Streaming App Outline</h2>
 
 - We are going to have our react application running inside the user's browser.
 - We are going to have a small API server that essentially lists out all streams or channels that video can watch.
@@ -1343,7 +1343,7 @@ export const fetchPostsAndUsers = () => {
 - And we are going to have RTMP(Real Time Messaging Protocol) Server that is actually responsible for hadling the video streams itself. 
 - RTMP server is very straightforward.
 
- ## 76. App Challenges
+<h2 name="76">76. App Challenges</h2>
 
 - Need to be able to navigate around to separate pages in our app 
 - Need to allow user to login/logout
@@ -1351,7 +1351,7 @@ export const fetchPostsAndUsers = () => {
 - Need to master *CRUD(Create Read Update Destroy)* operations in React/Redux 
 - Errors will likely occur! Need good error handling 
 
-## 77. Intoroducing React Router
+<h2 name="77">77. Intoroducing React Router</h2>
 
 - React Router family
   - React Rounter
@@ -1370,7 +1370,7 @@ export const fetchPostsAndUsers = () => {
     - It is a library that is very similar to react-redux library. 
     - It is essentially a compatibility layer to get react router and redux to play along with each other. 
 
-## 78. How React Router works?
+<h2 name="78">78. How React Router works?</h2>
 
 - React router does not care that we went to a domain of localhost or we were at port 3000.
 - Instead react router only cares about all the characters that are listed after the domain definition and the port definition. 
@@ -1383,7 +1383,7 @@ export const fetchPostsAndUsers = () => {
 - History object is then going to communicate the path over to BrowserRouter and then BrowserRouter is then going to communicate that path down to route components. 
 - The route components are going to decide either to show themselves or hide themselves depending upon the path inside of the url that the user is visiting, and the path property that it was passed when it was created. 
 
-## 79. How Paths Get Matched
+<h2 name="79">79. How Paths Get Matched</h2>
 
 - Inside of react router application, we can very easily have multiple route components that match a given url and all show themselves to the user. 
 - So by deeply nesting routes, we can customize how some part of our app looks depending upon the url 
@@ -1397,7 +1397,7 @@ export const fetchPostsAndUsers = () => {
   - It essentially changes to extracted path equal the string path (extractedPth === path).
   - It only modifies the route that you add it to. 
 
-## 80. How to Not Navigate with React Router
+<h2 name="80">80. How to Not Navigate with React Router</h2>
 
 - Bad Navigation
   - You add an 'a tag' to your application with href='/pagetwo' and click it
@@ -1413,7 +1413,7 @@ export const fetchPostsAndUsers = () => {
   - browser downloads and executes these scripts
   - Our app starts up.
 
-## 81. Navigating with React Router
+<h2 name="81">81. Navigating with React Router</h2>
 
 - Instead of using href and 'a tag', use 'Link tag'.
 ```js
@@ -1440,7 +1440,7 @@ export const fetchPostsAndUsers = () => {
   - We are essentially tricking the user into thinking that they really are going to different pages. 
   - But in fact, we are just showing in hiding different components. 
 
-## 82. Different Router Types
+<h2 name="82">82. Different Router Types</h2>
 
 - BrowserRouter
   - Uses everything after Top Level Domain(.com, .net) or port as the 'path'
@@ -1466,7 +1466,7 @@ export const fetchPostsAndUsers = () => {
   - If anyone ever makes requests to localhost:3000, you are always going to respond with index.html file. 
   - And your application loads up, the application will then look at whatever is after the hash and then use that to determine what content to show on the screen. 
 
-## 83. Component Scaffolding
+<h2 name="83">83. Component Scaffolding</h2>
 
 - Index Page : StreamList (/)
 - Show Stream : StreamShow (/streams/show)
@@ -1474,13 +1474,13 @@ export const fetchPostsAndUsers = () => {
 - Edit Stream : StreamEdit (/streams/edit)
 - Delete Stream : StreamDelete (/streams/delete)
 
-## 84. Always Visible Components
+<h2 name="84">84. Always Visible Components</h2>
 
 - We want our head component to always be visible no matter what url, user is trying to look at. 
 - In order to do so, we are going to add the header component to our app component outside of the BrowserRouter.
 - If we have a component that is not listed inside the BrowserRouter, it will always be shown 100% of the time irrespective of what the current path is. 
 
-## 85. Link Inside Routers
+<h2 name="85">85. Link Inside Routers</h2>
 
 - Error : You should not use 'Link tag' outside a 'Router' occurs
 - The error saying that any component that is not a child of our router cannot contain any react router related components. 
@@ -1501,7 +1501,7 @@ export const fetchPostsAndUsers = () => {
   </BrowserRouter>
   ```
 
-## 86. OAuth-Based Authentication
+<h2 name="86">86. OAuth-Based Authentication</h2>
 
 - Email/Password Authentication
   - We store a record in a database with the user's email and password. 
@@ -1515,7 +1515,7 @@ export const fetchPostsAndUsers = () => {
   - OAuth can be used for user identification in our app and our app making actions on behalf of user.
   - So OAuth is not only about authentication but also about letting our application get access to all that user's data on some outside service provider. 
 
-## 87. OAuth for Servers vs Browser Apps
+<h2 name="87">87. OAuth for Servers vs Browser Apps</h2>
 
 - OAuth for Servers
   - Results in a 'token' that a server can use to make requests on behalf of the user.
@@ -1537,7 +1537,7 @@ export const fetchPostsAndUsers = () => {
   - If user happens to log out our application or Google servers, we are going to get another callback invoked. 
   - This callback is going to say 'user just logged out'.
 
-## 88. Creating OAuth Credentials
+<h2 name="88">88. Creating OAuth Credentials</h2>
 
 - Steps for Setting Up OAuth
   - Create a new project at console.developers.google.com/
@@ -1546,7 +1546,7 @@ export const fetchPostsAndUsers = () => {
   - Install Google's API library, initialize it with the OAuth Client ID
   - Make sure the library gets called anytime the user clicks on the 'Login with Google' button.
 
-## 89. Wiring Up the Google API Library
+<h2 name="89">89. Wiring Up the Google API Library</h2>
 
 - Unfortunately Google themselves do not offer the library over npm, we are just going to add a manual script tag into the index.html. 
   ```js
@@ -1604,7 +1604,7 @@ componentDidMount() {
 
 reference : https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2getauthinstance
 
-## 90. Sending a User Into the OAuth Flow
+<h2 name="90">90. Sending a User Into the OAuth Flow</h2>
 
 - In console, get a reference to that auth instance object.
   ```js
@@ -1618,7 +1618,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - In order to check that user is signed in, type `auth.isSignedIn.get()`.
 - Just for a note, in theory if we had asked for any other scopes around this user such as ability to modify their email or their Google Drive files, we could now use this library to modify those files or those emails.
 
-## 91. Rendering Authentication Status
+<h2 name="91">91. Rendering Authentication Status</h2>
 
 - What we are going to do?
   - Get a reference to the `auth` object after it is initialized.
@@ -1673,7 +1673,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ``` 
 - For a quick note from future, If you want to sign in or sign out at this stage, you have to manually type in `gapi.auth2.getAuthInstance().signIn()` or `gapi.auth2.getAuthInstance().signOut()`.
 
-## 92. Updating Auth State
+<h2 name="92">92. Updating Auth State</h2>
 
 - Login or Logout state does not rerender on a screen automatically. We have to keep refresh the page in order to see the changed login status.
 - In order to make the state rerender on a screen we are going to use another method in `getAuthInstance()`.
@@ -1708,7 +1708,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   };
   ```
 
-## 93. Redux Architecture Design
+<h2 name="93">93. Redux Architecture Design</h2>
 
 - How to setup Google OAuth using redux?
   - Inside of GoogleAuth Component, we have got onSignIngClick, onSignOutgClick.
@@ -1755,7 +1755,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - Answer is we are going to need login state many other places inside of the app.
   - If we store the value inside of state which is central place where the data is stored, through reducer it would be easier to get access no matter where we are. 
 
-## 94. Connecting Auth with Action Creators
+<h2 name="94">94. Connecting Auth with Action Creators</h2>
 
 - Create action creators
 ```js
@@ -1785,7 +1785,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 - Depends what argument onAuthChange component will get, action that is going to be dispatched will be different.
 - onAuthChange 함수가 `this.auth.isSignedIn.listen`의 인수로 들어가게 되는데 `listen`은 boolean 값만 인수로 받는다. 즉 onAuthChange의 값은 boolean 값이라는것이며 그 값은 `isSignedIn`에 있는것 (아직 답변이 없으므로 이렇게 예상한다.)
 
-## 95. Building the Auth Reducer
+<h2 name="95">95. Building the Auth Reducer</h2>
 
 - Create reducer name authReducer.
 - reducer has default state in form of object because we are going to eventually have one other property related to authentication.
@@ -1827,13 +1827,13 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   ```
 - Last thing we have to do is communicate the state back over to the GoogleAuth component.
 
-## 96. Handling Auth Status Through Redux 
+<h2 name="96">96. Handling Auth Status Through Redux</h2>
 - We have to Auth piece of state back into our GoogleAuth Component.
 - We now essentially extracted that information to our redux store.
 - So now we need to pipe the information back into the component that was already containing that data.
 - It feels a little bit awkward to do it but this is correct way to do it.
 
-## 97. Handling Auth Status Through Redux
+<h2 name="97">97. Handling Auth Status Through Redux</h2>
 
 - When we finished initializing our library, we are going to assign the auth instance to this.auth
   ```js
@@ -1857,7 +1857,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   - `mapStateToProps`로 상태를 받아와 기존에 this.state를 사용하던 `renderGoogleButton`에서 this.state를 지우고 대신 reducer에서 받아온 상태를 사용해준다
   - 구글API에서 가져온 로그인 정보는 `onAuthChange`에서 action creator를 실행시킬때 사용하며 redux store에 있는 정보는 로그인버튼 보여줄때 사용함. 
   
-## 98. Fixed Action Types
+<h2 name="98">98. Fixed Action Types</h2>
 
 - When login button is clicked, nothing might be happening.
 - This is a common bug 
@@ -1868,7 +1868,7 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
   export const SIGN_OUT = "SIGN_OUT";
   ```
 
-## 99. Recording the User'sID
+<h2 name="99">99. Recording the User'sID</h2>
 
 - Some point in time, we need to make sure that each stream is somehow associated with the user who created it (delete, edit etc).
 - In order to do so, we are going to create each stream record inside the API server that contains the ID of the user who created it.
@@ -1925,14 +1925,14 @@ reference : https://developers.google.com/api-client-library/javascript/referenc
 ```
 ```
 
-## 100. Using Redux Dev Tools to inspect the Store
+<h2 name="100">100. Using Redux Dev Tools to inspect the Store</h2>
 
 - Install redux-devtools-extenstion from https://github.com/zalmoxisus/redux-devtools-extension
 - This is extension that is going to allow you to very easily debug redux store. 
 - But the extension is available only for Chrome and Firefox.
 - And configure according to Advanced store setup.
 
-## 101. Debug Sessions with Redux Dev Tools
+<h2 name="101">101. Debug Sessions with Redux Dev Tools</h2>
 
 ```js
 localhost:3000?debug_session='random String'
@@ -1942,7 +1942,7 @@ localhost:3000?debug_session='random String'
 - So when you enable this debug session, redux dev tools is going to make sure that all the data stays around between refreshes of the page. 
 - This is incredibly useful when we start doing some advanced feature development. 
 
-## 102. Form with Redux Form
+<h2 name="102">102. Form with Redux Form</h2>
 
 - install redux form on npm.
 - How have we handled form up to this time in react. 
@@ -1962,7 +1962,7 @@ localhost:3000?debug_session='random String'
   - Only thing that we have to do is make sure that we eventually get some form information in a component down into some given input element.
   - And make sure that the input element understands that it needs to call some callback handler provided redux form anytime that gets changed. 
 
-## 103. Connecting Redux Form
+<h2 name="103">103. Connecting Redux Form</h2>
 
 - Wire up redux form library inside of index.js in reducers file.
   ```js
@@ -1975,7 +1975,7 @@ localhost:3000?debug_session='random String'
   ```
 
 
-## 104. Creating Forms
+<h2 name="104">104. Creating Forms</h2>
 
 - In StreamCreate.js file, import `Field`, `reduxForm` from `redux-form`
   ```js
@@ -2029,7 +2029,7 @@ localhost:3000?debug_session='random String'
 - Because when we show this `Field` component, the `Field` itself has no idea how to render some type of input element on the screen. So a `Field` does not know how to show a text input, checkbox, dropdown etc.
 - A `Field` is just a component that is going to be part of the system that is going to automatically handle all of the forms put together but it individually is not responsible for actually getting to show up on the screen.
 
-## 105. Automatically Handling Events
+<h2 name="105">105. Automatically Handling Events</h2>
 
 - In order to tell `Field` component how to show an actual text input on the screen, we have to assign a prop to it called `component`. 
 - `Component` props is going to be either a real component or a function for the field to call.
@@ -2122,7 +2122,7 @@ renderInput({ input }) {
   }
 ```
 
-## 106. Customizing Form Fields
+<h2 name="106">106. Customizing Form Fields</h2>
 
 - When we pass elements to `Field` component, it does not know what to do with it
 - Therefore we have to pass those elements in argument of `renderInput` to render on a screen.
@@ -2150,7 +2150,7 @@ renderInput({ input, label }) {
   }
 ```
 
-## 107. Handling Form Submission
+<h2 name="107">107. Handling Form Submission</h2>
 
 - Inside of props that received by redux form library, it contains `handleSubmit` callback function. 
 - We then call that function with `onSubmit` callback method that we defined inside of the component.
@@ -2173,7 +2173,7 @@ onSubmit(e) {
   ```
   - formValue argument contains the inputs that user typed and submitted.
 
-## 108. Validation of Form Inputs
+<h2 name="108">108. Validation of Form Inputs</h2>
 
 - Steps for validation
   - Form is initially rendered OR user interacts with it 
@@ -2208,7 +2208,7 @@ onSubmit(e) {
   ```
   - *In order words, if we return empty object from `validate` redux form assumes that everything went OK. So it is only when we put a key value pair into the object that redux form realizes that something just went wrong*
 
-## 109. Displaying Validation Message
+<h2 name="109">109. Displaying Validation Message</h2>
 
 - Wire up `validate` function to redux form
   ```js
@@ -2246,7 +2246,7 @@ onSubmit(e) {
   - `reduxForm`에 연결시키게 되면 redux form은 자동적으로 `errors`객체안의 프로퍼티 이름과 `Field`컴포넌트안에 있는 이름을 비교한다.
   - 만일 같은 이름이 존재할 경우 `Field` 컴포넌트와 연결되어있으며 `renderInput` 함수로 전달되어진 `formProps` 인수의 `meta` 프로퍼티 `error`의 값으로 `validate` 함수에서 생성이 된 객체의 값이 들어가게된다. 
 
-## 110. Showing Errors on Touch
+<h2 name="110">110. Showing Errors on Touch</h2>
 
 - We got error message to print up underneath each field. 
 - But we want to show this error message whenever a user submits the form.
@@ -2300,7 +2300,7 @@ onSubmit(e) {
   <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
   ```
 
-## 111. Creating Streams
+<h2 name="111">111. Creating Streams</h2>
 
 - The real question is how do we communicate from our react application up to API server and tell the API server that there is now a new stream that is available for viewing. 
 - We are trying to take the title and description and put it up to API server so that other users can fetch a list of all the different available streams.
@@ -2314,7 +2314,7 @@ onSubmit(e) {
 - Streamer's computer creates stream id 2 -> RTMP -> API Server -> When viewer asking the stream id 2 -> API server responses to viewer.
 - Therefore, we are going to take the title and description from our form and try to create some new record on that API server. 
 
-## 112. REST-ful Convertions
+<h2 name="112">112. REST-ful Convertions</h2>
 
 - We are going to put together with API server using `JSON Server`.
 - The reason of using `JSON Server` because it has a extremely strict adherence to RESTful conventions. 
@@ -2343,7 +2343,7 @@ onSubmit(e) {
 - We can make use of this JSON server to manupulate the list of streams that are stored inside the API server by following of REST-ful conventions.
 - So if we want to get a list of our streams we are going to make a `get, post, delete etc` request to `localhost:3001/streams`.
 
-## 113. Creating Streams Through Action Creators
+<h2 name="113">113. Creating Streams Through Action Creators</h2>
 
 - We have our API server put together, we need to make sure that anytime that user submits the form in `StreamCreate` component, we attepmt to make ajax request or a network request over to our API running on `localhost:3001`.
 - So to make a network request, we are going to first define an action creator.
@@ -2374,7 +2374,7 @@ onSubmit(e) {
   })(StreamCreate);
   ```
 
-## 114. Creating a Stream with REST Conventions
+<h2 name="114">114. Creating a Stream with REST Conventions</h2>
 
 - It is going to be a little bit challenging to hook up both the `connect` function and `redux form` to this componnet.
   ```js
@@ -2422,7 +2422,7 @@ onSubmit(e) {
   - action creator를 만들어줄때 post할때는 서버에 유저가 입력한 내용을 보내줘야 하므로 매개변수 formValues를 받게 만들어준다.
   - 이제 connect를 이용해 BoardCreate 파일에 action creator를 연결시켜준뒤 form이 제출되면 작동되는 함수에 props로 formValues를 받은 action creator를 넣어준다. 
 
-## 115. Dispatching Actions After Stream Creation
+<h2 name="115">115. Dispatching Actions After Stream Creation</h2>
 
 - We need to somehow get a handle on the response that comes back from the post request.
 - Because it contains the actual saved record of the stream that we just created. 
@@ -2444,7 +2444,7 @@ onSubmit(e) {
   };
   ```
 
-## 116. Bulk Action Creators
+<h2 name="116">116. Bulk Action Creators</h2>
 
 - Since we follow the RESTful conventions, we know what results we expected. So it would be convenient to create action creators in advance. 
   ```js
@@ -2481,7 +2481,7 @@ onSubmit(e) {
   };
   ```
 
-## 117. Object-Based Reducers
+<h2 name="117">117. Object-Based Reducers</h2>
 
 - This time, instead of returning an array, reducer is going to return an object that has all the streams inside of it. 
 - Inside of the object, we are going to have a collection of key value pairs.
@@ -2503,7 +2503,7 @@ onSubmit(e) {
   ```
 - So basically the syntax of updating our state is going to be so much easier when we are making use of an object instead of an array.
 
-## 118. Key Interpolation Syntax
+<h2 name="118">118. Key Interpolation Syntax</h2>
 
 - Syntax of updating our state using object
   ```js
@@ -2535,7 +2535,7 @@ onSubmit(e) {
   {...animalSounds, [animal]:sound} // { cat: 'meow', dog: 'bark', lion: 'roar' }
   ```
 
-## 119. Handling Fetching, Creating and Updating
+<h2 name="119">119. Handling Fetching, Creating and Updating</h2>
 
 - Create `streamReducer` file inside of reducer folder.
 - It does all streams related works.
@@ -2555,7 +2555,7 @@ onSubmit(e) {
     }
   };
   ```
-## 120. Deleting Properties with Omit
+<h2 name="120">120. Deleting Properties with Omit</h2>
 
 - In order to make `DELETE_STREAM`, we are going to use `_omit` in `lodash` library.
 - Install `lodash` library and import it in `streamReducer` file.
@@ -2566,7 +2566,7 @@ onSubmit(e) {
 - But in this case, we do not have to reference `.id` property because in `DELETE_STREAM`, `action.payload` itself is the ID.
 - Nice thing about `_.omit` is that it is not going to change the original state object. Instead it creates a new object with all the properties from states without whatever we passed in as the `action.payload`.
   
-## 121. Merging Lists of Records 
+<h2 name="121">121. Merging Lists of Records</h2>
 
 - So now we are trying to make sure that we can take an array of streams from our API and merge them all into our state object.
 - It would be easier if we dealing with array but since we are using an object, we have to figure out a clever solution.
@@ -2605,7 +2605,7 @@ onSubmit(e) {
 - 정리 
   - db.json에서 가져온 배열형태의 데이터들을 lodash를 이용해 각 객체의 id가 키 값인 객체형태로 바꾸는것
 
-## 122. Fetching a List of All Streams
+<h2 name="122">122. Fetching a List of All Streams</h2>
 
 - In order to show the streams at StreamList component as soon as it renders, we are going to change the component function base to class base and add `componentDidMount` lifesycle.
 - After that, wire up `connect` function and `fetchStreams` action creator.
@@ -2629,7 +2629,7 @@ onSubmit(e) {
   )(StreamList);
   ```
 
-## 123. Rendering All Streams
+<h2 name="123">123. Rendering All Streams</h2>
 
 - Now that we are loading up our list of streams into the application, we want to make sure that data get rendered out by the StreamList component. 
 - The first thing we need to do is to make sure that we get our list of streams available as props inside of the component. 
@@ -2678,7 +2678,7 @@ onSubmit(e) {
   }
   ```
 
-## 124. Associating Streams with Users
+<h2 name="124">124. Associating Streams with Users</h2>
 
 - We got the list of streams to render but remember that we want to show some buttons on individual streams that say delete and edit.
 - These buttons should only be visible if I was the person who created the stream.
@@ -2707,7 +2707,7 @@ export const createStream = formValues => {
 };
 ```
 
-## 125. Conditionally Showing Edit and Delete
+<h2 name="125">125. Conditionally Showing Edit and Delete</h2>
 
 - Now we have our streams associated with the user who created them, we are going to update our `StreamList` component and make sure that these streams that were created by me have buttons. 
 - So we have to make sure that `StreamList` component understands the idea of the user who is currently signed into our application.
@@ -2756,7 +2756,7 @@ renderAdmin(stream) {
 - Once we sign out, we are not going to see any button anymore.
 - Now, we need to make sure that at the bottom of the page, whenever user is logged in, we show the button to allow a user to create a stream. 
 
-## 126. Linking to Stream Creation
+<h2 name="126">126. Linking to Stream Creation</h2>
 
 - We need to make sure that if the user is logged in, we show a button at the very bottom that says `Create Stream`.
 - So if a user clicks on the button, it should be taken to a page where a user can create a new stream.
@@ -2804,7 +2804,7 @@ renderCreate() {
 }
 ```
 
-## 127. When to Navigate Users
+<h2 name="127">127. When to Navigate Users</h2>
 
 - Even though, a user successfully creates a stream, there is nothing on the screen. 
 - We should automatically navigate the user back over to our list of streams after we have successfully created the stream. 
@@ -2840,7 +2840,7 @@ export const createStream = formValues => {
 };
 ```
 
-## 128. History References
+<h2 name="128">128. History References</h2>
 
 - The good news is that programmatic navigation sometimes with react router dom is really easy but sometimes it is not easy at all.
 - But we are in on scenarios where it is not easy to do programmatic navigation.
@@ -2882,7 +2882,7 @@ export const createStream = (formValues, history) => {
 - 하지만 기존의 `BrowserRouter`에 내장되어있는 `history` 객체에 접근하는게 번거롭다.
 - 그러므로 `history` 객체를 따로 만들어주고 그 객체를 쓰기 위해 `BrowserRouter`가 아닌 `Router`를 쓰겠다는것.
 
-## 129. Creating a Browser History Object
+<h2 name="129">129. Creating a Browser History Object</h2>
 
 - Create new file history.js in src folder.
 - We are going to create a `history` object and export it for use throughout our entire application.
@@ -2928,7 +2928,7 @@ import history from "../history";
 - Now we have got the `history` object which means we can trigger direct navigation or programmatic navigation from our `createStream` action creator.
 
 
-## 130. Implementing Programmatic Navigation
+<h2 name="130">130. Implementing Programmatic Navigation</h2>
 
 - We can import `history` into our action creator file and use it to automatically navigate our user around the application.
   ```js
@@ -2942,7 +2942,7 @@ import history from "../history";
     };
   };
   ```
-## 131. Manually Changing API Records
+<h2 name="131">131. Manually Changing API Records</h2>
 
 - How you can clean up and manually manipulate some of the different streams that get created when you are using JSON server API.
 - Using terminal, go inside the folder that `db.json` file is in.
@@ -2950,7 +2950,7 @@ import history from "../history";
 - Inside of the file, it contains all the different records we have created. 
 - So if you want to make any changes manually the data inside of the application, you can just change the file.  
 
-## 132. URL-Based Selection
+<h2 name="132">132. URL-Based Selection</h2>
 
 - Anytime a user comes to EditStream page, we are going to allow them the opportunity to edit the title or the description of already created stream.
 - We are going to talk about how a user can get to the page and how we are going to figure out what stream a user is trying to edit. 
@@ -2968,7 +2968,7 @@ import history from "../history";
 - Suppose in `/streams/edit/17`, then we can take that 17 and pass it as a prop into the `StreamEdit` component. 
 - Then `StreamEdit` component will know that it needs to show the stream 17 and allow a user to edit specifically the stream with ID 17. 
 
-## 133. Wildcard Navigation
+<h2 name="133">133. Wildcard Navigation</h2>
 
 - There are two seperate things to do
 - First off we need to make sure that anytime that a user clicks on Edit button, they go to a route of something like `streams/edit` and then the ID of the stream that the user just clicked on the button for. 
@@ -3002,7 +3002,7 @@ import history from "../history";
 - The colon(`:`) is what turns anything into a variable sorts.
 - Next thing we need to do is to make sure that anytime that a user comes to `StreamEdit` page, we somehow get that number out of the URL and we communicate that number down into `StreamEdit`. So That StreamEdit component knows exactly what stream it is trying to change. 
 
-## 134. More on Route Params
+<h2 name="134">134. More on Route Params</h2>
 
 - We now need to make sure that we somehow get that little piece of information out of the URL and communicate it down to StreamEdit.
 - We are going to add it on a reference to the props argument that this thing recieves and then I am going console.log it.
@@ -3019,7 +3019,7 @@ import history from "../history";
 - Next thing, I want to try to load up some information about that particular stream and show it on the screen. Because eventually we want to allow a user to edit the information.
 - But whenever we go to the StreamEdit page, we want to show the existing title and the existing description of the stream as it currently is. 
 
-## 135. Selecting Records from State
+<h2 name="135">135. Selecting Records from State</h2>
 
 - This time, we are going to try to print up some information about the stream that the user is trying to access from our `StreamEdit` component.
 - Let's make sure that we can load up the appropriate stream, so we know what default title and description we should put into two text inputs.
@@ -3044,7 +3044,7 @@ import history from "../history";
 - However, when you navigate back to main index page, and come back to `StreamEdit` page, stream property appears correctly. 
 - Is seems like when we first loaded up the page, we had no stream. But then when we started to navigate around a little bit, it seemed like the streams suddenly showed up.
 
-## 136. Component Isolation with React Router
+<h2 name="136">136. Component Isolation with React Router</h2>
 
 - Steps for navigation according to ID
   - User types in `/streams/edit/3` to address bar and hits enter 
@@ -3070,7 +3070,7 @@ import history from "../history";
 - Therefore every route and every component shown by that route needs to fetch it own data and it cannot rely upon some other component fetching data ahead of time for it. 
 - 아이디가 따로 배정된 StreamEdit 페이지에서 state.streams를 이용해 데이터를 가져올려고 했으나 우리가 원하는 데이터는 StreamList 컴포넌트의 componentDidMount를 통해서만 가져올수가 있다. 즉 componentDidMount가 있는 StreamList가 렌더링이 되지 않으면 stream 리스트를 가져오지 못하므로 StreamEdit 페이지만 렌더링이 된다면 state는 빈 객체가 되어버린다.(각각의 컴포넌트들은 독립적으로 작동되어져야한다!)
 
-## 137. Fetching a Stream for Edit Stream
+<h2 name="137">137. Fetching a Stream for Edit Stream</h2>
 
 - Essentially anytime our `StreamEdit` component is mounted on the screen or rendered to the screen, we want to make sure we call `fetchStream` action creator with the ID of the stream that we want to fetch. 
 - And make sure that pass the ID of stream we want to fetch. 
@@ -3099,7 +3099,7 @@ import history from "../history";
   ```
 - We are going to use this pattern in `StreamDelete` component and `StreamShow` component because both streams need to load up appropriate stream in order to show some details about it on the screen. 
 
-## 138. Real Code Reuse!
+<h2 name="138">138. Real Code Reuse!</h2>
 
 - We can start to think about putting together the actual edit stream form.
 - When you compare two mockups (Create Stream page and Edit Stream page), they are really similar compare to each other. 
@@ -3125,7 +3125,7 @@ import history from "../history";
   ```
   - So now we are going to expect the parent component to pass down a callback called `onSubmit`, and this is going to be called with whatever values are coming out of our form. 
 
-## 139. Refactoring Stream Creation
+<h2 name="139">139. Refactoring Stream Creation</h2>
 
 - `StreamCreate` is no longer going to be showing a form. So we don't need a filed or redux form anymore. 
 - We need to import `StreamForm` component. 
@@ -3151,7 +3151,7 @@ import history from "../history";
 - 그 값을 부모 컴포넌트인 `StreamCreate`에서 props로 내려준 `onSubmit`에 넣어주게되면
 - `StreamCreate` 컴포넌트의 `onSubmit` 함수는 받은 값으로 action creator를 실행함. 
 
-## 140. Setting Initial Values
+<h2 name="140">140. Setting Initial Values</h2>
 
 - We are going to do same thing for `StreamEdit` as well.
 - `StreamEdit` is going to be very similar to the work we just did inside of `StreamCreate`, the only big difference is that we want to make sure that the form is going to show some initial values inside of those inputs. 
@@ -3233,7 +3233,7 @@ import history from "../history";
 - If we change initial values inside of inputs and submit, it is going to trigger `onSubmit` callback we defined inside of `StreamEdit` and update values. 
 - But there is a small issue here. 
   
-## 141. Avoiding Changes to Properties
+<h2 name="141">141. Avoiding Changes to Properties</h2>
 
 - The application works just fine as is but this issue that might get you in trouble when you start working on other project and it comes down to how ytour back-end server is set up.
 - When you console.log your change, we will find out that there are some other properties are inside of the object beside of title and description(ID and userId). 
@@ -3259,7 +3259,7 @@ import history from "../history";
   _.pick(profie, 'name', 'age') // {"name" : "Sam", "age":18}
   ```
 
-## 142. Edit Form Submission
+<h2 name="142">142. Edit Form Submission</h2>
 
 - Whenever `onSubmit` inside of `StreamEdit` component gets called with `formValues` object, we need to call some appropriate action creator.  
 - Inside of `onSubmit`, we really have to do it call action creator.
@@ -3282,7 +3282,7 @@ import history from "../history";
   ```
 - But when we edit a stream, you will find out that we have lost edit and delete buttons as well!
 
-## 143. PUT vs PATCH Requests
+<h2 name="143">143. PUT vs PATCH Requests</h2>
 
 - When we check the Response tab in Network tab in developer console, we do not find the ID of stream that we just editted.
 - Actually `PUT` request has a little side effect to it. That is very commonly not well implemented in a lot of back-end API. 
@@ -3305,7 +3305,7 @@ import history from "../history";
   };
   ```
 
-## 144. Why Use Portal?
+<h2 name="144">144. Why Use Portal?</h2>
 
 - This time we are going to build a modal window to the user that is going to force user to either delete a steram or not delete a stream.
 - But showing modal using react is bit challenging.
@@ -3340,7 +3340,7 @@ import history from "../history";
   ```
 - You can check the text here : 'http://localhost:3000/modal.html
 
-## 145. More on Using Portals
+<h2 name="145">145. More on Using Portals</h2>
 
 - We set HTML document like this below:
   ```html
@@ -3412,7 +3412,7 @@ import history from "../history";
   - So this is the purpose of `portal`.
   - It allows us to render some element not as a direct child. We can instead render that element or that component as a child of some other element inside our HTML structure most commonly the body. 
 
-## 146. Creating a Portal
+<h2 name="146">146. Creating a Portal</h2>
 
 - Create a new file Modal.js inside of components folder.
 - When we create portal, return value changes a little bit.
@@ -3468,7 +3468,7 @@ import history from "../history";
 - It is going to take the jsx and attempt to insert it as a child to `div` with the ID of modal. 
 - Now we can find `Modal` appears on the screen successfully.
 
-## 147. Hiding a Modal
+<h2 name="147">147. Hiding a Modal</h2>
 
 - We are going to use semantic-ui to style `Modal`.
   ```js
@@ -3507,7 +3507,7 @@ import history from "../history";
 - `stopPropagation` is going to make sure that the event does not continue to bubble up and go to parent `div` does causing our window to get dismissed by navigating to some other page. 
 - But modal might be used in many other locations insdie of the application where we want to show a modal and in everyone of those cases, we probably are going to want to have a different header and different content, different buttons and different things to occur whenever user clicks those buttons and back to different location expected by users.
 
-## 148. Making the Modal Reusable
+<h2 name="148">148. Making the Modal Reusable</h2>
 
 - We have hard coded text and button and route inside of `Modal` component but highly likely we are going to use this component other side of the component. 
 - We should configure the modal based upon some props that get passed into it from the parent component. 
@@ -3551,7 +3551,7 @@ import history from "../history";
   };
   ```
 
-## 149. React Fragments
+<h2 name="149">149. React Fragments</h2>
 
 - We are going to use `React.Fragment`.
 - It is jsx looking element that is going to allow us to return assigned multiple elements to a single variable. 
@@ -3567,7 +3567,7 @@ import history from "../history";
 - You can shorten `React.Fragment` as <></>.
 - But some code checker might think that <></> syntax is not valid. 
 
-## 150. OnDismiss From the Parent
+<h2 name="150">150. OnDismiss From the Parent</h2>
 
 - `onClick` function inside of `div`, will always navigate user to the root route of the application. 
 - It is possible if we use a modal somewhere else that we will not want to take the user to the root route if they attempt to dismiss it. 
@@ -3583,7 +3583,7 @@ import history from "../history";
     onDismiss={() => history.push("/")}
   />
   ```
-## 151. Reminder on Path Params
+<h2 name="151">151. Reminder on Path Params</h2>
 
 - When we click on that Delete button, we actually attempt to delete the stream. And we click on Cancel, we have to make sure we dismiss the modal.
 - And it would be really helpful if the user understood what stream they were trying to delete. 
@@ -3619,7 +3619,7 @@ import history from "../history";
   ```
 - If we look at the URL at the top, we should see streams delete and then the ID of stream that I am trying to delete. 
 
-## 152. Fetching the Deleting Stream
+<h2 name="152">152. Fetching the Deleting Stream</h2>
 
 - Now we need to start to refactor the StreamDelete component. 
 - We are going to turn it into a class based component and we are going to make sure that anytime it gets rendered to the screen, it attempts to fetch the stream with the ID.
@@ -3659,7 +3659,7 @@ import history from "../history";
   }
   ```
 
-## 153. Conditionally Showing Stream Details
+<h2 name="153">153. Conditionally Showing Stream Details</h2>
 
 - Actually deleting as usual to get some information from our redux store into our component, we are going to use `mapStateToProps` function.
   ```js
@@ -3695,7 +3695,7 @@ import history from "../history";
   }
   ```
 
-## 154. Deleting a Stream
+<h2 name="154">154. Deleting a Stream</h2>
 
 - The last thing we have to do with our StreamDelete modal is make sure that two buttons actually do something. 
 - So if a user clicks on Cancel button, we probably want to just take the user back to the stream list page. 
@@ -3729,7 +3729,7 @@ import history from "../history";
   ```
 - When delete request is successful, we are going to get empty object inside of preview tab in network tab.
 
-## 155. Viewing a Stream
+<h2 name="155">155. Viewing a Stream</h2>
 
 - We are going to create StreamShow page. 
 - We are going to first focus on just making sure that we can load up particular stream and show some details about it on the page.
@@ -3747,7 +3747,7 @@ import history from "../history";
   </Link>
   ```
 
-## 156. Switcheds with React-Router
+<h2 name="156">156. Switcheds with React-Router</h2>
 
 - After we click a one of stream in the list and then click `Create Stream` button, we can see very strange behavior.
 - The word `StreamShow` appears under `Submit` button.
@@ -3779,7 +3779,7 @@ import history from "../history";
   ```
 - Now whenever we go to `stream/new`, this route will be shown and react-router-dom is going to think that I am not going to show any other potential route. 
 
-## 157. Showing a Stream
+<h2 name="157">157. Showing a Stream</h2>
 
 - In `StreamShow` component, we need to read the ID out of the URL and we need to call the action creator to fetch that particular stream and then use a `mapStateToProps` function to get that stream out of our redux store and into our component. 
 - We are going to use `fetchStream` ,`connect` function, `mapStateToProps` function.
@@ -3818,14 +3818,14 @@ import history from "../history";
 
   ```
 
-## 158. The Context System
+<h2 name="158">158. The Context System</h2>
 
 - Props System
   - Gets data from a parent component to a direct child component.
 - Context System
   - Gets data from a parent component to any nested child component. 
 
-## 159. Getting Data Out of Context
+<h2 name="159">159. Getting Data Out of Context</h2>
 
 - The context system is all about communication some information from a parent component down to a nested child.
 - In translation app, parent component is the `App`. and the nested child that we want to communicate some information to is both `Button` and `Field` components in order to communicate the information. 
@@ -3837,7 +3837,7 @@ import history from "../history";
 - Once we get some information out of the object, inside of a nested child component, we can create a component called a `Consumer` component.
 - This is how we get information out of the Context object. 
 
-## 160. Creating Context Objects 
+<h2 name="160">160. Creating Context Objects</h2>
 
 - We are going to start to focus on create a `context object` inside of application that is going to communicate the currently selected language from our `App` component down to both the `Button` and `Field` components.
 - Create new folder name contexts and also create a new file name LanguageContext.
@@ -3866,7 +3866,7 @@ import history from "../history";
     }
   ```
 
-## 161. Consuming the Context Value
+<h2 name="161">161. Consuming the Context Value</h2>
 
 - Change the name of button and `Name` according to the value inside of Context Object
   ```js
@@ -3887,7 +3887,7 @@ import history from "../history";
   }
   ```
 
-## 162. The Context Provider
+<h2 name="162">162. The Context Provider</h2>
 - `App` component knows what the currently selected language is becasue remember we set up all that `state` stuff inside of the `App` component. 
 - So we now want to communicate some information from the `App` component into the `context object`. 
 - To do so, we are going to create `Provider` component. 
@@ -3904,7 +3904,7 @@ import history from "../history";
   </LanguageContext.Provider>
   ```
 
-## 163. Gotchas Around Providers
+<h2 name="163">163. Gotchas Around Providers</h2>
 
 - Consumer is another way that we can consume information out of the context.
 - The trick is understanding that whatever value we assign to the value prop of that component will be used update our `context object`.
@@ -3919,7 +3919,7 @@ import history from "../history";
 - So the real lesson here is that `Provider` is essentially creating a separate type of information every single time you use `Provider`.
 - Our app component knows what the currently selected language is because we set up all that state stuff inside of the `App` component. 
 
-## 164. Accessing Data with Consumers
+<h2 name="164">164. Accessing Data with Consumers</h2>
 
 - We are going to refactor `Button` component to make it use of `Consumer` instead of `context object`. 
 - When we are using `Consumer`, we do not have to specify a context type. 
@@ -3944,7 +3944,7 @@ import history from "../history";
   }11
   ```
 
-## 165. Pulling From Multiple Contexts
+<h2 name="165">165. Pulling From Multiple Contexts</h2>
 
 - Why do we use `Consumer` i1111111nstead of `this.context` 
   - We will make use of `Consumer` anytime that we want to get information out of multiple different context objects inside of a single component.
@@ -3971,7 +3971,7 @@ import history from "../history";
   </ColorContext.Consumer>
   ```
 
-## 166. Replacing Redux with Context
+<h2 name="166">166. Replacing Redux with Context</h2>
 
 - We are going to refactor the code
 - We are going to create `LanguageSelector` component and assign `onLanguageChange` callback from `App` component as props. 
@@ -4002,14 +4002,14 @@ import history from "../history";
   }
   ```
 
-## 167. Creating a Store Component
+<h2 name="167">167. Creating a Store Component</h2>
 
 - If we want to use Context in place of Redux...
   - We need to be able to get data to any component in our hierarchy.
   - We need to be able to separate our view logic from business logic.
   - We need to ba able to split up business logic (not have a single file with 10000 lines of code)
 
-## 168. Implementing a Language Store
+<h2 name="168">168. Implementing a Language Store</h2>
 
 - `LanguageStore` is going to contain all of our business logic and our data and make it available to other components inside of our component hierarchy over the context system.
 - Inside of `LanguageContext` component we are going to set up some state property that is going to maintain the currently selected language. 
@@ -4050,7 +4050,7 @@ import history from "../history";
   ```
 - The component encapsulates all the data of around the currently selected language and it also implements the ability to change that data as well.
 
-## 169. Rendering the LanguageStore
+<h2 name="169">169. Rendering the LanguageStore</h2>
 
 - By rendering `LanguageStore` component, we are just implementing the `context object` inside of the component and making the current state and the ability to change it available to other components inside of our component hierarchy. 
 - Import `LanguageStore` component in `App` component. 
@@ -4073,7 +4073,7 @@ import history from "../history";
   }
   ```
 
-## 170. Connecting the Selector to the Store
+<h2 name="170">170. Connecting the Selector to the Store</h2>
 
 - Import `LanguageContext` inside of `LanguageSelector` component.
 - But `LanguageSelector` component does not need to access any other `context object`.
@@ -4100,7 +4100,7 @@ import history from "../history";
   }
   ```
 
-## 171. Connecting the Field and Button to the Store
+<h2 name="171">171. Connecting the Field and Button to the Store</h2>
 - We have to make sure that Field component is going to reach into the context and pull out the language.
 - But remember that previously we had wired up our context object to just contain a string of either English or Korean.
 - Now our context is actually an object that has both a language property.
@@ -4132,7 +4132,7 @@ import history from "../history";
   ```
 - Now button and field text start to change. 
 
-## 172. Context vs Redux Recap
+<h2 name="172">172. Context vs Redux Recap</h2>
 
 - Here is the reason why you should continue to use Redux
   - Redux
@@ -4143,6 +4143,130 @@ import history from "../history";
     - No need for an extra lib
     - Hard to build a 'store' component with cross cutting concerns
     - In orther words we would probably want to build a separate store component for each type of resource we have inside of our application. 
+
+<h2 name="173">173. Introducing Hooks</h2>
+
+- With a hook system of react, we can introduce component level state and kind of lifecycle methods to function based components.
+- So hook system is all about borrowing some functionality from the class based component world and adding it to our function based components. 
+- Why do we want to use hook system?
+  - hooks are going to make it really easy to share logic between different components.
+
+<h2 name="174">174. Building Stateful Class Components </h2>
+
+- Basic setting
+```js
+class App extends React.Component {
+  state = { resource: "posts" };
+  render() {
+    return (
+      <div>
+        <div>
+          <button onClick={() => this.setState({ resource: "posts" })}>
+            Posts
+          </button>
+          <button onClick={() => this.setState({ resource: "todos" })}>
+            Todos
+          </button>
+        </div>
+        {this.state.resource}
+      </div>
+    );
+  }
+}
+```
+
+<h2 name="175">175. The UseState Hook</h2>
+
+- So instead of class based component, we are going to user a functional component that makes use of component level state. 
+- But by default, we cannot use component state inside of a functional component. 
+- So in order to do so we are going to be making use of the hook system in react. 
+- Different hooks in react
+  - useState 
+    - Allow a functional component to use component-level state.
+  - useEffect
+    - Allow a functional component to use `lifesycle methods`.
+  - useContext
+    - Allow a functional component to use the context system.
+  - useRef
+    - Allow a functional component to use the ref system.
+  - useReducer
+    - Allow a functional component to store data through a 'reducer'.
+- We are going to use `useState` in `App` component so import it
+```js
+import React, { useState } from "react";
+```
+- And refactor `App` to functional component
+```js
+const App = () => {
+  return (
+    <div>
+      <div>
+        <button onClick={() => this.setState({ resource: "posts" })}>
+          Posts
+        </button>
+        <button onClick={() => this.setState({ resource: "todos" })}>
+          Todos
+        </button>
+      </div>
+      {this.state.resource}
+    </div>
+  );
+};
+```
+- use `useState` that we imported
+```js
+const App = () => {
+  const [resource, setResource] = useState("posts");
+  return (
+    <div>
+      <div>
+        <button onClick={() => setResource("posts")}>Posts</button>
+        <button onClick={() => setResource("todos")}>Todos</button>
+      </div>
+      {resource}
+    </div>
+  );
+};
+```
+
+<h2 name="176">176. UseState in Detail</h2>
+
+- What is `const [resource, setResource] = useState("posts");`?
+- This is what we refer to as `array destructuring`.
+```js
+// example
+const colors = ['red', 'green']
+const myColorOne = colors[0];
+const myColorTwo = colors[1];
+console.log(myColorOne) // red
+console.log(myColorTwo) // green
+
+const [myColorThree, myColorFour] = colors
+console.log(myColorThree) // red
+console.log(myColorFour) // green
+```
+- When we call `useState`, it is going to return an array with two elements inside of it. 
+```js
+const [resource, setResource] = useState("posts");
+```
+- We are going to take the first element of that array and assign it to the variable `resource`. 
+- And take the second variable of the array and assign to the variable `setResource`.
+- Individual segments 
+  - `const [currentValue, setCurrentValue] = useState(initialValue)`
+  - currentValue (`this.state.resource`)
+    - Contains the present value of this piece of state.
+  - setCurrentValue (`this.setState({resource: 'posts'})`)
+    - Function to call when we want to update our state(and rerender).
+  - useState
+    - Function from React.
+  - initialValue (`state={resouce: 'posts'}`)
+    - Starting value for this piece of state, similar to when we initialized our state object.
+- Whenever we call `setResource`, that is going to cause our component to automatically rerender.
+- When the component automatically rerenders, anything we pass into `setResource` is going to be assigned to variable `resource`.
+
+
+
+
 
 
 
