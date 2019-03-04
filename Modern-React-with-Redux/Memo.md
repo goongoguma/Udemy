@@ -3,175 +3,179 @@
 - [1. 리액트란 무엇인가?](#1)
 - [2. Create-React-App에 대해 알아보기](#2)
 - [3. 자바스크립트 모듈](#3)
-- [3. 함수형 컴포넌트](#4)
-- [4. JSX?](#5)
-- [5. JSX의 인라인 CSS스타일](#6)
-- [6. Class vs ClassName](#7)
-- [7. JSX에서 JS 변수 사용하기](#8)
-- [8. JSX에서 사용하지 못하는 값](#9)
-- [9.  컴포넌트의 3가지 요소](#10)
-- [10. faker 라이브러리 사용하기](#11)
-- [11. 컴포넌트를 다른 컴포넌트로 넘겨주기](#12)
-- [12. 새로운 컴포넌트에서 JSX 가져오기](#13)
-- [13. 리액트 props](#14)
-- [14. 컴포넌트의 재활용](#15)
-- [15. 클래스 컴포넌트](#16)
-- [16. 사용자의 위치정보 받는법](#17)
-- [17. 함수형 컴포넌트에서 비동기 처리해주기](#18)
-- [18. 함수형 컴포넌트에서 클래스 컴포넌트로 전환](#19)
-- [19. state의 규칙](#20)
-- [20. constructor를 사용한 state의 초기화](#21)
-- [21. geolocation 앱의 작동 순서](#22)
-- [22. 라이프사이클 사용해보기](#23)
-- [23. 왜 라이프사이클을 사용할까?](#24)
-- [24. 스타일링 해주기](#25)
-- [25. JSX에서 함수를 이용해 값 표기하기](#26)
-- [26. 사진 검색 앱 Overview](#27)
-- [27. Controlled Element?](#28)
-- [28. Axios vs Fetch](#29)
-- [29. Async/Await 사용해보기](#30)
-- [30. Axios 초기설정하기](#31)
-- [31. ref 사용법](#32)
-- [32. 콜백과 이미지 로딩](#33)
-- [33. 이벤트 핸들러 작성할때의 주의점](#34)
-- [34. Youtube API 사용해보기](#35)
-- [35. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기](#36)
-- [36. 비디오앱 완성](#37)
-- [37. 리덕스에 대해서1](#38)
-- [38. 리덕스에 대해서2](#39)
-- [39. 리덕스 써보기](#40)
-- [40. 리덕스 키노트](#41)
-- [41. React-Redux 라이브러리](#42)
-- [42. React와 Redux를 이용해 앱 만들기](#43)
-- [43. 앱 Overview](#44)
-- [44. Provider 사용하기](#45)
-- [45. Connect 사용하기](#46)
-- [46. mapStateToProps를 사용해서 state 가져오기](#47)
-- [47. 중간정리](#48)
-- [48. 컴포넌트에서 action creators 불러오기](#49)
-- [49. 왜 컴포넌트를 import하고 다시 connect에 넣는지?](#50)
-- [50. 함수형 컴포넌트를 이용해 connect 사용해보기](#51)
-- [51. 정리하기](#52)
-- [52. Redux-Thunk를 이용해 앱 만들어보기](#53)
-- [53. 리덕스를 이용해 데이터 불러오기](#54)
-- [54. 더미 action creator 연결해주기](#55)
-- [55. Axios와 Action creator를 이용해 서버에 데이터 가져오기](#56)
-- [56. Action creator에서 비동기 요청 에러 1](#57)
-- [57. Action creator에서 비동기 요청 에러 2](#58)
-- [58. 리덕스 미들웨어](#59)
-- [59. Redux-Thunk의 역할](#60)
-- [60. 비동기 action creator 만드는법](#61)
-- [61. 리듀서의 규칙 1](#62)
-- [62. 리듀서의 규칙 2](#63)
-- [63. 상태를 변형시켜도 된다 하지만...](#64)
-- [64. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법](#65)
-- [65. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정](#66)
-- [66. 어떻게 유저 정보를 보여줄것인가?](#67)
-- [67. mapStateToProps를 이용해 필요한 정보 가져오기](#68)
-- [68. 반복요청 문제 발생](#69)
-- [69. memoize를 통한 문제 해결방법 ](#70)
-- [70. 다른 방법](#71)
-- [71. 새로운 action creator를 생성함으로써 문제 해결방법](#72)
-- [72. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기](#73)
-- [73. redux-thunk 정리](#74)
-- [74. Streaming App intro](#75)
-- [75. 앱 만들때의 어려운점](#76)
-- [76. 리액트 라우터 소개 ](#77)
-- [77. 리액트 라우터가 작동법](#78)
-- [78. exact 키워드](#79)
-- [79. 리액트 라우터에서 a태그를 쓰면 안되는 이유](#80)
-- [80. a태그 대신 Link태그 사용하기](#81)
-- [81. 여러 타입의 라우터들](#82)
-- [82. 앱 구성요소 컴포넌트](#83)
-- [83. 헤더 컴포넌트 만들기](#84)
-- [84. 에러 : You should not use Link outside a Router occur](#85)
-- [85. Email/Password Authentication vs OAuth Authentication](#86)
-- [86. OAuth for Servers vs Browser Apps](#87)
-- [87. OAuth 설정 단계](#88)
-- [88. 구글 API 초기 연동하기 (OAuth 요청보내기)](#89)
-- [89. 구글 API에서 데이터 가져오기 (OAuth에 필요한 데이터 가져오기)](#90)
-- [90. 가져온 데이터를 이용해 상태 변환시켜주기 ](#91)
-- [91. listen 메소드를 이용해 상태 변환 후 화면에 렌더링 해주기](#92)
-- [92. 리덕스 연결시키기](#93)
-- [93. Action creator 만들기](#94)
-- [94. 리듀서 만들기](#95)
-- [95. 리듀서에서 컴포넌트로](#96)
-- [96. 리덕스를 이용해 OAuth 다루기](#97)
-- [97. 변수로 action의 타입 설정해주기](#98)
-- [98. 유저의 ID를 redux state에 저장하기](#99)
-- [99.  Redux Dev Tools 설치 및 설정](#100)
-- [100. Redux Dev Tools 디버그 세션](#101)
-- [101. 리덕스 폼 라이브러리](#102)
-- [102. 리덕스 폼 연결하기](#103)
-- [103. 폼 만들기 및 에러발생](#104)
-- [104. 에러문제 해결 및 폼 렌더링하기](#105)
-- [105. 폼 커스터마이징 하기](#106)
-- [106. 폼 submisstion 다루기](#107)
-- [107. 폼의 유효성 설정해주기](#108)
-- [108. 에러 메세지 렌더링하기](#109)
-- [109. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정](#110)
-- [110. Streams의 API 설정](#111)
-- [111. JSON Server을 이용해 DB 만들기](#112)
-- [112. Action creator 만들어주기](#113)
-- [113. RESTful api를 이용해 stream 만들기(#)](#114)
-- [114. Stream을 만든 후에 actions를 dispatch하기](#115)
-- [115. 필요한 Action creators 만들기](#116)
-- [116. 객체를 반환하는 reducer의 장점](#117)
-- [117. Key Interpolation](#118)
-- [118. Streaming과 관련된 다양한 reducers 만들어주기](#119)
-- [119. Lodash 라이브러리의 _omit 사용해 객체 지우기](#120)
-- [120. Lodash 라이브러리를 이용해 배열에서 객체 반환하기](#121)
-- [121. 모든 streams 가져오기](#122)
-- [122. 모든 Streams 렌더링하기 ](#123)
-- [123. userId와 action creator 연결시키기](#124)
-- [124. 조건에 맞춰 버튼 보여주기 1](#125)
-- [125. 조건에 맞춰 버튼 보여주기 2](#126)
-- [126. Intentional Navigation vs Programmatic Navigation](#127)
-- [127. history 객체 참조하기](#128)
-- [128. 커스텀 history 객체 만들기](#129)
-- [129. 커스텀 history 객체 사용하기](#130)
-- [130. 직접 데이터 수정하기](#131)
-- [131. 수정 페이지 만드는 방법](#132)
-- [132. 아이디에 따른 수정페이지 설정 방법 1](#133)
-- [133. Route Params](#134)
-- [134. state와 ownProps를 이용해 원하는 아이디 불러오기](#135)
-- [135. 각 컴포넌트의 독립성](#136)
-- [136. StreamEdit 컴포넌트에서 stream 데이터 가져오기](#137)
-- [137. StreamForm 컴포넌트 만들기](#138)
-- [138. StreamCreate 컴포넌트 재구성하기 ](#139)
-- [139. 초기값 셋팅하기 ](#140)
-- [140. Lodash를 이용해 필요한 값만 고르기](#141)
-- [141. 수정된 내용 제출](#142)
-- [142. PUT vs PATCH](#143)
-- [143. HTML을 사용해 modal 만들어보기](#144)
-- [144. Portal를 사용해 modal을 만드는 이유](#145)
-- [145. Portal를 사용해 modal 만들기](#146)
-- [146. Modal 숨기기](#147)
-- [147. Modal 재활용하기](#148)
-- [148. React.Fragment](#149)
-- [149. history 객체를 prop으로 내려주기](#150)
-- [150. delete 요청에 ID 넣어주기](#151)
-- [151. StreamDelete 컴포넌트에서 해당 stream 가져오기](#152)
-- [152. 조건적으로 stream의 디테일 보여주기](#153)
-- [153. stream 지우기](#154)
-- [154. Stream에 링크걸어주기](#155)
-- [155. Switch 사용하기 ](#156)
-- [156. Stream 보여주기](#157)
-- [157. Context System](#158)
-- [158. Context에서 데이터 가져오기](#159)
-- [159. Context 객체 만들기](#160)
-- [160. Context Value 사용법 (this.context)](#161)
-- [161. Context Provider](#162)
-- [162. Provider의 특징](#163)
-- [163. Consumer를 이용해 데이터에 접근하기](#164)
-- [164. 여러개의 Context 사용해보기](#165)
-- [165. Redux를 Context로 대체하기](#166)
-- [166. Context를 위한 Store 컴포넌트 만들기](#167)
-- [167. LanguageStore 만들기](#168)
-- [168. LanguageStore 사용법](#169)
-- [169. LanguageSelector와 LanguageStore 연동하기 (this.context)](#170)
-- [170. LanguageStore를 Field와 Button 컴포넌트에 연동시키기](#171)
-- [171. Context vs Redux 다시보기](#172)
+- [4. 함수형 컴포넌트](#4)
+- [5. JSX?](#5)
+- [6. JSX의 인라인 CSS스타일](#6)
+- [7. Class vs ClassName](#7)
+- [8. JSX에서 JS 변수 사용하기](#8)
+- [9. JSX에서 사용하지 못하는 값](#9)
+- [10.  컴포넌트의 3가지 요소](#10)
+- [11. faker 라이브러리 사용하기](#11)
+- [12. 컴포넌트를 다른 컴포넌트로 넘겨주기](#12)
+- [13. 새로운 컴포넌트에서 JSX 가져오기](#13)
+- [14. 리액트 props](#14)
+- [15. 컴포넌트의 재활용](#15)
+- [16. 클래스 컴포넌트](#16)
+- [17. 사용자의 위치정보 받는법](#17)
+- [18. 함수형 컴포넌트에서 비동기 처리해주기](#18)
+- [19. 함수형 컴포넌트에서 클래스 컴포넌트로 전환](#19)
+- [20. state의 규칙](#20)
+- [21. constructor를 사용한 state의 초기화](#21)
+- [22. geolocation 앱의 작동 순서](#22)
+- [23. 라이프사이클 사용해보기](#23)
+- [24. 왜 라이프사이클을 사용할까?](#24)
+- [25. 스타일링 해주기](#25)
+- [26. JSX에서 함수를 이용해 값 표기하기](#26)
+- [27. 사진 검색 앱 Overview](#27)
+- [28. Controlled Element?](#28)
+- [29. Axios vs Fetch](#29)
+- [30. Async/Await 사용해보기](#30)
+- [31. Axios 초기설정하기](#31)
+- [32. ref 사용법](#32)
+- [33. 콜백과 이미지 로딩](#33)
+- [34. 이벤트 핸들러 작성할때의 주의점](#34)
+- [35. Youtube API 사용해보기](#35)
+- [36. 콜백을 사용해 부모 컴포넌트의 상태 바꿔주기](#36)
+- [37. 비디오앱 완성](#37)
+- [38. 리덕스에 대해서1](#38)
+- [39. 리덕스에 대해서2](#39)
+- [40. 리덕스 써보기](#40)
+- [41. 리덕스 키노트](#41)
+- [42. React-Redux 라이브러리](#42)
+- [43. React와 Redux를 이용해 앱 만들기](#43)
+- [44. 앱 Overview](#44)
+- [45. Provider 사용하기](#45)
+- [46. Connect 사용하기](#46)
+- [47. mapStateToProps를 사용해서 state 가져오기](#47)
+- [48. 중간정리](#48)
+- [49. 컴포넌트에서 action creators 불러오기](#49)
+- [50. 왜 컴포넌트를 import하고 다시 connect에 넣는지?](#50)
+- [51. 함수형 컴포넌트를 이용해 connect 사용해보기](#51)
+- [52. 정리하기](#52)
+- [53. Redux-Thunk를 이용해 앱 만들어보기](#53)
+- [54. 리덕스를 이용해 데이터 불러오기](#54)
+- [55. 더미 action creator 연결해주기](#55)
+- [56. Axios와 Action creator를 이용해 서버에 데이터 가져오기](#56)
+- [57. Action creator에서 비동기 요청 에러 1](#57)
+- [58. Action creator에서 비동기 요청 에러 2](#58)
+- [59. 리덕스 미들웨어](#59)
+- [60. Redux-Thunk의 역할](#60)
+- [61. 비동기 action creator 만드는법](#61)
+- [62. 리듀서의 규칙 1](#62)
+- [63. 리듀서의 규칙 2](#63)
+- [64. 상태를 변형시켜도 된다 하지만...](#64)
+- [65. 리듀서 업데이트를 위해 안전하게 객체 변형시키는법](#65)
+- [66. 비동기 요청을 통해 서버에서 데이터를 가져오는 과정](#66)
+- [67. 어떻게 유저 정보를 보여줄것인가?](#67)
+- [68. mapStateToProps를 이용해 필요한 정보 가져오기](#68)
+- [69. 반복요청 문제 발생](#69)
+- [70. memoize를 통한 문제 해결방법 ](#70)
+- [71. 다른 방법](#71)
+- [72. 새로운 action creator를 생성함으로써 문제 해결방법](#72)
+- [73. 새로운 action creator에서 유저의 id를 이용해 필요한 정보 가져오기](#73)
+- [74. redux-thunk 정리](#74)
+- [75. Streaming App intro](#75)
+- [76. 앱 만들때의 어려운점](#76)
+- [77. 리액트 라우터 소개 ](#77)
+- [78. 리액트 라우터가 작동법](#78)
+- [79. exact 키워드](#79)
+- [80. 리액트 라우터에서 a태그를 쓰면 안되는 이유](#80)
+- [81. a태그 대신 Link태그 사용하기](#81)
+- [82. 여러 타입의 라우터들](#82)
+- [83. 앱 구성요소 컴포넌트](#83)
+- [84. 헤더 컴포넌트 만들기](#84)
+- [85. 에러 : You should not use Link outside a Router occur](#85)
+- [86. Email/Password Authentication vs OAuth Authentication](#86)
+- [87. OAuth for Servers vs Browser Apps](#87)
+- [88. OAuth 설정 단계](#88)
+- [89. 구글 API 초기 연동하기 (OAuth 요청보내기)](#89)
+- [90. 구글 API에서 데이터 가져오기 (OAuth에 필요한 데이터 가져오기)](#90)
+- [91. 가져온 데이터를 이용해 상태 변환시켜주기 ](#91)
+- [92. listen 메소드를 이용해 상태 변환 후 화면에 렌더링 해주기](#92)
+- [93. 리덕스 연결시키기](#93)
+- [94. Action creator 만들기](#94)
+- [95. 리듀서 만들기](#95)
+- [96. 리듀서에서 컴포넌트로](#96)
+- [97. 리덕스를 이용해 OAuth 다루기](#97)
+- [98. 변수로 action의 타입 설정해주기](#98)
+- [99. 유저의 ID를 redux state에 저장하기](#99)
+- [100.  Redux Dev Tools 설치 및 설정](#100)
+- [101. Redux Dev Tools 디버그 세션](#101)
+- [102. 리덕스 폼 라이브러리](#102)
+- [103. 리덕스 폼 연결하기](#103)
+- [104. 폼 만들기 및 에러발생](#104)
+- [105. 에러문제 해결 및 폼 렌더링하기](#105)
+- [106. 폼 커스터마이징 하기](#106)
+- [107. 폼 submisstion 다루기](#107)
+- [108. 폼의 유효성 설정해주기](#108)
+- [109. 에러 메세지 렌더링하기](#109)
+- [110. touched 프로퍼티를 이용해 메세지 보여주기 & css 설정](#110)
+- [111. Streams의 API 설정](#111)
+- [112. JSON Server을 이용해 DB 만들기](#112)
+- [113. Action creator 만들어주기](#113)
+- [114. RESTful api를 이용해 stream 만들기(#)](#114)
+- [115. Stream을 만든 후에 actions를 dispatch하기](#115)
+- [116. 필요한 Action creators 만들기](#116)
+- [117. 객체를 반환하는 reducer의 장점](#117)
+- [118. Key Interpolation](#118)
+- [119. Streaming과 관련된 다양한 reducers 만들어주기](#119)
+- [120. Lodash 라이브러리의 _omit 사용해 객체 지우기](#120)
+- [121. Lodash 라이브러리를 이용해 배열에서 객체 반환하기](#121)
+- [122. 모든 streams 가져오기](#122)
+- [123. 모든 Streams 렌더링하기 ](#123)
+- [124. userId와 action creator 연결시키기](#124)
+- [125. 조건에 맞춰 버튼 보여주기 1](#125)
+- [126. 조건에 맞춰 버튼 보여주기 2](#126)
+- [127. Intentional Navigation vs Programmatic Navigation](#127)
+- [128. history 객체 참조하기](#128)
+- [129. 커스텀 history 객체 만들기](#129)
+- [130. 커스텀 history 객체 사용하기](#130)
+- [131. 직접 데이터 수정하기](#131)
+- [132. 수정 페이지 만드는 방법](#132)
+- [133. 아이디에 따른 수정페이지 설정 방법 1](#133)
+- [134. Route Params](#134)
+- [135. state와 ownProps를 이용해 원하는 아이디 불러오기](#135)
+- [136. 각 컴포넌트의 독립성](#136)
+- [137. StreamEdit 컴포넌트에서 stream 데이터 가져오기](#137)
+- [138. StreamForm 컴포넌트 만들기](#138)
+- [139. StreamCreate 컴포넌트 재구성하기 ](#139)
+- [140. 초기값 셋팅하기 ](#140)
+- [141. Lodash를 이용해 필요한 값만 고르기](#141)
+- [142. 수정된 내용 제출](#142)
+- [143. PUT vs PATCH](#143)
+- [144. HTML을 사용해 modal 만들어보기](#144)
+- [145. Portal를 사용해 modal을 만드는 이유](#145)
+- [146. Portal를 사용해 modal 만들기](#146)
+- [147. Modal 숨기기](#147)
+- [148. Modal 재활용하기](#148)
+- [149. React.Fragment](#149)
+- [150. history 객체를 prop으로 내려주기](#150)
+- [151. delete 요청에 ID 넣어주기](#151)
+- [152. StreamDelete 컴포넌트에서 해당 stream 가져오기](#152)
+- [153. 조건적으로 stream의 디테일 보여주기](#153)
+- [154. stream 지우기](#154)
+- [155. Stream에 링크걸어주기](#155)
+- [156. Switch 사용하기 ](#156)
+- [157. Stream 보여주기](#157)
+- [158. Context System](#158)
+- [159. Context에서 데이터 가져오기](#159)
+- [160. Context 객체 만들기](#160)
+- [161. Context Value 사용법 (this.context)](#161)
+- [162. Context Provider](#162)
+- [163. Provider의 특징](#163)
+- [164. Consumer를 이용해 데이터에 접근하기](#164)
+- [165. 여러개의 Context 사용해보기](#165)
+- [166. Redux를 Context로 대체하기](#166)
+- [167. Context를 위한 Store 컴포넌트 만들기](#167)
+- [168. LanguageStore 만들기](#168)
+- [169. LanguageStore 사용법](#169)
+- [170. LanguageSelector와 LanguageStore 연동하기 (this.context)](#170)
+- [171. LanguageStore를 Field와 Button 컴포넌트에 연동시키기](#171)
+- [172. Context vs Redux 다시보기](#172)
+- [173. React Hook 소개](#173)
+- [174. Hook을 위한 예시 작성](#174)
+- [175. UseState 사용하기](#175)
+- [176. UseState에 대해서](#176)
 
 
 
@@ -4177,7 +4181,7 @@ class App extends React.Component {
 
 <h2 name="175">175. The UseState Hook</h2>
 
-- So instead of class based component, we are going to user a functional component that makes use of component level state. 
+- So instead of class based component, we are going to use a functional component that makes use of component-level state. 
 - But by default, we cannot use component state inside of a functional component. 
 - So in order to do so we are going to be making use of the hook system in react. 
 - Different hooks in react
@@ -4263,6 +4267,245 @@ const [resource, setResource] = useState("posts");
     - Starting value for this piece of state, similar to when we initialized our state object.
 - Whenever we call `setResource`, that is going to cause our component to automatically rerender.
 - When the component automatically rerenders, anything we pass into `setResource` is going to be assigned to variable `resource`.
+
+<h2 name="177">177. Building the ResourceList</h2>
+
+- Create `ResouceList` component that gets `resource` from `App.js` component as props.
+
+  ```js
+  const App = () => {
+  const [resource, setResource] = useState("posts");
+  return (
+      <div>
+        <div>
+          <button onClick={() => setResource("posts")}>Posts</button>
+          <button onClick={() => setResource("todos")}>Todos</button>
+        </div>
+        <ResourceList resource={resource} />
+      </div>
+    );
+  };
+
+  class ResourceList extends React.Component {
+    render() {
+      return <div>{this.props.resource}</div>;
+    }
+  }
+
+  export default ResourceList;
+  ```
+
+<h2 name="178">178. Fetching a Given Resouce</h2>
+
+- In this section, we are going to ensure that the `ResourceList` component can take the currently selected resource and use it to make a request over to our API. (We are going to use JSONPlaceholder)
+
+  ```js
+    class ResourceList extends React.Component {
+    state = { resources: [] };
+
+    async componentDidMount() {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${this.props.resource}`
+      );
+
+      this.setState({ resources: res.data });
+    }
+
+    render() {
+      return <div>{this.state.resources.length}</div>;
+    }
+  }
+  ```
+- But the problem is when we click `Todos` button, the length `this.state.resources` remains the same as `Posts`.
+
+<h2 name="179">179. ComponentDidUpdate vs ComponentDidMount</h2>
+
+- Let's quickly make sure that we understand why the component is not working as we would expect.  
+- Here is a flow diagram explains why the component is not properly fetching the list of `Todos` anytime we click on that `Todos` with button.
+  - App component created, initializes state `resource` of `posts`
+  - App renders `ResourceList`
+  - `ResourceList`'s `componentDidMount` called, fetches posts
+  - Fetch completed, setState called, number of posts rendered
+  - We click `todos` button, `App` updates its state, rerenders itself and `ResouceList`
+  - `ResourceList` was already `mounted`, so `componentDidMount` is not called a second time!
+- Therefore we are going to use `componentDidUpdate` lifecycle method. 
+- `componentDidUpdata` gets called anytime that our component renders either because of a parent component or anytime that we call `setState` inside of class based componenet. 
+- But when you just wrtie a code like this 
+  ```js
+  async componentDidUpdate() {
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/${this.props.resource}`
+    );
+
+    this.setState({ resources: res.data });
+  }
+  ```
+- It is going to make endless GET requests to that JS on Api.
+- Because `setState` inside of `componentDidUpdate` immediately causes another render or another update of our component endlessly.
+- We are going to pass `prevProps` inside of `componentDidUpdate` method to decide whether or not the currently selected resource has changed. 
+- So if the prop did change, we want to make another request. 
+  ```js
+  async componentDidUpdate(preProps) {
+    if (preProps.resource !== this.props.resource) {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${this.props.resource}`
+      );
+      this.setState({ resources: res.data });
+    }
+  }
+  ```
+- This is a downside of class based component. Anytime that we render a class based component, we've got multiple lifecycle methods. And repetitive logic inside of them. 
+
+<h2 name="180">Refactoring a Class to a Funciton</h2>
+
+- We are going to refactor a class based component to functional one. 
+- We are going to use `useEffect` hooks this time. 
+  ```js
+  const ResourceList = () => {
+    const [resources, setResources] = useState([]);
+    const fetchResource = async () => {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${this.props.resource}`
+      );
+
+      this.setState({ resources: res.data });
+    };
+
+    return <div>{resources.length}</div>;
+  };
+  ```
+
+<h2 name="181">Lifecycles with UseEffect</h2>
+
+- We want to do what we were previously able to do through the use of lifecycle methods. 
+- But our functional component does not have access to lifecycle methods.
+- In order to access to them, we are going to use the hook of `useEffect`.
+- It allows a functional component to use `lifecycle methods`.
+- We care essentially combining the effect of the `componentDidMount` and `componentDidUpdate` lifecycle methods. 
+- Create `useEffect` function inside of a component. 
+- So every single time that our component gets rendered to the screen or updated, we are going to run the function.
+  ```js
+    const ResourceList = ({ resource }) => {
+    const [resources, setResources] = useState([]);
+    const fetchResource = async resource => {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${resource}`
+      );
+
+      setResources(res.data);
+    };
+
+    useEffect(() => {
+      fetchResource(resource);
+    }, []);
+
+    return <div>{resources.length}</div>;
+  };
+  ```
+- We can see that the length of resources rendered on a screen but does not change when we click `Todos` button.
+
+<h2 name="182">Updates with UseEffect</h2>
+
+- What's up with the second argument of array in `useEffect` function?
+  ```js
+  useEffect(() => {
+    fetchResource(props.resource);
+  }, [props.resource]);
+  ```
+- Remember that we are calling the `useEffect` function every single time our component is rendered.
+- So everytime a component is rendered, we are recreating the array and possibly putting a different value into the array. 
+- Between subsequent renders of our component, if the elements inside of that array are different, the arraow function that we pass to `useEffect` is going to be called.
+- So the first time our component gets rendered and we have a default value always inside of our application of `posts`. Because that is the initial state that we set up inside of our `App` component. 
+- In order words, whenever the value of `props.resource` is different, the `useEffect` function gets called. 
+
+<h2 name="183">Does It Gets Called?</h2>
+
+- `useEffect` function that no putting in an array as a second argument is going to be called 100 percent of the time. 
+- If we do not pass in that second array that `useEffect` function is going to be called every single time the component rerenders.
+- `useEffect` functoin that contains an empty array as a second argument is not going to be called second time. 
+- It is essentially Identical with `componentDidMount`.
+- `useEffect` functoin that contains objects in array as a second argument is going to be called.
+- Because everytime we create an object in JS, these are different objects in memory. 
+
+<h2 name="184">Quick Gotcha with UseEffect</h2>
+
+- When we use function inside of `useEffect` function directly, we will get a warning saying `useEffect function must return a cleanup function or nothing. Promises and useEffect are not supported.`
+  ```js
+  useEffect(async () => {
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/${resource}`
+    );
+  }, [props.resource]);
+  ```
+- So if we want to make a request with `useEffect` or do any type of asynchronous logic inside of the function, we have to define it inside of a second function. 
+  ```js
+  const fetchResource = async resource => {
+    const res = await axios.get(
+      `https://jsonplaceholder.typicode.com/${resource}`
+    );
+
+    setResources(res.data);
+  };
+
+  useEffect(() => {
+    fetchResource(props.resource);
+  }, [props.resource]);
+  ```
+
+<h2 name="185">Rendering a List</h2>
+
+  ```js
+   return (
+    <ul>
+      {resources.map(record => (
+        <li key={record.id}>{record.title}</li>
+      ))}
+    </ul>
+  );
+  ```
+
+<h2 name="186">Actual Code Reuse</h2>
+
+- The real reason that we use hooks is because it makes it really easy to share logic between different components. 
+- Let's extract all the hook related logic into a separate function. 
+- create `useResources` function to contain all the logic related hooks
+  ```js
+    const useResources = props => {
+    const [resources, setResources] = useState([]);
+
+    const fetchResource = async resource => {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${resource}`
+      );
+
+      setResources(res.data);
+    };
+
+    useEffect(() => {
+      fetchResource(props.resource);
+    }, [props.resource]);
+    return resources;
+  };
+  ```
+- And wire it up with `ResourceList` component
+  ```js
+    const ResourceList = props => {
+    const resources = useResources(props);
+    return (
+      <ul>
+        {resources.map(record => (
+          <li key={record.id}>{record.title}</li>
+        ))}
+      </ul>
+    );
+  };
+  ```
+- This might seem like not a big improvement but in fact it really is. 
+- Because now we can use `useResources` function anywhere in our project. 
+
+
+
+
 
 
 
