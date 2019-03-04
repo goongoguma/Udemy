@@ -4503,6 +4503,41 @@ const [resource, setResource] = useState("posts");
 - This might seem like not a big improvement but in fact it really is. 
 - Because now we can use `useResources` function anywhere in our project. 
 
+<h2 name="187">Code Reuse with Hooks</h2>
+
+- Create `useResources` component and move all hook related function and import it inside of `ResourceList` component. 
+- It still works! 
+  ```js
+  // useResources
+    const useResources = props => {
+    const [resources, setResources] = useState([]);
+
+    const fetchResource = async resource => {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/${resource}`
+      );
+
+      setResources(res.data);
+    };
+      useEffect(() => {
+        fetchResource(props.resource);
+      }, [props.resource]);
+      return resources;
+    };
+  //  ResourceList
+    const ResourceList = props => {
+    const resources = useResources(props);
+    return (
+      <ul>
+        {resources.map(record => (
+          <li key={record.id}>{record.title}</li>
+        ))}
+      </ul>
+    );
+  };
+  ```
+- In this way, we can seperate the component according to their roles. 
+
 
 
 
