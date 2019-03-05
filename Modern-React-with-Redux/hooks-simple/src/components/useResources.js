@@ -15,6 +15,7 @@ const useResources = props => {
   useEffect(() => {
     fetchResource(props.resource);
   }, [props.resource]);
+
   return resources;
 };
 

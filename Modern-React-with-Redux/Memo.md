@@ -176,6 +176,17 @@
 - [174. Hook을 위한 예시 작성](#174)
 - [175. UseState 사용하기](#175)
 - [176. UseState에 대해서](#176)
+- [177. UseState 예시 준비](#177)
+- [178. ResourceList에서 api 통신하기](#178)
+- [179. ComponentDidUpdate vs ComponentDidMount](#179)
+- [180. useEffect 사용준비](#180)
+- [181. useEffect 사용하기](#181)
+- [182. useEffect 업데이트하기](#182) 
+- [183. useEffect의 조건적 호출](#183)
+- [184. useEffect 주의해야 할 점](#184)
+- [185. 리스트 렌더링](#185)
+- [186. hook을 이용한 코드의 재활용 1](#186)
+- [187. hook을 이용한 코드의 재활용 2](#187)
 
 
 
@@ -4321,7 +4332,7 @@ const [resource, setResource] = useState("posts");
 <h2 name="179">179. ComponentDidUpdate vs ComponentDidMount</h2>
 
 - Let's quickly make sure that we understand why the component is not working as we would expect.  
-- Here is a flow diagram explains why the component is not properly fetching the list of `Todos` anytime we click on that `Todos` with button.
+- Here are steps explain why the component is not properly fetching the list of `Todos` anytime we click on that `Todos` with button.
   - App component created, initializes state `resource` of `posts`
   - App renders `ResourceList`
   - `ResourceList`'s `componentDidMount` called, fetches posts
@@ -4330,7 +4341,7 @@ const [resource, setResource] = useState("posts");
   - `ResourceList` was already `mounted`, so `componentDidMount` is not called a second time!
 - Therefore we are going to use `componentDidUpdate` lifecycle method. 
 - `componentDidUpdata` gets called anytime that our component renders either because of a parent component or anytime that we call `setState` inside of class based componenet. 
-- But when you just wrtie a code like this 
+- But when you just write a code like this 
   ```js
   async componentDidUpdate() {
     const res = await axios.get(
@@ -4340,13 +4351,13 @@ const [resource, setResource] = useState("posts");
     this.setState({ resources: res.data });
   }
   ```
-- It is going to make endless GET requests to that JS on Api.
+- It is going to make endless GET requests to that JSON Api.
 - Because `setState` inside of `componentDidUpdate` immediately causes another render or another update of our component endlessly.
 - We are going to pass `prevProps` inside of `componentDidUpdate` method to decide whether or not the currently selected resource has changed. 
 - So if the prop did change, we want to make another request. 
   ```js
-  async componentDidUpdate(preProps) {
-    if (preProps.resource !== this.props.resource) {
+  async componentDidUpdate(prevProps) {
+    if (prevProps.resource !== this.props.resource) {
       const res = await axios.get(
         `https://jsonplaceholder.typicode.com/${this.props.resource}`
       );
@@ -4385,21 +4396,22 @@ const [resource, setResource] = useState("posts");
 - Create `useEffect` function inside of a component. 
 - So every single time that our component gets rendered to the screen or updated, we are going to run the function.
   ```js
-    const ResourceList = ({ resource }) => {
-    const [resources, setResources] = useState([]);
-    const fetchResource = async resource => {
-      const res = await axios.get(
-        `https://jsonplaceholder.typicode.com/${resource}`
-      );
+    const ResourceList = (props) => {
+      const [resources, setResources] = useState([]);
 
-      setResources(res.data);
-    };
+      const fetchResource = async resource => {
+        const res = await axios.get(
+          `https://jsonplaceholder.typicode.com/${resource}`
+        );
 
-    useEffect(() => {
-      fetchResource(resource);
-    }, []);
+        setResources(res.data);
+      };
 
-    return <div>{resources.length}</div>;
+      useEffect(() => {
+        fetchResource(props.resource);
+      }, []);
+
+      return <div>{resources.length}</div>;
   };
   ```
 - We can see that the length of resources rendered on a screen but does not change when we click `Todos` button.
@@ -4414,7 +4426,7 @@ const [resource, setResource] = useState("posts");
   ```
 - Remember that we are calling the `useEffect` function every single time our component is rendered.
 - So everytime a component is rendered, we are recreating the array and possibly putting a different value into the array. 
-- Between subsequent renders of our component, if the elements inside of that array are different, the arraow function that we pass to `useEffect` is going to be called.
+- Between subsequent renders of our component, if the elements inside of that array are different, the arrow function that we pass to `useEffect` is going to be called.
 - So the first time our component gets rendered and we have a default value always inside of our application of `posts`. Because that is the initial state that we set up inside of our `App` component. 
 - In order words, whenever the value of `props.resource` is different, the `useEffect` function gets called. 
 
@@ -4422,9 +4434,9 @@ const [resource, setResource] = useState("posts");
 
 - `useEffect` function that no putting in an array as a second argument is going to be called 100 percent of the time. 
 - If we do not pass in that second array that `useEffect` function is going to be called every single time the component rerenders.
-- `useEffect` functoin that contains an empty array as a second argument is not going to be called second time. 
+- `useEffect` function that contains an empty array as a second argument is not going to be called second time. 
 - It is essentially Identical with `componentDidMount`.
-- `useEffect` functoin that contains objects in array as a second argument is going to be called.
+- `useEffect` function that contains objects in array as a second argument is going to be called.
 - Because everytime we create an object in JS, these are different objects in memory. 
 
 <h2 name="184">Quick Gotcha with UseEffect</h2>
@@ -4537,6 +4549,8 @@ const [resource, setResource] = useState("posts");
   };
   ```
 - In this way, we can seperate the component according to their roles. 
+
+<h2 name="188"></h2>
 
 
 

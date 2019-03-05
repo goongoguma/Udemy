@@ -154,7 +154,7 @@ console.log(multiply(2, "Max")); // error
 - Function types
 
 ```js
-function muliply(value1: number, value2: number): number {
+function multiply(value1: number, value2: number): number {
   return value1 * value2;
 }
 
@@ -241,4 +241,13 @@ let complex2: { data: number[], output: (all: boolean) => number[] } = {
       return this.data;
     }
   };
+  ```
+
+## 17. Allowing multiple Types with Union Types
+
+- union types
+
+  ```js
+  let myRealAge: any = 27;
+  myrRealAge = "27";
   ```
