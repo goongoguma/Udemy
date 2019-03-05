@@ -4550,7 +4550,7 @@ const [resource, setResource] = useState("posts");
   ```
 - In this way, we can seperate the component according to their roles. 
 
-<h2 name="188"></h2>
+
 
 
 
