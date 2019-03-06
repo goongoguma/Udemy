@@ -1,6 +1,26 @@
 - ## Tutorial Memo Index
 
-## 1. What is TypeScript?
+- [1. 타입스크립트는 무엇인가](#1)
+- [2. 타입스크립트를 사용하는 이유](#2)
+- [3. 타입스크립트 설치](#3)
+- [4. 타입스크립트 사용하기](#4)
+- [5. 환경설정](#5)
+- [6. Type Bascis](#6)
+- [7. 타입 넣어주기](#7)
+- [8. 배열과 타입들](#8)
+- [9. Tuples](#9)
+- [10. Enums](#10)
+- [11. Any Type](#11)
+- [12. 함수에 타입 사용하기](#12)
+- [13. 타입으로서의 함수](#13)
+- [14. 객체와 타입](#14)
+- [15. 중간 예제](#15)
+- [16. Custom 타입과 타입 aliases](#16)
+- [17. Union](#17)
+- [18. 실행되는 동안 타입 체크하기](#18)
+- [19. Never Type](#19)
+
+<h2 name="1">1. What is TypeScript?</h2>
 
 - _TypeScript is a wrapper so to say it compiles down to Javascript_ in the end and introduces new features which we can use in our code and which will then run in the browser as the TypeScript compiler will make sure to find ways to compile all these great new features into ES5 code to then run in any browser.
 - _The most important feature is that TypeScript is that strongly typed language_ which means you have to be specific which type of variable is
@@ -8,27 +28,27 @@
 - _TypeScript is only an extra language we can use during development, it is not what runs in the browser._
 - Easy to say, 타입스크립트 : 코드를 실행하기전 타입관련 문제를 찾아낼 수 있는 기술.
 
-## 2. Why TypeScript and How to use it?
+<h2 name="2">2. Why TypeScript and How to use it?</h2>
 
 - We simply mix our TS code with JS code, any degree of mixture is possible and then we get the benefits from using TS by simply getting extra check and making sure that not somewhere in our code we are kind of introducing a bug because us using wrong type.
 
-## 3. Installing TypeScript
+<h2 name="3">3. Installing TypeScript</h2>
 
 - In terminal, type `npm -g install typescript`.
 
-## 4. Using TypeScript
+<h2 name="4">4. Using TypeScript</h2>
 
 - You can use TS with a file name ended with extension `.ts`.
 - And run TS compiler with `tsc script.ts`
 - This command line is essentially saying that compile this TS file to JS file.
 - After run the command, when you check the folder, we will find the file that compiled to JS file.
 
-## 5. Setting up the Course Workspace
+<h2 name="5">5. Setting up the Course Workspace</h2>
 
 - Command line `tsc --init` in order to not only put this folder under control of npm but now also put it under control of TS.
 - And the command will in the end create a `tsconfig.json` file which tells TS 'hey the folder here is TS project by running tsc, Please compile all TS files.'
 
-## 6. Type Basics
+<h2 name="6">6. Type Basics</h2>
 
 - Which types do we have in TS?
   - `let myName = 'Max';` looks just a sting that assinged it into a variable.
@@ -36,7 +56,7 @@
   - TS recognizes that I assign a string into a variable and therefore automatically saves the information.
   - It keeps in mind that the variable be of type sting.
 
-## 7. Assigning Types Explicitly
+<h2 name="7">7. Assigning Types Explicitly</h2>
 
 ```js
 let myRealAge;
@@ -51,7 +71,7 @@ myRealAge = "27";
   ```
 - This is how explicitly assign types.
 
-## 8. Arrays and Types
+<h2 name="8">8. Arrays and Types</h2>
 
 ```js
 let hobbies = ["cooking", "Sports"];
@@ -64,7 +84,7 @@ hobbies = [100]; // error syaing 'Type number[] is not assignable to type 'strin
 let hobbies: any[] = ["cooking", "Sports"]; // it works!
 ```
 
-## 9. Tuples
+<h2 name="9">9. Tuples</h2>
 
 - New type available in TS.
 - It is just arrays with mixed types and a limited number of items.
@@ -73,7 +93,7 @@ let hobbies: any[] = ["cooking", "Sports"]; // it works!
   ```
 - In tuples type, order of index is very crucial.
 
-## 10. Enums
+<h2 name="10">10. Enums</h2>
 
 - New type available in TS.
 - It is a feature to make numbers more expressive
@@ -101,7 +121,7 @@ let hobbies: any[] = ["cooking", "Sports"]; // it works!
   ```
 - This means that it will always refer to the last item in front of it.
 
-## 11. The "Any" Type
+<h2 name="11">11. The "Any" Type</h2>
 
 ```js
 let car: any = "BMW";
@@ -112,7 +132,7 @@ console.log(car);
 
 - `Any` type is the most flexible type you have in TS and therefore you should really carefully use it. Try to be explicit.
 
-## 12. Using Types in Functions (Arguments & Return Values)
+<h2 name="12">12. Using Types in Functions (Arguments & Return Values)</h2>
 
 ```js
 let myName = "Max";
@@ -125,6 +145,7 @@ console.log(returnMyName); // Max
 ```
 
 - A special type regarding the return function or the return type is `void` type.
+- If I would have a function which simply is named say 'hello' and all it does is print hello to the console,
 
 ```js
 function sayHello(): void {
@@ -149,7 +170,7 @@ function muliply(value1: number, value2: number): number {
 console.log(multiply(2, "Max")); // error
 ```
 
-## 13. Functions as Types
+<h2 name="13">13. Functions as Types</h2>
 
 - Function types
 
@@ -165,7 +186,7 @@ myMultiply = multiply;
 console.log(myMultiplay(5, 2)); // 10
 ```
 
-## 14. Objects and Types
+<h2 name="14">14. Objects and Types</h2>
 
 - Objects
 
@@ -194,7 +215,7 @@ userData = {
   }; // it works
   ```
 
-## 15. Example: Putting it all together in a Complex Object
+<h2 name="15">15. Example: Putting it all together in a Complex Object</h2>
 
 - Complex Object
 
@@ -211,7 +232,7 @@ let complex: { data: number[], output: (all: boolean) => number[] } = {
 - `data` property should be an array of numbers
 - `output` property is actually a function that has only one argument that name `all` and type of `boolean`, it should give us an array of numbers.
 
-## 16. Creating custom Types with Type Aliases
+<h2 name="16">16. Creating custom Types with Type Aliases</h2>
 
 - Suppose we want to create a `complex2` variable that works same as `complex` variable above.
 
@@ -243,11 +264,57 @@ let complex2: { data: number[], output: (all: boolean) => number[] } = {
   };
   ```
 
-## 17. Allowing multiple Types with Union Types
+<h2 name="17">17. Allowing multiple Types with Union Types</h2>
 
-- union types
+- Union types
 
   ```js
-  let myRealAge: any = 27;
+  let myRealAge: number | string = 27;
   myrRealAge = "27";
+  myRealAge = true; // error
   ```
+
+- myRealAge may be either a number or a string but certainly not boolean type.
+
+<h2 name="18">18. Checking for Types during Runtime</h2>
+
+- Check types
+
+  ```js
+  let finalValue = "A string";
+  if (typeof finalValue === "number") {
+    console.log("Final value is a number"); // no error but no output on a screen either because type of fianlValue is a string not a number
+  }
+  ```
+
+- You would use this for example in let's say some function or some code where you are not really sure what values you are getting. And you just want to do something upon certain types.
+- Suppose for a calculation, you only want to perform made when you are getting numbers and with this `check type`, you can make sure that the values you are using are indeed of type number.
+
+<h2 name="19">19. The 'never` type (added with TS 2.0)</h2>
+  ```js
+  function neverReturns(): never {
+    throw new Error("An error!"); // nothing returns
+  }
+  ```
+- It never returns anything.
+- It is different with `void`! (because void returns error)
+- You might use it in functions or in parts of your code where you know it should never be reached because it kind of then is stuck.
+
+<h2 name="20">Nullable Types (added with TS 2.0)</h2>
+
+- You should not be able to assign null to types except for if you explicitly state that you want to do this.
+  ```js
+  let canBeNul: number | null = 12;
+  canBeNull = null; // we want to remove the value
+  let canAlsoBeNull;
+  ```
+- With TS 2.0, you can also be explicit about which you may be null and which should never be null.
+- We can now make sure that we don't accidentally assign nulls somewhere in our code to a variable which theoretically should only hold numbers.
+- So when the type `nullable` is initially assigned, it does not give an error.
+
+<h2 name="20">How Code gets Compiled</h2>
+
+- TS compiler gives you an erro but it compiles nonetheless.
+- It is saying that 'it might be wrong'.
+- Which means the code still works after it has been compiled.
+- But you can force to TS not work in `tsconfig.json`file.
