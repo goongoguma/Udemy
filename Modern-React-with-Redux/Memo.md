@@ -3083,7 +3083,7 @@ import history from "../history";
 - We need to make sure that every component is not going to have some dependency on a user visiting some other route inside of our application ahead of time.
 - A user could bookmark and then come back directly to a URL of streams and that would completely bypass the StreamList component which means users are always going to come directly to a given route inside the application.  
 - Therefore every route and every component shown by that route needs to fetch it own data and it cannot rely upon some other component fetching data ahead of time for it. 
-- 아이디가 따로 배정된 StreamEdit 페이지에서 state.streams를 이용해 데이터를 가져올려고 했으나 우리가 원하는 데이터는 StreamList 컴포넌트의 componentDidMount를 통해서만 가져올수가 있다. 즉 componentDidMount가 있는 StreamList가 렌더링이 되지 않으면 stream 리스트를 가져오지 못하므로 StreamEdit 페이지만 렌더링이 된다면 state는 빈 객체가 되어버린다.(각각의 컴포넌트들은 독립적으로 작동되어져야한다!)
+- 아이디가 따로 배정된 StreamEdit 페이지에서 state.streams를 이용해 데이터를 가져올려고 했으나 우리가 원하는 데이터는 StreamList 컴포넌트의 componentDidMount를 통해서만 가져올수가 있다. 즉 componentDidMount가 있는 StreamList가 렌더링이 되지 않으면 stream 리스트를 가져오지 못하므로 StreamEdit 페이지만 렌더링이 된다면 state는 빈 객체가 되어버린다.(각각의 컴포넌트 라우터들은 독립적으로 작동되어져야한다!)
 
 <h2 name="137">137. Fetching a Stream for Edit Stream</h2>
 
@@ -4549,6 +4549,7 @@ const [resource, setResource] = useState("posts");
   };
   ```
 - In this way, we can seperate the component according to their roles. 
+
 
 
 
