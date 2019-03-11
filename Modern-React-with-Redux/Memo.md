@@ -240,38 +240,38 @@
   - from : We are about to specify the name of the library or file we are importing from
   - 'react' : The name of the dependency or path to the file we are importing from node_modules
 
-<h2 name="4">4. Displaying Content with Functional Components
+<h2 name="4">4. Displaying Content with Functional Components</h2>
 
 - A component is a _Function_ or _Class_ that produces HTML to show the user using JSX and handles feedback from the user using Event Handlers.
 
-<h2 name="5">5. What is JSX?
+<h2 name="5">5. What is JSX?</h2>
 
 - It is a special dialect of JS (it is not HTML!)
 - Browsers do not understand JSX code. We write JSX then run tools to turn it into normal JS
 - Very similar in form and function to HTML with a couple differences.
 
-<h2 name="6">6. Inline Styling with JSX
+<h2 name="6">6. Inline Styling with JSX</h2>
 
 - JSX vs HTML
   - Adding custom styling to an element uses different syntax.
     - HTML : <div style="background-color:red;"></div>
     - JSX : <div style={{backgroundColor:'red'}}></div>
 
-<h2 name="7">7. Class vs ClassName
+<h2 name="7">7. Class vs ClassName</h2>
 
 - Adding a class to an element uses different syntax.
   - HTML : class
   - JSX : className (to avoid collision of words with class in component)
 
-<h2 name="8">8. Referencing JS Variables in JSX
+<h2 name="8">8. Referencing JS Variables in JSX</h2>
 
 - JSX can reference JS variables and function call inside of {}.
 
-<h2 name="9">9. Values JSX Can't show
+<h2 name="9">9. Values JSX Can't show</h2>
 
 - We are not allowed to take plain JS object and reference it inside of JSX to print it up as 'text'.
 
-<h2 name="10">10. Three Tenets of Components
+<h2 name="10">10. Three Tenets of Components</h2>
 
 - Component Nesting
   - A component can be shown inside of another.
