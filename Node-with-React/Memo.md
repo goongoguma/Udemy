@@ -67,3 +67,28 @@
     - ex. `Route Handler #1` is responsible for authenticatinig a user, `Route Handler #2` is responsible for logging out a user.
   - And gerenates outgoing response.
   - It sent back to running Node process and notable then respond to incoming request with response that we author.
+
+<h2 id='5'>Generating Express Apps</h2>
+
+- How to use common JS module before ES6.
+  ```js
+  const express = require("express");
+  ```
+- calling express function, it generates a new application that represents a running express app.
+  ```js
+  const app = express();
+  ```
+- The `app` object is used to set up configuration that will listen for incoming requests that are being routed to the Express side for Node side and then route those requests on to different route handlers.
+- So all of the different route handlers that we are ging to be creating over time will be all associated or registered with `app` object.
+- Write the code below
+
+  ```js
+  app.get("/", (req, res) => {
+    res.send({ hi: "there" });
+  });
+
+  app.listen(5000);
+  ```
+
+- When you go to `localhose:5000` you are going to see the message `{ hi: 'there' }`.
+- Let's figure out what is going on in next section.
