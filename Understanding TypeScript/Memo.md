@@ -310,7 +310,7 @@ let complex2: { data: number[], output: (all: boolean) => number[] } = {
 
 - You should not be able to assign null to types except for if you explicitly state that you want to do this.
   ```js
-  let canBeNul: number | null = 12;
+  let canBeNull: number | null = 12;
   canBeNull = null; // we want to remove the value
   let canAlsoBeNull;
   ```
@@ -320,7 +320,7 @@ let complex2: { data: number[], output: (all: boolean) => number[] } = {
 
 <h2 id="21">21. How Code gets Compiled</h2>
 
-- TS compiler gives you an erro but it compiles nonetheless.
+- TS compiler gives you an error but it compiles nonetheless.
 - It is saying that 'it might be wrong'.
 - Which means the code still works after it has been compiled.
 - But you can force to TS not work in `tsconfig.json`file.
@@ -374,3 +374,65 @@ function controlMe(isTrue: boolean) {
 - It is implicitly null here because it should be typeof number
 - If we add `strictNullChecks` in `tsconfig.json`, and set it true, and run `tsc`, we will get an error in console.
 - `noUnusedParameters` in `tsconfig.json` makes an error when there is a parameter that we do not use.
+
+<h2 id="26">26. React with TS<h2>
+
+- Install create-react-app with TS `create-react-app . --scripts-version=react-scripts-ts`.
+- How to set up types in react with TS.
+
+  ```js
+  interface ICounterOutputProps {
+    counter: number;
+  }
+
+  const counterOutput = (props: ICounterOutputProps) => {
+    return <p style={{ textAlign: "center" }}>{props.counter}</p>;
+  };
+  ```
+
+- Do not forget to add `I` after `interface`.
+- This is how use state in React with TS.
+
+```js
+interface IAppState {
+  counterValue: number;
+}
+
+class App extends React.Component<{}, IAppState> {
+  public state = { counterValue: 0 };
+
+  public render() {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <CounterOutput counter={this.state.counterValue} />
+        <button onClick={this.incHandler}>Increment</button>
+        <button onClick={this.deHandler}>Decrement</button>
+      </div>
+    );
+  }
+
+  private incHandler = () => {
+    this.setState(prevState => {
+      return { counterValue: prevState.counterValue + 1 };
+    });
+  };
+
+  private deHandler = () => {
+    this.setState(prevState => {
+      return { counterValue: prevState.counterValue - 1 };
+    });
+  };
+}
+
+export default App;
+```
+
+- First, use `private` and `public` method. Unless you will get an error.
+  ```js
+  The class property 'incHandler' must be marked either 'private', 'public', or 'protected'
+  ```
+- Second, always place `public` before `private`. Unless you will get an error.
+  ```js
+  Declaration of public instance method not allowed after declaration of private instance method. Instead,this should come after public instance fields.
+  ```
+- You can check more detail at here https://github.com/Microsoft/TypeScript-React-Starter
