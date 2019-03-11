@@ -1,8 +1,12 @@
-## Tutorial Inidex
+## Tutorial Index
 
 - [1. App Flow](#1)
 - [2. 사용 기술](#2)
 - [3. App Overview](#3)
+- [4. Node와 Express](#4)
+- [5. Express 생성하기](#5)
+- [6. Route Handlers 만들기](#6)
+- [7. Heroku 배포준비](#7)
 
 <h2 id="1">App User Flow Walkthrough</h2>
 
@@ -118,3 +122,35 @@ app.listen(5000);
 - `res.send({hi:'there'})` : Immediately send some JSON back to who ever made this request.
 - The function of route handler is executed every single time a single request comes in and attempting to make a get request to the route of '/'.
 - `app.listen(5000)` : This instructs express to tell Node that it wants to listen for incoming traffic on port 5000.
+
+<h2 id='7'>Heroku Deployment Checklist</h2>
+
+- Deployment Checklist
+  - Dynamic Port Binding
+    - Heroku tells us which port our app will use, so we need to make sure we listen to the port they tell us to.
+    - Whenever Heroku runs the application, it has the ability to inject what are called environment variables.
+    - Environment variables are variables that are set in the underlying runtime that node is running on top of.
+    - We have to wait until the very last second when our app is starting to be executed by Heroku to figure out what the port is.
+    - So `const PORT = process.env.PORT` says look at the underlying environment and see if they have declared a port for use to use.
+    - If we are unning our code inside of a development environment as opposed to production, the variable `const PORT` might not actually defined. So we are going to add on simple boolean statement.
+      ```js
+      const PORT = process.env.PORT || 5000;
+      ```
+  - Specify Node Environment
+    - We want to use a specific version of node, so we need to tell Heroku which version we want.
+    - Add specific version of node and npm in `package.json` file.
+      ```js
+      "engines": {
+        "node": "8.11.2",
+        "npm": "6.4.1"
+      },
+      ```
+  - Specify start script
+    - Instruct Heroku what command to run to start our server running inside of `package.json`.
+      ```js
+      "scripts": {
+        "start": "node index.js"
+      },
+      ```
+  - Create .gitignore file
+    - We do not want to include dependencies, Heroku will do that for us.
