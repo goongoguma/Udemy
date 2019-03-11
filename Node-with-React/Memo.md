@@ -92,3 +92,29 @@
 
 - When you go to `localhose:5000` you are going to see the message `{ hi: 'there' }`.
 - Let's figure out what is going on in next section.
+
+<h2 id='6'>Express Route Handlers</h2>
+
+```js
+// Route Handler
+app.get("/", (req, res) => {
+  res.send({ hi: "there" });
+});
+
+app.listen(5000);
+```
+
+- `app` : Express App to register this route handler with.
+- `get` : Watch for incoming requests with specific method.
+  - get : Get info
+  - post : Send info
+  - put : update all the properties of something
+  - delete : Delete something
+  - patch : Update one or two properties of something
+- By calling `app.get()`, we are creating a brand new route handler.
+- `/` : Watch for incoming requests trying to access '/'. It is called `route portion of the handler`.
+- `req` : Object representing the incoming request. It has a bunch of data that says a little bit about who is making the request and some associated data with it.
+- `res` : Object representing the outgoing response.
+- `res.send({hi:'there'})` : Immediately send some JSON back to who ever made this request.
+- The function of route handler is executed every single time a single request comes in and attempting to make a get request to the route of '/'.
+- `app.listen(5000)` : This instructs express to tell Node that it wants to listen for incoming traffic on port 5000.
