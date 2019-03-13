@@ -376,7 +376,7 @@ function controlMe(isTrue: boolean) {
 - If we add `strictNullChecks` in `tsconfig.json`, and set it true, and run `tsc`, we will get an error in console.
 - `noUnusedParameters` in `tsconfig.json` makes an error when there is a parameter that we do not use.
 
-<h2 id="26">26. React with TS<h2>
+<h2 id="26">26. React with TS</h2>
 
 - Install create-react-app with TS `create-react-app . --scripts-version=react-scripts-ts`.
 - How to set up types in react with TS.
