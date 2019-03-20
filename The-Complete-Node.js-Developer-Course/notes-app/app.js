@@ -1,9 +1,9 @@
-const validator = require("validator");
 const getNotes = require("./notes");
+const getChalk = require("./chalk");
 
 const msg = getNotes();
 
-console.log(msg);
+const chalk = getChalk;
 
-console.log(validator.isEmail("gmail.com"));
-console.log(validator.isURL("www.google.com"));
+console.log(msg);
+console.log(chalk.green("Success!"));
